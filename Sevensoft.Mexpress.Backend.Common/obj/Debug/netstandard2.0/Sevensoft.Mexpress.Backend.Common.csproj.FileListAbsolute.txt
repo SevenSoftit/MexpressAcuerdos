@@ -1,0 +1,9 @@
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.deps.json
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.csproj.CoreCompileInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.AssemblyInfoInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.AssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.csprojAssemblyReference.cache

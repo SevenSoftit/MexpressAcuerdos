@@ -1,0 +1,11 @@
+<mat-toolbar class="header-headernav">
+    <label class="header-name-logo">MExpress</label>
+    <span class="header-fill"></span>
+    <h5>{{title}}</h5>
+    <span class="header-fill"></span>
+    <!-- <mat-icon matBadge="{{test}}" matBadgeColor="warn" class="header-notification">notifications_none</mat-icon> -->
+    <button mat-button [matMenuTriggerFor]="myAccount" class="header-my-account">Mi cuenta<mat-icon class="header-toolbar-account-icon ml-5">expand_more</mat-icon></button>
+    <mat-menu #myAccount="matMenu">
+        <button mat-menu-item class="header-menu-item" *ngFor="let optionMenu of menuOptions | sort:'Orden'" (click)="optionSelected(optionMenu.Url)">{{optionMenu.Descripcion}}</button>
+    </mat-menu>
+</mat-toolbar>

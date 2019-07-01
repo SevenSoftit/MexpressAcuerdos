@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<ngx-loading [show]="loading" [config]="{animationType: 'none',backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)'}" [template]="customLoadingTemplate" class="loading">
+    <ng-template #customLoadingTemplate>
+        <div class="blobs">
+            <div class="blob-center"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+      </svg>
+    </ng-template>
+</ngx-loading>
+
+<body>
+    <div class="login container-fluid login-bg">
+        <div class="material-card login-card col-md-4 mx-auto pt-5 pb-5">
+            <div class="row">
+                <div class="col-md-10 text-center offset-md-1">
+                    <div class="login-logo"></div>
+                </div>
+            </div>
+            <div class="row login-title-row">
+                <h4 class="col-md-12 text-center login-title">¡Bienvenido a acuerdos M-Express!</h4>
+            </div>
+            <div class="row login-title-row">
+                <h4 class="col-md-12 text-center login-title-orange">Comencemos</h4>
+            </div>
+            <form class="form-username" [formGroup]="loginForm" novalidate>
+                <div class="row">
+                    <div class="login-email-container offset-md-2 col-md-8">
+                        <div class="form-group">
+                            <label class="login-label">Usuario</label>
+                            <input class="form-control login-input" [ngClass]="{'form-control-error': submitted && loginForm.get('username').errors}" type="text" formControlName="username" placeholder="usuario@correo.com" />
+                        </div>
+                        <div *ngIf="submitted  && loginForm.get('username').errors">
+                            <div *ngIf="loginForm.get('username').errors['required']" class="alert-error-required">
+                                El nombre de usuario es requerido
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row login-password-container">
+                    <div class=" offset-md-2 col-md-8">
+                        <div class="form-group">
+
+                            <label class="login-label">Contraseña</label>
+                            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" class="form-control login-input" [ngClass]="{'form-control-error': submitted  && loginForm.get('password').errors}" formControlName="password" placeholder="Contraseña">
+                            <mat-icon matSuffix (click)="hide = !hide" class="login-show-password">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+                        </div>
+                        <div *ngIf="submitted  && loginForm.get('password').errors">
+                            <div *ngIf="loginForm.get('password').errors['required']" class="alert-error-required">
+                                La contraseña es requerida
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row login-button-container text-center">
+                    <div class="col-md-12">
+                        <button class="login-button login-button-sign-in" (click)="login()">Ingresar</button>
+                    </div>
+                    <div class="col-md-12 pt-4">
+                        <a class="login-button login-button-forgot" (click)="forgotPassword()">Olvidé mis datos</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

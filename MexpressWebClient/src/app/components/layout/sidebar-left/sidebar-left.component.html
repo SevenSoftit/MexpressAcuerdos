@@ -1,0 +1,47 @@
+<!-- This class defines display: flex for the hole container-->
+<div class="d-flex">
+    <!-- The flex-shrink-1 allow us to resize the container depending of its content-->
+    <div class="flex-shrink-1 sidebar-left-sidenav {{sccsLeft}}">
+        <mat-sidenav mode="side" opened role="navigation">
+            <mat-nav-list>
+                <!-- {{activeOption}} -->
+                <div *ngFor="let menu of menuOptions" class="text-center">
+                    <div *ngIf="menu.Ubicacion =='Menu.Izquierda'">
+                        <label *ngIf="menu.Visible" class="sidebar-left-label-section" [ngClass]="{ 'sidebar-left-label-hidden' : !isMenuOpen}">{{menu.Nombre}}</label>
+                        <mat-list-item href="#" mat-list-item [ngClass]="['sidebar-left-navlist-option', option.Url]" [class.sidebar-left-activeOption]="option.Url === activeOption" *ngFor="let option of menu.OpcionMenu | sort:'Orden'" (click)="goMenuOption(option.Url)">
+                            <mat-icon class="sidebar-left-sidenav-icon">{{option.Estilo}}</mat-icon>
+                            <label [ngClass]="{ 'sidebar-left-label-visible' : !isMenuOpen}" class="sidebar-left-option-label">{{option.Descripcion}}</label>
+                        </mat-list-item>
+                    </div>
+                </div>
+                <div class="sidebar-left-content" [ngClass]="{'sidebar-left-collapsed-content': !isMenuOpen}">
+
+                    <div class="sidebar-left-chage-type-container" [ngClass]="{ 'sidebar-left-label-hidden': !isMenuOpen }">
+                        <div class="row">
+                            <label for="" class="sidebar-left-change-type sidebar-left-change-type-title">Bienvenido(a)</label>
+                        </div>
+                        <div class="row">
+                            <label for="" class="sidebar-left-change-type">{{actualUser}}</label>
+                        </div>
+                    </div>
+
+                    <hr class="sidebar-left-list-divider">
+                    <mat-list-item (click)="onCollapseMenu()" class="sidebar-left-navlist-collapse">
+                        <mat-icon class="sidebar-left-sidenav-icon ">zoom_out_map</mat-icon>
+                        <label class="sidebar-left-option-label" [ngClass]="{ 'sidebar-left-label-visible' : !isMenuOpen}">Minimizar
+                        </label>
+                    </mat-list-item>
+                </div>
+
+
+
+            </mat-nav-list>
+
+        </mat-sidenav>
+
+    </div>
+    <!-- This class specifies a width container of 100%-->
+    <div class="{{sccsContent}}">
+        <router-outlet></router-outlet>
+    </div>
+</div>

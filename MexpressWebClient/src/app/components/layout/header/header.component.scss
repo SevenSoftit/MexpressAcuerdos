@@ -1,0 +1,123 @@
+@import"../../../../styles.scss";
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 04/02/2019
+  * Description: styles for header.
+*******************************************************/
+
+.header-headernav {
+    background-color: $black;
+    color: #fff;
+}
+
+.header-name-logo {
+    font-family: $opensans-extrabold;
+    font-size: $font-size-big;
+}
+
+.header-fill {
+    flex: 1 1 auto;
+}
+
+.header-notification {
+    margin-right: 1rem;
+}
+
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 04/02/2019
+  * Description: Angular material class edited to change the toolbar height and padding left. 
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    height: 2.75rem;
+    padding: 0 0 0 16px;
+}
+
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 11/02/2019
+  * Description: class that remove the outline when button is clicked
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+*:focus {
+    outline: none;
+}
+
+.header-my-account {
+    height: 2.75rem;
+    background-color: $dark-gray;
+    color: #FFFFFF;
+    font-family: $opensans-semibold;
+    border: none;
+    font-size: $font-size-small;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    width: 9.87rem;
+}
+
+
+/*Styles for badge in notification*/
+
+/deep/ .mat-badge-medium[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+    width: 18px;
+    height: 19px;
+    line-height: 22px;
+    font-size: 0.65rem;
+}
+
+/deep/ .mat-badge-medium.mat-badge-above[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+    top: -5px;
+}
+
+/deep/ .mat-badge-medium.mat-badge-overlap.mat-badge-after[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+    right: -7px;
+}
+
+
+/*Styles for account options*/
+
+/deep/.header-menu-item {
+    color: $white!important;
+}
+
+/deep/.mat-menu-content:not(:empty) {
+    background: $dark-gray;
+}
+
+.mat-menu-item[_ngcontent-c3]:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused[_ngcontent-c3]:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused[_ngcontent-c3]:not([disabled]),
+.mat-menu-item-highlighted[_ngcontent-c3]:not([disabled]) {
+    background: $light-gray !important;
+}
+
+.header-button-option {
+    border-top: 1px solid $light-gray-softer;
+    border-bottom: 1px solid $light-gray-softer;
+}
+
+/deep/.mat-menu-panel {
+    border-radius: 0 0 0px 8px !important;
+}

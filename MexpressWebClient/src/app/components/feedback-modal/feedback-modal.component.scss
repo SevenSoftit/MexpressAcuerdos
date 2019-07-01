@@ -1,0 +1,37 @@
+@import '../../../styles.scss';
+.feedback-modal-title {
+    font-family: $opensans-bold;
+    font-size: $font-size-medium;
+    color: $black;
+    text-align: center;
+}
+
+.feedback-modal-description {
+    font-family: $opensans-regular;
+    font-size: $font-size-small;
+    color: $black;
+    line-height: 1.6rem;
+    text-align: center;
+}
+
+.feedback-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 8.43rem !important;
+    width: 7.4rem;
+    font-size: 127px;
+    margin: 0 auto!important;
+}
+
+.success {
+    color: $light-blue;
+}
+
+.error {
+    color: $red;
+}
+
+.warning {
+    color: $yellow;
+}

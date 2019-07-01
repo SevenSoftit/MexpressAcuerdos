@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <mat-icon class=" feedback-icon" [ngClass]="{'success': status == 'success', 'warning': status == 'warning', 'error': status == 'error'}">{{icon}}</mat-icon>
+    </div>
+    <div class="row">
+        <h5 class="feedback-modal-title w-100">{{labelTitile}}</h5>
+    </div>
+    <div class="row">
+        <label class="feedback-modal-description w-100">{{textDescription}}</label>
+    </div>
+</div>

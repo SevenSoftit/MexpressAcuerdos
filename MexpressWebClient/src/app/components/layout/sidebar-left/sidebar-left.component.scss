@@ -1,0 +1,199 @@
+@import "../../../../styles.scss";
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 04/02/2019
+  * Description:  styles for sidenav menu
+*******************************************************/
+
+.content-with-left-open {
+    width: 17% !important;
+}
+
+.content-with-left-close {
+    width: 4% !important;
+}
+
+.content-with-content-open {
+    width: 83% !important;
+}
+
+.content-with-content-close {
+    width: 95.9% !important;
+}
+
+.sidebar-left-sidenav {
+    background: $black;
+    min-height: 93.7vh;
+}
+
+.sidebar-left-navlist-option {
+    background-color: $soft-gray;
+    color: $white;
+    margin-bottom: 0.35rem;
+    white-space: nowrap;
+    height: 2.4rem !important;
+}
+
+.sidebar-left-navlist-option:hover {
+    background-color: $light-gray !important;
+}
+
+.sidebar-left-sidenav-icon {
+    color: $white;
+    margin-right: 0.35rem;
+    font-size: 1.3rem;
+}
+
+.sidebar-left-label-section {
+    color: #FFFFFF;
+    font-size: $font-size-small;
+    font-family: $opensans-semibold;
+}
+
+.sidebar-left-label-visible {
+    display: none;
+}
+
+.sidebar-left-label-hidden {
+    visibility: hidden;
+    white-space: nowrap;
+    width: 2vw;
+}
+
+.sidebar-left-list-divider {
+    border-top-color: $soft-gray;
+    margin-bottom: 0;
+}
+
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 06/02/2019
+  * Description:this is an angular material class that we edit to remove an border en sidenav
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.mat-drawer-side {
+    border-right: none;
+}
+
+
+/*******************************************************
+  * Author: Eduardo Salas
+  * Creation date: 06/02/2019
+  * Description:this is an angular material class that we edit to remove a padding top in the sidenav
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.mat-list-base {
+    padding-top: 0;
+}
+
+.sidebar-left-option-label {
+    font-size: $font-size-small;
+    font-family: $opensans-semibold;
+    margin-bottom: 0;
+    color: $white;
+}
+
+.sidebar-left-navlist-collapse {
+    color: $white;
+    white-space: nowrap;
+}
+
+.sidebar-left-change-type {
+    width: 100%;
+    font-size: $font-size-small;
+    font-family: $opensans-semibold;
+    color: $white;
+    text-align: center;
+}
+
+.sidebar-left-change-type-title {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+/*******************************************************
+  * Author: Josue Somarribas
+  * Creation date: 21/02/2019
+  * Description:this is the current option style
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.sidebar-left-activeOption,
+.sidebar-left-activeOption:hover {
+    background-color: $light-blue !important; //It has important atribute to overwrite the menu hover effect (the current tab select doesn't need hover)
+    position: relative;
+}
+
+.sidebar-left-activeOption:after {
+    margin-top: -0.6rem;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    border-left-color: $light-blue;
+    border-width: 0.6rem;
+    content: " ";
+}
+
+.sidebar-left-content {
+    position: absolute;
+    bottom: 0;
+    width: 16.3rem;
+}
+
+.sidebar-left-collapsed-content {
+    width: 3.8rem;
+}
+
+.sidebar-left-chage-type-container {
+    width: 75%;
+    border: 1px dashed $soft-gray;
+    margin: 0.5rem auto 0;
+    border-radius: 0.25rem;
+}
+
+@media (min-width: 1900px) {
+    .sidebar-left-sidenav {
+        min-height: 95.5vh;
+    }
+    .content-with-left-open {
+        width: 14% !important;
+    }
+    .content-with-left-close {
+        width: 3.3% !important;
+    }
+}
+
+@media (min-width: 1366px) and (max-width: 1530px) {
+    .sidebar-left-content {
+        width: 14.3rem;
+    }
+    .sidebar-left-collapsed-content {
+        width: 3.3rem;
+    }
+}

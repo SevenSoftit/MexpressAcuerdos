@@ -1,0 +1,20 @@
+<div class="container-fluid">
+
+    <div class="row mx-auto">
+        <mat-icon class=" offset-md-4 feedback-icon" [ngClass]="{'success': status == 'success', 'error': status == 'error'}">{{icon}}</mat-icon>
+    </div>
+
+    <div class="row">
+        <h5 class="feedback-modal-title w-100">{{labelTitile}}</h5>
+    </div>
+    <div class="row">
+        <p class="feedback-modal-description w-100">
+            {{textDescription}}
+        </p>
+    </div>
+    <!-- <div class="row">
+        <div class="offset-md-6 col-md-6 text-right">
+            <button mat-button mat-dialog-close class="confirm-modal-cancel-button">{{btnClose}}</button>
+        </div>
+    </div> -->
+</div>

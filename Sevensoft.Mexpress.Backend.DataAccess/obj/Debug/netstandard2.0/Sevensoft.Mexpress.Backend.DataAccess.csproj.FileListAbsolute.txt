@@ -1,0 +1,12 @@
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.deps.json
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.dll
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.pdb
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.csprojAssemblyReference.cache
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.csproj.CoreCompileInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.AssemblyInfoInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.AssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.csproj.CopyComplete
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.dll
+C:\GitHub\MEXPRESSACUERDOS\Sevensoft.Mexpress.Backend.DataAccess\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.pdb

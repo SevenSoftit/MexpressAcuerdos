@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+.confirm-modal-delete {
+    background: $soft-gray;
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $white;
+}
+
+.confirm-modal-cancel-button {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $white;
+    background: $light-blue-dark;
+    margin-left: 1rem;
+}
+
+.confirm-modal-description {
+    font-family: $opensans-regular;
+    font-size: $font-size-small;
+    color: $soft-gray;
+    line-height: 1.6rem;
+    padding: 2rem;
+    span {
+        font-family: $opensans-semibold;
+    }
+}
+
+.confirm-modal-title {
+    font-family: $opensans-bold;
+    font-size: $font-size-medium;
+    color: $black;
+}
