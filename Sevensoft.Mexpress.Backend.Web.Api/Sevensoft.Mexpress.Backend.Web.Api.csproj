@@ -2,12 +2,49 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Sevensoft.Mexpress.Backend.Web.Api\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7"/>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7"/>
+    <PackageReference Include="Microsoft.Owin" Version="4.0.1"/>
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.0.1"/>
+    <PackageReference Include="Microsoft.Owin.Cors" Version="4.0.1"/>
+    <PackageReference Include="System.Data.Entity.Reactive" Version="0.1.0"/>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7"/>
+    <PackageReference Include="EntityFramework" Version="6.1.0"/>
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.2"/>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1"/>
+    <PackageReference Include="package.mscorlib" Version="1.0.1"/>
+    <PackageReference Include="AutoMapper" Version="8.0.0"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0-preview3.19153.1"/>
+    <PackageReference Include="System.Runtime" Version="4.3.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.0.0-preview3.19153.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0"/>
+    <PackageReference Include="Hanssens.Net.Extensions" Version="2.1.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Server.HttpSys" Version="2.2.0"/>
+    <PackageReference Include="ChiKien276.AspNetCore.MultipartHelper" Version="0.0.6"/>
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0-preview3.19153.1"/>
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.0"/>
+    <PackageReference Include="DinkToPdfIncludesDependencies" Version="1.0.8"/>
+	  <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0-preview3.19153.1"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-preview3.19153.1"/>
   </ItemGroup>
 
   <ItemGroup>

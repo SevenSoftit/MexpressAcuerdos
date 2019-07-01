@@ -1,9 +1,6 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
-import { NoteModel } from '../note-modal/note.Model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonService } from 'src/app/services/common/common.service';
-import { EvidenceService } from 'src/app/services/evidence/evidence.service';
-import { EvidenceModel } from '../add-evidence-modal/evidence.Model';
 import { utiles } from 'src/environments/utiles';
 
 @Component({
@@ -13,7 +10,6 @@ import { utiles } from 'src/environments/utiles';
 })
 export class ConfirmModalComponent implements OnInit {
 //#region Model
-evidenceModel: EvidenceModel = new EvidenceModel();
 
 //#endregion Model
 //#region Variables
@@ -31,7 +27,7 @@ clickFunctions: any;
 onAdd = new EventEmitter();
 //#endregion Variables
 
-  constructor(private evidenceService: EvidenceService, @Inject(MAT_DIALOG_DATA) public dataConfirm: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public dataConfirm: any,
     public dialog: MatDialogRef<ConfirmModalComponent>, private commonService: CommonService) {
     if (this.dataConfirm !== null && this.dataConfirm !== undefined) {
       this.labelTitile = this.dataConfirm.confirmInfo.labelTitile;
@@ -88,24 +84,24 @@ deleteArchiveNote(){
   }, 0, 5000);
 if(this.dataConfirm.evidence.pk_Mtr_Pay_Evidence_Process > 0 && this.dataConfirm.evidence.pk_Mtr_Pay_Evidence_Process != undefined)
 {
-  this.evidenceModel.Pk_Mtr_Pay_Evidence_Process = this.dataConfirm.evidence.pk_Mtr_Pay_Evidence_Process;
-  this.evidenceModel.Pk_Do_Mtr_Pay_Slip = this.dataConfirm.evidence.pk_Do_Mtr_Pay_Slip;
-  this.evidenceModel.Pk_Do_Cat_Group = this.dataConfirm.evidence.pk_Do_Cat_Group; 
-  this.evidenceModel.Modification_User = utiles.getInfoUser().username;
-  this.evidenceModel.Archive_Original_Name = this.dataConfirm.evidence.archive_Original_Name;
-  this.evidenceModel.Archive_New_Name = this.dataConfirm.evidence.archive_New_Name;
-  this.evidenceModel.Slip_Name = this.dataConfirm.evidence.slip_Name;
-  this.evidenceModel.Active = false;
+  // this.evidenceModel.Pk_Mtr_Pay_Evidence_Process = this.dataConfirm.evidence.pk_Mtr_Pay_Evidence_Process;
+  // this.evidenceModel.Pk_Do_Mtr_Pay_Slip = this.dataConfirm.evidence.pk_Do_Mtr_Pay_Slip;
+  // this.evidenceModel.Pk_Do_Cat_Group = this.dataConfirm.evidence.pk_Do_Cat_Group; 
+  // this.evidenceModel.Modification_User = utiles.getInfoUser().username;
+  // this.evidenceModel.Archive_Original_Name = this.dataConfirm.evidence.archive_Original_Name;
+  // this.evidenceModel.Archive_New_Name = this.dataConfirm.evidence.archive_New_Name;
+  // this.evidenceModel.Slip_Name = this.dataConfirm.evidence.slip_Name;
+  // this.evidenceModel.Active = false;
 
-  this.evidenceService.deleteEvidence(this.evidenceModel).subscribe(
-    data => {
-      this.closeConfirm();     
-      this.onAdd.emit(true);
-      this.commonService._setLoading(false);
-    },
-    error => {
-    this.commonService._setLoading(false);
-    });
+  // this.evidenceService.deleteEvidence(this.evidenceModel).subscribe(
+  //   data => {
+  //     this.closeConfirm();     
+  //     this.onAdd.emit(true);
+  //     this.commonService._setLoading(false);
+  //   },
+  //   error => {
+  //   this.commonService._setLoading(false);
+  //   });
 }else{
   this.closeConfirm();         
   this.onAdd.emit(false);

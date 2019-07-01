@@ -1,5 +1,4 @@
-import { CdkTableModule } from '@angular/cdk/table';
-import { CdkTreeModule } from '@angular/cdk/tree';
+
 import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -38,8 +37,6 @@ import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   exports: [
-    CdkTableModule,
-    CdkTreeModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

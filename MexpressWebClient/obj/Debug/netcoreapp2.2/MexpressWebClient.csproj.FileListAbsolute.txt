@@ -1,0 +1,14 @@
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\bin\Debug\netcoreapp2.2\MexpressWebClient.deps.json
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\bin\Debug\netcoreapp2.2\MexpressWebClient.runtimeconfig.json
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\bin\Debug\netcoreapp2.2\MexpressWebClient.runtimeconfig.dev.json
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\bin\Debug\netcoreapp2.2\MexpressWebClient.dll
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\bin\Debug\netcoreapp2.2\MexpressWebClient.pdb
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.csprojAssemblyReference.cache
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.csproj.CoreCompileInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.RazorAssemblyInfo.cache
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.RazorAssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.AssemblyInfoInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.AssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.RazorTargetAssemblyInfo.cache
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.dll
+C:\GitHub\MEXPRESSACUERDOS\MexpressWebClient\obj\Debug\netcoreapp2.2\MexpressWebClient.pdb

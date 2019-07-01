@@ -6,6 +6,14 @@
     <ProjectReference Include="..\Sevensoft.Mexpress.Utilities.Extender\Sevensoft.Mexpress.Utilities.Extender.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime" Version="4.3.1"/>
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0"/>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0"/>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.9.1"/>
+  </ItemGroup>
+  
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>

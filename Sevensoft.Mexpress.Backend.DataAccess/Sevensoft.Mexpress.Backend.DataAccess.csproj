@@ -4,6 +4,12 @@
     <ProjectReference Include="..\Sevensoft.Mexpress.BackEnd.Common\Sevensoft.Mexpress.BackEnd.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.1"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0"/>
+  </ItemGroup>
+  
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
