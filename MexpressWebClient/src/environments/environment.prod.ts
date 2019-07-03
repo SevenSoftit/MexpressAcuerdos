@@ -9,7 +9,7 @@ export const environment = {
     apiURL: 'http://74.208.217.164/SevenSoft.Security.BackEnd.Web.Api/', //Desarrollo: http://74.208.217.164/SevenSoft.Security.BackEnd.Web.Api/
     production: false,                                                   // Producción: http://192.168.20.114/SevenSoft.Security.BackEnd.Web.Api.MExp/ 
     //options: options,
-    clientId: 'MEXPRESS_DO',
+    clientId: 'MEXPRESS_AC',
   
     /************** INFO SISTEMA *******************/
 

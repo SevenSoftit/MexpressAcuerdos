@@ -1,7 +1,8 @@
 import { Http, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 import { CustomRequestOptions } from './CustomRequestOptions';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class HttpProvider extends Http {

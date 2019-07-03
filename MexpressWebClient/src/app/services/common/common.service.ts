@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { CatalogModel } from '../../components/common-model/catalog.Model';
 import {utiles} from '../../../environments/utiles';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
 import { tap} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};

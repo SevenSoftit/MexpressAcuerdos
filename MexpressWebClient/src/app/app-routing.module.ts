@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../app/components/login/login.component';
 import { AuthGuard } from './services/auth/auth-guard.service';
+import { LayoutComponent } from './components/layout/layout.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    // component: LayoutComponent,
+    component: LayoutComponent,
     children: [
 
     ]

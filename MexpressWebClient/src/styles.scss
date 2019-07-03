@@ -3,9 +3,9 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/daygrid/main.css';
-@import '~@fullcalendar/timegrid/main.css';
+// @import '~@fullcalendar/core/main.css';
+// @import '~@fullcalendar/daygrid/main.css';
+// @import '~@fullcalendar/timegrid/main.css';
 //syncfusion imports
 @import '~@syncfusion/ej2/base/material.css';
 @import '~@syncfusion/ej2/color-picker/material.css';
@@ -181,10 +181,9 @@ $soft-gray: #5a5a5a;
   
   ****************************************************/
 
-/deep/button:focus {
-    outline: none !important;
-}
-
+// /deep/button:focus {
+//     outline: none !important;
+// }
 
 /*******************************************************
   * Author: Gustavo ZC
@@ -520,3 +519,5 @@ label {
 .fc-time {
     color: transparent !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

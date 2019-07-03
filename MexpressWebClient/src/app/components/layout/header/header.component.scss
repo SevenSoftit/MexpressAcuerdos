@@ -1,4 +1,4 @@
-@import"../../../../styles.scss";
+@import '../../../../styles.scss';
 
 /*******************************************************
   * Author: Eduardo Salas
@@ -80,29 +80,44 @@
 
 /*Styles for badge in notification*/
 
-/deep/ .mat-badge-medium[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+
+/*/deep/*/
+
+.mat-badge-medium[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
     width: 18px;
     height: 19px;
     line-height: 22px;
     font-size: 0.65rem;
 }
 
-/deep/ .mat-badge-medium.mat-badge-above[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+
+/*/deep/*/
+
+.mat-badge-medium.mat-badge-above[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
     top: -5px;
 }
 
-/deep/ .mat-badge-medium.mat-badge-overlap.mat-badge-after[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+
+/*/deep/*/
+
+.mat-badge-medium.mat-badge-overlap.mat-badge-after[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
     right: -7px;
 }
 
 
 /*Styles for account options*/
 
-/deep/.header-menu-item {
+
+/*/deep/*/
+
+.header-menu-item {
     color: $white!important;
 }
 
-/deep/.mat-menu-content:not(:empty) {
+
+/*/deep/*/
+
+.mat-menu-content:not(:empty) {
     background: $dark-gray;
 }
 
@@ -118,6 +133,9 @@
     border-bottom: 1px solid $light-gray-softer;
 }
 
-/deep/.mat-menu-panel {
+
+/*/deep/*/
+
+.mat-menu-panel {
     border-radius: 0 0 0px 8px !important;
 }

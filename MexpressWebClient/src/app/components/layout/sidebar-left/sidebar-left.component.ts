@@ -106,67 +106,26 @@ export class SidebarLeftComponent implements OnInit {
         this._common.asignHeaderTitle("Inicio");
         break;
       }
-      case "ater": {
-        this.router.navigate(["allEmployeeRoster"]);
-        this._common.asignHeaderTitle("Todas las planillas");
+      case "acc": {
+        this.router.navigate(["tradeAgreements"]);
+        this._common.asignHeaderTitle("Acuerdos comerciales");
         break;
       }
-      case "my_pending_employee_rosters": {
-        this.router.navigate(["my_pending_employee_rosters"]);
-        this._common.asignHeaderTitle("Mis planillas pendientes");
+      case "sda": {
+        this.router.navigate(["tracingOfTheAgreement"]);
+        this._common.asignHeaderTitle("Seguimiento del acuerdo");
 
         break;
       }
-      case "merr": {
-        this.router.navigate(["my_employee_rosters_review"]);
-        this._common.asignHeaderTitle("Mis planillas en revisión");
-
-        break;
-      }
-      case "fer": {
-        this.router.navigate(["finishedEmployeeRoster"]);
-        this._common.asignHeaderTitle("Mis planillas finalizadas");
-
-        break;
-      }
-      case "atg": {
-        this.router.navigate(["allGroups"]);
-        this._common.asignHeaderTitle("Todos los centros de costo");
-
-        break;
-      }
-      case "doer": {
-        this.router.navigate(["employeeRosterDef"]);
-        this._common.asignHeaderTitle("Definición de planillas");
-
-        break;
-      }
-      case "mc": {
-        this.router.navigate(["manage_concepts"]);
-        this._common.asignHeaderTitle("Gestión de conceptos");
-
-        break;
-      }
-      case "me": {
-        this.router.navigate(["manageEmployee"]);
-        this._common.asignHeaderTitle("Gestión de empleados");
-
-        break;
-      }
-      case "review_of_employee_rosters": {
-        this.router.navigate(["review_of_employee_rosters"]);
-        this._common.asignHeaderTitle("Planillas pendientes por revisar");
-
-        break;
-      }
-      case "rprts": {
-        this.router.navigate(["reports"]);
-        this._common.asignHeaderTitle("Generación de reportes");
+      case "cda": {
+        this.router.navigate(["conciliationOfAgreements"]);
+        this._common.asignHeaderTitle("Conciliación de acuerdos");
 
         break;
       }
       case "": {
         this.router.navigate(["home"]);
+        break;
       }
     }
   }
