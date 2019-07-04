@@ -22,8 +22,12 @@ import { GridModule, ToolbarService, EditService, PageService, FilterService, So
 
 // Componentes
 import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'
 
 // Modal Components
+import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
+import { FeedbackDescriptionModalComponent } from './components/feedback-description-modal/feedback-description-modal.component';
+import { FeedbackModalComponent } from './components/feedback-modal/feedback-modal.component';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +47,11 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ChangePasswordModalComponent,
+    FeedbackDescriptionModalComponent,
+    FeedbackModalComponent 
   ],
   imports: [
     MaterialModule,

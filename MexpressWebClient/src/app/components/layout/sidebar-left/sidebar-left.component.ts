@@ -53,8 +53,8 @@ export class SidebarLeftComponent implements OnInit {
   }
 
   /*******************************************************
-   * Author: Eduardo Salas
-   * Creation date: 05/02/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
    * Description: method that change the value of isMenuOpen variable,
    * and set the value false to collapse the sidenav menu
    ****************************************************
@@ -75,8 +75,8 @@ export class SidebarLeftComponent implements OnInit {
   }
 
   /*******************************************************
-   * Author: Eduardo Salas
-   * Creation date: 05/02/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
    * Description: method that redirect to the component for each option
    ****************************************************
    * Modifications
@@ -114,13 +114,11 @@ export class SidebarLeftComponent implements OnInit {
       case "sda": {
         this.router.navigate(["tracingOfTheAgreement"]);
         this._common.asignHeaderTitle("Seguimiento del acuerdo");
-
         break;
       }
       case "cda": {
         this.router.navigate(["conciliationOfAgreements"]);
         this._common.asignHeaderTitle("Conciliación de acuerdos");
-
         break;
       }
       case "": {

@@ -1,8 +1,8 @@
 @import '../../../../styles.scss';
 
 /*******************************************************
-  * Author: Eduardo Salas
-  * Creation date: 04/02/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
   * Description: styles for header.
 *******************************************************/
 
@@ -26,8 +26,8 @@
 
 
 /*******************************************************
-  * Author: Eduardo Salas
-  * Creation date: 04/02/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
   * Description: Angular material class edited to change the toolbar height and padding left. 
   ****************************************************
   * Modifications
@@ -47,8 +47,8 @@
 
 
 /*******************************************************
-  * Author: Eduardo Salas
-  * Creation date: 11/02/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
   * Description: class that remove the outline when button is clicked
   ****************************************************
   * Modifications
@@ -80,51 +80,36 @@
 
 /*Styles for badge in notification*/
 
-
-/*/deep/*/
-
-.mat-badge-medium[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+::ng-depp.mat-badge-medium .mat-badge-content {
     width: 18px;
     height: 19px;
     line-height: 22px;
     font-size: 0.65rem;
 }
 
-
-/*/deep/*/
-
-.mat-badge-medium.mat-badge-above[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+::ng-depp.mat-badge-medium.mat-badge-above .mat-badge-content {
     top: -5px;
 }
 
-
-/*/deep/*/
-
-.mat-badge-medium.mat-badge-overlap.mat-badge-after[_ngcontent-c2] .mat-badge-content[_ngcontent-c2] {
+::ng-depp.mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
     right: -7px;
 }
 
 
 /*Styles for account options*/
 
-
-/*/deep/*/
-
-.header-menu-item {
+::ng-depp.header-menu-item {
     color: $white!important;
 }
 
-
-/*/deep/*/
-
-.mat-menu-content:not(:empty) {
+::ng-depp.mat-menu-content:not(:empty) {
     background: $dark-gray;
 }
 
-.mat-menu-item[_ngcontent-c3]:hover:not([disabled]),
-.mat-menu-item.cdk-program-focused[_ngcontent-c3]:not([disabled]),
-.mat-menu-item.cdk-keyboard-focused[_ngcontent-c3]:not([disabled]),
-.mat-menu-item-highlighted[_ngcontent-c3]:not([disabled]) {
+.mat-menu-item:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused:not([disabled]),
+.mat-menu-item-highlighted:not([disabled]) {
     background: $light-gray !important;
 }
 
@@ -133,9 +118,6 @@
     border-bottom: 1px solid $light-gray-softer;
 }
 
-
-/*/deep/*/
-
-.mat-menu-panel {
+::ng-depp.mat-menu-panel {
     border-radius: 0 0 0px 8px !important;
 }

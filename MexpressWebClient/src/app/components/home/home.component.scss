@@ -1,0 +1,135 @@
+@import"../../../styles.scss";
+
+/*******************************************************
+  * Author: Josue Somarribas
+  * Creation date: 16/02/2019
+  * Description: General component's elements, like titles 
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.home-title {
+    font-size: $font-size-medium;
+}
+
+.home-title span {
+    font-family: $opensans-semibold;
+}
+
+.home-top {
+    margin-top: 5vh;
+}
+
+.border-revision {
+    border: 2px solid $yellow !important;
+}
+
+.border-rejected {
+    border: 2px solid $red !important;
+}
+
+.border-finished {
+    border: 2px solid $light-blue !important;
+}
+
+
+/*******************************************************
+  * Author: Josue Somarribas
+  * Creation date: 16/02/2019
+  * Description: This component's cards. This styles define its color and size and child element's styles.
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.home-card {
+    padding: 0.5rem 0;
+    background-color: #f7f7f7;
+    color: #484848;
+}
+
+.home-card-title {
+    font-size: $font-size-biggest;
+}
+
+.home-card-subtitle {
+    font-size: $font-size-bigger;
+}
+
+.home-card-subtitle:hover {
+    cursor: pointer;
+}
+
+.home-card p {
+    font-family: $opensans-semibold;
+}
+
+.home-card-button {
+    background-color: $light-blue;
+    color: #fff;
+}
+
+.home-card-button mat-icon {
+    margin: -0.1rem -0.5rem auto 0.5rem;
+}
+
+
+/*******************************************************
+  * Author: Josue Somarribas
+  * Creation date: 16/02/2019
+  * Description: Lines with icons used over each card on the first row of the dashboard
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author: 
+  * Description:
+*******************************************************/
+
+.home-line {
+    height: 1rem;
+    margin: auto -3rem 0.9rem 1rem;
+    border-left: #FFFFFF 0.25rem solid;
+    border-bottom: #FFFFFF 0.25rem solid;
+}
+
+.home-last-line {
+    margin: auto 0 0.9rem 1rem;
+}
+
+.home-line-icon {
+    position: absolute;
+    top: -1.5rem;
+    left: 1.3rem;
+    color: $light-gray-softer;
+}
+
+.label-bottom-top {
+    margin-top: 2rem;
+}
+
+.label-number-top {
+    margin-top: 1.2rem;
+}
+
+@media (min-width: 1900px) {
+    .home-top-header {
+        margin-top: 9vh;
+    }
+    .home-top {
+        margin-top: 9vh;
+    }
+}

@@ -181,9 +181,10 @@ $soft-gray: #5a5a5a;
   
   ****************************************************/
 
-// /deep/button:focus {
-//     outline: none !important;
-// }
+ ::ng-depp.button:focus {
+    outline: none !important;
+}
+
 
 /*******************************************************
   * Author: Gustavo ZC
@@ -519,5 +520,13 @@ label {
 .fc-time {
     color: transparent !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

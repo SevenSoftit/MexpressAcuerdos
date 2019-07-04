@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   //#region variables
   /*********************************************************************
    * Author: Gustavo ZC
-   * Creation date: 
+   * Creation date: 02/07/2019 
    *********************************************************************/
   loginForm: FormGroup;
   loginModel: LoginModel = new LoginModel();
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   //#region constructor
   /*********************************************************************
    * Author: Gustavo ZC
-   * Creation date: 
+   * Creation date: 02/07/2019
    *********************************************************************/
   constructor(private router: Router, private fb: FormBuilder, private loginService: LoginService,
     private _common: CommonService, private matDialog: MatDialog, private authService: AuthService) { }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   /***********************************************************************************
     * Author: Gustavo ZC
-    * Creation date: 
+    * Creation date: 02/07/2019 
     * Description:
    * ***********************************************************************************
     * Modifications
@@ -143,7 +143,7 @@ export class LoginComponent implements OnInit {
 
     /***********************************************************************************
   * Author: Gustavo ZC
-  * Creation date: 23/04/2019
+  * Creation date: 02/07/2019
   * Description:
  * ***********************************************************************************
   * Modifications

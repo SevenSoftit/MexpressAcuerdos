@@ -23,8 +23,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private commonService: CommonService, public dialog: MatDialog) { }
 
   /***********************************************************************************
-  * Author: Gustavo ZC
-  * Creation date: 15/05/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
   * Description:
  * ***********************************************************************************
   * Modifications
@@ -43,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   /***********************************************************************************
     * Author: Gustavo ZC
-    * Creation date: 15/05/2019
+    * Creation date: 02/07/2019
     * Description:
    * ***********************************************************************************
     * Modifications
@@ -76,7 +76,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   /***********************************************************************************
     * Author: Gustavo ZC
-    * Creation date: 15/05/2019
+    * Creation date: 02/07/2019
     * Description:
    * ***********************************************************************************
     * Modifications
@@ -93,7 +93,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   /***********************************************************************************
     * Author: Gustavo ZC
-    * Creation date: 15/05/2019
+    * Creation date: 02/07/2019
     * Description:
    * ***********************************************************************************
     * Modifications

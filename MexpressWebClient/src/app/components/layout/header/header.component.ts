@@ -48,8 +48,8 @@ export class HeaderComponent implements OnInit {
   }
 
   /*******************************************************
-  * Author: Gustavo ZC
-  * Creation date: 16/05/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
   * Description: Method that redirect the user to the quick add project component
   ****************************************************
   * Modifications

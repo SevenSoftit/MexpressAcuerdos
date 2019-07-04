@@ -23,8 +23,8 @@ export class ChangePasswordModalComponent implements OnInit {
   constructor(private commonService: CommonService,private matDialog: MatDialog, public matDialogRef: MatDialogRef<ChangePasswordModalComponent>) { }
 
   /***********************************************************************************
-    * Author: Eduardo Salas
-    * Creation date: 10/05/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
     * Description:
    * ***********************************************************************************
     * Modifications
@@ -44,8 +44,8 @@ export class ChangePasswordModalComponent implements OnInit {
   }
 
   /***********************************************************************************
-    * Author: Eduardo Salas
-    * Creation date: 10/05/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
     * Description:
    * ***********************************************************************************
     * Modifications

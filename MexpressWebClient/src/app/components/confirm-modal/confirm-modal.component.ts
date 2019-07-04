@@ -47,8 +47,8 @@ onAdd = new EventEmitter();
   }
 
   /***********************************************************************************
-     * Author: Gustavo ZC
-     * Creation date:25/04/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
      * Description: 
     * ***********************************************************************************
      * Modifications
@@ -65,8 +65,8 @@ deleteArchiveNote(){
 }
 
   /***********************************************************************************
-     * Author: Gustavo ZC
-     * Creation date:30/04/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
      * Description: 
     * ***********************************************************************************
      * Modifications
@@ -112,8 +112,8 @@ if(this.dataConfirm.evidence.pk_Mtr_Pay_Evidence_Process > 0 && this.dataConfirm
 
 
   /***********************************************************************************
-     * Author: Gustavo ZC
-     * Creation date:25/04/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
      * Description: 
     * ***********************************************************************************
      * Modifications
@@ -157,8 +157,8 @@ if(this.dataConfirm.file.pk_Glb_Mtr_Document > 0 && this.dataConfirm.file.pk_Glb
 }
 }
   /***********************************************************************************
-     * Author: Gustavo ZC
-     * Creation date:25/04/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
      * Description: 
     * ***********************************************************************************
      * Modifications
@@ -182,8 +182,8 @@ if(this.dataConfirm.file.pk_Glb_Mtr_Document > 0 && this.dataConfirm.file.pk_Glb
   }
   
   /***********************************************************************************
-     * Author: Gustavo ZC
-     * Creation date:25/04/2019
+    * Author: Gustavo ZC
+    * Creation date: 02/07/2019
      * Description: 
     * ***********************************************************************************
      * Modifications
