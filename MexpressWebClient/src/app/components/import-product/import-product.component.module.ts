@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ImportEmployeeComponent } from './import-employee.component';
+import { ImportProductComponent } from './import-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
@@ -40,9 +40,9 @@ const routes: Routes = [{ path: "" },];
     GridModule,
     UploaderModule,
     DropzoneModule],
-  //declarations: [ ImportEmployeeComponent],
+  //declarations: [ ImportProductComponent],
   providers: [PageService, SortService, FilterService, GroupService, FreezeService, SelectionService],
-  entryComponents: [ImportEmployeeComponent],
+  entryComponents: [ImportProductComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [
     RouterModule,

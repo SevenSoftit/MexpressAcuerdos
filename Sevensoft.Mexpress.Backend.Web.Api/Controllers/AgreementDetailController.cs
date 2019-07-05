@@ -24,10 +24,10 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes =
     JwtBearerDefaults.AuthenticationScheme)]
-    public class EmployeeController : Controller
+    public class AgreementDetailController : Controller
     {
         private IConfiguration configuration;
-        public EmployeeController(IConfiguration iConfiguration)
+        public AgreementDetailController(IConfiguration iConfiguration)
         {
             configuration = iConfiguration;
         }
@@ -163,7 +163,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns> 
         [Route("ValidateEmployeeError")]
         [HttpPost]
-        public async Task<IActionResult> ValidateEmployeeError([FromBody] Common.ImportEmployee model)
+        public async Task<IActionResult> ValidateEmployeeError([FromBody] Common.Import_Product model)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var list = result.DeSerializeObject<IEnumerable<Common.ImportEmployee>>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
 
                     return Ok(list);
                 }
@@ -243,12 +243,12 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns> 
         [Route("processWorkEmployeeTable")]
         [HttpPost]
-        public async Task<IActionResult> ProcessWorkEmployeeTable([FromBody] Common.ImportEmployee model)
+        public async Task<IActionResult> ProcessWorkEmployeeTable([FromBody] Common.Import_Product model)
         {
             try
             {
                 var message = new Message();
-                model.Option = Employee_Option.Process_Work_Table;
+                model.Option = Agreement_Option.Process_Work_Table;
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:GblWrkEmployee");
                 message.Operation = Operation.Save;
                 message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
@@ -260,7 +260,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var list = result.DeSerializeObject<IEnumerable<Common.ImportEmployee>>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
 
                     return Ok(list);
                 }

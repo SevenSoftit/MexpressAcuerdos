@@ -22,12 +22,12 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     [Route("api/[controller]")]
     //  [Authorize(AuthenticationSchemes =
     //  JwtBearerDefaults.AuthenticationScheme)]
-    public class GblWrkEmployee : Controller
+    public class GblWrkAgreementDetailController : Controller
     {
         private static readonly Microsoft.AspNetCore.Http.Features.FormOptions _defaultFormOptions = new Microsoft.AspNetCore.Http.Features.FormOptions();
         private IConfiguration configuration;
 
-        public GblWrkEmployee(IConfiguration iConfiguration)
+        public GblWrkAgreementDetailController(IConfiguration iConfiguration)
         {
             configuration = iConfiguration;
         }
@@ -154,7 +154,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         section = await reader.ReadNextSectionAsync();
                     }
 
-                    var model = new Common.ImportEmployee();
+                    var model = new Common.Import_Product();
                     model.Creation_User = (queryString["User"]).ToString();
                     model.File_Path = ProcessPathDocumentAsync(nameFile, targetFilePathBackUp).Result;
 
@@ -179,7 +179,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         {
                             return BadRequest(result.Result);
                         }
-                        var list = result.DeSerializeObject<IEnumerable<Common.ImportEmployee>>();
+                        var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
 
                         return Ok(list);
                     }
@@ -270,7 +270,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             return targetFilePath;
         }
 
-        private Common.ImportEmployee GetDocuments(Dictionary<string, StringValues> fields, Common.ImportEmployee model)
+        private Common.Import_Product GetDocuments(Dictionary<string, StringValues> fields, Common.Import_Product model)
         {
             foreach (var dictionary in fields)
             {

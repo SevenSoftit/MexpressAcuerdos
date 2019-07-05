@@ -45,7 +45,7 @@
         }
 
 
-        public enum Employee_Option
+        public enum Agreement_Option
         {
             None,
             Process_Work_Table

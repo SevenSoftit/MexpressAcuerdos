@@ -80,29 +80,29 @@
 
 /*Styles for badge in notification*/
 
-::ng-depp.mat-badge-medium .mat-badge-content {
+::ng-depp .mat-badge-medium .mat-badge-content {
     width: 18px;
     height: 19px;
     line-height: 22px;
     font-size: 0.65rem;
 }
 
-::ng-depp.mat-badge-medium.mat-badge-above .mat-badge-content {
+::ng-depp .mat-badge-medium.mat-badge-above .mat-badge-content {
     top: -5px;
 }
 
-::ng-depp.mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+::ng-depp .mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
     right: -7px;
 }
 
 
 /*Styles for account options*/
 
-::ng-depp.header-menu-item {
+::ng-depp .header-menu-item {
     color: $white!important;
 }
 
-::ng-depp.mat-menu-content:not(:empty) {
+::ng-depp .mat-menu-content:not(:empty) {
     background: $dark-gray;
 }
 
@@ -118,6 +118,6 @@
     border-bottom: 1px solid $light-gray-softer;
 }
 
-::ng-depp.mat-menu-panel {
+::ng-depp .mat-menu-panel {
     border-radius: 0 0 0px 8px !important;
 }

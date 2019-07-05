@@ -1,0 +1,56 @@
+@import '.././../../styles.scss';
+::ng-deep #loader {
+    color: #008cff !important;
+    height: 40px !important;
+    left: 45% !important;
+    position: absolute !important;
+    top: 45% !important;
+    width: 30% !important;
+}
+
+::ng-deep .control_wrapper {
+    max-width: 500px !important;
+    min-width: 245px;
+    margin: auto;
+}
+
+::ng-deep #container .e-control .e-upload-files .e-file-container .e-progress-inner-wrap .e-upload-progress {
+    background: green !important;
+    height: 4px;
+}
+
+::ng-deep #container .e-control .e-upload-files .e-file-container .e-progress-inner-wrap {
+    height: 4px !important;
+    background-color: lightblue;
+}
+
+::ng-deep dropzone>.dropzone.dz-wrapper .dz-message {
+    padding-top: 19rem;
+}
+
+.import-modal-label-title {
+    font-family: $opensans-extrabold;
+    font-size: $font-size-medium;
+}
+
+::ng-depp .import-dropzone>dropzone {
+    height: 20rem !important;
+}
+
+::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper .dz-message {
+    padding-top: 4rem !important;
+}
+
+::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper {
+    height: 20rem !important;
+}
+
+::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper .dz-preview {
+    margin-left: 13vw !important;
+}
+
+@media (min-width: 1900px) {
+     ::ng-depp.import-dropzone>dropzone>.dropzone.dz-wrapper .dz-preview {
+        margin-left: 10.5vw !important;
+    }
+}

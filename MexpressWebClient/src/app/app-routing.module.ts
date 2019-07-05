@@ -19,7 +19,7 @@ const routes: Routes = [
       {path: 'home', redirectTo: 'home', pathMatch: 'full' },
       {path: 'home', loadChildren: './components/home/home.module#HomeModule' },
       {path: 'tradeAgreements', loadChildren: './components/trade-agreements/trade-agreements.module#TradeAgreementsModule'},
-      {path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements/new-trade-agreements.module#NewTradeAgreementsModule'},
+      {path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements-detail/new-trade-agreements-detail.module#NewTradeAgreementsDetailModule'},
     ]
   }, 
 

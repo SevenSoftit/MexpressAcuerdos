@@ -12,9 +12,9 @@ import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.compone
   templateUrl: './import-employee.component.html',
   styleUrls: ['./import-employee.component.scss']
 })
-export class ImportEmployeeComponent implements OnInit {
+export class ImportProductComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,public matDialogRef: MatDialogRef<ImportEmployeeComponent>, private _common: CommonService) { }
+  constructor(public dialog: MatDialog,public matDialogRef: MatDialogRef<ImportProductComponent>, private _common: CommonService) { }
   public uploadObj: UploaderComponent;
   infoUser = utiles.getInfoUser();
   public userName: string = this.infoUser.username;

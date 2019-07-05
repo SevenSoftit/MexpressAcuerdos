@@ -1,0 +1,116 @@
+@import "../../../styles.scss";
+.tittle-agreement {
+    font-size: $font-size-medium;
+    text-align: left;
+    font-family: $opensans-semibold;
+    color: #001B36;
+}
+
+.agreement-top-header {
+    margin-top: 2vh;
+}
+
+.agreement-scroll {
+    height: 85vh!important;
+}
+
+.create-agreement-sector {
+    background: $light-gray-softer;
+    border-radius: 0rem;
+    padding: 1.3rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.new-agreement-form-top {
+    margin-top: 3vh;
+}
+
+.agreement-top {
+    margin-top: 2vh;
+}
+
+.new-agreement-label-input {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: #000;
+}
+
+.new-agreement-form-input {
+    background: $backgroud-input;
+    border-radius: 0.25rem;
+    color: $dark-gray !important;
+}
+
+.new-agreement-select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $backgroud-input;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.new-agreement-table-top {
+    margin-top: 4vh;
+}
+
+.new-agreement-doc-errors {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $red;
+    margin-left: 4rem;
+    margin-top: 1.2rem;
+}
+
+.manage-employee-buttons-top {
+    margin-top: 6vh;
+}
+
+.excel-button {
+    font-family: "Open Sans SemiBold";
+    font-size: 0.8rem;
+    color: #F9F9F9;
+    background-color: $light-blue;
+    border-color: $light-blue;
+    border-radius: 0.437rem;
+    min-width: 7rem;
+}
+
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background: $light-blue !important;
+}
+
+::ng-depp .e-pager .e-currentitem {
+    background: $light-blue;
+}
+
+::ng-depp .e-pager .e-currentitem:hover {
+    background: $light-blue;
+}
+
+::ng-depp .e-grid .e-content {
+    overflow-x: hidden !important;
+}
+
+::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+    font-family: $opensans-semibold !important;
+    font-size: $font-size-small!important;
+    color: $white!important;
+    background-color: $light-blue!important;
+    border-color: $light-blue!important;
+    border-radius: 0.437rem!important;
+    min-width: 7rem!important;
+}
+
+::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+    color: $white!important;
+}

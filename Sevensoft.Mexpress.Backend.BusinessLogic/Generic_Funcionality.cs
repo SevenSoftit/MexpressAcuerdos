@@ -28,7 +28,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
 
         #region Region [Methods]
 
-        public int readAsExcelFile(ImportEmployee model)
+        public int readAsExcelFile(Import_Product model)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                                             dataRow[i] = GetCellValue(spreadSheetDocument, row.Descendants<Cell>().ElementAt(i));
                                         }
                                         dataRow["CREATION_USER"] = model.Creation_User;
-                                        dataRow["FK_GBL_WRK_EMPLOYEE_HEADER"] = model.Fk_Gbl_Wrk_Employee_Header;
+                                        dataRow["FK_GBL_WRK_AGREEMENT_HEADER"] = model.Fk_Gbl_Wrk_Agreement_Header;
                                         dataTable.Rows.Add(dataRow);
                                     }
                                 }

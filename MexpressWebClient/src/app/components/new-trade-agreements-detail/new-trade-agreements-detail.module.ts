@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewTradeAgreementsComponent } from './new-trade-agreements.component';
+import { NewTradeAgreementsDetailComponent } from './new-trade-agreements-detail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-// import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ToolbarService,EditService,PageService,FilterService,SortService,FreezeService,ResizeService,GridModule, ExcelExportService, PdfExportService} from "@syncfusion/ej2-angular-grids";
 import { MatSelectModule } from '@angular/material/select';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
+import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 
 setCulture('es-ES');
 
@@ -29,11 +30,11 @@ L10n.load({
 });
 
 const routes: Routes = [
-  { path: '', component: NewTradeAgreementsComponent },
+  { path: '', component: NewTradeAgreementsDetailComponent },
 
 ];
 @NgModule({
-  declarations: [NewTradeAgreementsComponent],
+  declarations: [NewTradeAgreementsDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -42,7 +43,10 @@ const routes: Routes = [
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    GridModule,
+    ScrollDispatchModule,
+    DropDownListAllModule
   ],
   providers: [
     ToolbarService,
@@ -56,4 +60,4 @@ const routes: Routes = [
     PdfExportService
   ]
 })
-export class NewTradeAgreementsModule { }
+export class NewTradeAgreementsDetailModule { }

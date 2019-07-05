@@ -69,7 +69,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<ImportEmployee>();
+                var model = message.DeSerializeObject<Import_Product>();
                 using (var repository = new GblWrkEmployeeRepository(message.Connection))
                 {
                     var returnObject = await repository.List(model);
@@ -108,7 +108,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<ImportEmployee>();
+                var model = message.DeSerializeObject<Import_Product>();
                 using (var repository = new GblWrkEmployeeRepository(message.Connection))
                 {
                     var returnObject = await repository.Get(model);
@@ -147,7 +147,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<ImportEmployee>();
+                var model = message.DeSerializeObject<Import_Product>();
                 using (var repository = new GblWrkEmployeeRepository(message.Connection))
                 {
                     if (model.Option == Employee_Option.Process_Work_Table)
@@ -159,7 +159,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                     {
                         var repository_funcionality = new Generic_Funcionality(message.Connection);
                         var result = await repository.SaveGet(model);
-                        model.Fk_Gbl_Wrk_Employee_Header = result.Fk_Gbl_Wrk_Employee_Header;
+                        model.Fk_Gbl_Wrk_Agreement_Header = result.Fk_Gbl_Wrk_Agreement_Header;
                         model.Total_Records = repository_funcionality.readAsExcelFile(model);
                         await repository.Save(model);
                         var resultEmployeeList = repository.ListWorkTable(model);
@@ -202,7 +202,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<ImportEmployee>();
+                var model = message.DeSerializeObject<Import_Product>();
                 using (var repository = new GblWrkEmployeeRepository(message.Connection))
                 {
                     await repository.Delete(model);
