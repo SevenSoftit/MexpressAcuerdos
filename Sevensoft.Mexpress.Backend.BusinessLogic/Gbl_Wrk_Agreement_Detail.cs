@@ -7,13 +7,13 @@ using static Sevensoft.Mexpress.Backend.Common.Enum;
 
 namespace Sevensoft.Mexpress.Backend.BusinessLogic
 {
-    public class Do_Cat_Employee : IBusinessLogic
+    public class Gbl_Wrk_Agreement_Detail : IBusinessLogic
     {
         #region Region [Methods]
         /// <summary>
         /// Nombre: DoWork
-        /// Descripcion: Metodo encargado de orquestar las solicitudes de operaciones para el objeto "Do_Cat_Employee".
-        /// Fecha de creación: 22/03/2019.
+        /// Descripcion: Method in charge of orchestrating the operations requests for the object "GBL_PAR_PARAMETER".
+        /// Fecha de creación: 05/07/2019.
         /// Autor: Gustavo ZC.
         /// </summary>
         /// <param name="message"></param>
@@ -49,13 +49,28 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 return resultMessage;
             }
         }
+
+        /**************************************************************
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
+            * Description: Method responsible for communicating with the DataAccess and for extracting information
+            * Modifications:
+            * ************************************************************
+            * Number:
+            * Date:
+            * Ticket:
+            * Author:
+            * Descripction:
+            * ************************************************************
+        */
+
         public async virtual Task<Message> List(Message message)
         {
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>();
-                using (var repository = new Do_Cat_Employee_Repository(message.Connection))
+                var model = message.DeSerializeObject<Import_Product>();
+                using (var repository = new Gbl_Wrk_Agreement_Detail_Repository(message.Connection))
                 {
                     var returnObject = await repository.List(model);
                     resultMessage.Status = Status.Success;
@@ -73,13 +88,28 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 return resultMessage;
             }
         }
+
+        /**************************************************************
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
+            * Description: Method responsible for communicating with the DataAccess and for extracting information
+            * Modifications:
+            * ************************************************************
+            * Number:
+            * Date:
+            * Ticket:
+            * Author:
+            * Descripction:
+            * ************************************************************
+        */
+
         public async virtual Task<Message> Get(Message message)
         {
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>();
-                using (var repository = new Do_Cat_Employee_Repository(message.Connection))
+                var model = message.DeSerializeObject<Import_Product>();
+                using (var repository = new Gbl_Wrk_Agreement_Detail_Repository(message.Connection))
                 {
                     var returnObject = await repository.Get(model);
                     resultMessage.Status = Status.Success;
@@ -92,24 +122,54 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             {
                 var resultMessage = new Message();
                 resultMessage.Status = Status.Failed;
-                resultMessage.Result = string.Format("{0}", ex.Message);
+                resultMessage.Result = string.Format("{ 0}", ex.Message);
                 resultMessage.MessageInfo = string.Empty;
                 return resultMessage;
             }
         }
+
+        /**************************************************************
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
+            * Description: Method responsible for communicating with the DataAccess and for save information
+            * Modifications:
+            * ************************************************************
+            * Number:
+            * Date:
+            * Ticket:
+            * Author:
+            * Descripction:
+            * ************************************************************
+        */
+
         public async virtual Task<Message> Save(Message message)
         {
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>();
-                using (var repository = new Do_Cat_Employee_Repository(message.Connection))
+                var model = message.DeSerializeObject<Import_Product>();
+                using (var repository = new Gbl_Wrk_Agreement_Detail_Repository(message.Connection))
                 {
-                    
-                    var returObject = await repository.SaveScalar(model);
+                    if (model.Option == Agreement_Option.Process_Work_Table)
+                    {
+                        await repository.ExecuteProcess(model);
+                        resultMessage.MessageInfo = string.Empty;
+                    }
+                    else
+                    {
+                        var repository_funcionality = new Generic_Funcionality(message.Connection);
+                        var result = await repository.SaveGet(model);
+                        model.Fk_Gbl_Wrk_Agreement_Header = result.Fk_Gbl_Wrk_Agreement_Header;
+                        model.Total_Records = repository_funcionality.readAsExcelFile(model);
+                        await repository.Save(model);
+                        var resultProductList = repository.ListWorkTable(model);
+
+                        resultMessage.MessageInfo = resultProductList.Result.SerializeObject();
+                    }
+
+
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = returObject.SerializeObject();
                     return resultMessage;
                 }
             }
@@ -122,18 +182,33 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 return resultMessage;
             }
         }
+
+        /**************************************************************
+           * Author: Gustavo ZC
+           * Creation date: 05/07/2019
+           * Description: Method responsible for communicating with the DataAccess and for delete information
+           * Modifications:
+           * ************************************************************
+           * Number:
+           * Date:
+           * Ticket:
+           * Author:
+           * Descripction:
+           * ************************************************************
+       */
+
         public async virtual Task<Message> Delete(Message message)
         {
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>();
-                using (var repository = new Do_Cat_Employee_Repository(message.Connection))
+                var model = message.DeSerializeObject<Import_Product>();
+                using (var repository = new Gbl_Wrk_Agreement_Detail_Repository(message.Connection))
                 {
-                    var returnObject = await repository.DeleteScalar(model);
+                    await repository.Delete(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = returnObject.SerializeObject();
+                    resultMessage.MessageInfo = String.Empty;
                     return resultMessage;
                 }
             }
@@ -147,6 +222,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             }
         }
         #endregion
+
         #region Region [Dispose]
         public void Dispose()
         {
@@ -156,12 +232,11 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         protected virtual void Dispose(bool disposing)
         {
         }
-        ~Do_Cat_Employee()
+        ~Gbl_Wrk_Agreement_Detail()
         {
             this.Dispose(false);
         }
         #endregion
+
     }
-
-
 }

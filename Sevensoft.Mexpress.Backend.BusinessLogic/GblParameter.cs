@@ -13,8 +13,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         /// <summary>
         /// Nombre: DoWork
         /// Descripcion: Method in charge of orchestrating the operations requests for the object "GBL_PAR_PARAMETER".
-        /// Fecha de creación: 1/29/2019.
-        /// Autor: JnMcGregor.
+        /// Fecha de creación: 05/07/2019.
+        /// Autor: Gustavo ZC.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -51,8 +51,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         }
 
         /**************************************************************
-            * Author: JnMcGregor
-            * Creation date: 1/29/2019
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
             * Description: Method responsible for communicating with the DataAccess and for extracting information
             * Modifications:
             * ************************************************************
@@ -90,8 +90,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         }
 
         /**************************************************************
-            * Author: JnMcGregor
-            * Creation date: 1/29/2019
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
             * Description: Method responsible for communicating with the DataAccess and for extracting information
             * Modifications:
             * ************************************************************
@@ -129,8 +129,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         }
 
         /**************************************************************
-            * Author: JnMcGregor
-            * Creation date: 1/29/2019
+            * Author: Gustavo ZC
+            * Creation date: 05/07/2019
             * Description: Method responsible for communicating with the DataAccess and for save information
             * Modifications:
             * ************************************************************
@@ -168,8 +168,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         }
 
         /**************************************************************
-           * Author: JnMcGregor
-           * Creation date: 1/29/2019
+           * Author: Gustavo ZC
+           * Creation date: 05/07/2019
            * Description: Method responsible for communicating with the DataAccess and for delete information
            * Modifications:
            * ************************************************************

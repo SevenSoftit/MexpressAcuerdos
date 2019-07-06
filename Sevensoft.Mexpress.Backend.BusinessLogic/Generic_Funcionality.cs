@@ -65,36 +65,26 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
 
                             foreach (var header in dataTable.Columns)
                             {
-                                if (header.ToString() == "Identificacion")
+                                if (header.ToString() == "Código")
                                 {
-                                    dataTable.Columns[header.ToString()].ColumnName = "ID_EMPLOYEE";
+                                    dataTable.Columns[header.ToString()].ColumnName = "PRODUCT_ID_ALIAS";
                                 }
                                 else if (header.ToString() == "Nombre")
                                 {
-                                    dataTable.Columns[header.ToString()].ColumnName = "EMPLOYEE_NAME";
+                                    dataTable.Columns[header.ToString()].ColumnName = "PRODUCT_NAME";
                                 }
-                                else if (header.ToString() == "Centro de costos")
+                                else if (header.ToString() == "Moneda")
                                 {
-                                    dataTable.Columns[header.ToString()].ColumnName = "EMPLOYEE_COST_CENTER";
+                                    dataTable.Columns[header.ToString()].ColumnName = "ID_CURRENCY";
                                 }
-                                else if (header.ToString() == "Puesto")
+                                else if (header.ToString() == "Monto")
                                 {
-                                    dataTable.Columns[header.ToString()].ColumnName = "EMPLOYEE_POSITION";
-                                }else if (header.ToString() == "Identificador del grupo")
-                                {
-                                    dataTable.Columns[header.ToString()].ColumnName = "GROUP_IDENTIFIER";
-                                }
-                                else if (header.ToString() == "Nota")
-                                {
-                                    dataTable.Columns[header.ToString()].ColumnName = "EMPLOYEE_ADD1";
-                                }else if (header.ToString() == "Nota #2")
-                                {
-                                    dataTable.Columns[header.ToString()].ColumnName = "EMPLOYEE_ADD2";
+                                    dataTable.Columns[header.ToString()].ColumnName = "PRODUCT_AMOUNT";
                                 }
                                 dataTable.AcceptChanges();
                             }
                             dataTable.Columns.Add("CREATION_USER");
-                            dataTable.Columns.Add("FK_GBL_WRK_EMPLOYEE_HEADER");
+                            dataTable.Columns.Add("FK_GBL_WRK_AGREEMENT_HEADER");
 
                             var x = 0;
                             foreach (Row row in rows)
@@ -119,7 +109,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                             // buscamos la tabla de parametros
                             var repositoryParameter = new GblParameterRepository(ConnectionString);
                             var parameter = new Sevensoft.Mexpress.Backend.Common.GblParameter();
-                            parameter.SEARCH_KEY = "TABLE_IMPORT_EMPLOYEE";
+                            parameter.SEARCH_KEY = "TABLE_IMPORT_PRODUCT";
 
                             var result = repositoryParameter.Get(parameter).Result;
                             if (dataTable.Rows.Count == 0)

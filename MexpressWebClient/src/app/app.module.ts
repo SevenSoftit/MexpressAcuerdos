@@ -28,6 +28,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
 import { FeedbackDescriptionModalComponent } from './components/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './components/feedback-modal/feedback-modal.component';
+import { ImportProductComponent } from './components/import-product/import-product.component';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -51,7 +52,8 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent,
     ChangePasswordModalComponent,
     FeedbackDescriptionModalComponent,
-    FeedbackModalComponent 
+    FeedbackModalComponent,
+    ImportProductComponent
   ],
   imports: [
     MaterialModule,

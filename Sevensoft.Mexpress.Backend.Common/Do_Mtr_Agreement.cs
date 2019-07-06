@@ -2,9 +2,9 @@ using System;
 
 namespace Sevensoft.Mexpress.Backend.Common
 {
-    public partial class Do_Cat_Employee
+    public partial class Do_Mtr_Agreement
     {
-        public Do_Cat_Employee()
+        public Do_Mtr_Agreement()
         {
 
             Pk_Do_Cat_Employee = 0;            

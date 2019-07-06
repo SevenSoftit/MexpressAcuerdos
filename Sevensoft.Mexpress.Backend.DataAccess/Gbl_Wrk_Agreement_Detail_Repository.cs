@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Sevensoft.Mexpress.Backend.DataAccess
 {
-    public class GblWrkEmployeeRepository : IRepository<Common.ImportEmployee>
+    public class Gbl_Wrk_Agreement_Detail_Repository : IRepository<Common.Import_Product>
     {
         #region Region [Variables]
         public IConnectionManager ConnectionManagerInstance { get; private set; }
@@ -19,7 +19,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         #endregion
 
         #region Region [Constructor]
-        public GblWrkEmployeeRepository(string connectionString)
+        public Gbl_Wrk_Agreement_Detail_Repository(string connectionString)
         {
             ConnectionString = connectionString;
         }
@@ -28,94 +28,93 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
 
         #region Region [Methods]
 
-        public async Task<IEnumerable<ImportEmployee>> ListWorkTable(ImportEmployee model)
+        public async Task<IEnumerable<Import_Product>> ListWorkTable(Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.ImportEmployee>
+                    Common.Import_Product>
                     ("PA_PRO_GBL_WRK_PROCESS_VALIDATION",
                     param: new
                     {
-                        P_FK_GBL_WRK_EMPLOYEE_HEADER = model.Fk_Gbl_Wrk_Employee_Header,
+                        P_FK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
 
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<ImportEmployee>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
             }
         }
 
-        public async Task<IEnumerable<ImportEmployee>> List(ImportEmployee model)
+        public async Task<IEnumerable<Import_Product>> List(Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.ImportEmployee>
+                    Common.Import_Product>
                     ("PA_PRO_GBL_WRK_VALIDATE_ERRORS",
                     param: new
                     {
-                        P_ID_EMPLOYEE = model.Id_Employee,
-                        P_EMPLOYEE_NAME = model.Employee_Name, 
-                        P_EMPLOYEE_COST_CENTER = model.Employee_Cost_Center, 
-                        P_EMPLOYEE_POSITION = model.Employee_Position,
-                        P_GROUP_IDENTIFIER = model.Group_Identifier,
-                        P_EMPLOYEE_ADD1 = model.Employee_Add1, 
-                        P_EMPLOYEE_ADD2 = model.Employee_Add2,
+                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_ID_CURRENCY = model.Id_Currency,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_CREATION_USER = model.Creation_User,
-                        P_FK_GBL_WRK_EMPLOYEE_HEADER = model.Fk_Gbl_Wrk_Employee_Header,
-                        P_PK_GBL_WRK_EMPLOYEE = model.Pk_Gbl_Wrk_Employee,
+                        P_FK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
+                        P_PK_GBL_WRK_AGREEMENT = model.Pk_Gbl_Wrk_Agreement,
                         P_ERROR = model.Error,
-                        P_MESSAGE_ERROR = model.Message_Error, 
+                        P_MESSAGE_ERROR = model.Message_Error,
                         P_IT_PROCESSED = model.It_Processed,
-                        P_DUPLICATE_IDENTIFICATION = model.Duplicate_Identification,
-                        P_NOT_EXIST_GROUP_IDENTIFIER = model.Not_Exist_Group_Identifier,
-                        P_ACTIVE = model.Active
-
+                        P_INVALID_AMOUNT = model.Invalid_Amount,
+                        P_NOT_EXIST_PRODUCT = model.Not_Exist_Product,
+                        P_DUPLICATE_PRODUCT_ALIAS = model.Duplicate_Product_Alias,
+                        P_NOT_EXIST_ID_CURRENCY = model.Not_Exist_Id_Currency,                       
+                        P_ACTIVE = model.Active,
+                        P_ALL_PRODUCTS = model.All_Products
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<ImportEmployee>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
             }
         }
-        public async Task<ICollection<ImportEmployee>> ListCollection(ImportEmployee model)
+        public async Task<ICollection<Import_Product>> ListCollection(Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.ImportEmployee>
+                    Common.Import_Product>
                     ("",
                     param: new
                     {
 
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<ICollection<Common.ImportEmployee>>(result.ToList());
+                return await Task.FromResult<ICollection<Common.Import_Product>>(result.ToList());
             }
         }
-        public async Task<Common.ImportEmployee> Get(Common.ImportEmployee model)
+        public async Task<Common.Import_Product> Get(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Sevensoft.Mexpress.Backend.Common.ImportEmployee>
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
                     ("",
                     param: new
                     {
 
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.ImportEmployee>(result);
+                return await Task.FromResult<Common.Import_Product>(result);
             }
         }
-        public async Task Save(Common.ImportEmployee model)
+        public async Task Save(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.ImportEmployee>
-                    ("PA_PRO_GBL_WRK_EMPLOYEE_HEADER",
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
+                    ("PA_PRO_GBL_WRK_AGREEMENT_HEADER",
                     param: new
                     {
-                        P_PK_GBL_WRK_EMPLOYEE_HEADER = model.Fk_Gbl_Wrk_Employee_Header,
+                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_USER = model.Creation_User,
                         P_TOTAL_RECORDS = model.Total_Records,
@@ -126,27 +125,27 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             }
         }
 
-        public async Task ExecuteProcess(Common.ImportEmployee model)
+        public async Task ExecuteProcess(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.ImportEmployee>
-                    ("PA_PRO_GBL_WRK_EMPLOYEE_EXECUTE_PROCESS",
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
+                    ("PA_PRO_GBL_WRK_AGREEMENT_EXECUTE_PROCESS",
                     param: new
                     {
-                        P_PK_GBL_WRK_EMPLOYEE_HEADER = model.Fk_Gbl_Wrk_Employee_Header,
+                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
                         P_UPDATE_ROWS = model.Update_Rows
                     },
                     commandType: CommandType.StoredProcedure);
             }
         }
-        public async Task Delete(Common.ImportEmployee model)
+        public async Task Delete(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.ImportEmployee>
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
                 ("",
                 param: new
                 {
@@ -155,16 +154,16 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             }
         }
 
-        public async Task<Common.ImportEmployee> SaveGet(Common.ImportEmployee model)
+        public async Task<Common.Import_Product> SaveGet(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.ImportEmployee>
-                    ("PA_PRO_GBL_WRK_EMPLOYEE_HEADER",
+                    Common.Import_Product>
+                    ("PA_PRO_GBL_WRK_AGREEMENT_HEADER",
                     param: new
                     {
-                        P_PK_GBL_WRK_EMPLOYEE_HEADER = model.Fk_Gbl_Wrk_Employee_Header,
+                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_USER = model.Creation_User,
                         P_TOTAL_RECORDS = model.Total_Records,
@@ -172,7 +171,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.ImportEmployee>(result);
+                return await Task.FromResult<Common.Import_Product>(result);
             }
         }
 
@@ -184,7 +183,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        ~GblWrkEmployeeRepository()
+        ~Gbl_Wrk_Agreement_Detail_Repository()
         {
             Dispose(false);
         }

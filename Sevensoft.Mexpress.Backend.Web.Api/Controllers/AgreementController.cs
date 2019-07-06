@@ -24,10 +24,10 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes =
     JwtBearerDefaults.AuthenticationScheme)]
-    public class AgreementDetailController : Controller
+    public class AgreementController : Controller
     {
         private IConfiguration configuration;
-        public AgreementDetailController(IConfiguration iConfiguration)
+        public AgreementController(IConfiguration iConfiguration)
         {
             configuration = iConfiguration;
         }
@@ -42,7 +42,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns> 
         [Route("ListEmployee")]
         [HttpPost]
-        public async Task<IActionResult> ListEmployee([FromBody] Common.Do_Cat_Employee model)
+        public async Task<IActionResult> ListEmployee([FromBody] Common.Do_Mtr_Agreement model)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var list = result.DeSerializeObject<IEnumerable<Common.Do_Cat_Employee>>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Do_Mtr_Agreement>>();
                     // var dataSuccess = new
                     // {
                     //     Data = list,
@@ -84,7 +84,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns>
         [Route("Get")]
         [HttpPost]
-        public async Task<IActionResult> Get([FromBody] Common.Do_Cat_Employee model)
+        public async Task<IActionResult> Get([FromBody] Common.Do_Mtr_Agreement model)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Do_Cat_Employee>();
+                    var resultModel = result.DeSerializeObject<Common.Do_Mtr_Agreement>();
                     var dataSuccess = new
                     {
                         Data = resultModel,
@@ -126,7 +126,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns>
         [Route("Save")]
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] Common.Do_Cat_Employee model)
+        public async Task<IActionResult> Save([FromBody] Common.Do_Mtr_Agreement model)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Do_Cat_Employee>();
+                    var resultModel = result.DeSerializeObject<Common.Do_Mtr_Agreement>();
 
                     return Ok(resultModel);
                 }
@@ -201,7 +201,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns>
         [Route("Delete")]
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] Common.Do_Cat_Employee model)
+        public async Task<IActionResult> Delete([FromBody] Common.Do_Mtr_Agreement model)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Do_Cat_Employee>>();
+                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Do_Mtr_Agreement>>();
                     // var dataSuccess = new
                     // {
                     //     Data = resultModel,

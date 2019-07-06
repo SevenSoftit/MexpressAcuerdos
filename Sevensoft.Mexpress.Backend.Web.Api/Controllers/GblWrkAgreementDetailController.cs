@@ -37,8 +37,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <summary>
         /// Name: ImportFile
         /// Description: Method to import excel file
-        /// Creation date: 20/03/2019.
-        /// Author: JnMcGregor
+        /// Creation date: 05/07/2019.
+        /// Author: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -57,15 +57,15 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     }
                     var queryString = Request.Query;
                     /*
-                        Sacamos la ruta de la carpeta para inportar medios de contactos  
+                        Sacamos la ruta de la carpeta para importar medios de contactos  
                     */
 
                     var parameter = new Common.GblParameter();
-                    parameter.SEARCH_KEY = "IMPORT_EMPLOYEE_PENDING";
+                    parameter.SEARCH_KEY = "IMPORT_PRODUCT_PENDING";
 
                     var message = new Message();
                     message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:GblParameter");
-                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                     message.Operation = Operation.Get;
                     using (var businessLgic = new ServiceManager())
                     {
@@ -167,8 +167,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         valueProvider: formValueProvider);
 
 
-                    message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:GblWrkEmployee");
-                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                    message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Wrk_Agreement_Detail");
+                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                     message.Operation = Operation.Save;
                     using (var businessLgic = new ServiceManager())
                     {
@@ -199,8 +199,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <summary>
         /// Nombre: GetEncoding
         /// Descripcion: 
-        /// Fecha de creacion: 1/29/2019
-        /// Autor:
+        /// Fecha de creacion: 05/07/2019
+        /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -221,11 +221,11 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         private async Task<string> ProcessPathDocumentAsync(string FileName, string targetFilePathBackUp)
         {
             var parameters = new Common.GblParameter();
-            parameters.SEARCH_KEY = "IMPORT_EMPLOYEE_FINISHED";
+            parameters.SEARCH_KEY = "IMPORT_PRODUCT_FINISHED";
 
             var message = new Message();
             message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:GblParameter");
-            message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+            message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
             message.Operation = Operation.Get;
             using (var businessLgic = new ServiceManager())
             {

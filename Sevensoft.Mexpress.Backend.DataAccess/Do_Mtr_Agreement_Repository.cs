@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 namespace Sevensoft.Mexpress.Backend.DataAccess
 {
 
-    public class Do_Cat_Employee_Repository : IRepository<Common.Do_Cat_Employee>, IDisposable
+    public class Do_Mtr_Agreement_Repository : IRepository<Common.Do_Mtr_Agreement>, IDisposable
     {
 
         #region Region [Variables]
@@ -24,19 +24,19 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         #endregion
 
         #region Region [Constructor]
-        public Do_Cat_Employee_Repository(string connectionString)
+        public Do_Mtr_Agreement_Repository(string connectionString)
         {
             ConnectionString = connectionString;
         }
         #endregion
 
         #region Region [Methods]
-        public async Task<IEnumerable<Do_Cat_Employee>> List(Do_Cat_Employee model)
+        public async Task<IEnumerable<Do_Mtr_Agreement>> List(Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.Do_Cat_Employee>
+                    Common.Do_Mtr_Agreement>
                     ("PA_CON_DO_CAT_EMPLOYEE_GET",
                     param: new
                     {
@@ -56,16 +56,16 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<Do_Cat_Employee>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Do_Mtr_Agreement>>(result.ToList());
             }
         }
 
-        public async Task<Common.Do_Cat_Employee> Get(Common.Do_Cat_Employee model)
+        public async Task<Common.Do_Mtr_Agreement> Get(Common.Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>
+                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
                     ("PA_CON_DO_CAT_EMPLOYEE_GET",
                     param: new
                     {
@@ -85,15 +85,15 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Do_Cat_Employee>(result);
+                return await Task.FromResult<Common.Do_Mtr_Agreement>(result);
             }
         }
-        public async Task Save(Common.Do_Cat_Employee model)
+        public async Task Save(Common.Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>
+                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
                     ("PA_MAN_DO_CAT_EMPLOYEE_SAVE",
                     param: new
                     {
@@ -116,12 +116,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             }
         }
 
-        public async Task<Common.Do_Cat_Employee> SaveScalar(Common.Do_Cat_Employee model)
+        public async Task<Common.Do_Mtr_Agreement> SaveScalar(Common.Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Sevensoft.Mexpress.Backend.Common.Do_Cat_Employee>
+                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
                     ("PA_MAN_DO_CAT_EMPLOYEE_SAVE",
                     param: new
                     {
@@ -141,10 +141,10 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Do_Cat_Employee>(result);
+                return await Task.FromResult<Common.Do_Mtr_Agreement>(result);
             }
         }
-        public async Task Delete(Common.Do_Cat_Employee model)
+        public async Task Delete(Common.Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -160,12 +160,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                 commandType: CommandType.StoredProcedure);
             }
         }
-        public async Task<IEnumerable<Do_Cat_Employee>> DeleteScalar(Do_Cat_Employee model)
+        public async Task<IEnumerable<Do_Mtr_Agreement>> DeleteScalar(Do_Mtr_Agreement model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.Do_Cat_Employee>
+                    Common.Do_Mtr_Agreement>
                     ("PA_CON_DO_CAT_EMPLOYEE_DELETE",
                     param: new
                     {
@@ -175,7 +175,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     P_MODIFICATION_USER = model.Modification_User,
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<Do_Cat_Employee>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Do_Mtr_Agreement>>(result.ToList());
             }
         }
         
@@ -186,7 +186,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        ~Do_Cat_Employee_Repository()
+        ~Do_Mtr_Agreement_Repository()
         {
             Dispose(false);
         }

@@ -8,9 +8,9 @@ import { CommonService } from 'src/app/services/common/common.service';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 
 @Component({
-  selector: 'app-import-employee',
-  templateUrl: './import-employee.component.html',
-  styleUrls: ['./import-employee.component.scss']
+  selector: 'app-import-product',
+  templateUrl: './import-product.component.html',
+  styleUrls: ['./import-product.component.scss']
 })
 export class ImportProductComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class ImportProductComponent implements OnInit {
     clickable: true,
     // url: "http://localhost:50077/api/GblWrkEmployee/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     
-    url: utiles.getInfoUser().apiServiceBaseUri + "api/GblWrkEmployee/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
+    url: utiles.getInfoUser().apiServiceBaseUri + "api/GblWrkAgreementDetailController/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     method: 'POST',
     maxFilesize: 10,
     maxFiles: 10,
@@ -55,9 +55,8 @@ export class ImportProductComponent implements OnInit {
    setTimeout(() => dialogRef.close(), 3000);
 
     this._common._setLoading(false);
-
-
   }
+
   public onUploadSuccess(args: any): void {
     const dataSuccess = {
       labelTitile: '¡Listo!',
@@ -73,7 +72,6 @@ export class ImportProductComponent implements OnInit {
     setTimeout(() => dialogRef.close(), 3000);
     this.closeDocumentModal(args[1]);
     this._common._setLoading(false);
-
   }
 
   onSending(file) {
