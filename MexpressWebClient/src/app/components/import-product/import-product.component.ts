@@ -25,7 +25,7 @@ export class ImportProductComponent implements OnInit {
     clickable: true,
     // url: "http://localhost:50077/api/GblWrkEmployee/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     
-    url: utiles.getInfoUser().apiServiceBaseUri + "api/GblWrkAgreementDetailController/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
+    url: utiles.getInfoUser().apiServiceBaseUri + "api/GblWrkAgreementDetail/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     method: 'POST',
     maxFilesize: 10,
     maxFiles: 10,
@@ -78,6 +78,7 @@ export class ImportProductComponent implements OnInit {
     setTimeout(() => {
       this._common._setLoading(true);
     }, 0, 5000);
+    debugger;
     file[2].append("UserName", this.userName );
     file[2].append("FK_GLB_MTR_ORGANIZATION", this.PK_GLB_MTR_ORGANIZATION );
 }

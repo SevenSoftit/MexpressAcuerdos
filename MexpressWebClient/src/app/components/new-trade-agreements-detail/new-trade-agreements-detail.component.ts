@@ -6,6 +6,7 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
+import { CommonService } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -40,7 +41,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   headerFile: number = 0;
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
-  constructor(public matDialog: MatDialog) { }
+  public moneyModel: MoneyModel = new MoneyModel();
+  constructor(public matDialog: MatDialog, private _common: CommonService) { }
 
   ngOnInit() {
 
@@ -59,6 +61,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
      this.codeRules = { required: [true, 'Código requerido'] };
      this.productNameRules = { required: [true, 'Nombre requerido'] };
      this.moneyRules = { required: [true, 'Moneda requerida'] };
+     
+     this.listMoney();
 
     //  this.moneyTypeParams = {
     //   params: { popupHeight: '300px' },
@@ -193,8 +197,8 @@ debugger;
 
     /*******************************************************
  * Author: Gustavo ZC
- * Creation date:  06/07/2019
- * Description: method that list the groups of employee rosters 
+ * Creation date:  08/07/2019
+ * Description: method that list all types of moneys
  ****************************************************
  * Modifications
  ****************************************************
@@ -204,26 +208,26 @@ debugger;
  * Author:
  * Description:
  *******************************************************/
-// listMoney() {
+listMoney() {
 
-//   // var modelArray = new NewGroupModel();
-//   this.allGroupService.ListAllGroupArray(this.newGroupModel).subscribe(
-//     dataS => {
-//       const that = this;
-//       dataS.forEach(function (item) {
-//         that.listsMoney.push({
-//           group_Identifier: item.group_Identifier,
-//           group_Name: item.group_Name
-//         });
-//       });
-//       this._common._setLoading(false);
-//     },
-//     error => {
-//       this._common._setLoading(false);
-//       console.error(error);
-//     }
-//   )
-// }
+  // var modelArray = new NewGroupModel();
+  this.allGroupService.ListAllGroupArray(this.newGroupModel).subscribe(
+    dataS => {
+      const that = this;
+      dataS.forEach(function (item) {
+        that.listsMoney.push({
+          group_Identifier: item.group_Identifier,
+          group_Name: item.group_Name
+        });
+      });
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
 
           // Opcion para Excel
       toolbarClick(args: ClickEventArgs): void {
