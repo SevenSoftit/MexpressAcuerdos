@@ -7,7 +7,7 @@ using static Sevensoft.Mexpress.Backend.Common.Enum;
 
 namespace Sevensoft.Mexpress.Backend.BusinessLogic
 {
-    public class Do_Mtr_Agreement : IBusinessLogic
+    public class Ac_Mtr_Agreement_Detail : IBusinessLogic
     {
         #region Region [Methods]
         /// <summary>

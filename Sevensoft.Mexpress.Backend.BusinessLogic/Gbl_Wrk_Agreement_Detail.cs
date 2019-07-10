@@ -12,7 +12,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         #region Region [Methods]
         /// <summary>
         /// Nombre: DoWork
-        /// Descripcion: Method in charge of orchestrating the operations requests for the object "GBL_PAR_PARAMETER".
+        /// Descripcion: .
         /// Fecha de creación: 05/07/2019.
         /// Autor: Gustavo ZC.
         /// </summary>

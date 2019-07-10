@@ -9,6 +9,8 @@ import { ImportProductComponent } from '../import-product/import-product.compone
 import { CommonService } from 'src/app/services/common/common.service';
 import { MoneyModel } from 'src/app/models/money.model';
 import { AllMoneyService } from 'src/app/services/allMoney/allMoney.service';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -44,7 +46,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
   public moneyModel: MoneyModel = new MoneyModel();
-  constructor(public matDialog: MatDialog, private _common: CommonService, private allMoneyService: AllMoneyService) { }
+  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, private allMoneyService: AllMoneyService) { }
 
   ngOnInit() {
 
@@ -66,31 +68,31 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
      
      this.listMoney();
 
-    //  this.moneyTypeParams = {
-    //   params: { popupHeight: '300px' },
-    //   create: () => {
-    //     this.typeContacElem = document.createElement("input");
-    //     return this.typeContacElem;
-    //   },
-    //   read: () => {
-    //     return this.typeContactObj.value;
-    //   },
-    //   destroy: () => {
-    //     this.typeContactObj.destroy();
-    //   },
-    //   write: () => {
-    //     this.typeContactObj = new DropDownList({
-    //       dataSource: this.listsMoney,
+     this.moneyTypeParams = {
+      params: { popupHeight: '300px' },
+      create: () => {
+        this.typeContacElem = document.createElement("input");
+        return this.typeContacElem;
+      },
+      read: () => {
+        return this.typeContactObj.value;
+      },
+      destroy: () => {
+        this.typeContactObj.destroy();
+      },
+      write: () => {
+        this.typeContactObj = new DropDownList({
+          dataSource: this.listsMoney,
 
-    //       fields: { value: "id_Currency", text: "name_Currency" },
-    //       enabled: true,
-    //       placeholder: "Seleccione la moneda",
-    //       floatLabelType: "Never"
-    //     });
-    //     this.typeContactObj.appendTo(this.typeContacElem);
-    //     this.typeContactObj.dataBind();
-    //   }
-    // };
+          fields: { value: "id_Currency", text: "name_Currency" },
+          enabled: true,
+          placeholder: "Seleccione la moneda",
+          floatLabelType: "Never"
+        });
+        this.typeContactObj.appendTo(this.typeContacElem);
+        this.typeContactObj.dataBind();
+      }
+    };
 
   }
 
@@ -185,7 +187,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     const dialogRef = this.matDialog.open(ImportProductComponent, { minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight:'420px' });
     dialogRef.afterClosed().subscribe(
       result => {
-debugger;
         if (result != undefined) {
           this.workDataTable = result;
           this.showWorkTable = true;
@@ -194,7 +195,35 @@ debugger;
         }
       }
     );
+  }
 
+  processProductWork(updateRows) {
+    var object = {
+      Fk_Gbl_Wrk_Agreement_Header: this.headerFile,
+      Update_Rows: updateRows
+    };
+
+    this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
+      dataW => {
+
+        // this.listEmployee();
+        this.showWorkTable = false;
+        this.title = 'Todos los productos';
+        const dataSuccess = {
+          labelTitile: '¡Listo!',
+          icon: 'check_box',
+          textDescription: 'Se procesaron los registros de manera correcta.',
+          status: 'success'
+        };
+
+        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+          data: { contactInfo: dataSuccess },
+          minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+        });
+        setTimeout(() => dialogRef.close(), 3000);
+      }, error => {
+        this._common._setLoading(false);
+      });
   }
 
     /*******************************************************

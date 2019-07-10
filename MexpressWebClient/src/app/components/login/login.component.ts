@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
         data => {
           this.loginModel = data;
           utiles.createCacheUser(this.loginModel);
-          debugger;
           utiles.createInfoMenu(JSON.parse(this.loginModel.roleList));
   
           if (this.loginModel.Posee_Autenticacion == "True") {

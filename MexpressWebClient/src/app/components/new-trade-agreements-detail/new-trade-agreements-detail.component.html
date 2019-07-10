@@ -5,11 +5,11 @@
     </div>
 
     <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
-        <div class="col-md-3">
+        <div class="col-md-6 text-left">
             <button class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
         </div>
 
-        <div class="offset-md-2 col-md-7 text-right">
+        <div class="col-md-6 text-right">
             <button class="save-button" mat-raised-button (click)="uploadArchive()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
@@ -98,9 +98,9 @@
         <div class="row w-100">
             <label for="" class="new-agreement-doc-errors" *ngIf="docHasErrors">La información del excel contiene errores.</label>
         </div>
-        <div class=" mx-auto manage-employee-buttons-top">
-            <button (click)="processEmployeeWork(false)" class="excel-button float-left mr-4" mat-raised-button>Sobreescribir con excel<mat-icon class="ml-2">play_for_work</mat-icon></button>
-            <button (click)="processEmployeeWork(true)" class="excel-button mr-4" mat-raised-button>Actualizar<mat-icon
+        <div class=" mx-auto new-agreement-buttons-top">
+            <button (click)="processProductWork(false)" class="excel-button float-left mr-4" mat-raised-button>Sobreescribir con excel<mat-icon class="ml-2">play_for_work</mat-icon></button>
+            <button (click)="processProductWork(true)" class="excel-button mr-4" mat-raised-button>Actualizar<mat-icon
                     class="ml-2">autorenew</mat-icon></button>
             <button (click)="cancel()" class="excel-button" mat-raised-button>Cancelar<mat-icon class="ml-2">
                     delete_forever</mat-icon></button>

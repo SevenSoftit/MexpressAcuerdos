@@ -3,8 +3,6 @@ import { tap, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import {utiles} from '../../../environments/utiles';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { MoneyModel } from 'src/app/models/money.model';
 
