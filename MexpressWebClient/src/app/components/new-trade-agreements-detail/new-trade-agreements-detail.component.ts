@@ -7,6 +7,8 @@ import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
 import { CommonService } from 'src/app/services/common/common.service';
+import { MoneyModel } from 'src/app/models/money.model';
+import { AllMoneyService } from 'src/app/services/allMoney/allMoney.service';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -42,7 +44,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
   public moneyModel: MoneyModel = new MoneyModel();
-  constructor(public matDialog: MatDialog, private _common: CommonService) { }
+  constructor(public matDialog: MatDialog, private _common: CommonService, private allMoneyService: AllMoneyService) { }
 
   ngOnInit() {
 
@@ -210,14 +212,13 @@ debugger;
  *******************************************************/
 listMoney() {
 
-  // var modelArray = new NewGroupModel();
-  this.allGroupService.ListAllGroupArray(this.newGroupModel).subscribe(
+  this.allMoneyService.listMoney(this.moneyModel).subscribe(
     dataS => {
       const that = this;
       dataS.forEach(function (item) {
         that.listsMoney.push({
-          group_Identifier: item.group_Identifier,
-          group_Name: item.group_Name
+          id_Currency: item.id_Currency,
+          name_Currency: item.name_Currency
         });
       });
       this._common._setLoading(false);

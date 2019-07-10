@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AllGroupService } from './allGroup.service';
+import { AllMoneyService } from './allMoney.service';
 
-describe('AllGroupService', () => {
+describe('AllMoneyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AllGroupService = TestBed.get(AllGroupService);
+    const service: AllMoneyService = TestBed.get(AllMoneyService);
     expect(service).toBeTruthy();
   });
 });

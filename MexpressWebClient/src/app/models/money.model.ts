@@ -14,34 +14,23 @@
   * Description:
 *******************************************************/
 export class MoneyModel {
-    Pk_Glb_Mtr_Organization: number;
-    Organization_Id: string;
-    Organization_Identification: string;
-    Organization_Name: string;
-    Creation_User: string;
+    Pk_Cat_Currency: number;
     Creation_Date: Date;
-    Modification_User: string;
+    Creation_User: string;
     Modification_Date: Date;
-    Fk_Gbl_Cat_Language: number;
-    Page_Number: number;
-    Rows_Pag: number;
-    Total_Row: number;
-    Keys: number;
+    Modification_User: string;
+    Name_Currency: string;
+    Id_Currency: string;
+
   
     constructor() {
-      this.Pk_Glb_Mtr_Organization = 0;
-      this.Organization_Id = '';
-      this.Organization_Identification = '';
-      this.Organization_Name = '';
-      this.Creation_User = '';
+      this.Pk_Cat_Currency = 0;
       this.Creation_Date = new Date();
-      this.Modification_User = '';
+      this.Creation_User = '';
       this.Modification_Date = new Date();
-      this.Fk_Gbl_Cat_Language = 0;
-      this.Page_Number = 0;
-      this.Rows_Pag = 0;
-      this.Total_Row = 0;
-      this.Keys = 0;
+      this.Modification_User = '';
+      this.Name_Currency = '';
+      this.Id_Currency = '';
     }
   }
   
