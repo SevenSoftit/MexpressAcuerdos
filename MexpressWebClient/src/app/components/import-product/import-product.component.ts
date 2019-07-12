@@ -78,7 +78,6 @@ export class ImportProductComponent implements OnInit {
     setTimeout(() => {
       this._common._setLoading(true);
     }, 0, 5000);
-    debugger;
     file[2].append("UserName", this.userName );
     file[2].append("FK_GLB_MTR_ORGANIZATION", this.PK_GLB_MTR_ORGANIZATION );
 }

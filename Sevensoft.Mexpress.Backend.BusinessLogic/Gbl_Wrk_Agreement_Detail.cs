@@ -159,7 +159,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                     {
                         var repository_funcionality = new Generic_Funcionality(message.Connection);
                         var result = await repository.SaveGet(model);
-                        model.Fk_Gbl_Wrk_Agreement_Header = result.Fk_Gbl_Wrk_Agreement_Header;
+                        model.Pk_Ac_Trade_Agreement = result.Pk_Ac_Trade_Agreement;
                         model.Total_Records = repository_funcionality.readAsExcelFile(model);
                         await repository.Save(model);
                         var resultProductList = repository.ListWorkTable(model);

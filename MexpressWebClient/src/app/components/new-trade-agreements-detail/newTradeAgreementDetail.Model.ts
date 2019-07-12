@@ -1,39 +1,35 @@
 
 export class NewTradeAgreementDetailModel {
+
+    Product_Id_Alias: string;
+    Product_Name: string;    
+    Id_Currency: string;      
+    Product_Amount: number;
+    Creation_User: string;
     Pk_Cat_Agreement_Details: number;
-    Pk_Ac_Trade_Agreement: number;
+    Pk_Ac_Trade_Agreement: number;    
     Pk_Cat_Currency: number;
     Pk_Glb_Products: number;
-    Pk_Gbl_Wrk_Agreement: number;
     Creation_Date: Date;
-    Creation_User: string;
     Modification_Date: Date;
-    Modification_User: string;
-    Product_Id_Alias: string;
-    Product_Name: string;
-    Product_Amount: number;
-    Id_Currency: string;
-    Active: boolean;
+    Modification_User: string;  
     All_Products: boolean;
-    Name_Currency: string;
-
+    Active: boolean;
 
     constructor() {
+        this.Product_Id_Alias = '',
+        this.Product_Name = '';    
+        this.Id_Currency = '',      
+        this.Product_Amount = 0,
+        this.Creation_User = '',
         this.Pk_Cat_Agreement_Details = 0,
-        this.Pk_Ac_Trade_Agreement = 0,
+        this.Pk_Ac_Trade_Agreement = 0,    
         this.Pk_Cat_Currency = 0,
         this.Pk_Glb_Products = 0,
         this.Creation_Date = new Date(),
-        this.Creation_User = '',
         this.Modification_Date = new Date(),
-        this.Modification_User = '',
-        this.Product_Id_Alias = '',
-        this.Product_Name = '',
-        this.Product_Amount = 0.0,
-        this.Id_Currency = '',
-        this.Active = false,
-        this.All_Products = false,      
-        this.Name_Currency = ''
+        this.Modification_User = '',  
+        this.All_Products = false,
+        this.Active = false
     }
-
 }

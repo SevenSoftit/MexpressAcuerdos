@@ -190,7 +190,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.docHasErrors = true;
       }
   debugger;
-      this.headerFile = args.data.fk_Gbl_Wrk_Agreement_Header;      
+      this.headerFile = args.data.pk_Ac_Trade_Agreement;      
       this.grid.gridLines = 'Both';
     }
   
@@ -227,7 +227,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     //EN PROCESO
     var object = {
       Pk_Cat_Agreement_Details: this.pkCatAgreementDetails,
-      Fk_Gbl_Wrk_Agreement_Header: this.headerFile,
+      Pk_Ac_Trade_Agreement: this.headerFile,
       Update_Rows: updateRows 
     };
 

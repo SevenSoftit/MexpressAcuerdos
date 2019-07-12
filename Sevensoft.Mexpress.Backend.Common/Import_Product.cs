@@ -9,15 +9,32 @@ namespace Sevensoft.Mexpress.Backend.Common
         {
             Product_Id_Alias = "";
             Product_Name = "";
-            Name_Currency = "";
+            Id_Currency = "";
             Product_Amount = 0;
-            Creation_User = "";
             Pk_Gbl_Wrk_Agreement = 0;
-            Fk_Gbl_Wrk_Agreement_Header = 0;   
-            Pk_Cat_Agreement_Details = 0;     
+
+            Pk_Ac_Trade_Agreement = 0;
+            Pk_Cat_Type_Agreement = 0;
+            Pk_Ac_Cat_Provider = 0;
+            Creation_Date = Convert.ToDateTime("1900-01-01");
+            Creation_User = "";
+            Modification_Date = Convert.ToDateTime("1900-01-01");
+            Modification_User = "";
+            Status_Agreement = "";
+            Name_Agreement = "";
+            Description_Agreement = "";
+            Date_Start = Convert.ToDateTime("1900-01-01");
+            Date_Finish = Convert.ToDateTime("1900-01-01");
+            Date_Process = Convert.ToDateTime("1900-01-01");
+            Date_Reprocess = Convert.ToDateTime("1900-01-01");
+            All_Products = false;
+            Provider_Name = "";
+            Recovery_Amount = 0;
+            Active = true;
+
             Error = false;
             Message_Error = "";
-            It_Processed = false;
+            It_Processed = true;
             Invalid_Amount = false;
             Not_Exist_Product = false;
             Duplicate_Product_Alias = false;
@@ -25,22 +42,36 @@ namespace Sevensoft.Mexpress.Backend.Common
             File_Path = "";
             Total_Records = 0;
             Fk_Glb_Mtr_Organization = 0;
-            Active = true;
-            All_Products = true;
-            Id_Currency = "";
             Option = Agreement_Option.None;
             Update_Rows = false;
+            Name_Currency = "";
 
         }
+
         public String Product_Id_Alias { get; set; }
         public String Product_Name { get; set; }
-        public String Name_Currency { get; set; }
+        public String Id_Currency { get; set; }
         public Decimal Product_Amount { get; set; }
-        public String Creation_User { get; set; }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
-        public Int64 Fk_Gbl_Wrk_Agreement_Header { get; set; }
-        public Int64 Pk_Cat_Agreement_Details { get; set; }
-        
+        public Int64 Pk_Ac_Trade_Agreement { get; set; }
+        public Int32 Pk_Cat_Type_Agreement { get; set; }
+        public Int32 Pk_Ac_Cat_Provider { get; set; }
+        public DateTime Creation_Date { get; set; }
+        public String Creation_User { get; set; }
+        public DateTime Modification_Date { get; set; }
+        public String Modification_User { get; set; }
+        public String Status_Agreement { get; set; }
+        public String Name_Agreement { get; set; }
+        public string Description_Agreement { get; set; }
+        public DateTime Date_Start { get; set; }
+        public DateTime Date_Finish { get; set; }
+        public DateTime Date_Process { get; set; }
+        public DateTime Date_Reprocess { get; set; }
+        public bool All_Products { get; set; }
+        public string Provider_Name { get; set; }
+        public Decimal Recovery_Amount { get; set; }
+        public bool Active { get; set; }
+
         public bool Error { get; set; }
         public String Message_Error { get; set; }
         public bool It_Processed { get; set; }
@@ -51,10 +82,8 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String File_Path { get; set; }
         public Int64 Total_Records { get; set; }
         public Int32 Fk_Glb_Mtr_Organization { get; set; }
-        public bool Active { get; set; }
-        public bool All_Products { get; set; }
-        public string Id_Currency { get; set; }
         public Agreement_Option Option { get; set; }
         public bool Update_Rows { get; set; }
+        public String Name_Currency { get; set; }
     }
 }

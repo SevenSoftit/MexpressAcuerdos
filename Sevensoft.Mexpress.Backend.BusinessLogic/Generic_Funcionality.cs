@@ -84,7 +84,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                                 dataTable.AcceptChanges();
                             }
                             dataTable.Columns.Add("CREATION_USER");
-                            dataTable.Columns.Add("FK_GBL_WRK_AGREEMENT_HEADER");
+                            dataTable.Columns.Add("PK_AC_TRADE_AGREEMENT");
 
                             var x = 0;
                             foreach (Row row in rows)
@@ -99,7 +99,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                                             dataRow[i] = GetCellValue(spreadSheetDocument, row.Descendants<Cell>().ElementAt(i));
                                         }
                                         dataRow["CREATION_USER"] = model.Creation_User;
-                                        dataRow["FK_GBL_WRK_AGREEMENT_HEADER"] = model.Fk_Gbl_Wrk_Agreement_Header;
+                                        dataRow["PK_AC_TRADE_AGREEMENT"] = model.Pk_Ac_Trade_Agreement;
                                         dataTable.Rows.Add(dataRow);
                                     }
                                 }

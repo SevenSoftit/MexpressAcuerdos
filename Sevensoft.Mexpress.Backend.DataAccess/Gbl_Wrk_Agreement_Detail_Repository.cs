@@ -37,7 +37,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_PRO_GBL_WRK_PROCESS_VALIDATION",
                     param: new
                     {
-                        P_FK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
 
                     },
                     commandType: CommandType.StoredProcedure);
@@ -54,22 +54,27 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_PRO_GBL_WRK_VALIDATE_ERRORS",
                     param: new
                     {
-                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
-                        P_PRODUCT_NAME = model.Product_Name,
-                        P_ID_CURRENCY = model.Id_Currency,
-                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
+                        P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
+                        P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
-                        P_FK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
-                        P_PK_GBL_WRK_AGREEMENT = model.Pk_Gbl_Wrk_Agreement,
-                        P_ERROR = model.Error,
-                        P_MESSAGE_ERROR = model.Message_Error,
-                        P_IT_PROCESSED = model.It_Processed,
-                        P_INVALID_AMOUNT = model.Invalid_Amount,
-                        P_NOT_EXIST_PRODUCT = model.Not_Exist_Product,
-                        P_DUPLICATE_PRODUCT_ALIAS = model.Duplicate_Product_Alias,
-                        P_NOT_EXIST_ID_CURRENCY = model.Not_Exist_Id_Currency,                       
+                        P_MODIFICATION_DATE = model.Modification_Date,
+                        P_MODIFICATION_USER = model.Modification_User,
+                        P_STATUS_AGREEMENT = model.Status_Agreement,
+                        P_NAME_AGREEMENT = model.Name_Agreement,
+                        P_DESCRIPTION_AGREEMENT = model.Description_Agreement,
+                        P_DATE_START = model.Date_Start,
+                        P_DATE_FINISH = model.Date_Finish,
+                        P_DATE_PROCESS = model.Date_Process,
+                        P_DATE_REPROCESS = model.Date_Reprocess,
+                        P_ALL_PRODUCTS = model.All_Products,
+                        P_PROVIDER_NAME = model.Provider_Name,
+                        P_RECOVERY_AMOUNT = model.Recovery_Amount,
                         P_ACTIVE = model.Active,
-                        P_ALL_PRODUCTS = model.All_Products
+                        P_TOTAL_RECORDS = model.Total_Records,
+                        P_IT_PROCESSED = model.It_Processed,
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure);
                 return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
@@ -114,9 +119,24 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_PRO_GBL_WRK_AGREEMENT_HEADER",
                     param: new
                     {
-                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
+                        P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
+                        P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
-                        P_MODIFICATION_USER = model.Creation_User,
+                        P_MODIFICATION_DATE = model.Modification_Date,
+                        P_MODIFICATION_USER = model.Modification_User,
+                        P_STATUS_AGREEMENT = model.Status_Agreement,
+                        P_NAME_AGREEMENT = model.Name_Agreement,
+                        P_DESCRIPTION_AGREEMENT = model.Description_Agreement,
+                        P_DATE_START = model.Date_Start,
+                        P_DATE_FINISH = model.Date_Finish,
+                        P_DATE_PROCESS = model.Date_Process,
+                        P_DATE_REPROCESS = model.Date_Reprocess,
+                        P_ALL_PRODUCTS = model.All_Products,
+                        P_PROVIDER_NAME = model.Provider_Name,
+                        P_RECOVERY_AMOUNT = model.Recovery_Amount,
+                        P_ACTIVE = model.Active,
                         P_TOTAL_RECORDS = model.Total_Records,
                         P_IT_PROCESSED = model.It_Processed,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
@@ -134,7 +154,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_PRO_GBL_WRK_AGREEMENT_EXECUTE_PROCESS",
                     param: new
                     {
-                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_UPDATE_ROWS = model.Update_Rows
                     },
                     commandType: CommandType.StoredProcedure);
@@ -163,9 +183,24 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_PRO_GBL_WRK_AGREEMENT_HEADER",
                     param: new
                     {
-                        P_PK_GBL_WRK_AGREEMENT_HEADER = model.Fk_Gbl_Wrk_Agreement_Header,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
+                        P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
+                        P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
-                        P_MODIFICATION_USER = model.Creation_User,
+                        P_MODIFICATION_DATE = model.Modification_Date,
+                        P_MODIFICATION_USER = model.Modification_User,
+                        P_STATUS_AGREEMENT = model.Status_Agreement,
+                        P_NAME_AGREEMENT = model.Name_Agreement,
+                        P_DESCRIPTION_AGREEMENT = model.Description_Agreement,
+                        P_DATE_START = model.Date_Start,
+                        P_DATE_FINISH = model.Date_Finish,
+                        P_DATE_PROCESS = model.Date_Process,
+                        P_DATE_REPROCESS = model.Date_Reprocess,
+                        P_ALL_PRODUCTS = model.All_Products,
+                        P_PROVIDER_NAME = model.Provider_Name,
+                        P_RECOVERY_AMOUNT = model.Recovery_Amount,
+                        P_ACTIVE = model.Active,
                         P_TOTAL_RECORDS = model.Total_Records,
                         P_IT_PROCESSED = model.It_Processed,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
