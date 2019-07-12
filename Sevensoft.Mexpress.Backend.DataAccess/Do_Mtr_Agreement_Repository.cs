@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 namespace Sevensoft.Mexpress.Backend.DataAccess
 {
 
-    public class Do_Mtr_Agreement_Repository : IRepository<Common.Do_Mtr_Agreement>, IDisposable
+    public class Do_Mtr_Agreement_Repository : IRepository<Common.Ac_Mtr_Agreement_Detail>, IDisposable
     {
 
         #region Region [Variables]
@@ -31,120 +31,121 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         #endregion
 
         #region Region [Methods]
-        public async Task<IEnumerable<Do_Mtr_Agreement>> List(Do_Mtr_Agreement model)
+        public async Task<IEnumerable<Ac_Mtr_Agreement_Detail>> List(Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.Do_Mtr_Agreement>
+                    Common.Ac_Mtr_Agreement_Detail>
                     ("PA_CON_DO_CAT_EMPLOYEE_GET",
                     param: new
                     {
-                        P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
-                        P_GROUP_IDENTIFIER = model.Group_Identifier,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_EMPLOYEE_NAME = model.Employee_Name,
-                        P_EMPLOYEE_COST_CENTER = model.Employee_Cost_Center,
-                        P_EMPLOYEE_POSITION = model.Employee_Position,
-                        P_EMPLOYEE_ADD1 = model.Employee_Add1,
-                        P_EMPLOYEE_ADD2 = model.Employee_Add2,
-                        P_ID_EMPLOYEE = model.Id_Employee,
-                        P_ACTIVE = model.Active
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_CURRENCY = model.Pk_Cat_Currency,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_ID_CURRENCY = model.Id_Currency,
+                        P_ACTIVE = model.Active,
+                        P_ALL_PRODUCTS = model.All_Products
+
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<Do_Mtr_Agreement>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Detail>>(result.ToList());
             }
         }
 
-        public async Task<Common.Do_Mtr_Agreement> Get(Common.Do_Mtr_Agreement model)
+        public async Task<Common.Ac_Mtr_Agreement_Detail> Get(Common.Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
+                    Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
                     ("PA_CON_DO_CAT_EMPLOYEE_GET",
                     param: new
                     {
-                        P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
-                        P_GROUP_IDENTIFIER = model.Group_Identifier,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_EMPLOYEE_NAME = model.Employee_Name,
-                        P_EMPLOYEE_COST_CENTER = model.Employee_Cost_Center,
-                        P_EMPLOYEE_POSITION = model.Employee_Position,
-                        P_EMPLOYEE_ADD1 = model.Employee_Add1,
-                        P_EMPLOYEE_ADD2 = model.Employee_Add2,
-                        P_ID_EMPLOYEE = model.Id_Employee,
-                        P_ACTIVE = model.Active
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_CURRENCY = model.Pk_Cat_Currency,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_ID_CURRENCY = model.Id_Currency,
+                        P_ACTIVE = model.Active,
+                        P_ALL_PRODUCTS = model.All_Products
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Do_Mtr_Agreement>(result);
+                return await Task.FromResult<Common.Ac_Mtr_Agreement_Detail>(result);
             }
         }
-        public async Task Save(Common.Do_Mtr_Agreement model)
+        public async Task Save(Common.Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
+                    Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
                     ("PA_MAN_DO_CAT_EMPLOYEE_SAVE",
                     param: new
                     {
-                        P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
-                        P_GROUP_IDENTIFIER = model.Group_Identifier,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_EMPLOYEE_NAME = model.Employee_Name,
-                        P_EMPLOYEE_COST_CENTER = model.Employee_Cost_Center,
-                        P_EMPLOYEE_POSITION = model.Employee_Position,
-                        P_EMPLOYEE_ADD1 = model.Employee_Add1,
-                        P_EMPLOYEE_ADD2 = model.Employee_Add2,
-                        P_ID_EMPLOYEE = model.Id_Employee,
-                        P_ACTIVE = model.Active
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_CURRENCY = model.Pk_Cat_Currency,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_ID_CURRENCY = model.Id_Currency,
+                        P_ACTIVE = model.Active,
+                        P_ALL_PRODUCTS = model.All_Products
                     },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public async Task<Common.Do_Mtr_Agreement> SaveScalar(Common.Do_Mtr_Agreement model)
+        public async Task<Common.Ac_Mtr_Agreement_Detail> SaveScalar(Common.Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>
+                    Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
                     ("PA_MAN_DO_CAT_EMPLOYEE_SAVE",
                     param: new
                     {
-                        P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
-                        P_GROUP_IDENTIFIER = model.Group_Identifier,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_EMPLOYEE_NAME = model.Employee_Name,
-                        P_EMPLOYEE_COST_CENTER = model.Employee_Cost_Center,
-                        P_EMPLOYEE_POSITION = model.Employee_Position,
-                        P_EMPLOYEE_ADD1 = model.Employee_Add1,
-                        P_EMPLOYEE_ADD2 = model.Employee_Add2,
-                        P_ID_EMPLOYEE = model.Id_Employee,
-                        P_ACTIVE = model.Active
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_CAT_CURRENCY = model.Pk_Cat_Currency,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_ID_CURRENCY = model.Id_Currency,
+                        P_ACTIVE = model.Active,
+                        P_ALL_PRODUCTS = model.All_Products
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Do_Mtr_Agreement>(result);
+                return await Task.FromResult<Common.Ac_Mtr_Agreement_Detail>(result);
             }
         }
-        public async Task Delete(Common.Do_Mtr_Agreement model)
+        public async Task Delete(Common.Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -152,33 +153,33 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                 sql: "PA_CON_DO_CAT_EMPLOYEE_DELETE",
                 param: new
                 {
-                    P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                    P_CREATION_USER = model.Creation_User,
-                    P_MODIFICATION_DATE = model.Modification_Date,
-                    P_MODIFICATION_USER = model.Modification_User,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_CREATION_USER = model.Creation_User,
+                        P_MODIFICATION_DATE = model.Modification_Date,
+                        P_MODIFICATION_USER = model.Modification_User
                 },
                 commandType: CommandType.StoredProcedure);
             }
         }
-        public async Task<IEnumerable<Do_Mtr_Agreement>> DeleteScalar(Do_Mtr_Agreement model)
+        public async Task<IEnumerable<Ac_Mtr_Agreement_Detail>> DeleteScalar(Ac_Mtr_Agreement_Detail model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var result = connection.Query<
-                    Common.Do_Mtr_Agreement>
+                    Common.Ac_Mtr_Agreement_Detail>
                     ("PA_CON_DO_CAT_EMPLOYEE_DELETE",
                     param: new
                     {
-                    P_PK_DO_CAT_EMPLOYEE = model.Pk_Do_Cat_Employee,
-                    P_CREATION_USER = model.Creation_User,
-                    P_MODIFICATION_DATE = model.Modification_Date,
-                    P_MODIFICATION_USER = model.Modification_User,
+                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_CREATION_USER = model.Creation_User,
+                        P_MODIFICATION_DATE = model.Modification_Date,
+                        P_MODIFICATION_USER = model.Modification_User
                     },
                     commandType: CommandType.StoredProcedure);
-                return await Task.FromResult<IEnumerable<Do_Mtr_Agreement>>(result.ToList());
+                return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Detail>>(result.ToList());
             }
         }
-        
+
         #endregion
         #region Region [Dispose]
         public void Dispose()

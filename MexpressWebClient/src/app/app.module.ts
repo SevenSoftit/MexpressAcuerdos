@@ -17,6 +17,7 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { ApplicationPipesModule } from 'src/app/application-pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 // import the GridModule for the Grid component
 import { GridModule, ToolbarService, EditService, PageService, FilterService, SortService} from '@syncfusion/ej2-angular-grids';
 
@@ -40,6 +41,8 @@ import { HttpinterceptorService } from './services/interceptor/httpinterceptor.s
 import { ErrorDialogService } from 'src/app/services/interceptor/errordialog.service';
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,8 +79,10 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     DropzoneModule,
     ApplicationPipesModule,
-    GridModule
-
+    GridModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatButtonModule
   ],
   entryComponents: [
     

@@ -7,21 +7,21 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Ac_Mtr_Agreement_Detail()
         {
 
-            Pk_Cat_Agreement_Details = 0;            
+            Pk_Cat_Agreement_Details = 0;         
             Pk_Ac_Trade_Agreement = 0;
             Pk_Cat_Currency = 0;
             Pk_Glb_Products = 0;
             Creation_Date = Convert.ToDateTime("1900-01-01");
             Creation_User = "";
             Modification_Date = Convert.ToDateTime("1900-01-01");
-            Modification_User = "";
+            Modification_User = "";            
             Product_Id_Alias = "";
             Product_Name = "";
             Product_Amount = 0;
-            Name_Currency = "";
-            Active = false;
-            All_Products = false;
             Id_Currency = "";
+            Active = false;
+            All_Products = false;     
+            Name_Currency = "";
             
 
         }
@@ -36,10 +36,10 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Product_Id_Alias { get; set; }
         public String Product_Name { get; set; }
         public Decimal Product_Amount { get; set; }
-        public String Name_Currency { get; set; }
+        public String Id_Currency { get; set; }
         public Boolean Active { get; set; }
         public Boolean All_Products { get; set; }
-        public String Id_Currency { get; set; }
+        public String Name_Currency { get; set; }
         
     }
 }

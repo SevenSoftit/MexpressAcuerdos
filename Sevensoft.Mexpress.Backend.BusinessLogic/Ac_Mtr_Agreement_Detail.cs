@@ -54,7 +54,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
                 using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
                 {
                     var returnObject = await repository.List(model);
@@ -78,7 +78,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
                 using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
                 {
                     var returnObject = await repository.Get(model);
@@ -102,7 +102,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
                 using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
                 {
                     
@@ -127,7 +127,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Do_Mtr_Agreement>();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
                 using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
                 {
                     var returnObject = await repository.DeleteScalar(model);
@@ -156,7 +156,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         protected virtual void Dispose(bool disposing)
         {
         }
-        ~Do_Mtr_Agreement()
+        ~Ac_Mtr_Agreement_Detail()
         {
             this.Dispose(false);
         }

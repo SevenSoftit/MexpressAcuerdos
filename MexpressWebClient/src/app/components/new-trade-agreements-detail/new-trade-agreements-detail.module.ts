@@ -11,6 +11,7 @@ import {ToolbarService,EditService,PageService,FilterService,SortService,FreezeS
 import { MatSelectModule } from '@angular/material/select';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
 import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 setCulture('es-ES');
 
@@ -46,7 +47,8 @@ const routes: Routes = [
     MatSelectModule,
     GridModule,
     ScrollDispatchModule,
-    DropDownListAllModule
+    DropDownListAllModule,
+    MatDatepickerModule
   ],
   providers: [
     ToolbarService,

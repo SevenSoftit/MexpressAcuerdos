@@ -43,15 +43,20 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   listsMoney: { [key: string]: Object }[] = [];
   docHasErrors = false;
   headerFile: number = 0;
+  pkCatAgreementDetails: number = 0;
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
   public moneyModel: MoneyModel = new MoneyModel();
+  errorStartDate: boolean = false;
+  errorEndDate: boolean = false;
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, private allMoneyService: AllMoneyService) { }
 
   ngOnInit() {
 
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
+      startDatePicker: new FormControl(new Date()),
+      endDatePicker: new FormControl(new Date())
 
      });
 
@@ -113,6 +118,27 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
+  dateChange() {
+    debugger;
+    var startDate = this.newAgreementForm.value.startDatePicker;
+    var endDate = this.newAgreementForm.value.endDatePicker;
+    startDate.setHours(0);
+    endDate.setHours(0);
+
+    var diff = this.newAgreementForm.value.endDatePicker.getTime() - this.newAgreementForm.value.startDatePicker.getTime();
+
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
+    if (diffDays < 0)
+      diffDays = 0;
+    else if (diffDays == 0)
+      diffDays = 1;
+
+    // this.newAgreementForm.patchValue({
+    //   workedDays: diffDays + 1
+    // });
+  }
+
   // actionBegin(args: any): void {
   //   let gridInstance: any = (<any>document.getElementById('Normalgrid')).ej2_instances[0];
   //   if (args.requestType === 'save') {
@@ -163,9 +189,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         args.row.style.backgroundColor = "#F3C3C3";
         this.docHasErrors = true;
       }
-  
-      this.headerFile = args.data.fk_Gbl_Wrk_Agreement_Header;
-      
+  debugger;
+      this.headerFile = args.data.fk_Gbl_Wrk_Agreement_Header;      
       this.grid.gridLines = 'Both';
     }
   
@@ -188,6 +213,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
+          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
@@ -198,14 +224,16 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   processProductWork(updateRows) {
+    //EN PROCESO
     var object = {
+      Pk_Cat_Agreement_Details: this.pkCatAgreementDetails,
       Fk_Gbl_Wrk_Agreement_Header: this.headerFile,
-      Update_Rows: updateRows
+      Update_Rows: updateRows 
     };
 
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
-
+debugger;
         // this.listEmployee();
         this.showWorkTable = false;
         this.title = 'Todos los productos';

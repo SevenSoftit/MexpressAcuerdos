@@ -12,8 +12,9 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Currency = "";
             Product_Amount = 0;
             Creation_User = "";
-            Fk_Gbl_Wrk_Agreement_Header = 0;
             Pk_Gbl_Wrk_Agreement = 0;
+            Fk_Gbl_Wrk_Agreement_Header = 0;   
+            Pk_Cat_Agreement_Details = 0;     
             Error = false;
             Message_Error = "";
             It_Processed = false;
@@ -36,8 +37,10 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Name_Currency { get; set; }
         public Decimal Product_Amount { get; set; }
         public String Creation_User { get; set; }
-        public Int64 Fk_Gbl_Wrk_Agreement_Header { get; set; }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
+        public Int64 Fk_Gbl_Wrk_Agreement_Header { get; set; }
+        public Int64 Pk_Cat_Agreement_Details { get; set; }
+        
         public bool Error { get; set; }
         public String Message_Error { get; set; }
         public bool It_Processed { get; set; }
@@ -53,7 +56,5 @@ namespace Sevensoft.Mexpress.Backend.Common
         public string Id_Currency { get; set; }
         public Agreement_Option Option { get; set; }
         public bool Update_Rows { get; set; }
-
-
     }
 }
