@@ -13,7 +13,6 @@ export class NewTradeAgreementDetailModel {
     Creation_User: string;  
     Modification_Date: Date;
     Modification_User: string;  
-    All_Products: boolean;
     Active: boolean;
 
     constructor() {
@@ -29,7 +28,6 @@ export class NewTradeAgreementDetailModel {
         this.Creation_User = '',    
         this.Modification_Date = new Date(),
         this.Modification_User = '',  
-        this.All_Products = false,
         this.Active = false
     }
 }

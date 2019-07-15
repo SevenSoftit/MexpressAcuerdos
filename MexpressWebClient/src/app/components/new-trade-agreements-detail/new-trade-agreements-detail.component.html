@@ -19,11 +19,8 @@
             <div class="form-group col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
                 <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)">
-                    <!-- <mat-option *ngFor="let paySlip of listER" [value]="paySlip.pk_Do_Mtr_Pay_Slip">
-                    {{paySlip.slip_Name}}
-                </mat-option> -->
-                    <mat-option [value]="0">
-                        Prueba
+                    <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
+                        {{typeAgreement.name_Agreement}}
                     </mat-option>
                 </mat-select>
             </div>

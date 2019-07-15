@@ -11,6 +11,8 @@ import { MoneyModel } from 'src/app/models/money.model';
 import { AllMoneyService } from 'src/app/services/allMoney/allMoney.service';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
+import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -41,15 +43,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   private typeContacElem: HTMLElement;
   private typeContactObj: DropDownList;
   listsMoney: { [key: string]: Object }[] = [];
+  typeOfAgreementList: any;
   docHasErrors = false;
   headerFile: number = 0;
   pkCatAgreementDetails: number = 0;
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
   public moneyModel: MoneyModel = new MoneyModel();
+  public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   errorStartDate: boolean = false;
   errorEndDate: boolean = false;
-  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, private allMoneyService: AllMoneyService) { }
+  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
+    private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService) { }
 
   ngOnInit() {
 
@@ -72,6 +77,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
      this.moneyRules = { required: [true, 'Moneda requerida'] };
      
      this.listMoney();
+     this.listTypeOfAgreement();
 
      this.moneyTypeParams = {
       params: { popupHeight: '300px' },
@@ -203,7 +209,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   behaviorProvider(value: any){
+    //Al parecer, no tendra comportamiento en especifico
   }
+
 
   uploadArchive(){
   }
@@ -278,6 +286,21 @@ listMoney() {
           name_Currency: item.name_Currency
         });
       });
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
+
+listTypeOfAgreement() {
+
+  this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
+    dataS => {
+      debugger;
+      this.typeOfAgreementList = dataS;
       this._common._setLoading(false);
     },
     error => {

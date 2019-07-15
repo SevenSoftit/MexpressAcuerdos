@@ -52,9 +52,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PRODUCT_NAME = model.Product_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ID_CURRENCY = model.Id_Currency,
-                        P_ACTIVE = model.Active,
-                        P_ALL_PRODUCTS = model.All_Products
-
+                        P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure);
                 return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Detail>>(result.ToList());
@@ -82,8 +80,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PRODUCT_NAME = model.Product_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ID_CURRENCY = model.Id_Currency,
-                        P_ACTIVE = model.Active,
-                        P_ALL_PRODUCTS = model.All_Products
+                        P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
                 return await Task.FromResult<Common.Ac_Mtr_Agreement_Detail>(result);
@@ -110,8 +107,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PRODUCT_NAME = model.Product_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ID_CURRENCY = model.Id_Currency,
-                        P_ACTIVE = model.Active,
-                        P_ALL_PRODUCTS = model.All_Products
+                        P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure);
             }
@@ -138,8 +134,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PRODUCT_NAME = model.Product_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ID_CURRENCY = model.Id_Currency,
-                        P_ACTIVE = model.Active,
-                        P_ALL_PRODUCTS = model.All_Products
+                        P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
                 return await Task.FromResult<Common.Ac_Mtr_Agreement_Detail>(result);
