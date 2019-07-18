@@ -37,3 +37,5 @@ Sevensoft.Mexpress.Utilities.Extender/bin/Debug/netstandard2.0/Sevensoft.Mexpres
 Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Utilities.Extender.AssemblyInfo.cs
 Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Utilities.Extender.assets.cache
 Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Utilities.Extender.csproj.CopyComplete
+*.cache
+*.cache

@@ -155,6 +155,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     }
 
                     var model = new Common.Import_Product();
+                    model.Pk_Ac_Trade_Agreement = GetHeaderPk(formAccumulator.GetResults());
                     model.Creation_User = (queryString["User"]).ToString();
                     model.File_Path = ProcessPathDocumentAsync(nameFile, targetFilePathBackUp).Result;
 
@@ -283,9 +284,22 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     //model.FK_GBL_CAT_COMPANY = Convert.ToInt64(dictionary.Value[0]);
                 }
             }
+            return model;
+        }
+
+        private Common.Import_Product GetHeaderPk(Dictionary<string, StringValues> fields)
+        {
+            var model = new Common.Import_Product();
+            foreach (var dictionary in fields)
+            {
+                if (dictionary.Key == "Pk_Ac_Trade_Agreement")
+                    model.Pk_Ac_Trade_Agreement = Convert.ToInt64(dictionary.Value[0]);
+            }
 
             return model;
         }
+
+
 
         #endregion Region [Methods]
     }
