@@ -1,0 +1,6 @@
+
+FioWebAdmin/
+*.cache
+*.dll
+*.txt
+*.pdb
