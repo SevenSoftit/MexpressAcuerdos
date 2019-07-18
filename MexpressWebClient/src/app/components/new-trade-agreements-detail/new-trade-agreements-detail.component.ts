@@ -73,7 +73,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
-    private providerService: ProviderService, public matDialogRef: MatDialogRef<NewTradeAgreementsDetailComponent>) { }
+    private providerService: ProviderService) { }
 
   ngOnInit() {
 
@@ -196,7 +196,6 @@ debugger;
 
           this.showErrors = false;
           this.onAdd.emit(true);
-          this.matDialogRef.close();
         },
         error => {
 
