@@ -155,7 +155,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     }
 
                     var model = new Common.Import_Product();
-                    model.Pk_Ac_Trade_Agreement = GetHeaderPk(formAccumulator.GetResults());
+                    model = GetHeaderPk(formAccumulator.GetResults());
                     model.Creation_User = (queryString["User"]).ToString();
                     model.File_Path = ProcessPathDocumentAsync(nameFile, targetFilePathBackUp).Result;
 
