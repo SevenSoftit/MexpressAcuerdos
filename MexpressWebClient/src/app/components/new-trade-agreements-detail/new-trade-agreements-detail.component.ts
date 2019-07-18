@@ -68,6 +68,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
+  providerValue: any;
+  providerName;
   
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -176,7 +178,7 @@ debugger;
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
-      this.newAgreementDetailHeaderModel.Provider_Name = this.providerList.filter(provider => provider.pk_Ac_Cat_Provider === this.provider);
+      this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;     
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = 1;
 
@@ -291,6 +293,7 @@ debugger;
 
   behaviorProvider(value: any){
     //Al parecer, no tendra comportamiento en especifico
+    this.providerValue = value;
   }
 
 
@@ -395,6 +398,11 @@ listProvider() {
   this.providerService.listProvider(this.providerModel).subscribe(
     dataG => {
       this.providerList = dataG;
+
+      var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerValue);
+      filterProviderName.forEach(element => {
+        this.providerName = element.name_Provider
+      });
       this._common._setLoading(false);
     },
     error => {
