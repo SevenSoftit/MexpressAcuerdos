@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, IEditCell } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { MoneyModel } from 'src/app/models/money.model';
@@ -13,6 +13,10 @@ import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.compone
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
+import { ProviderService } from 'src/app/services/TaProvider/provider.service';
+import { ProviderModel } from 'src/app/models/provider.model';
+import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.Model';
+import { utiles } from 'src/environments/utiles';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -21,7 +25,10 @@ import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfA
 })
 export class NewTradeAgreementsDetailComponent implements OnInit {
   newAgreementForm: FormGroup;
-  showErrors = false;
+  showErrors: boolean = false;
+  errorDate: boolean = false;
+  errorStartDate: boolean = false;
+  errorEndDate: boolean = false;
   type_of_agreement: any;
   provider: any;
   @ViewChild("grid", {static: false})
@@ -44,6 +51,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   private typeContactObj: DropDownList;
   listsMoney: { [key: string]: Object }[] = [];
   typeOfAgreementList: any;
+  providerList: any;
   docHasErrors = false;
   headerFile: number = 0;
   pkCatAgreementDetails: number = 0;
@@ -51,18 +59,27 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   title = 'Todos los empleados';
   public moneyModel: MoneyModel = new MoneyModel();
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
-  errorStartDate: boolean = false;
-  errorEndDate: boolean = false;
+  public providerModel: ProviderModel = new ProviderModel();
+  agreement_activator: boolean = false;
+  pk_Ac_Trade_Agreement: number = 0;
+  newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
+  infoUser = utiles.getInfoUser();
+  allProducts: boolean = false;
+  dateProcess: Date = new Date();
+  dateReprocess: Date = new Date();
+  onAdd = new EventEmitter();
+  
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
-    private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService) { }
+    private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
+    private providerService: ProviderService, public matDialogRef: MatDialogRef<NewTradeAgreementsDetailComponent>) { }
 
   ngOnInit() {
 
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
-      endDatePicker: new FormControl(new Date())
-
+      endDatePicker: new FormControl(new Date()),
+      description: new FormControl('')
      });
 
      this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
@@ -77,7 +94,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
      this.moneyRules = { required: [true, 'Moneda requerida'] };
      
      this.listMoney();
-     this.listTypeOfAgreement();
+     
 
      this.moneyTypeParams = {
       params: { popupHeight: '300px' },
@@ -124,6 +141,70 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
+
+  saveAgreementHeader(){
+    this.errorDate = false;
+    this.errorStartDate = false;
+    this.errorEndDate = false;
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    this.newAgreementForm.value.startDatePicker.setHours(0, 0, 0, 0);
+    this.newAgreementForm.value.endDatePicker.setHours(0, 0, 0, 0);
+
+    if (this.newAgreementForm.value.startDatePicker < today) {
+      this.errorDate = true;
+      this.errorStartDate = true;
+    }
+    if (this.newAgreementForm.value.startDatePicker > this.newAgreementForm.value.endDatePicker) {
+      this.errorDate = true;
+      this.errorEndDate = true;
+    }
+
+    if (this.newAgreementForm.status != 'INVALID' && !this.errorDate) {
+debugger;
+      this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.pk_Ac_Trade_Agreement;
+      this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
+      this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
+      this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
+      this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
+      
+      this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
+      this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
+      this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
+      this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
+      this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
+      this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
+      this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
+      this.newAgreementDetailHeaderModel.Provider_Name = this.providerList.filter(provider => provider.pk_Ac_Cat_Provider === this.provider);
+      this.newAgreementDetailHeaderModel.Active = this.agreement_activator;     
+      this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = 1;
+
+      this.tradeAgreementDetailService.savEAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
+        data => {
+
+          //this.modalSuccessConcept();
+
+          this.newAgreementForm.setValue({
+            agreement_name: '',
+            description: '',
+            startDatePicker: new Date(),
+            endDatePicker: new Date()
+          });
+
+          this.showErrors = false;
+          this.onAdd.emit(true);
+          this.matDialogRef.close();
+        },
+        error => {
+
+        });
+
+    }
+    else
+      this.showErrors = true;
+
+  }
   dateChange() {
     debugger;
     var startDate = this.newAgreementForm.value.startDatePicker;
@@ -221,7 +302,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
-          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
@@ -286,6 +366,7 @@ listMoney() {
           name_Currency: item.name_Currency
         });
       });
+      this.listTypeOfAgreement();
       this._common._setLoading(false);
     },
     error => {
@@ -299,8 +380,21 @@ listTypeOfAgreement() {
 
   this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
     dataS => {
-      debugger;
       this.typeOfAgreementList = dataS;
+      this.listProvider();
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
+
+listProvider() {
+  this.providerService.listProvider(this.providerModel).subscribe(
+    dataG => {
+      this.providerList = dataG;
       this._common._setLoading(false);
     },
     error => {

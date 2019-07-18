@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { utiles } from 'src/environments/utiles';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NewTradeAgreementDetailModel } from 'src/app/components/new-trade-agreements-detail/newTradeAgreementDetail.Model';
+import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.Model';
 
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
@@ -38,10 +38,10 @@ export class TradeAgreementDetailService {
   * Author:
   * Description:
   --------------------------------------------------------------------*/
-  ListTradeAgreementDetail (tradeAgreementDetail: NewTradeAgreementDetailModel) {
+  ListTradeAgreementDetail (tradeAgreementDetail: NewAgreementDetailHeaderModel) {
     const url = this.apiUrl + 'api/agreementDetail/ListAgreementDetail';
-    return this.http.post<NewTradeAgreementDetailModel[]>(url, tradeAgreementDetail, httpOptions).pipe(
-      tap((product: NewTradeAgreementDetailModel[]) => console.log(''))
+    return this.http.post<NewAgreementDetailHeaderModel[]>(url, tradeAgreementDetail, httpOptions).pipe(
+      tap((product: NewAgreementDetailHeaderModel[]) => console.log(''))
       );
   }
 
@@ -65,9 +65,6 @@ export class TradeAgreementDetailService {
       );
   }
 
-
-
-
   deleteTradeAgreementDetailProduct (contactInfoData: any) {
     const url = this.apiUrl + 'api/agreementDetail/Delete';
     return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
@@ -89,6 +86,13 @@ export class TradeAgreementDetailService {
       );
   }
 
-  
+  // HEADER OF THE AGREEMENT
+
+  savEAgreementHeader (contactInfoData: any) {
+    const url = this.apiUrl + 'api/agreementDetailHeader/Save';
+    return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
+      tap((product: any) => console.log(''))
+      );
+  }
 
 }

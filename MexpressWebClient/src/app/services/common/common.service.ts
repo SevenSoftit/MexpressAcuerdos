@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CatalogModel } from '../../components/common-model/catalog.Model';
 import {utiles} from '../../../environments/utiles';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { tap} from 'rxjs/operators';
+import { tap, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 const methodApi = "api/User/Save";
@@ -37,9 +37,9 @@ export class CommonService {
 
   listCatalog(catalogModel: CatalogModel) {
     const url = utiles.getInfoUser().apiServiceBaseUri + 'api/catalog/list';
-    return this.http.post<CatalogModel>(url, catalogModel, httpOptions).pipe(
-      tap((product: CatalogModel) => console.log(''))
-      );
+    return this.http.post<CatalogModel>(url, catalogModel, httpOptions).pipe(map(response => {
+      return response;
+  }));
   }
 
     /*------------------------------------------------------------------

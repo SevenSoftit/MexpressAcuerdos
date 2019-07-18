@@ -7,12 +7,12 @@ namespace Sevensoft.Mexpress.Backend.Common
     {
         public Import_Product()
         {
+            Pk_Gbl_Wrk_Agreement = 0;
             Product_Id_Alias = "";
             Product_Name = "";
             Id_Currency = "";
             Product_Amount = 0;
-            Pk_Gbl_Wrk_Agreement = 0;
-
+            
             Pk_Ac_Trade_Agreement = 0;
             Pk_Cat_Type_Agreement = 0;
             Pk_Ac_Cat_Provider = 0;
@@ -20,7 +20,6 @@ namespace Sevensoft.Mexpress.Backend.Common
             Creation_User = "";
             Modification_Date = Convert.ToDateTime("1900-01-01");
             Modification_User = "";
-            Status_Agreement = "";
             Name_Agreement = "";
             Description_Agreement = "";
             Date_Start = Convert.ToDateTime("1900-01-01");
@@ -29,7 +28,6 @@ namespace Sevensoft.Mexpress.Backend.Common
             Date_Reprocess = Convert.ToDateTime("1900-01-01");
             All_Products = false;
             Provider_Name = "";
-            Recovery_Amount = 0;
             Active = true;
 
             Error = false;
@@ -47,12 +45,12 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Currency = "";
 
         }
-
+        public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
         public String Product_Name { get; set; }
         public String Id_Currency { get; set; }
         public Decimal Product_Amount { get; set; }
-        public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
+        
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int32 Pk_Cat_Type_Agreement { get; set; }
         public Int32 Pk_Ac_Cat_Provider { get; set; }
@@ -69,7 +67,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public DateTime Date_Reprocess { get; set; }
         public bool All_Products { get; set; }
         public string Provider_Name { get; set; }
-        public Decimal Recovery_Amount { get; set; }
         public bool Active { get; set; }
 
         public bool Error { get; set; }

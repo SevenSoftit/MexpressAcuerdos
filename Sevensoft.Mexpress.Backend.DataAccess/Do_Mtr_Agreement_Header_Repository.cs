@@ -152,7 +152,6 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_DATE_REPROCESS = model.Date_Reprocess,
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
-                        P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ACTIVE = model.Active,                      
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },

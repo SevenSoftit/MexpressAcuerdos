@@ -1,6 +1,6 @@
 /*******************************************************
   * Author: Gustavo ZC
-  * Creation date: 15/07/2019
+  * Creation date: 16/07/2019
   * Description:
   * Properties:
   * Username:
@@ -13,27 +13,34 @@
   * Author:
   * Description:
 *******************************************************/
-export class TypeOfAgreementModel {
-  Pk_Cat_Type_Agreement: number;
+export class ProviderModel {
+  Pk_Ac_Cat_Provider: number;
   Creation_Date: Date;
   Creation_User: string;
   Modification_Date: Date;
   Modification_User: string;
-  Name_Agreement: string;
-  Description_Agreement: string;
-  Id_Alias: string;
-  Behavior: string;
+  Name_Provider: string;
+  Identification_Provider: string;
+  Email_Provider: string;
+  Business_Name: string;
+  Id_Provider_Pdv: string;
+  Id_Provider_Erp: string;
+  Active: boolean;
 
+  
   constructor() {
-    this.Pk_Cat_Type_Agreement = 0;
+    this.Pk_Ac_Cat_Provider = 0;
     this.Creation_Date = new Date();
     this.Creation_User = '';
     this.Modification_Date = new Date();
     this.Modification_User = '';
-    this.Name_Agreement = '';
-    this.Description_Agreement = '';
-    this.Id_Alias = '';
-    this.Behavior = '';
+    this.Name_Provider = '';
+    this.Identification_Provider = '';
+    this.Email_Provider = '';
+    this.Business_Name = '';
+    this.Id_Provider_Pdv = '';
+    this.Id_Provider_Erp = '';
+    this.Active = false;
 
   }
 }

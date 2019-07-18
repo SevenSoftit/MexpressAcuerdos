@@ -36,18 +36,15 @@
             <div class="form-group col-md-2">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)">
-                    <!-- <mat-option *ngFor="let paySlip of listER" [value]="paySlip.pk_Do_Mtr_Pay_Slip">
-                    {{paySlip.slip_Name}}
-                </mat-option> -->
-                    <mat-option [value]="0">
-                        Prueba
+                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
+                        {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
             </div>
             <!-- Fecha Inicio -->
             <div class="col-md-2">
-                <div class="form-group text">
-                    <label for="startDatePicker" class="new-agreement-label-input">Fecha Inicio</label>
+                <div class="form-group text date-picker-custom">
+                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Inicio</label>
                     <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
                         readonly>
                     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
@@ -59,8 +56,8 @@
             </div>
             <!-- Fecha Fin -->
             <div class="col-md-2">
-                <div class="form-group text">
-                    <label for="endDatePicker" class="new-agreement-label-input">Fecha Fin</label>
+                <div class="form-group text date-picker-custom">
+                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Fin</label>
                     <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
                     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
@@ -68,7 +65,22 @@
                         La fecha de fin del acuerdo debe de ser mayor/igual a la fecha de inicio
                     </div>
                 </div>
-
+            </div>
+            <!--Activador de acuerdos-->
+            <div class="form-group col-md-2 agr-activator">
+                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
+                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                </mat-slide-toggle>
+            </div>
+        </div>
+        <div class="row">
+            <!--Descripción-->
+            <div class="form-group col-md-10">
+                <label for="description" class="new-agreement-label-input">Descripción</label>
+                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+            </div>
+            <div class="col-md-2">
+                <button class="save-button" mat-raised-button (click)="saveAgreementHeader()"><mat-icon  class="mr-2">attachment</mat-icon>Guardar encabezado</button>
             </div>
         </div>
     </form>

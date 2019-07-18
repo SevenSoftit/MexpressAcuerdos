@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { TradeAgreementDetailService } from './tradeAgreementDetail.service';
 
-import { ManageEmployeeService } from './manageEmployee.service';
 
-describe('ManageEmployeeService', () => {
+describe('TradeAgreementDetailService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ManageEmployeeService = TestBed.get(ManageEmployeeService);
+    const service: TradeAgreementDetailService = TestBed.get(TradeAgreementDetailService);
     expect(service).toBeTruthy();
   });
 });

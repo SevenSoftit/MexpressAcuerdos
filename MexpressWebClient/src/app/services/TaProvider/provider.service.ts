@@ -4,15 +4,14 @@ import { of, Observable } from 'rxjs';
 import {utiles} from '../../../environments/utiles';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
-
+import { ProviderModel } from 'src/app/models/provider.model';
 
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
 @Injectable({
   providedIn: 'root'
 })
-export class TypeOfAgreementService {
+export class ProviderService {
 
   //#region variables
     apiUrl :any;
@@ -32,7 +31,7 @@ export class TypeOfAgreementService {
 
  /*------------------------------------------------------------------
   * Author: Gustavo ZC
-  * Creation date: 15/07/2019
+  * Creation date: 16/07/2019
   * Description:
  * *****************************************************
   * Modifications
@@ -43,17 +42,17 @@ export class TypeOfAgreementService {
   * Author:
   * Description:
   --------------------------------------------------------------------*/
-  saveTypeOfAgreement (contactInfoData: TypeOfAgreementModel) {
-    const url = this.apiUrl + 'api/typeOfAgreement/Save';
-    return this.http.post<TypeOfAgreementModel>(url, contactInfoData, httpOptions).pipe(
-      tap((product: TypeOfAgreementModel) => console.log('')),
-      catchError(this.handleError<TypeOfAgreementModel>(''))
+  saveProvider (contactInfoData: ProviderModel) {
+    const url = this.apiUrl + 'api/provider/Save';
+    return this.http.post<ProviderModel>(url, contactInfoData, httpOptions).pipe(
+      tap((product: ProviderModel) => console.log('')),
+      catchError(this.handleError<ProviderModel>(''))
       );
   }
 
   /*------------------------------------------------------------------
   * Author: Gustavo ZC
-  * Creation date: 15/07/2019
+  * Creation date: 16/07/2019
   * Description:
  * *****************************************************
   * Modifications
@@ -64,8 +63,8 @@ export class TypeOfAgreementService {
   * Author:
   * Description:
   --------------------------------------------------------------------*/
-  listTypeOfAgreement (contactInfoData: any) {
-    const url = this.apiUrl + 'api/typeOfAgreement/List';
+  listProvider (contactInfoData: any) {
+    const url = this.apiUrl + 'api/provider/List';
     return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
       tap((product: any) => console.log('')),
       catchError(this.handleError<any>(''))
@@ -74,7 +73,7 @@ export class TypeOfAgreementService {
 
     /*------------------------------------------------------------------
   * Author: Gustavo ZC
-  * Creation date: 15/07/2019
+  * Creation date: 16/07/2019
   * Description:
  * *****************************************************
   * Modifications
@@ -85,17 +84,17 @@ export class TypeOfAgreementService {
   * Author:
   * Description:
   --------------------------------------------------------------------*/
-  deleteTypeOfAgreement (contactInfoData: TypeOfAgreementModel) {
-    const url = this.apiUrl + 'api/typeOfAgreement/Delete';
-    return this.http.post<TypeOfAgreementModel>(url, contactInfoData, httpOptions).pipe(
-      tap((product: TypeOfAgreementModel) => console.log('')),
-      catchError(this.handleError<TypeOfAgreementModel>(''))
+  deleteProvider (contactInfoData: ProviderModel) {
+    const url = this.apiUrl + 'api/provider/Delete';
+    return this.http.post<ProviderModel>(url, contactInfoData, httpOptions).pipe(
+      tap((product: ProviderModel) => console.log('')),
+      catchError(this.handleError<ProviderModel>(''))
       );
   }
 
   /*******************************************************
   * Author: Gustavo ZC
-  * Creation date: 15/07/2019
+  * Creation date: 16/07/2019
   * Description:
  * *****************************************************
   * Modifications

@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import {utiles} from "../../../environments/utiles"
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: "app-change-password-modal",
@@ -14,6 +16,7 @@ import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.compone
 })
 export class ChangePasswordModalComponent implements OnInit {
   //#region Variables
+  private unsubscribe$ = new Subject<void>();
   changePassForm: FormGroup;
   submitted = false;
   showPassError = false;
@@ -83,7 +86,9 @@ export class ChangePasswordModalComponent implements OnInit {
         this.loginModel.pk_Usuario = utiles.getInfoUser().pk_Usuario;
         this.loginModel.Fk_Sistema = utiles.getInfoUser().fk_Sistema;
 
-        this.commonService._OptionsUser(this.loginModel).subscribe(
+        this.commonService._OptionsUser(this.loginModel)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(
           data => {
             this.submitted = false;
 
@@ -106,5 +111,11 @@ export class ChangePasswordModalComponent implements OnInit {
 
   closeModalChangePassword() {
     this.matDialogRef.close();
+  }
+
+  ngOnDestroy()
+  {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
