@@ -17,6 +17,7 @@ import { ProviderService } from 'src/app/services/TaProvider/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.Model';
 import { utiles } from 'src/environments/utiles';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -31,7 +32,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   errorEndDate: boolean = false;
   type_of_agreement: any;
   provider: any;
-  @ViewChild("grid", {static: false})
+  @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
   public workDataTable: any;
@@ -51,7 +52,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   private typeContactObj: DropDownList;
   listsMoney: { [key: string]: Object }[] = [];
   typeOfAgreementList: any;
-  providerList: any;
+  providerList: any = [];
+  providerValue: any;
   docHasErrors = false;
   headerFile: number = 0;
   pkCatAgreementDetails: number = 0;
@@ -68,10 +70,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
-  providerValue: any;
   providerName;
-  
-  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
+  enableExcel: boolean = false;
+  disableHeader: boolean = false;
+
+  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService) { }
 
@@ -82,23 +85,23 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
       description: new FormControl('')
-     });
+    });
 
-     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-     this.pageSettings = { pageSize: 8, pageCount: 5 };
-     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
-     this.editSettingsWork = { allowEditing: true, allowDeleting: true };
-     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
-     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
+    this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
+    this.pageSettings = { pageSize: 8, pageCount: 5 };
+    this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
+    this.editSettingsWork = { allowEditing: true, allowDeleting: true };
+    this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
 
-     this.codeRules = { required: [true, 'Código requerido'] };
-     this.productNameRules = { required: [true, 'Nombre requerido'] };
-     this.moneyRules = { required: [true, 'Moneda requerida'] };
-     
-     this.listMoney();
-     
+    this.codeRules = { required: [true, 'Código requerido'] };
+    this.productNameRules = { required: [true, 'Nombre requerido'] };
+    this.moneyRules = { required: [true, 'Moneda requerida'] };
 
-     this.moneyTypeParams = {
+    this.listMoney();
+
+
+    this.moneyTypeParams = {
       params: { popupHeight: '300px' },
       create: () => {
         this.typeContacElem = document.createElement("input");
@@ -144,7 +147,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
 
-  saveAgreementHeader(){
+  saveAgreementHeader() {
     this.errorDate = false;
     this.errorStartDate = false;
     this.errorEndDate = false;
@@ -164,13 +167,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate) {
-debugger;
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.pk_Ac_Trade_Agreement;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
       this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
       this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
-      
+
       this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
       this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
       this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
@@ -179,12 +181,15 @@ debugger;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
       this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
-      this.newAgreementDetailHeaderModel.Active = this.agreement_activator;     
+      this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = 1;
 
-      this.tradeAgreementDetailService.savEAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
+      this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
-
+          this.enableExcel = true;
+          this.disableHeader = true;
+          this.headerFile = data.pk_Ac_Trade_Agreement;
+          this.workDataTable = [];
           //this.modalSuccessConcept();
 
           this.newAgreementForm.setValue({
@@ -207,7 +212,6 @@ debugger;
 
   }
   dateChange() {
-    debugger;
     var startDate = this.newAgreementForm.value.startDatePicker;
     var endDate = this.newAgreementForm.value.endDatePicker;
     startDate.setHours(0);
@@ -269,44 +273,52 @@ debugger;
     }
   }
 
-        //Pinta los campos erroneos en rojo
-    rowDataBound(args: any): void {
+  //Pinta los campos erroneos en rojo
+  rowDataBound(args: any): void {
+    debugger;
+    if (args.data.error == true) {
 
-      if (args.data.error == true) {
-  
-        args.row.style.backgroundColor = "#F3C3C3";
-        this.docHasErrors = true;
-      }
-  debugger;
-      this.headerFile = args.data.pk_Ac_Trade_Agreement;      
-      this.grid.gridLines = 'Both';
+      args.row.style.backgroundColor = "#F3C3C3";
+      this.docHasErrors = true;
     }
-  
-    // dataBound(args: any) {
-    //     this.grid.gridLines = 'Both';
-    //   }
-  
-
-  behaviorTypeOfAgreement(value: any){
+    
+    this.headerFile = args.data.pk_Ac_Trade_Agreement;
+    this.grid.gridLines = 'Both';
   }
 
-  behaviorProvider(value: any){
+  // dataBound(args: any) {
+  //     this.grid.gridLines = 'Both';
+  //   }
+
+
+  behaviorTypeOfAgreement(value: any) {
+  }
+
+  behaviorProvider(value: any) {
     //Al parecer, no tendra comportamiento en especifico
-    this.providerValue = value;
+
+    var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
+    filterProviderName.forEach(element => {
+      this.providerName = element.name_Provider
+    });
   }
 
-
-  uploadArchive(){
+  uploadArchive() {
   }
 
   openDialogImportProduct(): void {
-    const dialogRef = this.matDialog.open(ImportProductComponent, { minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight:'420px' });
+    const dialogRef = this.matDialog.open(ImportProductComponent, { 
+      data: { contactInfo: this.headerFile },
+      minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight: '420px' });
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
+          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
+          this.enableExcel = false;
+          this.disableHeader = false;
 
         }
       }
@@ -315,15 +327,15 @@ debugger;
 
   processProductWork(updateRows) {
     //EN PROCESO
-    var object = {
-      Pk_Cat_Agreement_Details: this.pkCatAgreementDetails,
+    debugger;
+    var object = { 
       Pk_Ac_Trade_Agreement: this.headerFile,
-      Update_Rows: updateRows 
+      Update_Rows: updateRows
     };
 
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
-debugger;
+        debugger;
         // this.listEmployee();
         this.showWorkTable = false;
         this.title = 'Todos los productos';
@@ -344,90 +356,85 @@ debugger;
       });
   }
 
-    /*******************************************************
- * Author: Gustavo ZC
- * Creation date:  08/07/2019
- * Description: method that list all types of moneys
- ****************************************************
- * Modifications
- ****************************************************
- * Number:
- * Date:
- * Ticket:
- * Author:
- * Description:
- *******************************************************/
-listMoney() {
+  /*******************************************************
+* Author: Gustavo ZC
+* Creation date:  08/07/2019
+* Description: method that list all types of moneys
+****************************************************
+* Modifications
+****************************************************
+* Number:
+* Date:
+* Ticket:
+* Author:
+* Description:
+*******************************************************/
+  listMoney() {
 
-  this.allMoneyService.listMoney(this.moneyModel).subscribe(
-    dataS => {
-      const that = this;
-      dataS.forEach(function (item) {
-        that.listsMoney.push({
-          id_Currency: item.id_Currency,
-          name_Currency: item.name_Currency
+    this.allMoneyService.listMoney(this.moneyModel).subscribe(
+      dataS => {
+        const that = this;
+        dataS.forEach(function (item) {
+          that.listsMoney.push({
+            id_Currency: item.id_Currency,
+            name_Currency: item.name_Currency
+          });
         });
-      });
-      this.listTypeOfAgreement();
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
-
-listTypeOfAgreement() {
-
-  this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
-    dataS => {
-      this.typeOfAgreementList = dataS;
-      this.listProvider();
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
-
-listProvider() {
-  this.providerService.listProvider(this.providerModel).subscribe(
-    dataG => {
-      this.providerList = dataG;
-
-      var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerValue);
-      filterProviderName.forEach(element => {
-        this.providerName = element.name_Provider
-      });
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
-
-          // Opcion para Excel
-      toolbarClick(args: ClickEventArgs): void {
-        if(args.item.id == "export"){
-        var date = new Date().toISOString().slice(0,10);
-        var archiveName = 'Reporte_De_Productos_' + date + '.xlsx'
-    
-        const excelExportProperties: ExcelExportProperties = {
-          fileName: archiveName
-        };
-    
-        this.grid.excelExport(excelExportProperties);
+        this.listTypeOfAgreement();
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
       }
-    }
+    )
+  }
 
-    cancel(): void {
-      this.showWorkTable = false;
-      this.title = 'Todos los empleados';
+  listTypeOfAgreement() {
+
+    this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
+      dataS => {
+        this.typeOfAgreementList = dataS;
+        this.listProvider();
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
+  listProvider() {
+    this.providerService.listProvider(this.providerModel).subscribe(
+      dataG => {
+        this.providerList = dataG;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
+  // Opcion para Excel
+  toolbarClick(args: ClickEventArgs): void {
+    if (args.item.id == "export") {
+      var date = new Date().toISOString().slice(0, 10);
+      var archiveName = 'Reporte_De_Productos_' + date + '.xlsx'
+
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: archiveName
+      };
+
+      this.grid.excelExport(excelExportProperties);
     }
+  }
+
+  cancel(): void {
+    this.showWorkTable = false;
+    this.title = 'Todos los empleados';
+  }
 
 }

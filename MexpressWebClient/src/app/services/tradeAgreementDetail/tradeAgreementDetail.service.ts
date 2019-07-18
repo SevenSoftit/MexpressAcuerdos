@@ -88,7 +88,7 @@ export class TradeAgreementDetailService {
 
   // HEADER OF THE AGREEMENT
 
-  savEAgreementHeader (contactInfoData: any) {
+  saveAgreementHeader (contactInfoData: any) {
     const url = this.apiUrl + 'api/agreementDetailHeader/Save';
     return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
       tap((product: any) => console.log(''))

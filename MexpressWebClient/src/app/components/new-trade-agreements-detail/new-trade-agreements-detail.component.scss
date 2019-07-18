@@ -162,3 +162,8 @@
 .new-trade-agr-toogle-lbl {
     justify-content: center;
 }
+
+.disabled_button {
+    background-color: $light-gray !important;
+    border-color: $light-gray !important;
+}

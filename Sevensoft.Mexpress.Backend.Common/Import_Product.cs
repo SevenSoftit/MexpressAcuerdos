@@ -82,5 +82,10 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Agreement_Option Option { get; set; }
         public bool Update_Rows { get; set; }
         public String Name_Currency { get; set; }
+
+        public static implicit operator long(Import_Product v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

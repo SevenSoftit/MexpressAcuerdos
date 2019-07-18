@@ -1,7 +1,7 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, Inject } from '@angular/core';
 import { UploaderComponent } from '@syncfusion/ej2-angular-inputs';
 import { utiles } from 'src/environments/utiles';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FeedbackDescriptionModalComponent } from '../feedback-description-modal/feedback-description-modal.component';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { CommonService } from 'src/app/services/common/common.service';
@@ -13,17 +13,24 @@ import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.compone
   styleUrls: ['./import-product.component.scss']
 })
 export class ImportProductComponent implements OnInit {
-
-  constructor(public dialog: MatDialog,public matDialogRef: MatDialogRef<ImportProductComponent>, private _common: CommonService) { }
   public uploadObj: UploaderComponent;
   infoUser = utiles.getInfoUser();
   public userName: string = this.infoUser.username;
   public PK_GLB_MTR_ORGANIZATION: string = '1';
+  pKHeaderFile: number = 0;
+
+
+  constructor(public dialog: MatDialog,public matDialogRef: MatDialogRef<ImportProductComponent>, private _common: CommonService, 
+    @Inject(MAT_DIALOG_DATA) public dataSuccess: any) { 
+      if (this.dataSuccess !== null && this.dataSuccess !== undefined) {
+        this.pKHeaderFile = this.dataSuccess.contactInfo;
+      }
+    }
 
   public config: DropzoneConfigInterface = {
     paramName: 'file',
     clickable: true,
-    // url: "http://localhost:50077/api/GblWrkEmployee/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
+    // url: "http://localhost:50077/api/GblWrkAgreementDetail/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     
     url: utiles.getInfoUser().apiServiceBaseUri + "api/GblWrkAgreementDetail/ImportFile?User=" + this.userName + "&FK_GLB_MTR_ORGANIZATION=" + this.PK_GLB_MTR_ORGANIZATION,
     method: 'POST',
@@ -78,8 +85,10 @@ export class ImportProductComponent implements OnInit {
     setTimeout(() => {
       this._common._setLoading(true);
     }, 0, 5000);
+    debugger;
     file[2].append("UserName", this.userName );
     file[2].append("FK_GLB_MTR_ORGANIZATION", this.PK_GLB_MTR_ORGANIZATION );
+    file[2].append("Pk_Ac_Trade_Agreement", this.pKHeaderFile );
 }
 
 

@@ -5,12 +5,10 @@
     </div>
 
     <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
-        <div class="col-md-6 text-left">
-            <button class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
-        </div>
+        <div class="col-md-12 text-right">
+            <button *ngIf="enableExcel" class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
 
-        <div class="col-md-6 text-right">
-            <button class="save-button" mat-raised-button (click)="uploadArchive()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
+            <button class="save-button ml-4" mat-raised-button (click)="uploadArchive()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
@@ -79,8 +77,8 @@
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
-            <div class="col-md-2">
-                <button class="save-button" mat-raised-button (click)="saveAgreementHeader()"><mat-icon  class="mr-2">attachment</mat-icon>Guardar encabezado</button>
+            <div class="col-md-2 mt-4">
+                <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()"><mat-icon  class="mr-2">save</mat-icon>Guardar encabezado</button>
             </div>
         </div>
     </form>
