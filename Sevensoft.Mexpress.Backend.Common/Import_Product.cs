@@ -43,6 +43,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Option = Agreement_Option.None;
             Update_Rows = false;
             Name_Currency = "";
+            Pk_Cat_Agreement_Details = 0;
 
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
@@ -82,6 +83,8 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Agreement_Option Option { get; set; }
         public bool Update_Rows { get; set; }
         public String Name_Currency { get; set; }
+
+        public Int64 Pk_Cat_Agreement_Details { get; set; }
 
         public static implicit operator long(Import_Product v)
         {

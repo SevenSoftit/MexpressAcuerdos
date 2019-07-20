@@ -36,6 +36,7 @@ export class NewAgreementDetailHeaderModel {
     Fk_Glb_Mtr_Organization: number;
     Update_Rows: Boolean;
     Name_Currency: String;
+    Pk_Cat_Agreement_Details: Number;
 
 
     constructor() {
@@ -75,6 +76,7 @@ export class NewAgreementDetailHeaderModel {
             this.Fk_Glb_Mtr_Organization = 0;
             this.Update_Rows = false;
             this.Name_Currency = '';
+            this.Pk_Cat_Agreement_Details = 0;
 
     }
 }

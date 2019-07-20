@@ -4,7 +4,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, IEditCell } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { MoneyModel } from 'src/app/models/money.model';
@@ -15,9 +15,11 @@ import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
 import { ProviderService } from 'src/app/services/TaProvider/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
-import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.Model';
+import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NewAgreementModel } from 'src/app/models/newAgreement.model';
+
+   
 
 @Component({
   selector: 'app-new-trade-agreements-detail',
@@ -47,6 +49,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public codeRules: Object;
   public productNameRules: Object;
   public moneyRules: Object;
+  public amountRules: Object;
   public moneyTypeParams: IEditCell;
   private typeContacElem: HTMLElement;
   private typeContactObj: DropDownList;
@@ -73,6 +76,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   providerName;
   enableExcel: boolean = false;
   disableHeader: boolean = false;
+  errorProvider: boolean = false;
+  errorTypeOfAgreement: boolean = false;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -97,6 +102,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.codeRules = { required: [true, 'Código requerido'] };
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
+    this.amountRules = { required: [true, 'Monto requerida'] };
 
     this.listMoney();
 
@@ -130,7 +136,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
+  getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
@@ -166,7 +172,15 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.errorEndDate = true;
     }
 
-    if (this.newAgreementForm.status != 'INVALID' && !this.errorDate) {
+    if(this.provider == undefined){
+        this.errorProvider = true;
+    }
+
+    if(this.type_of_agreement == undefined){
+      this.errorTypeOfAgreement = true;
+  }
+
+    if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.pk_Ac_Trade_Agreement;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
@@ -192,24 +206,23 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.workDataTable = [];
           //this.modalSuccessConcept();
 
-          this.newAgreementForm.setValue({
-            agreement_name: '',
-            description: '',
-            startDatePicker: new Date(),
-            endDatePicker: new Date()
-          });
+          // this.newAgreementForm.setValue({
+          //   agreement_name: '',
+          //   description: '',
+          //   startDatePicker: new Date(),
+          //   endDatePicker: new Date()
+          // });
 
           this.showErrors = false;
           this.onAdd.emit(true);
         },
-        error => {
+        () => {
 
         });
 
     }
     else
       this.showErrors = true;
-
   }
   dateChange() {
     var startDate = this.newAgreementForm.value.startDatePicker;
@@ -273,9 +286,56 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
   }
 
+  updateWorkProduct(args: any, isDelete) {
+
+    var object: any;
+
+    if (!isDelete) {
+      // args.data.id_Employee = (args.data.id_Employee != undefined) ? args.data.id_Employee : '';
+      // args.data.employee_Name = (args.data.employee_Name != undefined) ? args.data.employee_Name : '';
+      // args.data.employee_Cost_Center = (args.data.employee_Cost_Center != undefined) ? args.data.employee_Cost_Center : '';
+      // args.data.employee_Position = (args.data.employee_Position != undefined) ? args.data.employee_Position : '';
+      // args.data.group_Identifier = (args.data.group_Identifier != undefined) ? args.data.group_Identifier : '';
+      // args.data.employee_Add1 = (args.data.employee_Add1 != undefined) ? args.data.employee_Add1 : '';
+      // args.data.employee_Add2 = (args.data.employee_Add2 != undefined) ? args.data.employee_Add2 : '';
+      // args.data.creation_User = this.infoUser.username;
+      // args.data.pk_Gbl_Wrk_Employee_Header = (args.data.pk_Gbl_Wrk_Employee_Header != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Employee_Header)) ? args.data.pk_Gbl_Wrk_Employee_Header : 0;
+      // args.data.pk_Gbl_Wrk_Employee = (args.data.pk_Gbl_Wrk_Employee != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Employee)) ? args.data.pk_Gbl_Wrk_Employee : 0;
+      // args.data.error = (args.data.error != undefined && !Number.isNaN(args.data.error)) ? args.data.error : args.data.error;
+      // args.data.message_Error = (args.data.message_Error != undefined) ? args.data.message_Error : '';
+      // args.data.it_Processed = (args.data.it_Processed != undefined && !Number.isNaN(args.data.it_Processed)) ? args.data.it_Processed : args.data.it_Processed;
+      // args.data.duplicate_Identification = (args.data.duplicate_Identification != undefined && !Number.isNaN(args.data.duplicate_Identification)) ? args.data.duplicate_Identification : args.data.duplicate_Identification;
+      // args.data.not_Exist_Group_Identifier = (args.data.not_Exist_Group_Identifier != undefined && !Number.isNaN(args.data.not_Exist_Group_Identifier)) ? args.data.not_Exist_Group_Identifier : args.data.not_Exist_Group_Identifier;
+   
+      object = args.data;
+      object.active = true;
+    }
+    else {
+      object = args.data[0];
+      object.active = false;
+    }
+
+    this.tradeAgreementDetailService.validateTradeAgreementDetailProductError(object).subscribe(
+      dataW => {
+
+        if (!isDelete) {
+          if (dataW[0].error !== true) {
+            args.row.style.backgroundColor = "#FFF";
+            args.data.error = false;
+            var obj = this.workDataTable.filter(val=> val.pk_Gbl_Wrk_Agreement == args.data.pk_Gbl_Wrk_Agreement);
+            obj[0].error = false;
+            this.docHasErrors = false;                
+          }
+        }
+
+
+      }, error => {
+        this._common._setLoading(false);
+       });
+  }
+
   //Pinta los campos erroneos en rojo
   rowDataBound(args: any): void {
-    debugger;
     if (args.data.error == true) {
 
       args.row.style.backgroundColor = "#F3C3C3";
@@ -286,17 +346,17 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.grid.gridLines = 'Both';
   }
 
-  // dataBound(args: any) {
-  //     this.grid.gridLines = 'Both';
-  //   }
+  dataBound(args: any) {
+      this.grid.gridLines = 'Both';
+    }
 
 
-  behaviorTypeOfAgreement(value: any) {
+  behaviorTypeOfAgreement() {
+    this.errorTypeOfAgreement = false;
   }
 
   behaviorProvider(value: any) {
-    //Al parecer, no tendra comportamiento en especifico
-
+    this.errorProvider = false;
     var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
     filterProviderName.forEach(element => {
       this.providerName = element.name_Provider
@@ -313,21 +373,17 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
-          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
           this.enableExcel = false;
           this.disableHeader = false;
-
         }
       }
     );
   }
 
   processProductWork(updateRows) {
-    //EN PROCESO
-    debugger;
     var object = { 
       Pk_Ac_Trade_Agreement: this.headerFile,
       Update_Rows: updateRows
@@ -335,8 +391,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
-        debugger;
-        // this.listEmployee();
+        var agreement = new NewAgreementModel();
+        agreement.Pk_Ac_Trade_Agreement = dataW[0].pk_Ac_Trade_Agreement;
+        this.listAgreement(agreement);
         this.showWorkTable = false;
         this.title = 'Todos los productos';
         const dataSuccess = {
@@ -432,9 +489,35 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
   }
 
+    /*******************************************************
+* Author: Gustavo ZC
+* Creation date:  19/07/2019
+* Description: method that list the products of the agreement 
+****************************************************
+* Modifications
+****************************************************
+* Number:
+* Date:
+* Ticket:
+* Author:
+* Description:
+*******************************************************/
+listAgreement(data: NewAgreementModel) {
+  
+  this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
+    dataQ => {
+      this.dataTable = dataQ;
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.log('no se envio' + ' ' + error);
+    });
+}
+
   cancel(): void {
     this.showWorkTable = false;
-    this.title = 'Todos los empleados';
+    this.title = 'Todos los productos';
   }
 
 }
