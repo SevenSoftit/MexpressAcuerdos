@@ -275,11 +275,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       if (args.action == "add" || args.action == "edit") {
 
-        //this.updateWorkEmployee(args, false);
+        //this.updateWorkProduct(args, false);
       }
     }
     else if (args.requestType === 'delete') {
-      //this.updateWorkEmployee(args, true);
+      //this.updateWorkProduct(args, true);
     }
     else if (args.requestType === 'beginedit') {
       gridInstance.ej

@@ -41,3 +41,4 @@ Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpres
 *.cache
 Sevensoft.Mexpress.Backend.Web.Api/obj/Debug/netcoreapp2.2/project.razor.json
 MexpressWebClient/obj/Debug/netcoreapp2.2/project.razor.json
+*.cache
