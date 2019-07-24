@@ -338,6 +338,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   //Pinta los campos erroneos en rojo
   rowDataBound(args: any): void {
+    debugger;
     if (args.data.error == true) {
 
       args.row.style.backgroundColor = "#F3C3C3";
@@ -375,7 +376,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
-          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
