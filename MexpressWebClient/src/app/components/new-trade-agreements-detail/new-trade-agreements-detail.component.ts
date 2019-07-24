@@ -102,7 +102,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.codeRules = { required: [true, 'Código requerido'] };
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
-    this.amountRules = { required: [true, 'Monto requerida'] };
+    this.amountRules = { required: [true, 'Monto requerido'] };
 
     this.listMoney();
 
@@ -204,6 +204,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.disableHeader = true;
           this.headerFile = data.pk_Ac_Trade_Agreement;
           this.workDataTable = [];
+          this.dataTable = [];
           //this.modalSuccessConcept();
 
           // this.newAgreementForm.setValue({
@@ -244,25 +245,26 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     // });
   }
 
-  // actionBegin(args: any): void {
-  //   let gridInstance: any = (<any>document.getElementById('Normalgrid')).ej2_instances[0];
-  //   if (args.requestType === 'save') {
-  //     if (gridInstance.pageSettings.currentPage !== 1 && gridInstance.editSettings.newRowPosition === 'Top') {
-  //       args.index = (gridInstance.pageSettings.currentPage * gridInstance.pageSettings.pageSize) - gridInstance.pageSettings.pageSize;
-  //     } else if (gridInstance.editSettings.newRowPosition === 'Bottom') {
-  //       args.index = (gridInstance.pageSettings.currentPage * gridInstance.pageSettings.pageSize) - 1;
-  //     }
+  actionBegin(args: any): void {
+    let gridInstance: any = (<any>document.getElementById('Normalgrid')).ej2_instances[0];
+    if (args.requestType === 'save') {
+      if (gridInstance.pageSettings.currentPage !== 1 && gridInstance.editSettings.newRowPosition === 'Top') {
+        args.index = (gridInstance.pageSettings.currentPage * gridInstance.pageSettings.pageSize) - gridInstance.pageSettings.pageSize;
+      } else if (gridInstance.editSettings.newRowPosition === 'Bottom') {
+        args.index = (gridInstance.pageSettings.currentPage * gridInstance.pageSettings.pageSize) - 1;
+      }
 
-  //     if (args.action == "add" || args.action == "edit")
-  //       this.saveWorkLine(args.data);
-  //   }
-  //   else if (args.requestType === 'delete') {
-  //     this.deleteWorkLine(args.data);
-  //   }
-  //   else if (args.requestType === 'beginedit') {
-  //     gridInstance.ej
-  //   }
-  // }
+      if (args.action == "add" || args.action == "edit"){
+        //this.saveWorkLine(args.data);
+      }
+    }
+    else if (args.requestType === 'delete') {
+      //this.deleteWorkLine(args.data);
+    }
+    else if (args.requestType === 'beginedit') {
+      gridInstance.ej
+    }
+  }
 
   actionBeginWork(args: any): void {
     let gridInstance: any = (<any>document.getElementById('NormalgridWork')).ej2_instances[0];
@@ -275,11 +277,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       if (args.action == "add" || args.action == "edit") {
 
-        //this.updateWorkProduct(args, false);
+        this.updateWorkProduct(args, false);
       }
     }
     else if (args.requestType === 'delete') {
-      //this.updateWorkProduct(args, true);
+      this.updateWorkProduct(args, true);
     }
     else if (args.requestType === 'beginedit') {
       gridInstance.ej
@@ -291,22 +293,22 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     var object: any;
 
     if (!isDelete) {
-      // args.data.id_Employee = (args.data.id_Employee != undefined) ? args.data.id_Employee : '';
-      // args.data.employee_Name = (args.data.employee_Name != undefined) ? args.data.employee_Name : '';
-      // args.data.employee_Cost_Center = (args.data.employee_Cost_Center != undefined) ? args.data.employee_Cost_Center : '';
-      // args.data.employee_Position = (args.data.employee_Position != undefined) ? args.data.employee_Position : '';
-      // args.data.group_Identifier = (args.data.group_Identifier != undefined) ? args.data.group_Identifier : '';
-      // args.data.employee_Add1 = (args.data.employee_Add1 != undefined) ? args.data.employee_Add1 : '';
-      // args.data.employee_Add2 = (args.data.employee_Add2 != undefined) ? args.data.employee_Add2 : '';
-      // args.data.creation_User = this.infoUser.username;
-      // args.data.pk_Gbl_Wrk_Employee_Header = (args.data.pk_Gbl_Wrk_Employee_Header != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Employee_Header)) ? args.data.pk_Gbl_Wrk_Employee_Header : 0;
-      // args.data.pk_Gbl_Wrk_Employee = (args.data.pk_Gbl_Wrk_Employee != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Employee)) ? args.data.pk_Gbl_Wrk_Employee : 0;
-      // args.data.error = (args.data.error != undefined && !Number.isNaN(args.data.error)) ? args.data.error : args.data.error;
-      // args.data.message_Error = (args.data.message_Error != undefined) ? args.data.message_Error : '';
-      // args.data.it_Processed = (args.data.it_Processed != undefined && !Number.isNaN(args.data.it_Processed)) ? args.data.it_Processed : args.data.it_Processed;
-      // args.data.duplicate_Identification = (args.data.duplicate_Identification != undefined && !Number.isNaN(args.data.duplicate_Identification)) ? args.data.duplicate_Identification : args.data.duplicate_Identification;
-      // args.data.not_Exist_Group_Identifier = (args.data.not_Exist_Group_Identifier != undefined && !Number.isNaN(args.data.not_Exist_Group_Identifier)) ? args.data.not_Exist_Group_Identifier : args.data.not_Exist_Group_Identifier;
-   
+      args.data.product_Id_Alias = (args.data.product_Id_Alias != undefined) ? args.data.product_Id_Alias : '';
+      args.data.product_Name = (args.data.product_Name != undefined) ? args.data.product_Name : '';
+      args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
+      args.data.product_Amount = (args.data.product_Amount != undefined) ? args.data.product_Amount : 0;
+      args.data.creation_User = this.infoUser.username;
+      debugger;
+      args.data.pk_Ac_Trade_Agreement = (args.data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(args.data.pk_Ac_Trade_Agreement)) ? args.data.pk_Ac_Trade_Agreement : 0;
+      args.data.pk_Gbl_Wrk_Agreement = (args.data.pk_Gbl_Wrk_Agreement != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Agreement)) ? args.data.pk_Gbl_Wrk_Agreement : 0;
+      args.data.error = (args.data.error != undefined && !Number.isNaN(args.data.error)) ? args.data.error : args.data.error;
+      args.data.message_Error = (args.data.message_Error != undefined) ? args.data.message_Error : '';
+      args.data.it_Processed = (args.data.it_Processed != undefined && !Number.isNaN(args.data.it_Processed)) ? args.data.it_Processed : args.data.it_Processed;
+      args.data.invalid_Amount = (args.data.invalid_Amount != undefined && !Number.isNaN(args.data.invalid_Amount)) ? args.data.invalid_Amount : args.data.invalid_Amount;
+      args.data.not_Exist_Product = (args.data.not_Exist_Product != undefined && !Number.isNaN(args.data.not_Exist_Product)) ? args.data.not_Exist_Product : args.data.not_Exist_Product;  
+      args.data.duplicate_Product_Alias = (args.data.duplicate_Product_Alias != undefined && !Number.isNaN(args.data.duplicate_Product_Alias)) ? args.data.duplicate_Product_Alias : args.data.duplicate_Product_Alias;
+      args.data.not_Exist_Id_Currency = (args.data.not_Exist_Id_Currency != undefined && !Number.isNaN(args.data.not_Exist_Id_Currency)) ? args.data.not_Exist_Id_Currency : args.data.not_Exist_Id_Currency;
+
       object = args.data;
       object.active = true;
     }
@@ -314,7 +316,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       object = args.data[0];
       object.active = false;
     }
-
+    debugger;
     this.tradeAgreementDetailService.validateTradeAgreementDetailProductError(object).subscribe(
       dataW => {
 
@@ -341,7 +343,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       args.row.style.backgroundColor = "#F3C3C3";
       this.docHasErrors = true;
     }
-    
+    debugger;
     this.headerFile = args.data.pk_Ac_Trade_Agreement;
     this.grid.gridLines = 'Both';
   }
@@ -373,6 +375,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
+          debugger;
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
@@ -392,6 +395,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
         var agreement = new NewAgreementModel();
+
         agreement.Pk_Ac_Trade_Agreement = dataW[0].pk_Ac_Trade_Agreement;
         this.listAgreement(agreement);
         this.showWorkTable = false;
@@ -503,9 +507,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description:
 *******************************************************/
 listAgreement(data: NewAgreementModel) {
-  
+  debugger;
   this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
     dataQ => {
+      debugger;
       this.dataTable = dataQ;
       this._common._setLoading(false);
     },
@@ -519,5 +524,9 @@ listAgreement(data: NewAgreementModel) {
     this.showWorkTable = false;
     this.title = 'Todos los productos';
   }
+
+  // downloadFile() {
+  //   $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de empleados.xlsx");
+  // }
 
 }

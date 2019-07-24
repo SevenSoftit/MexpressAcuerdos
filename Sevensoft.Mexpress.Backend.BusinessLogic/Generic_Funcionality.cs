@@ -137,7 +137,10 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         private string GetCellValue(SpreadsheetDocument document, Cell cell)
         {
             SharedStringTablePart stringTablePart = document.WorkbookPart.SharedStringTablePart;
-            string value = cell.CellValue.InnerXml;
+            string value = "";
+
+            if (cell.CellValue != null)
+                value = cell.CellValue.InnerXml;
 
             if (cell.DataType != null && cell.DataType.Value == CellValues.SharedString)
             {
