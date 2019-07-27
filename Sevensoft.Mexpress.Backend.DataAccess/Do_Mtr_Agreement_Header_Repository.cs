@@ -40,7 +40,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_CON_AC_MTR_AGREEMENT_HEADER_GET",
                     param: new
                     {
-	                    P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
                         P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
                         P_CREATION_DATE = model.Creation_Date,
@@ -56,7 +56,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
-                        P_ACTIVE = model.Active,                      
+                        P_ACTIVE = model.Active,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure);
@@ -73,7 +73,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_CON_AC_MTR_AGREEMENT_HEADER_GET",
                     param: new
                     {
-	                    P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
                         P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
                         P_CREATION_DATE = model.Creation_Date,
@@ -89,7 +89,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
-                        P_ACTIVE = model.Active,                      
+                        P_ACTIVE = model.Active,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
@@ -105,7 +105,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_MAN_AC_MTR_AGREEMENT_HEADER_SAVE",
                     param: new
                     {
-	                    P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
                         P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
                         P_CREATION_DATE = model.Creation_Date,
@@ -121,14 +121,14 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
-                        P_ACTIVE = model.Active,                      
+                        P_ACTIVE = model.Active,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public async Task<Common.Import_Product> SaveScalar(Common.Import_Product model)
+        public async Task<IEnumerable<Common.Import_Product>> SaveScalar(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -137,7 +137,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_MAN_AC_MTR_AGREEMENT_HEADER_SAVE",
                     param: new
                     {
-	                    P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
                         P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
                         P_CREATION_DATE = model.Creation_Date,
@@ -152,11 +152,14 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_DATE_REPROCESS = model.Date_Reprocess,
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
-                        P_ACTIVE = model.Active,                      
+                        P_ACTIVE = model.Active,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
-                    commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Import_Product>(result);
+                //     commandType: CommandType.StoredProcedure).FirstOrDefault();
+                // return await Task.FromResult<Common.Import_Product>(result);
+                commandType: CommandType.StoredProcedure);
+                return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
+
             }
         }
         public async Task Delete(Common.Import_Product model)
@@ -167,10 +170,10 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                 sql: "PA_MAN_AC_MTR_AGREEMENT_HEADER_DELETE",
                 param: new
                 {
-                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
-                        P_CREATION_USER = model.Creation_User,
-                        P_MODIFICATION_DATE = model.Modification_Date,
-                        P_MODIFICATION_USER = model.Modification_User
+                    P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                    P_CREATION_USER = model.Creation_User,
+                    P_MODIFICATION_DATE = model.Modification_Date,
+                    P_MODIFICATION_USER = model.Modification_User
                 },
                 commandType: CommandType.StoredProcedure);
             }

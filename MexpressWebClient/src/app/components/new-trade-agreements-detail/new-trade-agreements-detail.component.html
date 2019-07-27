@@ -8,7 +8,7 @@
         <div class="col-md-12 text-right">
             <button *ngIf="enableExcel" class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
 
-            <button class="save-button ml-4" mat-raised-button (click)="uploadArchive()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
+            <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openAddEvidenceModal()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">

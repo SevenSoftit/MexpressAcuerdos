@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using static Sevensoft.Mexpress.Backend.Common.Enum;
 
 namespace Sevensoft.Mexpress.Backend.Common
@@ -20,7 +21,6 @@ namespace Sevensoft.Mexpress.Backend.Common
             Creation_User = "";
             Modification_Date = Convert.ToDateTime("1900-01-01");
             Modification_User = "";
-            Name_Agreement = "";
             Description_Agreement = "";
             Date_Start = Convert.ToDateTime("1900-01-01");
             Date_Finish = Convert.ToDateTime("1900-01-01");
@@ -28,6 +28,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Date_Reprocess = Convert.ToDateTime("1900-01-01");
             All_Products = false;
             Provider_Name = "";
+            Name_Agreement = "";
             Active = true;
 
             Error = false;
@@ -44,7 +45,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Update_Rows = false;
             Name_Currency = "";
             Pk_Cat_Agreement_Details = 0;
-
+            list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();      
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -60,7 +61,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
         public String Status_Agreement { get; set; }
-        public String Name_Agreement { get; set; }
+
         public string Description_Agreement { get; set; }
         public DateTime Date_Start { get; set; }
         public DateTime Date_Finish { get; set; }
@@ -68,6 +69,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public DateTime Date_Reprocess { get; set; }
         public bool All_Products { get; set; }
         public string Provider_Name { get; set; }
+        public string Name_Agreement { get; set; }
         public bool Active { get; set; }
 
         public bool Error { get; set; }
@@ -86,6 +88,8 @@ namespace Sevensoft.Mexpress.Backend.Common
 
         public Int64 Pk_Cat_Agreement_Details { get; set; }
 
+        public List<Ac_Mtr_Agreement_Document> list_Agreement_Document { get; set; }
+        
         public static implicit operator long(Import_Product v)
         {
             throw new NotImplementedException();

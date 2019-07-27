@@ -18,6 +18,8 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
+import * as $ from 'jquery';
+import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 
    
 
@@ -59,6 +61,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   providerValue: any;
   docHasErrors = false;
   headerFile: number = 0;
+  nameAgree: string = '';
   pkCatAgreementDetails: number = 0;
   public showWorkTable: boolean = false;
   title = 'Todos los empleados';
@@ -78,10 +81,14 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   disableHeader: boolean = false;
   errorProvider: boolean = false;
   errorTypeOfAgreement: boolean = false;
+  enableEvidence: boolean = false;
+  listHeader: any = [];
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
-    private providerService: ProviderService) { }
+    private providerService: ProviderService) {
+       
+     }
 
   ngOnInit() {
 
@@ -201,10 +208,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
           this.enableExcel = true;
-          this.disableHeader = true;
-          this.headerFile = data.pk_Ac_Trade_Agreement;
+          this.enableEvidence = true;
+          // this.disableHeader = true;
+          this.headerFile = data[0].pk_Ac_Trade_Agreement;
           this.workDataTable = [];
           this.dataTable = [];
+          debugger;
+          this.nameAgree = data[0].name_Agreement;
           //this.modalSuccessConcept();
 
           // this.newAgreementForm.setValue({
@@ -298,7 +308,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
       args.data.product_Amount = (args.data.product_Amount != undefined) ? args.data.product_Amount : 0;
       args.data.creation_User = this.infoUser.username;
-      debugger;
       args.data.pk_Ac_Trade_Agreement = (args.data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(args.data.pk_Ac_Trade_Agreement)) ? args.data.pk_Ac_Trade_Agreement : 0;
       args.data.pk_Gbl_Wrk_Agreement = (args.data.pk_Gbl_Wrk_Agreement != undefined && !Number.isNaN(args.data.pk_Gbl_Wrk_Agreement)) ? args.data.pk_Gbl_Wrk_Agreement : 0;
       args.data.error = (args.data.error != undefined && !Number.isNaN(args.data.error)) ? args.data.error : args.data.error;
@@ -316,10 +325,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       object = args.data[0];
       object.active = false;
     }
-    debugger;
+    
     this.tradeAgreementDetailService.validateTradeAgreementDetailProductError(object).subscribe(
       dataW => {
-
         if (!isDelete) {
           if (dataW[0].error !== true) {
             args.row.style.backgroundColor = "#FFF";
@@ -338,13 +346,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   //Pinta los campos erroneos en rojo
   rowDataBound(args: any): void {
-    debugger;
     if (args.data.error == true) {
 
       args.row.style.backgroundColor = "#F3C3C3";
       this.docHasErrors = true;
     }
-    debugger;
     this.headerFile = args.data.pk_Ac_Trade_Agreement;
     this.grid.gridLines = 'Both';
   }
@@ -370,16 +376,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   openDialogImportProduct(): void {
+
     const dialogRef = this.matDialog.open(ImportProductComponent, { 
-      data: { contactInfo: this.headerFile },
+      data: { confirmInfo: this.headerFile },
       minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight: '420px' });
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
+          this.workDataTable = [];
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
-          this.enableExcel = false;
+          // this.enableExcel = false;
           this.disableHeader = false;
         }
       }
@@ -395,8 +403,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
         var agreement = new NewAgreementModel();
-
-        agreement.Pk_Ac_Trade_Agreement = dataW[0].pk_Ac_Trade_Agreement;
+        if(dataW.length !== 0){
+          agreement.Pk_Ac_Trade_Agreement = dataW[0].pk_Ac_Trade_Agreement;
+        }else{
+          agreement.Pk_Ac_Trade_Agreement = 0;
+        }              
         this.listAgreement(agreement);
         this.showWorkTable = false;
         this.title = 'Todos los productos';
@@ -521,12 +532,37 @@ listAgreement(data: NewAgreementModel) {
 }
 
   cancel(): void {
-    this.showWorkTable = false;
     this.title = 'Todos los productos';
+    this.showWorkTable = false;
+    this.workDataTable = [];
+    var pkH = new NewAgreementModel(); 
+    pkH.Pk_Ac_Trade_Agreement = this.headerFile;
+    this.listAgreement(pkH);
   }
 
-  // downloadFile() {
-  //   $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de empleados.xlsx");
-  // }
+  downloadFile() {
+    $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
+  }
+
+  // PRUEBA TEMPORAL
+  openAddEvidenceModal(){
+    const object ={
+      header_File: this.headerFile,
+      name_Agree: this.nameAgree
+     }
+    const dialogRef = this.matDialog.open(AddAgreementEvidenceModalComponent, {
+      data: {confirmInfo: object},
+      minWidth: "900px",
+      maxWidth: "950px",
+      maxHeight: "600px",
+      minHeight: "475px"
+    });
+
+    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
+      if (data) {
+        //this.listAllEvidences();
+      }
+    });
+  }
 
 }

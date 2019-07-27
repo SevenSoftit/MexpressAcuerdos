@@ -1,0 +1,108 @@
+@import '../../../styles.scss';
+.add-evidence-title {
+    width: 100%;
+    color: $black;
+    font-family: $opensans-bold;
+    font-size: $font-size-medium;
+    text-align: center;
+}
+
+.add-evidence-file-name {
+    width: 100%;
+}
+
+.file-name-input {
+    background: $backgroud-input;
+}
+
+.form-control:focus {
+    background-color: $light-gray-softer;
+    border-color: $backgroud-input;
+    outline: 0;
+    box-shadow: none;
+}
+
+.file-name-label {
+    font-family: $opensans-semibold;
+    color: $black;
+    line-height: 27px;
+    margin-bottom: 1rem;
+}
+
+.add-evidence-label-optional {
+    font-family: $opensans-semibold;
+    color: $black;
+    line-height: 27px;
+    margin-bottom: 1rem;
+}
+
+.evidence-margin-left-mat-expansion {
+    margin-left: 0.5rem !important;
+}
+
+.disabled_button {
+    background-color: $light-gray !important;
+    border-color: $light-gray !important;
+}
+
+.evidence-modal-line {
+    border-top: 2px solid #DADADA;
+}
+
+::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper .dz-message {
+    padding-top: 6rem !important;
+}
+
+::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper {
+    height: 8rem !important;
+}
+
+::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper .dz-preview {
+    display: none;
+}
+
+.add-evidence-modal-row-buttons {
+    margin-top: 3vh;
+}
+
+.add-evidence-doc-errors {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $red;
+    margin-top: 0.5rem;
+}
+
+::ng-deep .dropzone .dz-preview {
+    display: none !important;
+}
+
+// acordion material
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-document-expansion-panel {
+    width: 100%
+}
+
+.style-row-buttons {
+    margin-top: 2rem;
+}
+
+::ng-deep .mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+    display: flex;
+    flex-grow: 2;
+    margin-right: 0px !important;
+}
+
+::ng-deep dropzone>.dropzone.dz-wrapper .dz-message {
+    min-height: 55px !important;
+    border-radius: 0.8rem !important;
+}

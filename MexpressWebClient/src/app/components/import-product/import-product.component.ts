@@ -23,7 +23,7 @@ export class ImportProductComponent implements OnInit {
   constructor(public dialog: MatDialog,public matDialogRef: MatDialogRef<ImportProductComponent>, private _common: CommonService, 
     @Inject(MAT_DIALOG_DATA) public dataSuccess: any) { 
       if (this.dataSuccess !== null && this.dataSuccess !== undefined) {
-        this.pKHeaderFile = this.dataSuccess.contactInfo;
+        this.pKHeaderFile = this.dataSuccess.confirmInfo;
       }
     }
 

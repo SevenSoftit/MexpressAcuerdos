@@ -15,8 +15,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         #region Region [Methods]
         /// <summary>
         /// Nombre: DoWork
-        /// Descripcion: Metodo encargado de orquestar las solicitudes de operaciones para el objeto "Do_Mtr_Evidence".
-        /// Fecha de creación: 26/04/2019.
+        /// Descripcion: Metodo encargado de orquestar las solicitudes de operaciones para el objeto "Ac_Mtr_Agreement_Document".
+        /// Fecha de creación: 24/07/2019.
         /// Autor: Gustavo ZC.
         /// </summary>
         /// <param name="message"></param>
@@ -59,7 +59,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Mexpress.Backend.Common.Do_Mtr_Evidence>();
+                var model = message.DeSerializeObject<Mexpress.Backend.Common.Ac_Mtr_Agreement_Document>();
                 using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
                 {
                     var returnObject = await repository.ListSpecial(model);
@@ -83,7 +83,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Mexpress.Backend.Common.Do_Mtr_Evidence>();
+                var model = message.DeSerializeObject<Mexpress.Backend.Common.Ac_Mtr_Agreement_Document>();
                 using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
                 {
                     var returnObject = await repository.Get(model);
@@ -107,44 +107,42 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Mexpress.Backend.Common.Do_Mtr_Evidence>();
+                var model = message.DeSerializeObject<Mexpress.Backend.Common.Import_Product>();
 
                 using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
                 {
-                    if (model.list_Evidence_Archive.Count == 0 || model.list_Evidence_Archive == null)
+                    if (model.list_Agreement_Document.Count == 0 || model.list_Agreement_Document == null)
                     {
-                        await repository.Save(model);
+                        await repository.SaveSpecial(model);
                     }
                     else
                     {
-                        foreach (var item in model.list_Evidence_Archive)
+                        foreach (var item in model.list_Agreement_Document)
                         {
-
-                            var archive = new Mexpress.Backend.Common.Do_Mtr_Evidence
+                            var document = new Mexpress.Backend.Common.Ac_Mtr_Agreement_Document
                             {
 
-                                Pk_Mtr_Pay_Evidence_Process = item.Pk_Mtr_Pay_Evidence_Process,
-                                Pk_Do_Mtr_Pay_Slip = item.Pk_Do_Mtr_Pay_Slip,
-                                Pk_Do_Cat_Group = item.Pk_Do_Cat_Group,
-                                Creation_User = item.Creation_User,
-                                Modification_User = item.Modification_User,
+                                Pk_Cat_Document_Agreement = item.Pk_Cat_Document_Agreement, 
+                                Pk_Ac_Trade_Agreement = item.Pk_Ac_Trade_Agreement,                              
+                                Creation_User = item.Creation_User,                             
+                                Modification_User = item.Modification_User, 
+                                Url_Attachment = item.Url_Attachment, 
                                 Archive_Original_Name = item.Archive_Original_Name,
                                 Archive_New_Name = item.Archive_New_Name,
-                                Url_Attachment = item.Url_Attachment,
                                 Active = item.Active,
-                                Slip_Name = item.Slip_Name
-                            };
+                                Name_Agreement = item.Name_Agreement 
+                        };
 
-                            await repository.Save(archive);
-                        }
+                        await repository.Save(document);
                     }
                 }
+            }
 
                 resultMessage.Status = Status.Success;
                 resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                 resultMessage.MessageInfo = String.Empty;
                 return resultMessage;
-            }
+        }
             catch (Exception ex)
             {
                 var resultMessage = new Message();
@@ -153,70 +151,70 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 resultMessage.MessageInfo = string.Empty;
                 return resultMessage;
             }
-        }
-        public async virtual Task<Message> Delete(Message message)
+}
+public async virtual Task<Message> Delete(Message message)
+{
+    try
+    {
+        var resultMessage = new Message();
+        var model = message.DeSerializeObject<Mexpress.Backend.Common.Ac_Mtr_Agreement_Document>();
+        using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
         {
-            try
-            {
-                var resultMessage = new Message();
-                var model = message.DeSerializeObject<Mexpress.Backend.Common.Do_Mtr_Evidence>();
-                using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
-                {
-                    await repository.DeleteSpecial(model);
-                    resultMessage.Status = Status.Success;
-                    resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = String.Empty;
-                    return resultMessage;
-                }
-            }
-            catch (Exception ex)
-            {
-                var resultMessage = new Message();
-                resultMessage.Status = Status.Failed;
-                resultMessage.Result = string.Format("{0}", ex.Message);
-                resultMessage.MessageInfo = string.Empty;
-                return resultMessage;
-            }
+            await repository.DeleteSpecial(model);
+            resultMessage.Status = Status.Success;
+            resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+            resultMessage.MessageInfo = String.Empty;
+            return resultMessage;
         }
+    }
+    catch (Exception ex)
+    {
+        var resultMessage = new Message();
+        resultMessage.Status = Status.Failed;
+        resultMessage.Result = string.Format("{0}", ex.Message);
+        resultMessage.MessageInfo = string.Empty;
+        return resultMessage;
+    }
+}
 
-        public async virtual Task<Message> DeleteSpecific(Message message)
+public async virtual Task<Message> DeleteSpecific(Message message)
+{
+    try
+    {
+        var resultMessage = new Message();
+        var model = message.DeSerializeObject<Mexpress.Backend.Common.Ac_Mtr_Agreement_Document>();
+        using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
         {
-            try
-            {
-                var resultMessage = new Message();
-                var model = message.DeSerializeObject<Mexpress.Backend.Common.Do_Mtr_Evidence>();
-                using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
-                {
-                    await repository.DeleteSpecific(model);
-                    resultMessage.Status = Status.Success;
-                    resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = String.Empty;
-                    return resultMessage;
-                }
-            }
-            catch (Exception ex)
-            {
-                var resultMessage = new Message();
-                resultMessage.Status = Status.Failed;
-                resultMessage.Result = string.Format("{0}", ex.Message);
-                resultMessage.MessageInfo = string.Empty;
-                return resultMessage;
-            }
+            await repository.DeleteSpecific(model);
+            resultMessage.Status = Status.Success;
+            resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+            resultMessage.MessageInfo = String.Empty;
+            return resultMessage;
         }
-        #endregion
-        #region Region [Dispose]
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        protected virtual void Dispose(bool disposing)
-        {
-        }
-        ~Gbl_Mtr_Evidence()
-        {
-            this.Dispose(false);
-        }
+    }
+    catch (Exception ex)
+    {
+        var resultMessage = new Message();
+        resultMessage.Status = Status.Failed;
+        resultMessage.Result = string.Format("{0}", ex.Message);
+        resultMessage.MessageInfo = string.Empty;
+        return resultMessage;
+    }
+}
+#endregion
+#region Region [Dispose]
+public void Dispose()
+{
+    this.Dispose(true);
+    GC.SuppressFinalize(this);
+}
+protected virtual void Dispose(bool disposing)
+{
+}
+~Gbl_Mtr_Evidence()
+{
+    this.Dispose(false);
+}
         #endregion
     }
 }

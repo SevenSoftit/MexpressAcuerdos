@@ -8,6 +8,9 @@ import { ChangePasswordModalComponent } from './components/change-password-modal
 import { FeedbackDescriptionModalComponent } from './components/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './components/feedback-modal/feedback-modal.component';
 import { ImportProductComponent } from './components/import-product/import-product.component';
+import { ListEvidencesModalComponent } from './components/list-evidences-modal/list-evidences-modal.component';
+import { AddAgreementEvidenceModalComponent } from './components/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,7 +30,10 @@ const routes: Routes = [
   {path:'changePass', component: ChangePasswordModalComponent},
   {path: 'feedbackDescription', component: FeedbackDescriptionModalComponent},
   {path: 'feedbackModal', component: FeedbackModalComponent},
-  { path: 'importProduct', pathMatch: 'full', component: ImportProductComponent }
+  { path: 'importProduct', pathMatch: 'full', component: ImportProductComponent },
+  {path: 'addAgreementEvidence', component: AddAgreementEvidenceModalComponent},
+  {path: 'listEvidence', component: ListEvidencesModalComponent},
+  {path: 'confirmModal', component: ConfirmModalComponent},
 
 
 ];

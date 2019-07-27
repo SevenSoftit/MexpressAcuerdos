@@ -134,9 +134,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Import_Product>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
 
-                    return Ok(resultModel);
+                    return Ok(list);
                 }
             }
             catch (Exception ex)

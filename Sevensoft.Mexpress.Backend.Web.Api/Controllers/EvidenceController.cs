@@ -1,11 +1,6 @@
 using System.IO;
-using System.Data;
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,18 +9,11 @@ using Sevensoft.Mexpress.Utilities.Extender;
 using Sevensoft.Mexpress.Backend.Common;
 using static Sevensoft.Mexpress.Backend.Common.Enum;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Server.HttpSys;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Sevensoft.Mexpress.Backend.Web.Api.Helpers;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
-using Microsoft.Extensions.DependencyInjection;
 using System.Text;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Globalization;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Win32;
 
@@ -35,6 +23,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EvidenceController : Controller
     {
+        public string correctName = "";
 
         private static readonly Microsoft.AspNetCore.Http.Features.FormOptions _defaultFormOptions = new Microsoft.AspNetCore.Http.Features.FormOptions();
 
@@ -50,21 +39,21 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         #region Region [Methods]
         /// <summary>
         /// Nombre: List
-        /// Descripcion: Metodo utilizado para obtener una lista de modelos Do_Mtr_Evidence y retornar un objeto datatable
-        /// Fecha de creacion: 26/04/2019
+        /// Descripcion: Metodo utilizado para obtener una lista de modelos Ac_Mtr_Agreement_Document y retornar un objeto datatable
+        /// Fecha de creacion: 24/07/2019
         /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         [Route("List")]
         [HttpPost]
-        public async Task<IActionResult> List([FromBody] Common.Do_Mtr_Evidence model)
+        public async Task<IActionResult> List([FromBody] Common.Ac_Mtr_Agreement_Document model)
         {
             try
             {
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.Operation = Operation.List;
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
@@ -74,7 +63,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var list = result.DeSerializeObject<IEnumerable<Common.Do_Mtr_Evidence>>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Ac_Mtr_Agreement_Document>>();
                     var dataSuccess = new
                     {
                         Data = list,
@@ -91,22 +80,22 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             }
         }
         /// <summary>
-        /// Nombre: Obtener Do_Mtr_Evidence
-        /// Descripcion: Metodo utilizado para obtener una lista de modelos Do_Mtr_Evidence y retornar un objeto datatable
-        /// Fecha de creacion: 26/04/2019
+        /// Nombre: Obtener Ac_Mtr_Agreement_Document
+        /// Descripcion: Metodo utilizado para obtener una lista de modelos Ac_Mtr_Agreement_Document y retornar un objeto datatable
+        /// Fecha de creacion: 24/07/2019
         /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         [Route("Get")]
         [HttpPost]
-        public async Task<IActionResult> Get([FromBody] Common.Do_Mtr_Evidence model)
+        public async Task<IActionResult> Get([FromBody] Common.Ac_Mtr_Agreement_Document model)
         {
             try
             {
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.Operation = Operation.Get;
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
@@ -116,7 +105,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Do_Mtr_Evidence>();
+                    var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Document>();
                     var dataSuccess = new
                     {
                         Data = resultModel,
@@ -136,20 +125,20 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <summary>
         /// Nombre: Save
         /// Descripcion: Metodo utilizado para guardar una evidencia
-        /// Fecha de creacion: 26/04/2019
+        /// Fecha de creacion: 24/07/2019
         /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         [Route("Save")]
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] Common.Do_Mtr_Evidence model)
+        public async Task<IActionResult> Save([FromBody] Common.Ac_Mtr_Agreement_Document model)
         {
             try
             {
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.Operation = Operation.Save;
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
@@ -159,7 +148,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Do_Mtr_Evidence>();
+                    var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Document>();
                     var dataSuccess = new
                     {
                         Data = resultModel,
@@ -204,16 +193,12 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 var formAccumulator = new KeyValueAccumulator();
                 var nameFile = String.Empty;
                 string targetFilePathBackUp = string.Empty;
-                // string targetFilePath = string.Empty;
-
-
                 var boundary = MultipartRequestHelper.GetBoundary(
                     Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse(Request.ContentType),
                     _defaultFormOptions.MultipartBoundaryLengthLimit);
                 var reader = new MultipartReader(boundary, HttpContext.Request.Body);
-
                 var section = await reader.ReadNextSectionAsync();
-                var extension = "";
+                var extension = String.Empty;
                 while (section != null)
                 {
                     Microsoft.Net.Http.Headers.ContentDispositionHeaderValue contentDisposition;
@@ -222,11 +207,11 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         if (MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
                         {
-
                             extension = GetDefaultExtension(section.ContentType);
-
-                            if(string.IsNullOrEmpty(extension))
+                            if (string.IsNullOrEmpty(extension))
+                            {
                                 extension = contentDisposition.FileName.Value.Substring(contentDisposition.FileName.Value.IndexOf('.'), (contentDisposition.FileName.Value.Length - contentDisposition.FileName.Value.IndexOf('.')));
+                            }
 
                             nameFile = contentDisposition.FileName.Value;
                             targetFilePathBackUp = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaEvidencia"), nameFile);
@@ -271,39 +256,41 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     // Drains any remaining section body that has not been consumed and
                     // reads the headers for the next section.
                     section = await reader.ReadNextSectionAsync();
+
                 }
+                //Aca iria lo copiado arriba
+                                    // OJO 
+                    var document = new Common.Import_Product();
 
-                // OJO 
-                var archive = new Common.Do_Mtr_Evidence();
+                    document.list_Agreement_Document = GetArchives(formAccumulator.GetResults());
 
-                archive.list_Evidence_Archive = GetArchives(formAccumulator.GetResults());
+                    document = await ProcessPathArchiveAsync(document, extension);
 
-                archive = await ProcessPathArchiveAsync(archive, extension);
-
-                var message = new Message();
-                message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
-                message.Operation = Operation.Save;
-                message.MessageInfo = archive.SerializeObject();
-                using (var businessLgic = new ServiceManager())
-                {
-                    var result = await businessLgic.DoWork(message);
-                    if (result.Status == Status.Failed)
+                    var message = new Message();
+                    message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
+                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
+                    message.Operation = Operation.Save;
+                    message.MessageInfo = document.SerializeObject();
+                    using (var businessLgic = new ServiceManager())
                     {
-                        return BadRequest(result.Result);
+                        var result = await businessLgic.DoWork(message);
+                        if (result.Status == Status.Failed)
+                        {
+                            return BadRequest(result.Result);
+                        }
+                        var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Document>();
+
+                        var dataSuccess = new
+                        {
+                            Data = resultModel,
+                            MessageResult = Backend.Common.Enum.Status.Success,
+                            Message = string.Empty,
+                            RegisterType = string.Empty
+                        };
+
+                        return Ok(dataSuccess);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Do_Mtr_Evidence>();
 
-                    var dataSuccess = new
-                    {
-                        Data = resultModel,
-                        MessageResult = Backend.Common.Enum.Status.Success,
-                        Message = string.Empty,
-                        RegisterType = string.Empty
-                    };
-
-                    return Ok(dataSuccess);
-                }
             }
             catch (System.Exception ex)
             {
@@ -338,28 +325,25 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             return mediaType.Encoding;
         }
 
-        private List<Common.Do_Mtr_Evidence> GetArchives(Dictionary<string, StringValues> fields)
+        private List<Common.Ac_Mtr_Agreement_Document> GetArchives(Dictionary<string, StringValues> fields)
         {
-            var list = new List<Common.Do_Mtr_Evidence>();
+            var list = new List<Common.Ac_Mtr_Agreement_Document>();
             var contador = (fields["Archive_New_Name"].Count);
 
             for (var x = 0; x < contador; x++)
             {
-                var obj = new Common.Do_Mtr_Evidence();
+                var obj = new Common.Ac_Mtr_Agreement_Document();
 
                 foreach (var dictionary in fields)
                 {
                     if (dictionary.Key == "Archive_New_Name")
                         obj.Archive_New_Name = dictionary.Value[x];
 
-                    else if (dictionary.Key == "Pk_Mtr_Pay_Evidence_Process")
-                        obj.Pk_Mtr_Pay_Evidence_Process = Convert.ToInt32(dictionary.Value[x]);
+                    else if (dictionary.Key == "Pk_Cat_Document_Agreement")
+                        obj.Pk_Cat_Document_Agreement = Convert.ToInt32(dictionary.Value[x]);
 
-                    else if (dictionary.Key == "Pk_Do_Mtr_Pay_Slip")
-                        obj.Pk_Do_Mtr_Pay_Slip = Convert.ToInt32(dictionary.Value[x]);
-
-                    else if (dictionary.Key == "Pk_Do_Cat_Group")
-                        obj.Pk_Do_Cat_Group = Convert.ToInt32(dictionary.Value[x]);
+                    else if (dictionary.Key == "Pk_Ac_Trade_Agreement")
+                        obj.Pk_Ac_Trade_Agreement = Convert.ToInt64(dictionary.Value[x]);
 
                     else if (dictionary.Key == "Creation_User")
                         obj.Creation_User = dictionary.Value[x];
@@ -370,11 +354,11 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     else if (dictionary.Key == "Archive_Original_Name")
                         obj.Archive_Original_Name = dictionary.Value[x];
 
+                    else if (dictionary.Key == "Name_Agreement")
+                        obj.Name_Agreement = dictionary.Value[x];
+
                     else if (dictionary.Key == "Active")
                         obj.Active = Convert.ToBoolean(dictionary.Value[x]);
-
-                    else if (dictionary.Key == "Slip_Name")
-                        obj.Slip_Name = dictionary.Value[x];
                 }
 
                 list.Add(obj);
@@ -383,28 +367,71 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             return list;
         }
 
-        private async Task<Do_Mtr_Evidence> ProcessPathArchiveAsync(Common.Do_Mtr_Evidence archive, string extension)
+        private async Task<Import_Product> ProcessPathArchiveAsync(Common.Import_Product document, String correctExtension)
         {
-            var newArchive = new Common.Do_Mtr_Evidence();
+            var newDocument = new Common.Import_Product();
             string targetFilePath = "";
-
-            foreach (var item in archive.list_Evidence_Archive)
+            string actualDate = Convert.ToString(DateTime.Now);
+            actualDate = actualDate.Replace("/", "-");
+            if (actualDate.Contains(":"))
+            {
+                actualDate = actualDate.Replace(":", "-");
+            }
+            foreach (var item in document.list_Agreement_Document)
             {
                 var targetFilePathBackUp = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaEvidencia"), item.Archive_Original_Name);
 
                 if (System.IO.File.Exists(targetFilePathBackUp))
                 {
-                    string Path = string.Format("{0}{1}{2}\\", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia planilla-", item.Slip_Name);
+                    string Path = string.Format("{0}{1}{2}\\", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement);
 
                     if (item.Archive_New_Name != item.Archive_Original_Name)
                     {
-                        item.Archive_New_Name = item.Archive_New_Name + extension;
-                        targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia planilla-", item.Slip_Name, item.Archive_New_Name);
+                        this.correctName = "";
+                        StringBuilder sb = new StringBuilder(item.Archive_New_Name);
+                        this.correctName = Convert.ToString(sb);
+                        if (item.Archive_New_Name.Contains("/"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("/", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains("\\"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("\\", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains(":"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace(":", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains("*"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("*", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains("?"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("?", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains("<"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("<", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains(">"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace(">", "_"));
+                        }
+                        if (item.Archive_New_Name.Contains("|"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("|", "_"));
+                        }
+
+                        item.Archive_New_Name = actualDate + "_" + this.correctName + correctExtension;
+
+                        targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
                     else
                     {
-
-                        targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia planilla-", item.Slip_Name, item.Archive_New_Name);
+                        this.correctName = item.Archive_New_Name;
+                        item.Archive_New_Name = actualDate + "_" + this.correctName;
+                        targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
                     if (!System.IO.File.Exists(targetFilePath) && item.Active == true)
                     {
@@ -421,9 +448,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     else
                     {
                         System.IO.File.Delete(targetFilePath);
-                        archive.Url_Attachment = targetFilePath;
-                        archive.Modification_User = item.Modification_User;
-                        await DeleteSpecific(archive);
+                        item.Url_Attachment = targetFilePath;
+                        item.Modification_User = item.Modification_User;
+                        await DeleteSpecific(item);
                         if (!Directory.Exists(Path))
                         {
                             Directory.CreateDirectory(Path);
@@ -435,34 +462,31 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 }
             }
 
-            // item.Url_Attachment = targetFilePath;
+            newDocument = document;
 
-
-            newArchive = archive;
-
-            return newArchive;
+            return newDocument;
 
         }
 
 
         /// <summary>
-        /// Nombre: Eliminar Do_Mtr_Evidence
-        /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Do_Mtr_Evidence.
-        /// Fecha de creacion: 30/04/2019
+        /// Nombre: Eliminar Ac_Mtr_Agreement_Document
+        /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Ac_Mtr_Agreement_Document.
+        /// Fecha de creacion: 24/07/2019
         /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         [Route("Delete")]
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] Common.Do_Mtr_Evidence model)
+        public async Task<IActionResult> Delete([FromBody] Common.Ac_Mtr_Agreement_Document model)
         {
             try
             {
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
                 message.Operation = Operation.Delete;
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
                 {
@@ -471,7 +495,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Do_Mtr_Evidence>>();
+                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Ac_Mtr_Agreement_Document>>();
                     // var dataSuccess = new
                     // {
                     //     Data = resultModel,
@@ -489,8 +513,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         }
 
         /// <summary>
-        /// Nombre: Eliminar Do_Mtr_Evidence
-        /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Do_Mtr_Evidence.
+        /// Nombre: Eliminar Ac_Mtr_Agreement_Document
+        /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Ac_Mtr_Agreement_Document.
         /// Fecha de creacion: 30/04/2019
         /// Autor: Gustavo ZC
         /// </summary>
@@ -498,14 +522,14 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns>
         [Route("DeleteSpecific")]
         [HttpPost]
-        public async Task<IActionResult> DeleteSpecific([FromBody] Common.Do_Mtr_Evidence model)
+        public async Task<IActionResult> DeleteSpecific([FromBody] Common.Ac_Mtr_Agreement_Document model)
         {
             try
             {
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
                 message.Operation = Operation.DeleteSpecific;
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
                 {
@@ -514,7 +538,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Do_Mtr_Evidence>>();
+                    var resultModel = result.DeSerializeObject<IEnumerable<Common.Ac_Mtr_Agreement_Document>>();
                     // var dataSuccess = new
                     // {
                     //     Data = resultModel,

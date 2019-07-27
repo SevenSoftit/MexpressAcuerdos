@@ -1,0 +1,48 @@
+@import '../../../styles.scss';
+.list-evidences-title {
+    width: 100%;
+    color: $black;
+    font-family: $opensans-bold;
+    font-size: $font-size-medium;
+    text-align: center;
+}
+
+.list-evidence-scroll {
+    height: 42vh !important;
+    border-top: 1px solid $light-gray-softer !important;
+    border-bottom: 1px solid $light-gray-softer !important;
+}
+
+.list-evidence-buttons-top {
+    margin-top: 3vh;
+}
+
+.evidence-file-name {
+    font-family: $opensans-regular;
+    color: $soft-gray
+}
+
+.icons {
+    color: $soft-gray
+}
+
+.without-evidences {
+    font-family: $opensans-bold;
+    color: $black;
+    font-size: $font-size-small;
+}
+
+.button-disabled {
+    background: $light-gray;
+    color: $white !important;
+}
+
+::ng-depp .cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper {
+    padding: 1rem;
+}
+
+@media (min-width: 1900px) {
+    .list-evidence-scroll {
+        height: 33vh !important;
+    }
+}

@@ -18,6 +18,7 @@ import { ApplicationPipesModule } from 'src/app/application-pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 // import the GridModule for the Grid component
 import { GridModule, ToolbarService, EditService, PageService, FilterService, SortService} from '@syncfusion/ej2-angular-grids';
 
@@ -30,6 +31,9 @@ import { ChangePasswordModalComponent } from './components/change-password-modal
 import { FeedbackDescriptionModalComponent } from './components/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './components/feedback-modal/feedback-modal.component';
 import { ImportProductComponent } from './components/import-product/import-product.component';
+import { ListEvidencesModalComponent } from './components/list-evidences-modal/list-evidences-modal.component';
+import { AddAgreementEvidenceModalComponent } from './components/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +60,10 @@ export function createTranslateLoader(http: HttpClient) {
     ChangePasswordModalComponent,
     FeedbackDescriptionModalComponent,
     FeedbackModalComponent,
-    ImportProductComponent
+    ImportProductComponent,
+    ListEvidencesModalComponent,
+    AddAgreementEvidenceModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     MaterialModule,
@@ -82,7 +89,8 @@ export function createTranslateLoader(http: HttpClient) {
     GridModule,
     MatDatepickerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ScrollDispatchModule
   ],
   entryComponents: [
     

@@ -1,3 +1,4 @@
+import { AgreementDocumentModel } from './agreementDocument.model';
 
 export class NewAgreementDetailHeaderModel {
 
@@ -37,6 +38,7 @@ export class NewAgreementDetailHeaderModel {
     Update_Rows: Boolean;
     Name_Currency: String;
     Pk_Cat_Agreement_Details: Number;
+    list_Agreement_Document: Array<AgreementDocumentModel>;
 
 
     constructor() {
@@ -77,6 +79,7 @@ export class NewAgreementDetailHeaderModel {
             this.Update_Rows = false;
             this.Name_Currency = '';
             this.Pk_Cat_Agreement_Details = 0;
+            this.list_Agreement_Document = [];
 
     }
 }

@@ -1,40 +1,35 @@
 using System;
-using System.Collections.Generic;
 
 namespace Sevensoft.Mexpress.Backend.Common
 {
-    public partial class Do_Mtr_Evidence
+    public partial class Ac_Mtr_Agreement_Document
     {
-        public Do_Mtr_Evidence()
+        public Ac_Mtr_Agreement_Document()
         {
-            Pk_Mtr_Pay_Evidence_Process = 0;
-            Pk_Do_Mtr_Pay_Slip = 0;
-            Pk_Do_Cat_Group = 0;
+            Pk_Cat_Document_Agreement = 0;
+            Pk_Ac_Trade_Agreement = 0;
             Creation_Date = Convert.ToDateTime("1900-01-01");
             Creation_User = "";
             Modification_Date = Convert.ToDateTime("1900-01-01");
-            Modification_User = "";
+            Modification_User = "";     
+            Url_Attachment = "";
             Archive_Original_Name = "";
             Archive_New_Name = "";
-            Url_Attachment = "";           
-            Slip_Name = "";
+            Name_Agreement = "";
             Active = false;
+            
         }
-        public Int32 Pk_Mtr_Pay_Evidence_Process { get; set; }
-        public Int32 Pk_Do_Mtr_Pay_Slip { get; set; }
-        public Int32 Pk_Do_Cat_Group { get; set; }
+        public Int32 Pk_Cat_Document_Agreement { get; set; }
+        public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public DateTime Creation_Date { get; set; }
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
+        public String Url_Attachment { get; set; }
         public String Archive_Original_Name { get; set; }
         public String Archive_New_Name { get; set; }
-        public String Url_Attachment { get; set; }
-        public String Slip_Name { get; set; }
-        public List<Do_Mtr_Evidence> list_Evidence_Archive { get; set; }
+        public String Name_Agreement { get; set; }
         public Boolean Active { get; set; }
-
-
+        
     }
 }
-
