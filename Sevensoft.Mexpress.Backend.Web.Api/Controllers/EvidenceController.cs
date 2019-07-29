@@ -199,6 +199,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 var reader = new MultipartReader(boundary, HttpContext.Request.Body);
                 var section = await reader.ReadNextSectionAsync();
                 var extension = String.Empty;
+
                 while (section != null)
                 {
                     Microsoft.Net.Http.Headers.ContentDispositionHeaderValue contentDisposition;
@@ -250,6 +251,11 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                                     throw new InvalidDataException($"Form key count limit {_defaultFormOptions.ValueCountLimit} exceeded.");
                                 }
                             }
+
+                                //var lista_trola = GetArchives(formAccumulator.GetResults());
+
+
+
                         }
                     }
 
@@ -257,39 +263,40 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     // reads the headers for the next section.
                     section = await reader.ReadNextSectionAsync();
 
+
+
                 }
-                //Aca iria lo copiado arriba
-                                    // OJO 
-                    var document = new Common.Import_Product();
+                // OJO 
+                var document = new Common.Import_Product();
 
-                    document.list_Agreement_Document = GetArchives(formAccumulator.GetResults());
+                document.list_Agreement_Document = GetArchives(formAccumulator.GetResults());
 
-                    document = await ProcessPathArchiveAsync(document, extension);
+                document = await ProcessPathArchiveAsync(document, extension);
 
-                    var message = new Message();
-                    message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
-                    message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
-                    message.Operation = Operation.Save;
-                    message.MessageInfo = document.SerializeObject();
-                    using (var businessLgic = new ServiceManager())
+                var message = new Message();
+                message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Gbl_Mtr_Evidence");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
+                message.Operation = Operation.Save;
+                message.MessageInfo = document.SerializeObject();
+                using (var businessLgic = new ServiceManager())
+                {
+                    var result = await businessLgic.DoWork(message);
+                    if (result.Status == Status.Failed)
                     {
-                        var result = await businessLgic.DoWork(message);
-                        if (result.Status == Status.Failed)
-                        {
-                            return BadRequest(result.Result);
-                        }
-                        var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Document>();
-
-                        var dataSuccess = new
-                        {
-                            Data = resultModel,
-                            MessageResult = Backend.Common.Enum.Status.Success,
-                            Message = string.Empty,
-                            RegisterType = string.Empty
-                        };
-
-                        return Ok(dataSuccess);
+                        return BadRequest(result.Result);
                     }
+                    var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Document>();
+
+                    var dataSuccess = new
+                    {
+                        Data = resultModel,
+                        MessageResult = Backend.Common.Enum.Status.Success,
+                        Message = string.Empty,
+                        RegisterType = string.Empty
+                    };
+
+                    return Ok(dataSuccess);
+                }
 
             }
             catch (System.Exception ex)
@@ -354,11 +361,14 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     else if (dictionary.Key == "Archive_Original_Name")
                         obj.Archive_Original_Name = dictionary.Value[x];
 
+                    else if (dictionary.Key == "File_Description")
+                        obj.File_Description = dictionary.Value[x];
+
                     else if (dictionary.Key == "Name_Agreement")
                         obj.Name_Agreement = dictionary.Value[x];
 
                     else if (dictionary.Key == "Active")
-                        obj.Active = Convert.ToBoolean(dictionary.Value[x]);
+                        obj.Active = Convert.ToBoolean(dictionary.Value[x]);                  
                 }
 
                 list.Add(obj);

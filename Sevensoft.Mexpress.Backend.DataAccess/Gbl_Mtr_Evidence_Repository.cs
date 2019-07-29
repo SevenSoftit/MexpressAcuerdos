@@ -142,6 +142,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_URL_ATTACHMENT = model.Url_Attachment,
                         P_ARCHIVE_ORIGINAL_NAME = model.Archive_Original_Name,
                         P_ARCHIVE_NEW_NAME = model.Archive_New_Name,
+                        P_FILE_DESCRIPTION = model.File_Description,
                         P_NAME_AGREEMENT = model.Name_Agreement,
                         P_ACTIVE = model.Active
                         

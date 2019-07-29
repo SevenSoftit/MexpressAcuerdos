@@ -110,6 +110,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     let data = {
       archive_Original_Name: file.name,
       archive_New_Name: file.name,
+      file_Description: ''
     }
 
     this.files.push(data);
@@ -143,6 +144,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
       file[2].append("Modification_User", utiles.getInfoUser().username);
       file[2].append("Archive_Original_Name", selectedFile[0].archive_Original_Name);
       file[2].append("Archive_New_Name", selectedFile[0].archive_New_Name);
+      file[2].append("File_Description", selectedFile[0].file_Description);   
       file[2].append("Name_Agreement", this.dataModal.confirmInfo.name_Agree);
       file[2].append("Active", true);
     }

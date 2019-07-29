@@ -85,8 +85,8 @@
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
-            <div class="col-md-2 mt-4">
-                <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()"><mat-icon  class="mr-2">save</mat-icon>Guardar encabezado</button>
+            <div class="col-md-2 mt-4" *ngIf="!disableHeader">
+                <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()"><mat-icon  class="mr-2">save</mat-icon>Guardar acuerdo</button>
             </div>
         </div>
     </form>
@@ -138,8 +138,8 @@
             <label for="" class="new-agreement-doc-errors" *ngIf="docHasErrors">La información del excel contiene errores.</label>
         </div>
         <div class=" mx-auto new-agreement-buttons-top">
-            <button (click)="processProductWork(false)" class="excel-button float-left mr-4" mat-raised-button>Sobreescribir con excel<mat-icon class="ml-2">play_for_work</mat-icon></button>
-            <button (click)="processProductWork(true)" class="excel-button mr-4" mat-raised-button>Actualizar<mat-icon
+            <button (click)="processProductWork(false)" class="excel-button float-left mr-4" mat-raised-button>Sobreescribir acuerdo<mat-icon class="ml-2">play_for_work</mat-icon></button>
+            <button (click)="processProductWork(true)" class="excel-button mr-4" mat-raised-button>Actualizar acuerdo<mat-icon
                     class="ml-2">autorenew</mat-icon></button>
             <button (click)="cancel()" class="excel-button" mat-raised-button>Cancelar<mat-icon class="ml-2">
                     delete_forever</mat-icon></button>

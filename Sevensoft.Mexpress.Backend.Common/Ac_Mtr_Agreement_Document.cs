@@ -15,8 +15,10 @@ namespace Sevensoft.Mexpress.Backend.Common
             Url_Attachment = "";
             Archive_Original_Name = "";
             Archive_New_Name = "";
+            File_Description = "";
             Name_Agreement = "";
             Active = false;
+            Extension_Type = "";
             
         }
         public Int32 Pk_Cat_Document_Agreement { get; set; }
@@ -28,8 +30,10 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Url_Attachment { get; set; }
         public String Archive_Original_Name { get; set; }
         public String Archive_New_Name { get; set; }
+        public String File_Description { get; set; }
         public String Name_Agreement { get; set; }
         public Boolean Active { get; set; }
+        public String Extension_Type { get; set; }
         
     }
 }

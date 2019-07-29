@@ -17,12 +17,13 @@ export class NewAgreementDetailHeaderModel {
     Modification_User: string;
     Name_Agreement: string;
     Description_Agreement: string;
-    Date_Start: Date;
+    Date_Start: Date;               
     Date_Finish: Date;
     Date_Process: Date;
     Date_Reprocess: Date;
     All_Products: Boolean;
     Provider_Name: string;
+    Fk_Status_Agreement: number;
     Active: Boolean;
 
     Error: Boolean;
@@ -64,6 +65,7 @@ export class NewAgreementDetailHeaderModel {
             this.Date_Reprocess = new Date();
             this.All_Products = false;
             this.Provider_Name = '';
+            this.Fk_Status_Agreement = 0;
             this.Active = true;
 
             this.Error = false;

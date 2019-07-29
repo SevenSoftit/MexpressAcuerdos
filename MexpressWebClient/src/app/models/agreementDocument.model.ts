@@ -25,6 +25,7 @@ export class AgreementDocumentModel {
   Archive_New_Name: string;
   Name_Agreement: string;
   Active: boolean;
+  Extension_Type: string;
  
     constructor() {
       this.Pk_Cat_Document_Agreement = 0;
@@ -38,6 +39,7 @@ export class AgreementDocumentModel {
       this.Archive_New_Name = '';
       this.Name_Agreement = '';
       this.Active = false;
+      this.Extension_Type = '';
       
     }
   }

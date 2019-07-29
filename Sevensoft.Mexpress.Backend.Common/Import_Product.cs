@@ -29,6 +29,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             All_Products = false;
             Provider_Name = "";
             Name_Agreement = "";
+            Fk_Status_Agreement = 0;
             Active = true;
 
             Error = false;
@@ -70,6 +71,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public bool All_Products { get; set; }
         public string Provider_Name { get; set; }
         public string Name_Agreement { get; set; }
+        public Int32 Fk_Status_Agreement { get; set; }
         public bool Active { get; set; }
 
         public bool Error { get; set; }

@@ -20,6 +20,7 @@ import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
 import * as $ from 'jquery';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
+import { CatalogModel } from '../common-model/catalog.Model';
 
    
 
@@ -83,6 +84,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   errorTypeOfAgreement: boolean = false;
   enableEvidence: boolean = false;
   listHeader: any = [];
+  catalogModel: CatalogModel = new CatalogModel();
+  search_key: string = 'agreement_status_in_process';
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -165,6 +168,19 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.errorStartDate = false;
     this.errorEndDate = false;
 
+    this.catalogModel.Search_Key = this.search_key;
+    this._common.listCatalog(this.catalogModel).subscribe(
+      dataF => {
+        debugger;
+        this.newAgreementDetailHeaderModel.Fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;         
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+        
+  
+      });
+
     var today = new Date();
     today.setHours(0, 0, 0, 0);
     this.newAgreementForm.value.startDatePicker.setHours(0, 0, 0, 0);
@@ -209,7 +225,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         data => {
           this.enableExcel = true;
           this.enableEvidence = true;
-          // this.disableHeader = true;
+          this.disableHeader = true;
           this.headerFile = data[0].pk_Ac_Trade_Agreement;
           this.workDataTable = [];
           this.dataTable = [];
@@ -408,6 +424,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }else{
           agreement.Pk_Ac_Trade_Agreement = 0;
         }              
+        this.saveAgreementHeader();
         this.listAgreement(agreement);
         this.showWorkTable = false;
         this.title = 'Todos los productos';

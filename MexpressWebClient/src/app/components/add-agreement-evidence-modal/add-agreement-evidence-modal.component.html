@@ -46,8 +46,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="file-name-label">Nuevo nombre del archivo (opcional)</label>
-                            <input class="form-control" type="text" id="fileName" [(ngModel)]="item.archive_New_Name" placeholder="Nuevo nombre (opcional)">
+                            <label class="file-name-label">Descripción del archivo (opcional)</label>
+                            <textarea class="form-control" rows="4" type="text" id="fileDescription" [(ngModel)]="item.file_Description" placeholder="Descripción(opcional)">
+                            </textarea>
                         </div>
                     </div>
                 </div>
