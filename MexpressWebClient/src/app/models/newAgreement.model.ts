@@ -12,7 +12,6 @@ export class NewAgreementModel {
     Creation_User: string;
     Modification_Date: Date;
     Modification_User: string;
-    Status_Agreement: string;
     Active: Boolean;
 
     constructor() {
@@ -27,7 +26,6 @@ export class NewAgreementModel {
         this.Creation_User = '';
         this.Modification_Date = new Date();
         this.Modification_User = '';
-        this.Status_Agreement = '';
         this.Active = false;
     }
 }

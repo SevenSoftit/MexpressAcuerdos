@@ -101,10 +101,15 @@
                     <e-column field='id_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5' textAlign='Center'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
                     <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'></e-column>
                 </e-columns>
             </ejs-grid>
+        </div>
+        <div class="mx-auto new-agreement-buttons-top" *ngIf="enableUpdateAgreement">
+            <button (click)="saveAgreementHeader()" class="excel-button float-left mr-4" mat-raised-button>Actualizar acuerdo<mat-icon class="ml-2">play_for_work</mat-icon></button>
         </div>
     </div>
 
@@ -145,7 +150,5 @@
                     delete_forever</mat-icon></button>
         </div>
     </div>
-
-
 
 </div>

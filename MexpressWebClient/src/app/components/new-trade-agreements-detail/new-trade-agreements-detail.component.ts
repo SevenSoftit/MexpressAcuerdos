@@ -86,6 +86,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   listHeader: any = [];
   catalogModel: CatalogModel = new CatalogModel();
   search_key: string = 'agreement_status_in_process';
+  fk_Status_Agreement: number = 0;
+  enableUpdateAgreement: boolean = false;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -94,7 +96,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
      }
 
   ngOnInit() {
-
+    this.getKeyStatus();
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
@@ -163,24 +165,23 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
 
-  saveAgreementHeader() {
-    this.errorDate = false;
-    this.errorStartDate = false;
-    this.errorEndDate = false;
-
+  getKeyStatus(){
     this.catalogModel.Search_Key = this.search_key;
     this._common.listCatalog(this.catalogModel).subscribe(
       dataF => {
-        debugger;
-        this.newAgreementDetailHeaderModel.Fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;         
+        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;         
       },
       error => {
         this._common._setLoading(false);
         console.log('no se envio' + ' ' + error);
-        
-  
+           
       });
 
+  }
+  saveAgreementHeader() {
+    this.errorDate = false;
+    this.errorStartDate = false;
+    this.errorEndDate = false;
     var today = new Date();
     today.setHours(0, 0, 0, 0);
     this.newAgreementForm.value.startDatePicker.setHours(0, 0, 0, 0);
@@ -204,12 +205,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
-      this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.pk_Ac_Trade_Agreement;
+
+
+      this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
       this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
       this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
-
       this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
       this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
       this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
@@ -218,30 +220,33 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
       this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
+      this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement; 
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = 1;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
+          if(!this.enableUpdateAgreement){
           this.enableExcel = true;
           this.enableEvidence = true;
           this.disableHeader = true;
           this.headerFile = data[0].pk_Ac_Trade_Agreement;
           this.workDataTable = [];
           this.dataTable = [];
-          debugger;
           this.nameAgree = data[0].name_Agreement;
-          //this.modalSuccessConcept();
-
-          // this.newAgreementForm.setValue({
-          //   agreement_name: '',
-          //   description: '',
-          //   startDatePicker: new Date(),
-          //   endDatePicker: new Date()
-          // });
-
           this.showErrors = false;
           this.onAdd.emit(true);
+        }else{
+          this.enableExcel = true;
+          this.enableEvidence = true;
+          this.disableHeader = true;
+          this.headerFile = data[0].pk_Ac_Trade_Agreement;
+          this.workDataTable = [];
+          this.nameAgree = data[0].name_Agreement;
+          this.showErrors = false;
+          this.onAdd.emit(true);
+
+        }
         },
         () => {
 
@@ -281,16 +286,64 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
 
       if (args.action == "add" || args.action == "edit"){
-        //this.saveWorkLine(args.data);
+          this.saveWorkLine(args.data);
       }
     }
     else if (args.requestType === 'delete') {
-      //this.deleteWorkLine(args.data);
+          this.deleteWorkLine(args.data);
     }
     else if (args.requestType === 'beginedit') {
       gridInstance.ej
     }
   }
+
+    /***********************************************************************************
+ * Author: Gustavo ZC
+ * Creation date: 30/07/2019
+ * Description: 
+ * ***********************************************************************************/
+
+saveWorkLine(data) {
+  debugger;
+  data.pk_Cat_Agreement_Details= (data.pk_Cat_Agreement_Details != undefined && !Number.isNaN(data.pk_Cat_Agreement_Details)) ? data.pk_Cat_Agreement_Details : 0;
+  data.pk_Ac_Trade_Agreement = (data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(data.pk_Ac_Trade_Agreement)) ? data.pk_Ac_Trade_Agreement : this.headerFile;
+  data.pk_Glb_Products = (data.pk_Glb_Products != undefined && data.pk_Glb_Products != 0 && !Number.isNaN(data.pk_Glb_Products)) ? data.pk_Glb_Products : 1;
+  data.product_Id_Alias = data.product_Id_Alias;
+  data.product_Name = data.product_Name;
+  data.id_Currency = data.id_Currency;
+  data.recovery_Amount = data.recovery_Amount;
+  data.active = (data.active != undefined && !Number.isNaN(data.active)) ? data.active : true;
+  data.creation_User = this.infoUser.username;
+  data.modification_User = this.infoUser.username;
+
+  this.tradeAgreementDetailService.saveTradeAgreementDetail(data).subscribe(
+    dataZ => {
+      debugger;
+      data.pk_Cat_Agreement_Details = dataZ.pk_Cat_Agreement_Details;
+     
+
+    }, error => {
+      this.dataTable = this.dataTable.filter(dt=>dt.pk_Cat_Agreement_Details!= 0);
+
+    });
+}
+
+  /***********************************************************************************
+ * Author: Gustavo ZC
+ * Creation date: 30/07/2019
+ * Description: This method delete an object to a control list
+ * ***********************************************************************************/
+
+deleteWorkLine(data: NewAgreementModel) {
+  data[0].pk_Cat_Agreement_Details = (data[0].pk_Cat_Agreement_Details != undefined && !Number.isNaN(data[0].pk_Cat_Agreement_Details)) ? data[0].pk_Cat_Agreement_Details : 0;
+  this.tradeAgreementDetailService.deleteTradeAgreementDetailProduct(data[0]).subscribe(
+    dataG => {
+      // data.pk_Cat_Agreement_Details = dataG.pk_Cat_Agreement_Details;
+    }, error => {
+      this._common._setLoading(false);
+      console.log(error);
+    });
+}
 
   actionBeginWork(args: any): void {
     let gridInstance: any = (<any>document.getElementById('NormalgridWork')).ej2_instances[0];
@@ -404,7 +457,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
           // this.enableExcel = false;
-          this.disableHeader = false;
+          this.disableHeader = true;
         }
       }
     );
@@ -535,11 +588,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description:
 *******************************************************/
 listAgreement(data: NewAgreementModel) {
-  debugger;
   this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
     dataQ => {
       debugger;
       this.dataTable = dataQ;
+      this.enableUpdateAgreement = true
+
       this._common._setLoading(false);
     },
     error => {

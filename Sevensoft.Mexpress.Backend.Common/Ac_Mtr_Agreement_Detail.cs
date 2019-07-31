@@ -17,8 +17,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Creation_Date = Convert.ToDateTime("1900-01-01");
             Creation_User = "";
             Modification_Date = Convert.ToDateTime("1900-01-01");
-            Modification_User = "";
-            Status_Agreement = "";                 
+            Modification_User = "";          
             Active = false;
         }
         public Int64 Pk_Cat_Agreement_Details { get; set; }
@@ -32,7 +31,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
-        public String Status_Agreement { get; set; }
         public Boolean Active { get; set; }       
     }
 }

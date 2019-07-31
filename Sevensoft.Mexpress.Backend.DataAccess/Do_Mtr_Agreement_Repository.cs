@@ -35,7 +35,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Common.Ac_Mtr_Agreement_Detail>
-                    ("PA_CON_DO_CAT_AGREEMENT_GET",
+                    ("PA_CON_AC_MTR_AGREEMENT_GET",
                     param: new
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
@@ -52,7 +52,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
-                ("PA_CON_DO_CAT_AGREEMENT_GET",
+                ("PA_CON_AC_MTR_AGREEMENT_GET",
                 param: new
                 {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
@@ -68,7 +68,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             await connection.QueryAsync<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
-                ("PA_MAN_DO_CAT_AGREEMENT_SAVE",
+                ("PA_MAN_AC_MTR_AGREEMENT_SAVE",
                 param: new
                 {
                         P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
@@ -82,7 +82,6 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_STATUS_AGREEMENT = model.Status_Agreement,
                         P_ACTIVE = model.Active
                 },
                 commandType: CommandType.StoredProcedure);
@@ -95,7 +94,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>
-                ("PA_MAN_DO_CAT_AGREEMENT_SAVE",
+                ("PA_MAN_AC_MTR_AGREEMENT_SAVE",
                 param: new
                 {
                         P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
@@ -109,7 +108,6 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_STATUS_AGREEMENT = model.Status_Agreement,
                         P_ACTIVE = model.Active
                 },
                 commandType: CommandType.StoredProcedure).FirstOrDefault();
@@ -121,12 +119,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         using (var connection = new SqlConnection(ConnectionString))
         {
             await connection.ExecuteAsync(
-            sql: "PA_CON_DO_CAT_AGREEMENT_DELETE",
+            sql: "PA_CON_AC_MTR_AGREEMENT_DELETE",
             param: new
             {
                         P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
-                        //P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User
@@ -141,12 +139,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Common.Ac_Mtr_Agreement_Detail>
-                ("PA_CON_DO_CAT_AGREEMENT_DELETE",
+                ("PA_CON_AC_MTR_AGREEMENT_DELETE",
                 param: new
                 {
                         P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
-                        //P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
+                        P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User

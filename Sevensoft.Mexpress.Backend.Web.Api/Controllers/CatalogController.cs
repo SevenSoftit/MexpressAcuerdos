@@ -38,7 +38,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 var message = new Message();
                 message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Glb_Cat_Catalog");
                 message.Operation = Operation.List;
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
                 {
@@ -81,7 +81,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 var message = new Message();
                 message.BusinessLogic = System.Configuration.ConfigurationManager.AppSettings["BusinessLogic:Glb_Cat_Catalog"];
                 message.Operation = Operation.Get;
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
                 {
@@ -125,7 +125,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 var message = new Message();
                 message.BusinessLogic = System.Configuration.ConfigurationManager.AppSettings["BusinessLogic:Glb_Cat_Catalog"];
                 message.Operation = Operation.Save;
-                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS");
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
                 message.MessageInfo = model.SerializeObject();
                 using (var businessLgic = new ServiceManager())
                 {

@@ -157,6 +157,9 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                     }
                     else
                     {
+                        if(model.Pk_Ac_Trade_Agreement != 0){
+                            
+                        }
                         var repository_funcionality = new Generic_Funcionality(message.Connection);
                         //var result = await repository.SaveGet(model);
                         // model.Pk_Ac_Trade_Agreement = result.Pk_Ac_Trade_Agreement;
