@@ -158,7 +158,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                     else
                     {
                         if(model.Pk_Ac_Trade_Agreement != 0){
-                            
+                            await repository.Delete(model);
                         }
                         var repository_funcionality = new Generic_Funcionality(message.Connection);
                         //var result = await repository.SaveGet(model);

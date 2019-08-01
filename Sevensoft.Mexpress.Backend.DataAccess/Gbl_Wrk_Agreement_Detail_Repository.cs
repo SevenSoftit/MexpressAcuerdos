@@ -145,11 +145,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
-                await connection.QueryAsync<
-                    Sevensoft.Mexpress.Backend.Common.Import_Product>
-                ("",
+                await connection.ExecuteAsync(
+                    "PA_MAN_AC_MTR_DELETE_WORK_AGREEMENT",
                 param: new
                 {
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_CREATION_USER = model.Creation_User
                 },
                 commandType: CommandType.StoredProcedure);
             }

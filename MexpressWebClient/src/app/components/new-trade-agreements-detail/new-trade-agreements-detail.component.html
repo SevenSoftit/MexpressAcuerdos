@@ -12,9 +12,9 @@
         </div>
     </div>
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
-        <div class="row agreement-top">
+        <div class="row mr-0 agreement-top">
             <!-- Tipo de acuerdo -->
-            <div class="form-group col-md-2">
+            <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
                 <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)"
                     placeholder="Tipo de acuerdo">
@@ -28,7 +28,7 @@
 
             </div>
             <!-- Nombre del acuerdo-->
-            <div class="form-group col-md-2">
+            <div class="col-md-2">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
                 <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors" class="alert-error-required mt-2">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <!-- Proveedor -->
-            <div class="form-group col-md-2">
+            <div class="col-md-2">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
                     <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <!-- Fecha Inicio -->
-            <div class="form-group col-md-2">
+            <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
                     <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Inicio</label>
                     <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <!-- Fecha Fin -->
-            <div class="form-group col-md-2">
+            <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
                     <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Fin</label>
                     <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <!--Activador de acuerdos-->
-            <div class="form-group col-md-2 agr-activator">
+            <div class="col-md-2 agr-activator">
                 <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
                 <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
@@ -81,7 +81,7 @@
         </div>
         <div class="row">
             <!--Descripción-->
-            <div class="form-group col-md-10">
+            <div class="col-md-10">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
@@ -91,7 +91,7 @@
         </div>
     </form>
 
-    <div class="row new-agreement-table-top" *ngIf="!showWorkTable">
+    <div class="row new-agreement-table-top" *ngIf="!showWorkTable && dataTable != undefined">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
                 [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
@@ -112,6 +112,13 @@
             <button (click)="saveAgreementHeader()" class="excel-button float-left mr-4" mat-raised-button>Actualizar acuerdo<mat-icon class="ml-2">play_for_work</mat-icon></button>
         </div>
     </div>
+
+
+
+
+
+
+
 
     <div class="row new-agreement-table-top" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">

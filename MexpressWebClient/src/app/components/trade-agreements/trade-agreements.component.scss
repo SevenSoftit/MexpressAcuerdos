@@ -21,3 +21,25 @@
     margin-left: 0;
     margin-right: 0;
 }
+
+// Tabla 
+.new-agreement-table-top {
+    margin-top: 4vh;
+}
+
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background: $light-blue !important;
+}
+
+::ng-depp .e-pager .e-currentitem {
+    background: $light-blue;
+}
+
+::ng-depp .e-pager .e-currentitem:hover {
+    background: $light-blue;
+}
+
+::ng-depp .e-grid .e-content {
+    overflow-x: hidden !important;
+}

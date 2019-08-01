@@ -21,6 +21,7 @@ import { NewAgreementModel } from 'src/app/models/newAgreement.model';
 import * as $ from 'jquery';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { ActivatedRoute } from '@angular/router';
 
    
 
@@ -65,7 +66,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   nameAgree: string = '';
   pkCatAgreementDetails: number = 0;
   public showWorkTable: boolean = false;
-  title = 'Todos los empleados';
+  title = 'Todos los acuerdos comerciales';
   public moneyModel: MoneyModel = new MoneyModel();
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   public providerModel: ProviderModel = new ProviderModel();
@@ -88,11 +89,34 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   search_key: string = 'agreement_status_in_process';
   fk_Status_Agreement: number = 0;
   enableUpdateAgreement: boolean = false;
+  agreementDetail: any;
+  fk_Glb_Mtr_Organization: number = 1;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
-    private providerService: ProviderService) {
-       
+    private providerService: ProviderService, private activated_route: ActivatedRoute,) {
+      
+      this.activated_route.queryParams.subscribe(params => {
+        this.agreementDetail = JSON.parse(params["agreementDet"]);
+  debugger;
+        this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+        this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
+        this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
+        // this.newAgreementForm.value.agreement_name = this.agreementDetail.info.name_Agreement;
+        // this.newAgreementForm.value.description = this.agreementDetail.info.description_Agreement;         
+        // this.newAgreementForm.value.startDatePicker = this.agreementDetail.info.date_Start;
+        // this.newAgreementForm.value.endDatePicker = this.agreementDetail.info.date_Finish;
+        this.dateProcess = this.agreementDetail.info.date_Process;
+        this.dateReprocess = this.agreementDetail.info.date_Reprocess;
+        this.allProducts = this.agreementDetail.info.all_Products;
+        this.providerName = this.agreementDetail.info.provider_Name;
+        this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
+        this.agreement_activator = this.agreementDetail.info.active;
+        this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+
+
+      });    
+ 
      }
 
   ngOnInit() {
@@ -145,6 +169,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     };
 
+    this.fillFormAgreementDetail();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -178,7 +203,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       });
 
   }
+
   saveAgreementHeader() {
+    if(this.dataTable != undefined || this.workDataTable != undefined){
+    this.grid.endEdit();
+  }
     this.errorDate = false;
     this.errorStartDate = false;
     this.errorEndDate = false;
@@ -205,8 +234,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
-
-
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
@@ -222,7 +249,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement; 
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
-      this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = 1;
+      this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
@@ -304,7 +331,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
  * ***********************************************************************************/
 
 saveWorkLine(data) {
-  debugger;
   data.pk_Cat_Agreement_Details= (data.pk_Cat_Agreement_Details != undefined && !Number.isNaN(data.pk_Cat_Agreement_Details)) ? data.pk_Cat_Agreement_Details : 0;
   data.pk_Ac_Trade_Agreement = (data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(data.pk_Ac_Trade_Agreement)) ? data.pk_Ac_Trade_Agreement : this.headerFile;
   data.pk_Glb_Products = (data.pk_Glb_Products != undefined && data.pk_Glb_Products != 0 && !Number.isNaN(data.pk_Glb_Products)) ? data.pk_Glb_Products : 1;
@@ -318,7 +344,6 @@ saveWorkLine(data) {
 
   this.tradeAgreementDetailService.saveTradeAgreementDetail(data).subscribe(
     dataZ => {
-      debugger;
       data.pk_Cat_Agreement_Details = dataZ.pk_Cat_Agreement_Details;
      
 
@@ -464,11 +489,13 @@ deleteWorkLine(data: NewAgreementModel) {
   }
 
   processProductWork(updateRows) {
+    if(this.dataTable != undefined || this.workDataTable != undefined){
+      this.grid.endEdit();
+    }
     var object = { 
       Pk_Ac_Trade_Agreement: this.headerFile,
       Update_Rows: updateRows
     };
-
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
         var agreement = new NewAgreementModel();
@@ -590,7 +617,6 @@ deleteWorkLine(data: NewAgreementModel) {
 listAgreement(data: NewAgreementModel) {
   this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
     dataQ => {
-      debugger;
       this.dataTable = dataQ;
       this.enableUpdateAgreement = true
 
@@ -635,5 +661,31 @@ listAgreement(data: NewAgreementModel) {
       }
     });
   }
+
+   fillFormAgreementDetail() {
+    if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
+      this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+    }
+    this.newAgreementForm.patchValue({
+      agreement_name: this.agreementDetail.info.name_Agreement,
+      description: this.agreementDetail.info.description_Agreement,         
+      startDatePicker: this.agreementDetail.info.date_Start,
+      endDatePicker: this.agreementDetail.info.date_Finish,
+       
+    });
+        // this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+        // this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
+        // this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
+        // this.dateProcess = this.agreementDetail.info.date_Process;
+        // this.dateReprocess = this.agreementDetail.info.date_Reprocess;
+        // this.allProducts = this.agreementDetail.info.all_Products;
+        // this.providerName = this.agreementDetail.info.provider_Name;
+        // this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
+        // this.agreement_activator = this.agreementDetail.info.active;
+        // this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+
+
+
+    }
 
 }

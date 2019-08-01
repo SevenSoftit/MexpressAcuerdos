@@ -30,6 +30,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Provider_Name = "";
             Name_Agreement = "";
             Fk_Status_Agreement = 0;
+            Agreement_Status_Name = "";
             Active = true;
 
             Error = false;
@@ -61,8 +62,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
-        public String Status_Agreement { get; set; }
-
         public string Description_Agreement { get; set; }
         public DateTime Date_Start { get; set; }
         public DateTime Date_Finish { get; set; }
@@ -72,6 +71,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public string Provider_Name { get; set; }
         public string Name_Agreement { get; set; }
         public Int32 Fk_Status_Agreement { get; set; }
+        public String Agreement_Status_Name { get; set; }
         public bool Active { get; set; }
 
         public bool Error { get; set; }

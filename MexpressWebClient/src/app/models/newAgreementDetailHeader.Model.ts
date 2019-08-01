@@ -24,6 +24,7 @@ export class NewAgreementDetailHeaderModel {
     All_Products: Boolean;
     Provider_Name: string;
     Fk_Status_Agreement: number;
+    Agreement_Status_Name: string;
     Active: Boolean;
 
     Error: Boolean;
@@ -66,6 +67,7 @@ export class NewAgreementDetailHeaderModel {
             this.All_Products = false;
             this.Provider_Name = '';
             this.Fk_Status_Agreement = 0;
+            this.Agreement_Status_Name = '';
             this.Active = true;
 
             this.Error = false;

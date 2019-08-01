@@ -31,9 +31,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns> 
-        [Route("ListAgreementDetailHeader")]
+        [Route("ListHeaderAgreement")]
         [HttpPost]
-        public async Task<IActionResult> ListAgreementDetailHeader([FromBody] Common.Import_Product model)
+        public async Task<IActionResult> ListHeaderAgreement([FromBody] Common.Import_Product model)
         {
             try
             {

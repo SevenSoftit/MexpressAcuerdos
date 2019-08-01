@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {EditService,PageService,FilterService,SortService,ResizeService,GridModule} from "@syncfusion/ej2-angular-grids";
+import { MaterialModule } from 'src/app/material-module';
 
 const routes: Routes = [
   { path: '', component: TradeAgreementsComponent },
@@ -22,7 +24,17 @@ const routes: Routes = [
     MatCardModule,
     ScrollDispatchModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GridModule,
+    MaterialModule 
+  ],
+  providers: [
+    EditService,
+    PageService,
+    FilterService,
+    SortService,
+    ResizeService,
+    
   ]
 })
 export class TradeAgreementsModule { }

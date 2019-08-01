@@ -37,7 +37,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Common.Import_Product>
-                    ("PA_CON_AC_MTR_AGREEMENT_HEADER_GET",
+                    ("PA_CON_AC_MTR_HEADER_AGREEMENT_GET",
                     param: new
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
@@ -55,7 +55,6 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_DATE_REPROCESS = model.Date_Reprocess,
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
-                        P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ACTIVE = model.Active,
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
@@ -71,7 +70,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Sevensoft.Mexpress.Backend.Common.Import_Product>
-                    ("PA_CON_AC_MTR_AGREEMENT_HEADER_GET",
+                    ("PA_CON_AC_MTR_HEADER_AGREEMENT_GET ",
                     param: new
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
@@ -89,8 +88,8 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_DATE_REPROCESS = model.Date_Reprocess,
                         P_ALL_PRODUCTS = model.All_Products,
                         P_PROVIDER_NAME = model.Provider_Name,
-                        P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ACTIVE = model.Active,
+                        P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();

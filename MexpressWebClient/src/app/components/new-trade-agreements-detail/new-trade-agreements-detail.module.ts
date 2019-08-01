@@ -19,6 +19,7 @@ setCulture('es-ES');
 L10n.load({
   'es-ES': {
       'grid': {
+          'Add': 'Agregar',
           'ExcelExport': 'Exportar a Excel',
           'Edit': 'Editar',
           'Delete': 'Eliminar',
