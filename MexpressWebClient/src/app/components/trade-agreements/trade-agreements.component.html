@@ -6,27 +6,61 @@
 
     <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
         <div class="offset-md-10 col-md-2">
-            <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()"><mat-icon  class="mr-2">add_circle_outline</mat-icon>Crear acuerdo</button>
+            <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
+                <mat-icon class="mr-2">add_circle_outline</mat-icon>Crear acuerdo
+            </button>
         </div>
     </div>
 
+
+    <div class="row new-agreement-table-top">
+        <div class="col-md-5 trade-agreements-radio-b">
+            <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
+
+            <div class="form-check d-inline-block agreements-radio-buttons">
+                <span>1: </span><input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
+                <label for="activeAgreements">Activos</label>
+            </div>
+            <div class="form-check d-inline-block agreements-radio-buttons">
+                <input type="radio" name="inactiveAgreements" id="inactiveAgreements" value="option2" [checked]="inactiveAgreements" (change)="listSpecificHeaderAgreement($event)">
+                <label for="inactiveAgreements">Inactivos</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5 class="radioButton-agreement d-inline-block">Filtro de estado</h5>
+            <div class="form-check d-inline-block trade-agreement-select">
+                <mat-select id="agreement_status" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_status" class="agreement-status-select text-center" (selectionChange)="behaviorStatus($event)" placeholder="Estado">
+                    <!-- <mat-option *ngFor="let status of statusList" [value]="status.pk_Glb_Cat_Catalog">
+                    {{status.value}}
+                </mat-option> -->
+                    <mat-option [value]="1">
+                        Prueba
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
 
     <!-- Listado de acuerdos -->
     <div class="row new-agreement-table-top">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'></e-column>
-                    <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'></e-column>
+                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'>
+                    </e-column>
+                    <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
+                    </e-column>
                     <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
                     <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center'></e-column>
-                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'></e-column>
+                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
+                    </e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Cat_Provider' [visible]="false" headerText='pk_Ac_Cat_Provider' width='5' textAlign='Center'></e-column>
                     <e-column field='description_Agreement' [visible]="false" headerText='description_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'></e-column>
+                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
+                    </e-column>
                     <e-column field='date_Process' [visible]="false" headerText='date_Process' width='5' textAlign='Center'></e-column>
                     <e-column field='date_Reprocess' [visible]="false" headerText='date_Reprocess' width='5' textAlign='Center'></e-column>
                     <e-column field='allProducts' [visible]="false" headerText='allProducts' width='5' textAlign='Center'></e-column>
@@ -35,7 +69,7 @@
 
                     <e-column field='edit' textAlign='center' headerText='Editar' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementDetails($event)" class="">border_color</mat-icon>
+                            <mat-icon (click)="viewAgreementDetails($event)">border_color</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>

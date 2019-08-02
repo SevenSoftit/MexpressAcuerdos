@@ -4,6 +4,7 @@ import { CommonService } from 'src/app/services/common/common.service';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { CatalogModel } from '../common-model/catalog.Model';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -19,6 +20,9 @@ export class TradeAgreementsComponent implements OnInit {
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
+  public activeAgreements: boolean = true;
+  public inactiveAgreements: boolean = false;
+  statusList: any;
 
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
@@ -58,7 +62,7 @@ export class TradeAgreementsComponent implements OnInit {
 
   }
 
-  /*******************************************************
+    /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  19/07/2019
 * Description: method that list the products of the agreement 
@@ -71,8 +75,61 @@ export class TradeAgreementsComponent implements OnInit {
 * Author:
 * Description:
 *******************************************************/
-  listHeaderAgreement() {
-    var data = new NewAgreementDetailHeaderModel();
+listHeaderAgreement() {
+  var data = new NewAgreementDetailHeaderModel();
+  data.Active = true;
+  this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+    dataQ => {
+      this.dataTable = dataQ;
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.log('no se envio' + ' ' + error);
+    });
+}
+
+listAgreementStatus() {
+  var catalogModel = new CatalogModel();
+  catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
+  this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
+    dataQ => {
+      this.statusList = dataQ;
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.log('no se envio' + ' ' + error);
+    });
+}
+
+  /*******************************************************
+* Author: Gustavo ZC
+* Creation date:  01/08/2019
+* Description: method that lists the products of the agreement whether active or inactive
+****************************************************
+* Modifications
+****************************************************
+* Number:
+* Date:
+* Ticket:
+* Author:
+* Description:
+*******************************************************/
+  listSpecificHeaderAgreement(evt: any) {
+    var data = new NewAgreementDetailHeaderModel();   
+    this.resetRadio();
+    var target = evt.target;
+
+    if(target.value == "option1"){
+        this.activeAgreements = true;
+        this.inactiveAgreements = false;
+        data.Active = this.activeAgreements;
+}else{
+  this.inactiveAgreements = true;
+  this.activeAgreements = false;
+  data.Active = false;
+}
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
         this.dataTable = dataQ;
@@ -84,8 +141,16 @@ export class TradeAgreementsComponent implements OnInit {
       });
   }
 
+  resetRadio() {
+    if (this.inactiveAgreements) {
+      this.inactiveAgreements = false;
+      this.activeAgreements = true;
+    } else {
+      this.activeAgreements = true;
+    }
+  }
+
   viewAgreementDetails(args: any): void {
-    debugger;
     let data: any = this.grid.getRowInfo(args.target).rowData;
     const agreementDet = {
       info: data
