@@ -23,7 +23,7 @@ export class TradeAgreementsComponent implements OnInit {
   public activeAgreements: boolean = true;
   public inactiveAgreements: boolean = false;
   statusList: any;
-
+  public isActiveAgreement: Boolean = false;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
@@ -33,6 +33,7 @@ export class TradeAgreementsComponent implements OnInit {
     this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.listHeaderAgreement();
+    this.listAgreementStatus();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -78,6 +79,7 @@ export class TradeAgreementsComponent implements OnInit {
 listHeaderAgreement() {
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
+  this.isActiveAgreement = data.Active;
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
       this.dataTable = dataQ;
@@ -125,12 +127,29 @@ listAgreementStatus() {
         this.activeAgreements = true;
         this.inactiveAgreements = false;
         data.Active = this.activeAgreements;
+        this.isActiveAgreement = data.Active;
 }else{
   this.inactiveAgreements = true;
   this.activeAgreements = false;
   data.Active = false;
+  this.isActiveAgreement = data.Active;
 }
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+      dataQ => {
+        this.dataTable = dataQ;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+
+  behaviorStatus(evt: any) {
+    var data = new NewAgreementDetailHeaderModel();
+    data.Fk_Status_Agreement = evt.value;
+    data.Active = this.isActiveAgreement;
+    this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
       dataQ => {
         this.dataTable = dataQ;
         this._common._setLoading(false);

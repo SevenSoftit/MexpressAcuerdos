@@ -24,6 +24,7 @@ export class AgreementDocumentModel {
   Archive_Original_Name: string;
   Archive_New_Name: string;
   Name_Agreement: string;
+  File_Description: string;
   Active: boolean;
   Extension_Type: string;
  
@@ -38,6 +39,7 @@ export class AgreementDocumentModel {
       this.Archive_Original_Name = '';
       this.Archive_New_Name = '';
       this.Name_Agreement = '';
+      this.File_Description = '';
       this.Active = false;
       this.Extension_Type = '';
       

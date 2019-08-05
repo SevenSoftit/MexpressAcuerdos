@@ -22,6 +22,7 @@ import * as $ from 'jquery';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
+import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
 
 
 
@@ -105,6 +106,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+          this.nameAgree = this.agreementDetail.info.name_Agreement
           this.listAgreement(agreement);
         }
       }
@@ -675,13 +677,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
   }
 
-  // PRUEBA TEMPORAL
-  openAddEvidenceModal() {
+  openListEvidenceModal() {
+    this.grid.endEdit();
     const object = {
       header_File: this.headerFile,
       name_Agree: this.nameAgree
     }
-    const dialogRef = this.matDialog.open(AddAgreementEvidenceModalComponent, {
+    const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object },
       minWidth: "900px",
       maxWidth: "950px",
@@ -691,7 +693,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
       if (data) {
-        //this.listAllEvidences();
       }
     });
   }

@@ -91,15 +91,16 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     {
                         return BadRequest(result.Result);
                     }
-                    var resultModel = result.DeSerializeObject<Common.Import_Product>();
-                    var dataSuccess = new
-                    {
-                        Data = resultModel,
-                        MessageResult = Backend.Common.Enum.Status.Success,
-                        Message = string.Empty,
-                        RegisterType = string.Empty
-                    };
-                    return Ok(dataSuccess);
+                    // var resultModel = result.DeSerializeObject<Common.Import_Product>();
+                    var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
+                    // var dataSuccess = new
+                    // {
+                    //     Data = resultModel,
+                    //     MessageResult = Backend.Common.Enum.Status.Success,
+                    //     Message = string.Empty,
+                    //     RegisterType = string.Empty
+                    // };
+                    return Ok(list);
                 }
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@
         <div class="col-md-12 text-right">
             <button *ngIf="enableExcel" class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
 
-            <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openAddEvidenceModal()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
+            <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openListEvidenceModal()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
@@ -113,12 +113,9 @@
         </div>
     </div>
 
-
-
-
-
-
-
+    <div class="row ml-0 mr-0 mt-4" *ngIf="!showWorkTable && dataTable == undefined">
+        <h5 class="begin-agreement-creation">Guarda la primera sección del acuerdo para poder cargar el excel de productos.</h5>
+    </div>
 
     <div class="row new-agreement-table-top" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">

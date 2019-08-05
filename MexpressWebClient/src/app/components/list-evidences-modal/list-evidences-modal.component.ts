@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/services/common/common.service';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
+import { AgreementDocumentModel } from 'src/app/models/agreementDocument.model';
 declare var require: any
 
 
@@ -36,7 +37,7 @@ export class ListEvidencesModalComponent implements OnInit {
 
       /*******************************************************
    * Author: Gustavo ZC
-   * Creation date:  29/04/2019
+   * Creation date:  05/08/2019
    * Description: method that list the groups of evidences
    ****************************************************
    * Modifications
@@ -48,8 +49,11 @@ export class ListEvidencesModalComponent implements OnInit {
    * Description:
    *******************************************************/
   listAllEvidences() {
-    this.evidenceService.listEvidence(this.dataModal.confirmInfo).subscribe(
+    var evidenceKey = new AgreementDocumentModel();
+    evidenceKey.Pk_Ac_Trade_Agreement = this.dataModal.confirmInfo.header_File;
+    this.evidenceService.listEvidence(evidenceKey).subscribe(
       dataQ => {
+        debugger;
         this.evidenceList = dataQ;
 
         this.evidenceListCount = this.evidenceList.length;
@@ -66,7 +70,7 @@ export class ListEvidencesModalComponent implements OnInit {
 
   /***********************************************************************************
   * Author: Gustavo ZC
-  * Creation date: 29/04/2019
+  * Creation date: 05/08/2019
   * Description:
  * ***********************************************************************************
   * Modifications
@@ -112,7 +116,7 @@ deleteEvidence(evidence) {
 
       /*******************************************************
    * Author: Gustavo ZC
-   * Creation date:  02/05/2019
+   * Creation date:  05/08/2019
    * Description: method that download the archive of the note
    ****************************************************
    * Modifications
@@ -150,7 +154,7 @@ debugger;
 
   /*******************************************************
    * Author: Gustavo ZC
-   * Creation date:  29/04/2019
+   * Creation date:  05/08/2019
    * Description: method that open the modal to add evidences
    ****************************************************
    * Modifications

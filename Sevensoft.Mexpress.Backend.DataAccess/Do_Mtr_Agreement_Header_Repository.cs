@@ -64,7 +64,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             }
         }
 
-        public async Task<Common.Import_Product> Get(Common.Import_Product model)
+        public async Task<Import_Product> Get(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -73,6 +73,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     ("PA_CON_AC_MTR_HEADER_AGREEMENT_GET ",
                     param: new
                     {
+
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_CAT_TYPE_AGREEMENT = model.Pk_Cat_Type_Agreement,
                         P_PK_AC_CAT_PROVIDER = model.Pk_Ac_Cat_Provider,
@@ -93,7 +94,26 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return await Task.FromResult<Common.Import_Product>(result);
+                    return await Task.FromResult<Common.Import_Product>(result);
+            }
+        }
+
+    public async Task<IEnumerable<Import_Product>> ListSpecialAgreementStatus(Common.Import_Product model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
+                    ("PA_CON_AC_MTR_HEADER_AGREEMENT_STATUS_GET ",
+                    param: new
+                    {
+
+                        P_ACTIVE = model.Active,
+                        P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                    },
+                commandType: CommandType.StoredProcedure);
+                return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
             }
         }
         public async Task Save(Common.Import_Product model)
