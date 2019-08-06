@@ -96,8 +96,7 @@ closeDocumentModal(list){
   this.matDialogRef.close(list);
 }
 
-downloadFile() {
-  debugger;
+downloadFile() {   
   $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
 }
 

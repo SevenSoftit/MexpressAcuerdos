@@ -50,8 +50,8 @@
                     <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
                     </e-column>
                     <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
-                    <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center'></e-column>
-                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
+                    <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
+                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
                     </e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>

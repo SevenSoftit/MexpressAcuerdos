@@ -11,6 +11,7 @@ import {EditService,PageService,FilterService,SortService,ResizeService,GridModu
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 
+
 setCulture('es-ES');
 
 L10n.load({

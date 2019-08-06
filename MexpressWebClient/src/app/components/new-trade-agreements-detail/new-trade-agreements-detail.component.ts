@@ -174,7 +174,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   fillFormAgreementDetail() {
     if(this.agreementDetail != undefined){
-      debugger;
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,

@@ -19,7 +19,7 @@ export class TradeAgreementsComponent implements OnInit {
   screenWidth: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
-  public dataTable: any;
+  public dataTable: Object[] = [];
   public activeAgreements: boolean = true;
   public inactiveAgreements: boolean = false;
   statusList: any;
@@ -183,4 +183,6 @@ listAgreementStatus() {
     this.router.navigate(['newTradeAgreements'], navigationExtras);
     this._common.asignHeaderTitle("Nuevo acuerdo comercial");
   }
+
+
 }
