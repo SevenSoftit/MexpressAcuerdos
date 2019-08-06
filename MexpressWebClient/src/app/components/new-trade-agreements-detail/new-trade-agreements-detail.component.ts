@@ -18,7 +18,6 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import * as $ from 'jquery';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
@@ -92,6 +91,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   enableUpdateAgreement: boolean = false;
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
+  disableStartDate: boolean = false;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -174,11 +174,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   fillFormAgreementDetail() {
     if(this.agreementDetail != undefined){
+      debugger;
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,
-        startDatePicker: this.agreementDetail.info.date_Start,
-        endDatePicker: this.agreementDetail.info.date_Finish,
+        startDatePicker: new Date(this.agreementDetail.info.date_Start),
+        endDatePicker: new Date(this.agreementDetail.info.date_Finish),
 
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -482,10 +483,16 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
   }
+ 
 
-
-  behaviorTypeOfAgreement() {
+  behaviorTypeOfAgreement(value: any) {
     this.errorTypeOfAgreement = false;
+    if(value.value == 3){
+      this.disableStartDate = true;
+      this.modalSelectedTypeAgreement();
+    }else{
+      this.disableStartDate = false;
+    }
   }
 
   behaviorProvider(value: any) {
@@ -496,8 +503,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     });
   }
 
-  uploadArchive() {
-  }
 
   openDialogImportProduct(): void {
 
@@ -673,10 +678,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.listAgreement(pkH);
   }
 
-  downloadFile() {
-    $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
-  }
-
   openListEvidenceModal() {
     this.grid.endEdit();
     const object = {
@@ -695,6 +696,23 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       if (data) {
       }
     });
+  }
+
+  public modalSelectedTypeAgreement() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'Se seleccionará el inventario del último día del rango seleccionado',
+      // btnClose: 'Cerrar',
+      status: 'warning'
+    };
+  
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3000);
   }
 
 
