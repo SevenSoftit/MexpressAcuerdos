@@ -121,7 +121,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getScreenSize();
     this.getKeyStatus();
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
@@ -131,7 +131,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     });
 
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-    this.pageSettings = { pageSize: 8, pageCount: 5 };
+   // this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
     this.editSettingsWork = { allowEditing: true, allowDeleting: true };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
@@ -208,9 +208,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount: 5 };
+      this.pageSettings = { pageSize: 9, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 7, pageCount: 5 };
+      this.pageSettings = { pageSize: 4, pageCount: 5 };
     }
   }
 

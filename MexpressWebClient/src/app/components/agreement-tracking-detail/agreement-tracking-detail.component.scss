@@ -1,4 +1,15 @@
 @import "../../../styles.scss";
+.tittle-agreement {
+    font-size: $font-size-medium;
+    text-align: left;
+    font-family: $opensans-semibold;
+    color: #001B36;
+}
+
+.agreement-top-header {
+    margin-top: 2vh;
+}
+
 .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
     background: $light-blue !important;

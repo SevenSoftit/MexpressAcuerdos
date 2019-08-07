@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
@@ -24,14 +24,16 @@ export class AgreementTrackingComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
+  public toolbar: ToolbarItems[] | Object;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
   ngOnInit() {
-
+    this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
+    this.toolbar = ['Search'];
     this.listHeaderAgreement();
     this.listAgreementStatus();
   }
@@ -41,9 +43,9 @@ export class AgreementTrackingComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount: 5 };
+      this.pageSettings = { pageSize: 9, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 7, pageCount: 5 };
+      this.pageSettings = { pageSize: 4, pageCount: 5 };
     }
   }
 
@@ -175,7 +177,7 @@ listAgreementStatus() {
       },
       skipLocationChange: true
     };
-    this.router.navigate(['newTradeAgreements'], navigationExtras);
+    this.router.navigate(['agreementTrackingDetail'], navigationExtras);
     this._common.asignHeaderTitle("Detalle del seguimiento");
   }
 

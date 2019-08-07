@@ -17,7 +17,8 @@ setCulture('es-ES');
 L10n.load({
   'es-ES': {
       'grid': {
-          'EmptyRecord': 'Sin coincidencias'
+          'EmptyRecord': 'Sin coincidencias',
+          'Search': 'Buscar'
       }
   }
 });
