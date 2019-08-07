@@ -96,7 +96,7 @@
             <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
                 [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
+                    <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>

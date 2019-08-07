@@ -1,0 +1,158 @@
+@import "../../../styles.scss";
+.tittle-agreement {
+    font-size: $font-size-medium;
+    text-align: left;
+    font-family: $opensans-semibold;
+    color: #001B36;
+}
+
+.agreement-top-header {
+    margin-top: 2vh;
+}
+
+.agreement-scroll {
+    height: 85vh!important;
+}
+
+.create-agreement-sector {
+    background: $light-gray-softer;
+    border-radius: 0rem;
+    padding: 1.3rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+// Tabla 
+.new-agreement-table-top {
+    margin-top: 4vh;
+}
+
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background: $light-blue !important;
+}
+
+::ng-depp .e-pager .e-currentitem {
+    background: $light-blue;
+}
+
+::ng-depp .e-pager .e-currentitem:hover {
+    background: $light-blue;
+}
+
+::ng-depp .e-grid .e-content {
+    overflow-x: hidden !important;
+}
+
+.radioButton-agreement {
+    font-family: $opensans-bold;
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 1rem;
+}
+
+// RadioButtons
+.agreements-radio-buttons {
+    font-family: $opensans-regular;
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color: $black;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="radio"]:checked+label,
+[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+
+[type="radio"]:checked+label:before,
+[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #DADADA;
+    border-radius: 100%;
+    background: #DADADA;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: $dark-gray;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+//COMBOBOX
+.agreement-status-select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $backgroud-input;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.trade-agreements-radio-b {
+    display: flex;
+    align-items: center;
+}
+
+.trade-agreement-select {
+    width: 60%;
+}
+
+.span-active {
+    margin-right: 1rem !important;
+    font-family: $opensans-bold;
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 1rem;
+}
+
+.span-inactive {
+    margin-right: 1rem !important;
+    font-family: $opensans-bold;
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 1rem;
+}

@@ -92,6 +92,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
+  isEditable: boolean = false; 
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -136,7 +137,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
 
-    this.codeRules = { required: [true, 'Código requerido'] };
+    this.codeRules = { required: [true, 'Código requerido']};
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
@@ -343,6 +344,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
 
       if (args.action == "add" || args.action == "edit") {
+
         this.saveWorkLine(args.data);
       }
     }
