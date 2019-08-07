@@ -92,7 +92,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
-  isEditable: boolean = false; 
+  isEditable: boolean = true; 
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -381,7 +381,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       }, error => {
         this.dataTable = this.dataTable.filter(dt => dt.pk_Cat_Agreement_Details != 0);
-
+        var agreement = new NewAgreementModel();
+        agreement.Pk_Ac_Trade_Agreement = this.headerFile;
+        this.listAgreement(agreement);
       });
   }
 
@@ -484,7 +486,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
   }
- 
+
 
   behaviorTypeOfAgreement(value: any) {
     this.errorTypeOfAgreement = false;
