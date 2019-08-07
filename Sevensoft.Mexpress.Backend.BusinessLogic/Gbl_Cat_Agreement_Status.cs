@@ -7,14 +7,14 @@ using static Sevensoft.Mexpress.Backend.Common.Enum;
 
 namespace Sevensoft.Mexpress.Backend.BusinessLogic
 {
-    public class Ac_Mtr_Agreement_Detail_Header : IBusinessLogic
+    public class Gbl_Cat_Agreement_Status : IBusinessLogic
     {
         #region Region [Methods]
         /// <summary>
         /// Nombre: DoWork
-        /// Descripcion: Metodo encargado de orquestar las solicitudes de operaciones para el objeto "Import_Product".
-        /// Fecha de creación: 15/07/2019.
-        /// Autor: Gustavo ZC.
+        /// Descripcion: Metodo encargado de orquestar las solicitudes de operaciones para el objeto "Gbl_Cat_Agreement_Status".
+        /// Fecha de creación: 05/08/2019.
+        /// Autor: Gustavo ZC
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -54,8 +54,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
-                using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Gbl_Cat_Agreement_Status>();
+                using (var repository = new Gbl_Cat_Agreement_Status_Repository(message.Connection))
                 {
                     var returnObject = await repository.List(model);
                     resultMessage.Status = Status.Success;
@@ -78,10 +78,10 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
-                using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Gbl_Cat_Agreement_Status>();
+                using (var repository = new Gbl_Cat_Agreement_Status_Repository(message.Connection))
                 {
-                    var returnObject = await repository.ListSpecialAgreementStatus(model);
+                    var returnObject = await repository.Get(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                     resultMessage.MessageInfo = returnObject.SerializeObject();
@@ -102,14 +102,13 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
-                using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Gbl_Cat_Agreement_Status>();
+                using (var repository = new Gbl_Cat_Agreement_Status_Repository(message.Connection))
                 {
-                    
-                    var returObject = await repository.SaveScalar(model);
+                    await repository.Save(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = returObject.SerializeObject();
+                    resultMessage.MessageInfo = String.Empty;
                     return resultMessage;
                 }
             }
@@ -127,13 +126,13 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
-                using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Gbl_Cat_Agreement_Status>();
+                using (var repository = new Gbl_Cat_Agreement_Status_Repository(message.Connection))
                 {
-                    var returnObject = await repository.DeleteScalar(model);
+                    await repository.Delete(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
-                    resultMessage.MessageInfo = returnObject.SerializeObject();
+                    resultMessage.MessageInfo = String.Empty;
                     return resultMessage;
                 }
             }
@@ -156,12 +155,10 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
         protected virtual void Dispose(bool disposing)
         {
         }
-        ~Ac_Mtr_Agreement_Detail_Header()
+        ~Gbl_Cat_Agreement_Status()
         {
             this.Dispose(false);
         }
         #endregion
     }
-
-
 }

@@ -18,12 +18,14 @@ const routes: Routes = [
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutComponent,  
     children: [
       {path: 'home', redirectTo: 'home', pathMatch: 'full' },
       {path: 'home', loadChildren: './components/home/home.module#HomeModule' },
       {path: 'tradeAgreements', loadChildren: './components/trade-agreements/trade-agreements.module#TradeAgreementsModule'},
       {path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements-detail/new-trade-agreements-detail.module#NewTradeAgreementsDetailModule'},
+      {path: 'agreementTracking', loadChildren: './components/agreement-tracking/agreement-tracking.module#AgreementTrackingModule'},
+      {path: 'agreementTrackingDetail', loadChildren: './components/agreement-tracking-deatil/agreement-tracking-detail.module#AgreementTrackingDetailModule'}
     ]
   }, 
 

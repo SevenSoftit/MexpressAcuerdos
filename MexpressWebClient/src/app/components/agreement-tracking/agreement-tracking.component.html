@@ -4,15 +4,6 @@
         <h5 class="tittle-agreement">Acuerdos comerciales</h5>
     </div>
 
-    <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
-        <div class="offset-md-10 col-md-2">
-            <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
-                <mat-icon class="mr-2">add_circle_outline</mat-icon>Crear acuerdo
-            </button>
-        </div>
-    </div>
-
-
     <div class="row new-agreement-table-top">
         <div class="col-md-5 trade-agreements-radio-b">
             <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
@@ -66,9 +57,9 @@
                     <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='edit' textAlign='center' headerText='Editar' width=120>
+                    <e-column field='edit' textAlign='center' headerText='Ver seguimiento' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementDetails($event)">border_color</mat-icon>
+                            <mat-icon (click)="viewAgreementTrackingDetails($event)">remove_red_eye</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>

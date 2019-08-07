@@ -10,9 +10,7 @@
                 <mat-icon class="mr-2">import_export</mat-icon>Subir excel de productos
             </button>
 
-            <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openAddEvidenceModal()">
-                <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
-            </button>
+            <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openListEvidenceModal()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
@@ -64,12 +62,10 @@
             <!-- Fecha Inicio -->
             <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
-                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
-                        Inicio</label>
-                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker"
-                        id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
-                        [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()" readonly>
-                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Inicio</label>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
+                        readonly>
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate"></mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
                     <div *ngIf="errorStartDate" class="alert-error-required mt-2">
                         La fecha de inicio del acuerdo debe de ser mayor/igual a hoy
@@ -123,9 +119,9 @@
             <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
                 [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
+                    <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='id_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
@@ -162,12 +158,9 @@
     </div>
 
 
-
-
-
-
-
-
+    <div class="row ml-0 mr-0 mt-4" *ngIf="!showWorkTable && dataTable == undefined">
+        <h5 class="begin-agreement-creation">Guarda la primera sección del acuerdo para poder cargar el excel de productos.</h5>
+    </div>
 
     <div class="row new-agreement-table-top" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">
@@ -176,38 +169,23 @@
                 [pageSettings]='pageSettings' [editSettings]='editSettingsWork' [toolbar]='toolbarWork'
                 (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBound($event)" [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center'
-                        [validationRules]='codeRules'></e-column>
-                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center'
-                        [validationRules]='productNameRules'></e-column>
-                    <e-column field='id_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220'
-                        editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='product_Amount' headerText='Monto' width='150' textAlign='Center'
-                        [validationRules]='amountRules'></e-column>
-                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170'
-                        textAlign='Center'></e-column>
+                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
+                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
+                    <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='product_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
 
-                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement'
-                        width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Gbl_Wrk_Agreement' [isPrimaryKey]="true" [visible]="false"
-                        headerText='pk_Gbl_Wrk_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Gbl_Wrk_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Gbl_Wrk_Agreement' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='error' [visible]="false" headerText='error' width='5' textAlign='Center'>
-                    </e-column>
-                    <e-column field='message_Error' [visible]="false" headerText='message_Error' width='5'
-                        textAlign='Center'></e-column>
-                    <e-column field='it_Processed' [visible]="false" headerText='it_Processed' width='5'
-                        textAlign='Center'></e-column>
-                    <e-column field='invalid_Amount' [visible]="false" headerText='invalid_Amount' width='5'
-                        textAlign='Center'></e-column>
-                    <e-column field='not_Exist_Product' [visible]="false" headerText='not_Exist_Product' width='5'
-                        textAlign='Center'></e-column>
-                    <e-column field='duplicate_Product_Alias' [visible]="false" headerText='duplicate_Product_Alias'
-                        width='5' textAlign='Center'></e-column>
-                    <e-column field='not_Exist_Id_Currency' [visible]="false" headerText='not_Exist_Id_Currency'
-                        width='5' textAlign='Center'></e-column>
-                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
-                    </e-column>
+                    <e-column field='error' [visible]="false" headerText='error' width='5' textAlign='Center'></e-column>
+                    <e-column field='message_Error' [visible]="false" headerText='message_Error' width='5' textAlign='Center'></e-column>
+                    <e-column field='it_Processed' [visible]="false" headerText='it_Processed' width='5' textAlign='Center'></e-column>
+                    <e-column field='invalid_Amount' [visible]="false" headerText='invalid_Amount' width='5' textAlign='Center'></e-column>
+                    <e-column field='not_Exist_Product' [visible]="false" headerText='not_Exist_Product' width='5' textAlign='Center'></e-column>
+                    <e-column field='duplicate_Product_Alias' [visible]="false" headerText='duplicate_Product_Alias' width='5' textAlign='Center'></e-column>
+                    <e-column field='not_Exist_Id_Currency' [visible]="false" headerText='not_Exist_Id_Currency' width='5' textAlign='Center'></e-column>
+                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'></e-column>
 
                 </e-columns>
             </ejs-grid>

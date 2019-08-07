@@ -7,11 +7,11 @@ import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDeta
 import { CatalogModel } from '../common-model/catalog.Model';
 
 @Component({
-  selector: 'app-trade-agreements',
-  templateUrl: './trade-agreements.component.html',
-  styleUrls: ['./trade-agreements.component.scss']
+  selector: 'app-agreement-tracking',
+  templateUrl: './agreement-tracking.component.html',
+  styleUrls: ['./agreement-tracking.component.scss']
 })
-export class TradeAgreementsComponent implements OnInit {
+export class AgreementTrackingComponent implements OnInit {
   public initialSort: Object;
   public pageSettings: Object;
   public editSettings: Object;
@@ -57,11 +57,6 @@ export class TradeAgreementsComponent implements OnInit {
     this.grid.gridLines = 'Both';
   }
 
-  redirectPageCreateNewAgreement() {
-    this.router.navigate(["newTradeAgreements"]);
-    this._common.asignHeaderTitle("Nuevo acuerdo comercial");
-
-  }
 
     /*******************************************************
 * Author: Gustavo ZC
@@ -169,7 +164,7 @@ listAgreementStatus() {
     }
   }
 
-  viewAgreementDetails(args: any): void {
+  viewAgreementTrackingDetails(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
     const agreementDet = {
       info: data

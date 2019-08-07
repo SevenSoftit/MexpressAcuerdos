@@ -112,7 +112,7 @@ export class SidebarLeftComponent implements OnInit {
         break;
       }
       case "sda": {
-        this.router.navigate(["tracingOfTheAgreement"]);
+        this.router.navigate(["agreementTracking"]);
         this._common.asignHeaderTitle("Seguimiento del acuerdo");
         break;
       }

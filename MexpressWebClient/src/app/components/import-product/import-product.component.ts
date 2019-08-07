@@ -6,6 +6,7 @@ import { FeedbackDescriptionModalComponent } from '../feedback-description-modal
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { CommonService } from 'src/app/services/common/common.service';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-import-product',
@@ -93,6 +94,10 @@ export class ImportProductComponent implements OnInit {
 
 closeDocumentModal(list){
   this.matDialogRef.close(list);
+}
+
+downloadFile() {   
+  $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
 }
 
 

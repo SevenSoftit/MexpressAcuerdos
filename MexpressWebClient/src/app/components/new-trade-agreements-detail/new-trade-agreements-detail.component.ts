@@ -18,10 +18,10 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import * as $ from 'jquery';
 import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
+import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
 
 
 
@@ -91,6 +91,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   enableUpdateAgreement: boolean = false;
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
+  disableStartDate: boolean = false;
+  isEditable: boolean = false; 
 
   dataTableGoal: any = [];
   toolbarGoal: ToolbarItems[] | Object;
@@ -110,7 +112,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-
+          this.nameAgree = this.agreementDetail.info.name_Agreement;
           // if (this.agreementDetail.info.all_Products) {
           this.listAgreementGoals(agreement);
           //   }
@@ -144,7 +146,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
 
-    this.codeRules = { required: [true, 'Código requerido'] };
+    this.codeRules = { required: [true, 'Código requerido']};
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
@@ -197,8 +199,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,
-        startDatePicker: this.agreementDetail.info.date_Start,
-        endDatePicker: this.agreementDetail.info.date_Finish,
+        startDatePicker: new Date(this.agreementDetail.info.date_Start),
+        endDatePicker: new Date(this.agreementDetail.info.date_Finish),
 
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -364,6 +366,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
 
       if (args.action == "add" || args.action == "edit") {
+
         this.saveWorkLine(args.data);
       }
     }
@@ -503,10 +506,16 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
   }
+ 
 
-
-  behaviorTypeOfAgreement() {
+  behaviorTypeOfAgreement(value: any) {
     this.errorTypeOfAgreement = false;
+    if(value.value == 3){
+      this.disableStartDate = true;
+      this.modalSelectedTypeAgreement();
+    }else{
+      this.disableStartDate = false;
+    }
   }
 
   behaviorProvider(value: any) {
@@ -517,8 +526,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     });
   }
 
-  uploadArchive() {
-  }
 
   openDialogImportProduct(): void {
 
@@ -708,17 +715,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.listAgreement(pkH);
   }
 
-  downloadFile() {
-    $("#dowloadFile").prop("href", "assets/download/Plantilla de carga de productos.xlsx");
-  }
-
-  // PRUEBA TEMPORAL
-  openAddEvidenceModal() {
+  openListEvidenceModal() {
+    this.grid.endEdit();
     const object = {
       header_File: this.headerFile,
       name_Agree: this.nameAgree
     }
-    const dialogRef = this.matDialog.open(AddAgreementEvidenceModalComponent, {
+    const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object },
       minWidth: "900px",
       maxWidth: "950px",
@@ -728,9 +731,25 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
       if (data) {
-        //this.listAllEvidences();
       }
     });
+  }
+
+  public modalSelectedTypeAgreement() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'Se seleccionará el inventario del último día del rango seleccionado',
+      // btnClose: 'Cerrar',
+      status: 'warning'
+    };
+  
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3000);
   }
 
 

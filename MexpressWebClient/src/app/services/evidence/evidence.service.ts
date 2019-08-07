@@ -66,7 +66,7 @@ export class EvidenceService {
   * Description:
   --------------------------------------------------------------------*/
   listEvidence (contactInfoData: any) {
-    const url = this.apiUrl + 'api/evidence/list';
+    const url = this.apiUrl + 'api/evidence/List';
     return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
       tap((product: any) => console.log('')),
       catchError(this.handleError<any>(''))

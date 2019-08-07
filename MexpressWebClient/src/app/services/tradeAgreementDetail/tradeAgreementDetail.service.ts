@@ -101,8 +101,15 @@ export class TradeAgreementDetailService {
       );
   }
 
+  ListHeaderAgreementDetailStatus (headerAgreementDetail: any) {
+    const url = this.apiUrl + 'api/agreementDetailHeader/Get';
+    return this.http.post<any[]>(url, headerAgreementDetail, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
+
   ListAgreementStatus (headerAgreementDetail: any) {
-    const url = this.apiUrl + 'api/agreementStatus/ListAgreementStatus';
+    const url = this.apiUrl + 'api/agreementStatus/List';
     return this.http.post<any[]>(url, headerAgreementDetail, httpOptions).pipe(
       tap(() => console.log(''))
       );

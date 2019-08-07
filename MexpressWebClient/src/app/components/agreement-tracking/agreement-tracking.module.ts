@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TradeAgreementsComponent } from './trade-agreements.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {EditService,PageService,FilterService,SortService,ResizeService,GridModule} from "@syncfusion/ej2-angular-grids";
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
+import { AgreementTrackingComponent } from './agreement-tracking.component';
 
 
 setCulture('es-ES');
@@ -23,11 +23,11 @@ L10n.load({
 });
 
 const routes: Routes = [
-  { path: '', component: TradeAgreementsComponent },
+  { path: '', component: AgreementTrackingComponent },
 
 ];
 @NgModule({
-  declarations: [TradeAgreementsComponent],
+  declarations: [AgreementTrackingComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -49,4 +49,4 @@ const routes: Routes = [
     
   ]
 })
-export class TradeAgreementsModule { }
+export class AgreementTrackingModule { }

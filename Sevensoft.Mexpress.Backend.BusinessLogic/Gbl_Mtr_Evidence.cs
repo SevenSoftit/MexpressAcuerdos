@@ -62,7 +62,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 var model = message.DeSerializeObject<Mexpress.Backend.Common.Ac_Mtr_Agreement_Document>();
                 using (var repository = new Gbl_Mtr_Evidence_Repository(message.Connection))
                 {
-                    var returnObject = await repository.ListSpecial(model);
+                    var returnObject = await repository.List(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                     resultMessage.MessageInfo = returnObject.SerializeObject();
