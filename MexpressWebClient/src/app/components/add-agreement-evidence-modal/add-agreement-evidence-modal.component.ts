@@ -138,7 +138,6 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     }
     else {
       file[2].append("Pk_Cat_Document_Agreement", this.pkDocument);
-      debugger;
       file[2].append("Pk_Ac_Trade_Agreement", this.dataModal.confirmInfo.header_File);
       file[2].append("Creation_User", utiles.getInfoUser().username);
       file[2].append("Modification_User", utiles.getInfoUser().username);

@@ -183,7 +183,7 @@ listAgreementStatus() {
       skipLocationChange: true
     };
     this.router.navigate(['newTradeAgreements'], navigationExtras);
-    this._common.asignHeaderTitle("Nuevo acuerdo comercial");
+    this._common.asignHeaderTitle("Editar acuerdo");
   }
 
 
