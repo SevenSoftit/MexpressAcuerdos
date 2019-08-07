@@ -1,19 +1,24 @@
-<div class="container-fluid">
-
-    <div class="row agreement-top-header ml-0 mr-0 ">
+<div class="container-fluid p-0">
+<div class="trade-agreements-header">
+      <div class="row ml-0 mr-0 ">
         <h5 class="tittle-agreement">Acuerdos comerciales</h5>
     </div>
+    <div class="row m-0 pl-5 pr-4">
+        <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes o bien agregar uno nuevo.</label>
+    </div>
 
-    <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
+    <div class="row ml-0 mr-0">
         <div class="offset-md-10 col-md-2">
             <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
                 <mat-icon class="mr-2">add_circle_outline</mat-icon>Crear acuerdo
             </button>
         </div>
     </div>
+</div>
+  
 
 
-    <div class="row new-agreement-table-top">
+    <div class="row new-agreement-table-top trade-agreements-filters">
         <div class="col-md-5 trade-agreements-radio-b">
             <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
 
@@ -41,9 +46,11 @@
     </div>
 
     <!-- Listado de acuerdos -->
-    <div class="row new-agreement-table-top">
+    <div class="row ml-0 mr-0 trade-agreements-grid">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
+            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' 
+            [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' 
+            (dataBound)="dataBound($event)" [allowResizing]='true' [toolbar]='toolbar' >
                 <e-columns>
                     <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'>
                     </e-column>
@@ -68,7 +75,7 @@
 
                     <e-column field='edit' textAlign='center' headerText='Editar' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementDetails($event)">border_color</mat-icon>
+                            <mat-icon (click)="viewAgreementDetails($event)" class="trade-agreements-edit-icon">border_color</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>
