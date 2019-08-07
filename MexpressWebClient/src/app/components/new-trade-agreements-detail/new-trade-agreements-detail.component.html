@@ -1,18 +1,22 @@
-<div class="container-fluid">
-
-    <div class="row agreement-top-header ml-0 mr-0 ">
+<div class="container-fluid p-0">
+<div class="create-agreement-sector">
+     <div class="row  ml-0 mr-0 ">
         <h5 class="tittle-agreement">Nuevo acuerdo comercial</h5>
     </div>
-
-    <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
+    <div class="row m-0 pl-5 pr-4">
+        <label class="trade-agreements-description">En esta sección se puede agregar un nuevo acuerdo comercial.</label>
+    </div>
+    <div class="row  ml-0 mr-0">
         <div class="col-md-12 text-right">
             <button *ngIf="enableExcel" class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
 
             <button *ngIf="enableEvidence" class="save-button ml-4" mat-raised-button (click)="openListEvidenceModal()"><mat-icon  class="mr-2">attachment</mat-icon>Subir adjuntos</button>
         </div>
     </div>
+</div>
+   
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
-        <div class="row mr-0 agreement-top">
+        <div class="row mr-0 ml-0 agreement-top">
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
@@ -79,7 +83,7 @@
                 </mat-slide-toggle>
             </div>
         </div>
-        <div class="row">
+        <div class="row ml-0 mr-0">
             <!--Descripción-->
             <div class="col-md-10">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
@@ -91,7 +95,7 @@
         </div>
     </form>
 
-    <div class="row new-agreement-table-top" *ngIf="!showWorkTable && dataTable != undefined">
+    <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="!showWorkTable && dataTable != undefined">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
                 [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
@@ -117,7 +121,7 @@
         <h5 class="begin-agreement-creation">Guarda la primera sección del acuerdo para poder cargar el excel de productos.</h5>
     </div>
 
-    <div class="row new-agreement-table-top" *ngIf="showWorkTable">
+    <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='workDataTable' id='NormalgridWork' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowScrolling='true' scrollSettings='initialScroll' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettingsWork'
                 [toolbar]='toolbarWork' (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBound($event)" [allowResizing]='true'>
@@ -143,7 +147,7 @@
                 </e-columns>
             </ejs-grid>
         </div>
-        <div class="row w-100">
+        <div class="row w-100 mr-0 ml-0 ">
             <label for="" class="new-agreement-doc-errors" *ngIf="docHasErrors">La información del excel contiene errores.</label>
         </div>
         <div class=" mx-auto new-agreement-buttons-top">

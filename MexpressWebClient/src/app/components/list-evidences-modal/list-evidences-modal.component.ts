@@ -172,7 +172,7 @@ debugger;
       minWidth: "900px",
       maxWidth: "950px",
       maxHeight: "600px",
-      minHeight: "475px"
+      minHeight: "370px"
     });
 
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {

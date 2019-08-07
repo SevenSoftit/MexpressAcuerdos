@@ -2,10 +2,12 @@
 .tittle-agreement {
     font-size: $font-size-medium;
     text-align: left;
-    font-family: $opensans-semibold;
-    color: #001B36;
+    font-family: $opensans-bold;
+    color: $light-blue;
 }
-
+.trade-agreements-description{
+    font-family: $opensans-semibold;
+}
 .agreement-top-header {
     margin-top: 2vh;
 }
@@ -25,7 +27,7 @@
 }
 
 .create-agreement-sector {
-    background: $light-gray-softer;
+    background: #eeeeee;
     border-radius: 0rem;
     padding: 1.3rem;
     margin-left: 0;
@@ -180,3 +182,24 @@
     font-size: 2rem;
     margin-top: 10vh;
 }
+
+//#region tableStyles
+
+::ng-deep .newtrade-agreements-grid  .e-grid .e-columnheader {   
+    color: $light-blue  !important;
+}
+
+::ng-deep.newtrade-agreements-grid  .e-grid .e-headercell, .e-grid .e-detailheadercell {
+    background-color: #eee !important;
+}
+
+::ng-deep.newtrade-agreements-grid  .e-grid .e-headercelldiv {
+    font-family:$opensans-bold !important;
+    font-size: $font-size-small!important;
+    white-space: normal !important;
+}
+
+::ng-deep.newtrade-agreements-grid  .e-pager .e-currentitem, .e-pager .e-currentitem:hover {
+    background-color: $light-blue !important
+}
+//#endregion tableStyles

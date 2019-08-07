@@ -511,7 +511,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(ImportProductComponent, {
       data: { confirmInfo: this.headerFile },
-      minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight: '420px'
+      minWidth: '750px', maxWidth: '750px', minHeight: '245px', maxHeight: '245px'
     });
     dialogRef.afterClosed().subscribe(
       result => {
