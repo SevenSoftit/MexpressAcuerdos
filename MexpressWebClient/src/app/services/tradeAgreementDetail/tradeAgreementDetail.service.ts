@@ -107,6 +107,13 @@ export class TradeAgreementDetailService {
       tap(() => console.log(''))
       );
   }
+
+  ListAgreementGoals (agreement: any) {
+    const url = this.apiUrl + 'api/agreementGoals/List';
+    return this.http.post<any>(url, agreement, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
   
 
 }

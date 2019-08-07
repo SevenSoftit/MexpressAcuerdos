@@ -51,7 +51,7 @@ const routes: Routes = [
     ScrollDispatchModule,
     DropDownListAllModule,
     MatDatepickerModule,
-    MaterialModule  
+    MaterialModule 
   ],
   providers: [
     ToolbarService,

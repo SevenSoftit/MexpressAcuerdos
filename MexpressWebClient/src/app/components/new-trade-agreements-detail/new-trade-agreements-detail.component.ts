@@ -92,29 +92,39 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
 
+  dataTableGoal: any = [];
+  toolbarGoal: ToolbarItems[] | Object;
+  dpParams: IEditCell;
+  ddParams: IEditCell;
+
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
-      
-      this.activated_route.queryParams.subscribe(params => {     
-        var parameters = params["agreementDet"];
 
-       if(parameters != undefined){
+    this.activated_route.queryParams.subscribe(params => {
+      var parameters = params["agreementDet"];
+
+      if (parameters != undefined) {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          this.listAgreement(agreement);
+
+          // if (this.agreementDetail.info.all_Products) {
+          this.listAgreementGoals(agreement);
+          //   }
+          //   else
+          //     this.listAgreement(agreement);
         }
       }
-      });    
+    });
 
-  if (this.headerFile == 0) {  
-    this.disableHeader = false;
-  } else {
-    this.disableHeader = true;
-  }
+    if (this.headerFile == 0) {
+      this.disableHeader = false;
+    } else {
+      this.disableHeader = true;
+    }
   }
 
   ngOnInit() {
@@ -139,6 +149,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
 
+
+    this.toolbarGoal = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    // this.formatoptions = { type: 'dateTime', format: 'M/d/y hh:mm a ' }
+    this.dpParams = { params: { value: new Date() } };
+    this.ddParams = { params: { value: 'COLONES'}};
     this.listMoney();
 
 
@@ -167,11 +182,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.typeContactObj.dataBind();
       }
     };
+
     this.fillFormAgreementDetail();
   }
 
+  initializeCurrency() {
+
+  }
+
+
+
   fillFormAgreementDetail() {
-    if(this.agreementDetail != undefined){
+    if (this.agreementDetail != undefined) {
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,
@@ -189,7 +211,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-    }else{
+    } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
         description: '',
@@ -311,6 +333,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     else
       this.showErrors = true;
   }
+
   dateChange() {
     var startDate = this.newAgreementForm.value.startDatePicker;
     var endDate = this.newAgreementForm.value.endDatePicker;
@@ -654,6 +677,20 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
 
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+
+  listAgreementGoals(data: NewAgreementModel) {
+
+    this.tradeAgreementDetailService.ListAgreementGoals(data).subscribe(
+      dataQ => {
+        this.dataTableGoal = dataQ.data;
+        console.log(this.dataTableGoal);
         this._common._setLoading(false);
       },
       error => {
