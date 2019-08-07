@@ -7,6 +7,7 @@ export class NewAgreementDetailHeaderModel {
     Product_Name: string;
     Id_Currency: string;
     Product_Amount: number;
+    Recovery_Amount: number;
 
     Pk_Ac_Trade_Agreement: number;
     Pk_Cat_Type_Agreement: number;
@@ -50,6 +51,7 @@ export class NewAgreementDetailHeaderModel {
             this.Product_Name = '';
             this.Id_Currency = '';
             this.Product_Amount = 0;
+            this.Recovery_Amount = 0;
             
             this.Pk_Ac_Trade_Agreement = 0;
             this.Pk_Cat_Type_Agreement = 0;
