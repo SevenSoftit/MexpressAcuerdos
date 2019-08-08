@@ -5,9 +5,11 @@
     font-family: $opensans-bold;
     color: $light-blue;
 }
-.trade-agreements-description{
+
+.trade-agreements-description {
     font-family: $opensans-semibold;
 }
+
 .agreement-top-header {
     margin-top: 2vh;
 }
@@ -125,19 +127,19 @@
     margin: 0.35rem auto auto;
 }
 
-::ng-depp .e-pager .e-currentitem {
+::ng-deep .e-pager .e-currentitem {
     background: $light-blue;
 }
 
-::ng-depp .e-pager .e-currentitem:hover {
+::ng-deep .e-pager .e-currentitem:hover {
     background: $light-blue;
 }
 
-::ng-depp .e-grid .e-content {
+::ng-deep .e-grid .e-content {
     overflow-x: hidden !important;
 }
 
-::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
     font-family: $opensans-semibold !important;
     font-size: $font-size-small!important;
     color: $white!important;
@@ -147,7 +149,7 @@
     min-width: 7rem!important;
 }
 
-::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
     color: $white!important;
 }
 
@@ -184,22 +186,24 @@
 }
 
 //#region tableStyles
-
-::ng-deep .newtrade-agreements-grid  .e-grid .e-columnheader {   
-    color: $light-blue  !important;
+::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
+    color: $light-blue !important;
 }
 
-::ng-deep.newtrade-agreements-grid  .e-grid .e-headercell, .e-grid .e-detailheadercell {
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
+.e-grid .e-detailheadercell {
     background-color: #eee !important;
 }
 
-::ng-deep.newtrade-agreements-grid  .e-grid .e-headercelldiv {
-    font-family:$opensans-bold !important;
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
+    font-family: $opensans-bold !important;
     font-size: $font-size-small!important;
     white-space: normal !important;
 }
 
-::ng-deep.newtrade-agreements-grid  .e-pager .e-currentitem, .e-pager .e-currentitem:hover {
+::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
     background-color: $light-blue !important
 }
+
 //#endregion tableStyles

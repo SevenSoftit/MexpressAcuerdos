@@ -1,37 +1,35 @@
-<div class="container-fluid">
-
-    <div class="row agreement-top-header ml-0 mr-0 ">
-        <h5 class="tittle-agreement">Seguimiento del acuerdo</h5>
-    </div>
-
-    <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
-        <div class="col-md-12 text-right">
-            <button class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
+<div class="container-fluid p-0">
+    <div class="create-agreement-sector">
+        <div class="row  ml-0 mr-0 ">
+            <h5 class="tittle-agreement">Detalle del seguimiento</h5>
+        </div>
+        <div class="row m-0 pl-5 pr-4">
+            <label class="trade-agreements-description">Esta sección  presenta el detalle del seguimiento de un acuerdo.</label>
+        </div>
+        <div class="row  ml-0 mr-0">
+            <div class="col-md-12 text-right">
+                <button class="save-button ml-4" mat-raised-button (click)="">
+                    <mat-icon class="mr-2">attachment</mat-icon>Ver detalle de todo el acuerdo
+                </button>
+            </div>
         </div>
     </div>
+
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
-        <div class="row mr-0 agreement-top">
+        <div class="row mr-0 ml-0 agreement-top">
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
-                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)"
-                    placeholder="Tipo de acuerdo">
+                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
                     <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
                         {{typeAgreement.name_Agreement}}
                     </mat-option>
                 </mat-select>
-                <div *ngIf="errorTypeOfAgreement" class="alert-error-required mt-2">
-                    Debe seleccionar el tipo de acuerdo
-                </div>
-
             </div>
             <!-- Nombre del acuerdo-->
             <div class="col-md-2">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
-                <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors" class="alert-error-required mt-2">
-                    Debe escribir un nombre
-                </div>
             </div>
             <!-- Proveedor -->
             <div class="col-md-2">
@@ -41,37 +39,31 @@
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
-                <div *ngIf="errorProvider" class="alert-error-required mt-2">
-                    Debe seleccionar el proveedor
-                </div>
             </div>
             <!-- Fecha Inicio -->
             <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
-                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Inicio</label>
+                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Inicio</label>
                     <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
                         readonly>
-                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate">
+                    </mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
-                    <div *ngIf="errorStartDate" class="alert-error-required mt-2">
-                        La fecha de inicio del acuerdo debe de ser mayor/igual a hoy
-                    </div>
                 </div>
             </div>
             <!-- Fecha Fin -->
             <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
-                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Fin</label>
+                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Fin</label>
                     <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
                     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
-                    <div *ngIf="errorEndDate" class="alert-error-required mt-2">
-                        La fecha de fin del acuerdo debe de ser mayor/igual a la fecha de inicio
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row ml-0 mr-0">
             <!--Descripción-->
             <div class="col-md-10">
                 <label for="description" class="new-agreement-label-input">Descripción</label>

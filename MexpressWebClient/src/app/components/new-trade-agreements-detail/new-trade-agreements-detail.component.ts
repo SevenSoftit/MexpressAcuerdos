@@ -18,7 +18,6 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import { AddAgreementEvidenceModalComponent } from '../add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
 import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
@@ -315,8 +314,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.showErrors = true;
   }
   dateChange() {
-    var startDate = this.newAgreementForm.value.startDatePicker;
-    var endDate = this.newAgreementForm.value.endDatePicker;
     // startDate.setHours(0);
     // endDate.setHours(0);
 
@@ -379,7 +376,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         data.pk_Cat_Agreement_Details = dataZ.pk_Cat_Agreement_Details;
 
 
-      }, error => {
+      }, () => {
         this.dataTable = this.dataTable.filter(dt => dt.pk_Cat_Agreement_Details != 0);
         var agreement = new NewAgreementModel();
         agreement.Pk_Ac_Trade_Agreement = this.headerFile;
@@ -396,7 +393,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   deleteWorkLine(data: NewAgreementModel) {
     data[0].pk_Cat_Agreement_Details = (data[0].pk_Cat_Agreement_Details != undefined && !Number.isNaN(data[0].pk_Cat_Agreement_Details)) ? data[0].pk_Cat_Agreement_Details : 0;
     this.tradeAgreementDetailService.deleteTradeAgreementDetailProduct(data[0]).subscribe(
-      dataG => {
+      () => {
         // data.pk_Cat_Agreement_Details = dataG.pk_Cat_Agreement_Details;
       }, error => {
         this._common._setLoading(false);
@@ -467,7 +464,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }
 
 
-      }, error => {
+      }, () => {
         this._common._setLoading(false);
       });
   }
@@ -483,7 +480,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.grid.gridLines = 'Both';
   }
 
-  dataBound(args: any) {
+  dataBound() {
     this.grid.gridLines = 'Both';
   }
 
@@ -559,7 +556,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
         });
         setTimeout(() => dialogRef.close(), 3000);
-      }, error => {
+      }, () => {
         this._common._setLoading(false);
       });
   }
@@ -695,10 +692,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       minHeight: "475px"
     });
 
-    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
-      if (data) {
-      }
-    });
   }
 
   public modalSelectedTypeAgreement() {
