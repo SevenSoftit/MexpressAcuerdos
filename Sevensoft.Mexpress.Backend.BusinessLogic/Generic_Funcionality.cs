@@ -73,7 +73,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                                 {
                                     dataTable.Columns[header.ToString()].ColumnName = "PRODUCT_NAME";
                                 }
-                                else if (header.ToString() == "Moneda(1: colones, 2:dólares)")
+                                else if (header.ToString() == "Moneda")
                                 {
                                     dataTable.Columns[header.ToString()].ColumnName = "ID_CURRENCY";
                                 }

@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
-                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider"  matTooltip="{{provider.name_Provider}}" class="provider-opt">
+                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
@@ -95,12 +95,12 @@
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
-              <!--Activador de acuerdos-->
-              <div class="col-md-2">
-                    <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
-                    <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
-                    </mat-slide-toggle>
-                </div>
+            <!--Activador de acuerdos-->
+            <div class="col-md-2">
+                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
+                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                </mat-slide-toggle>
+            </div>
             <div class="col-md-2 mt-4" *ngIf="!disableHeader">
                 <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
@@ -116,7 +116,7 @@
                 <e-columns>
                     <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='name_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='name_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
@@ -141,7 +141,7 @@
                 <e-columns>
                     <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='name_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='name_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='product_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
 
