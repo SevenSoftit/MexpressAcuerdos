@@ -150,7 +150,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         return this.typeContacElem;
       },
       read: () => {
-        return this.typeContactObj.text;
+        return this.typeContactObj.value;
       },
       destroy: () => {
         this.typeContactObj.destroy();
@@ -435,7 +435,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     if (!isDelete) {
       args.data.product_Id_Alias = (args.data.product_Id_Alias != undefined) ? args.data.product_Id_Alias : '';
       args.data.product_Name = (args.data.product_Name != undefined) ? args.data.product_Name : '';
-      args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
+      // args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
+      debugger;
+      args.data.id_Currency = this.listsMoney.filter(x => x.name_Currency == args.data.name_Currency)[0].id_Currency;
       args.data.product_Amount = (args.data.product_Amount != undefined) ? args.data.product_Amount : 0;
       args.data.creation_User = this.infoUser.username;
       args.data.pk_Ac_Trade_Agreement = (args.data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(args.data.pk_Ac_Trade_Agreement)) ? args.data.pk_Ac_Trade_Agreement : 0;
@@ -661,7 +663,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.enableExcel = true;
           this.enableEvidence = true;
         }
-        debugger;
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
       },
