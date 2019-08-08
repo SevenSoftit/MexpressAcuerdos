@@ -116,7 +116,7 @@
                 <e-columns>
                     <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='name_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
@@ -141,7 +141,8 @@
                 <e-columns>
                     <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <!-- <e-column field='id_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column> -->
+                    <e-column field='name_Currency' headerText='Moneda(1: colones, 2:dólares)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
                     <e-column field='product_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
 

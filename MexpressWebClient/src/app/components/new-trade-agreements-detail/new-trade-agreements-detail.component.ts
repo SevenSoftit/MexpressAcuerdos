@@ -91,16 +91,16 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
-  isEditable: boolean = true; 
+  isEditable: boolean = true;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
-      this._common._setLoading(true);
-      this.activated_route.queryParams.subscribe(params => {     
-        var parameters = params["agreementDet"];
+    this._common._setLoading(true);
+    this.activated_route.queryParams.subscribe(params => {
+      var parameters = params["agreementDet"];
 
-       if(parameters != undefined){
+      if (parameters != undefined) {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -110,13 +110,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.listAgreement(agreement);
         }
       }
-      });    
+    });
 
-  if (this.headerFile == 0) { 
-    this.disableHeader = false;
-  } else {
-    this.disableHeader = true;
-  }
+    if (this.headerFile == 0) {
+      this.disableHeader = false;
+    } else {
+      this.disableHeader = true;
+    }
   }
 
   ngOnInit() {
@@ -135,7 +135,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
 
-    this.codeRules = { required: [true, 'Código requerido']};
+    this.codeRules = { required: [true, 'Código requerido'] };
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
@@ -150,7 +150,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         return this.typeContacElem;
       },
       read: () => {
-        return this.typeContactObj.value;
+        return this.typeContactObj.text;
       },
       destroy: () => {
         this.typeContactObj.destroy();
@@ -159,7 +159,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.typeContactObj = new DropDownList({
           dataSource: this.listsMoney,
 
-          fields: { value: "id_Currency", text: "name_Currency" },
+          fields: { value: "name_Currency", text: "name_Currency" },
           enabled: true,
           placeholder: "Seleccione la moneda",
           floatLabelType: "Never"
@@ -172,7 +172,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   fillFormAgreementDetail() {
-    if(this.agreementDetail != undefined){
+    if (this.agreementDetail != undefined) {
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,
@@ -190,7 +190,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-    }else{
+    } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
         description: '',
@@ -206,9 +206,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 9, pageCount: 5 };
+      this.pageSettings = { pageSize: 10, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 4, pageCount: 5 };
+      this.pageSettings = { pageSize: 6, pageCount: 5 };
     }
   }
 
@@ -257,7 +257,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     if (this.provider == undefined) {
       this.errorProvider = true;
-    }   
+    }
 
     if (this.type_of_agreement == undefined) {
       this.errorTypeOfAgreement = true;
@@ -316,7 +316,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
     else
       this.showErrors = true;
-      this._common._setLoading(false);
+    this._common._setLoading(false);
   }
   dateChange() {
     // startDate.setHours(0);
@@ -370,7 +370,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     data.pk_Glb_Products = (data.pk_Glb_Products != undefined && data.pk_Glb_Products != 0 && !Number.isNaN(data.pk_Glb_Products)) ? data.pk_Glb_Products : 1;
     data.product_Id_Alias = data.product_Id_Alias;
     data.product_Name = data.product_Name;
-    data.id_Currency = data.id_Currency;
+    data.id_Currency = this.listsMoney.filter(x => x.name_Currency == data.name_Currency)[0].id_Currency;
     data.recovery_Amount = data.recovery_Amount;
     data.active = (data.active != undefined && !Number.isNaN(data.active)) ? data.active : true;
     data.creation_User = this.infoUser.username;
@@ -492,10 +492,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   behaviorTypeOfAgreement(value: any) {
     this.errorTypeOfAgreement = false;
-    if(value.value == 3){
+    if (value.value == 3) {
       this.disableStartDate = true;
       this.modalSelectedTypeAgreement();
-    }else{
+    } else {
       this.disableStartDate = false;
     }
   }
@@ -518,7 +518,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       result => {
         if (result != undefined) {
           this.docHasErrors = false;
-          this.workDataTable = [];       
+          this.workDataTable = [];
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
@@ -661,6 +661,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.enableExcel = true;
           this.enableEvidence = true;
         }
+        debugger;
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
       },
@@ -704,7 +705,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       // btnClose: 'Cerrar',
       status: 'warning'
     };
-  
+
     const dialogRef = this.matDialog.open(FeedbackModalComponent, {
       data: { contactInfo: dataSuccess },
       minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
