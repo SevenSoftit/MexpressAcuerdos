@@ -80,6 +80,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     * Description:
   **************************************************************************************/
   saveEvidence() {
+    this.commonService._setLoading(true);
     this.submitted = true;
     if (this.files.length <= 0) {
       this.AlmostOneEvidenceModal();
@@ -192,6 +193,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     * Description:
   **************************************************************************************/
   public onUploadSuccess(): void {
+    this.commonService._setLoading(false);
     this.onAdd.emit(true);
     this.modalSuccessEvidence();
     this.closeEvidenceModal();

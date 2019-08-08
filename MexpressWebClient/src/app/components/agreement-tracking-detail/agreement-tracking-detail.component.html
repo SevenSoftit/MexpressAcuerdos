@@ -8,7 +8,7 @@
         </div>
         <div class="row  ml-0 mr-0">
             <div class="col-md-12 text-right">
-                <button class="save-button ml-4" mat-raised-button (click)="">
+                <button class="save-button ml-4" mat-raised-button>
                     <mat-icon class="mr-2">attachment</mat-icon>Ver detalle de todo el acuerdo
                 </button>
             </div>
@@ -20,7 +20,7 @@
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
-                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
+                <mat-select [disabled]="true" id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
                     <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
                         {{typeAgreement.name_Agreement}}
                     </mat-option>
@@ -29,12 +29,13 @@
             <!-- Nombre del acuerdo-->
             <div class="col-md-2">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
+                    placeholder="Nombre del acuerdo">
             </div>
             <!-- Proveedor -->
             <div class="col-md-2">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
+                <mat-select [disabled]="true" id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor">
                     <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
                         {{provider.name_Provider}}
                     </mat-option>
@@ -47,7 +48,7 @@
                         Inicio</label>
                     <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
                         readonly>
-                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="true">
                     </mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
                 </div>
@@ -58,7 +59,7 @@
                     <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Fin</label>
                     <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
-                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker" [disabled]="true"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </div>
             </div>
@@ -67,7 +68,7 @@
             <!--Descripción-->
             <div class="col-md-10">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
         </div>
     </form>

@@ -6,6 +6,11 @@ import { ExcelExportProperties, ToolbarItems } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ProviderService } from 'src/app/services/TaProvider/provider.service';
+import { ProviderModel } from 'src/app/models/provider.model';
+import { CommonService } from 'src/app/services/common/common.service';
+import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
+import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 
 @Component({
   selector: 'app-agreement-tracking-detail',
@@ -35,8 +40,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
   fk_Status_Agreement: number = 0;
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
+  providerList: any = [];
+  public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
+  public providerModel: ProviderModel = new ProviderModel();
+  typeOfAgreementList: any = [];
  
-  constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute) {
+  constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService) {
       
       this.activated_route.queryParams.subscribe(params => {     
         var parameters = params["agreementDet"];
@@ -51,6 +60,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listTypeOfAgreement();
     this.getScreenSize();
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
@@ -59,8 +69,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
       description: new FormControl('')
     });
 
-    this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-   // this.pageSettings = { pageSize: 8, pageCount: 5 };
+    // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
 
@@ -133,4 +142,33 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.grid.excelExport(excelExportProperties);
     }
   }
+
+  listTypeOfAgreement() {
+
+    this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
+      dataS => {
+        this.typeOfAgreementList = dataS;
+        this.listProvider();
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
+  listProvider() {
+    this.providerService.listProvider(this.providerModel).subscribe(
+      dataG => {
+        this.providerList = dataG;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
 }

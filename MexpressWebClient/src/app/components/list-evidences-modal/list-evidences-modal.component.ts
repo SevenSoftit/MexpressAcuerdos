@@ -29,9 +29,8 @@ export class ListEvidencesModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
       this.commonService._setLoading(true);
-    }, 0, 5000);
+
     this.listAllEvidences();
   }
 

@@ -31,7 +31,6 @@ export class AgreementTrackingComponent implements OnInit {
   ngOnInit() {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
-    this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Search'];
     this.listHeaderAgreement();
@@ -43,9 +42,9 @@ export class AgreementTrackingComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 9, pageCount: 5 };
+      this.pageSettings = { pageSize: 12, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 4, pageCount: 5 };
+      this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
   }
 

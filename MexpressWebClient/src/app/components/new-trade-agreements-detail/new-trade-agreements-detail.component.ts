@@ -96,7 +96,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
-      
+      this._common._setLoading(true);
       this.activated_route.queryParams.subscribe(params => {     
         var parameters = params["agreementDet"];
 
@@ -112,7 +112,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
       });    
 
-  if (this.headerFile == 0) {  
+  if (this.headerFile == 0) { 
     this.disableHeader = false;
   } else {
     this.disableHeader = true;
@@ -130,7 +130,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     });
 
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-   // this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
     this.editSettingsWork = { allowEditing: true, allowDeleting: true };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
@@ -235,6 +234,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   saveAgreementHeader() {
+    this._common._setLoading(true);
     if (this.dataTable != undefined || this.workDataTable != undefined) {
       this.grid.endEdit();
     }
@@ -257,7 +257,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     if (this.provider == undefined) {
       this.errorProvider = true;
-    }
+    }   
 
     if (this.type_of_agreement == undefined) {
       this.errorTypeOfAgreement = true;
@@ -283,6 +283,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
+          this._common._setLoading(false);
           if (!this.enableUpdateAgreement) {
             this.enableExcel = true;
             this.enableEvidence = true;
@@ -292,6 +293,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
             this.dataTable = [];
             this.nameAgree = data[0].name_Agreement;
             this.showErrors = false;
+            this.showWorkTable = false;
+            this.enableUpdateAgreement = true;
             this.onAdd.emit(true);
           } else {
             this.enableExcel = true;
@@ -301,6 +304,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
             this.workDataTable = [];
             this.nameAgree = data[0].name_Agreement;
             this.showErrors = false;
+            this.showWorkTable = false;
             this.onAdd.emit(true);
 
           }
@@ -312,6 +316,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
     else
       this.showErrors = true;
+      this._common._setLoading(false);
   }
   dateChange() {
     // startDate.setHours(0);
@@ -505,7 +510,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
 
   openDialogImportProduct(): void {
-
     const dialogRef = this.matDialog.open(ImportProductComponent, {
       data: { confirmInfo: this.headerFile },
       minWidth: '750px', maxWidth: '750px', minHeight: '245px', maxHeight: '245px'
@@ -513,12 +517,14 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined) {
-          this.workDataTable = [];
+          this.docHasErrors = false;
+          this.workDataTable = [];       
           this.workDataTable = result;
           this.showWorkTable = true;
           this.title = 'Registros importados del Excel';
           // this.enableExcel = false;
           this.disableHeader = true;
+          this.enableUpdateAgreement = false;
         }
       }
     );
@@ -586,7 +592,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           });
         });
         this.listTypeOfAgreement();
-        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
@@ -601,7 +606,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       dataS => {
         this.typeOfAgreementList = dataS;
         this.listProvider();
-        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
@@ -651,7 +655,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description:
 *******************************************************/
   listAgreement(data: NewAgreementModel) {
-
     this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
       dataQ => {
         if ((dataQ.length == 0 || dataQ.length != 0) && dataQ != undefined) {
@@ -660,8 +663,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
-
-        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
