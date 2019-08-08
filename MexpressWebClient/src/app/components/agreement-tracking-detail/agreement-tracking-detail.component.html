@@ -27,16 +27,16 @@
                 </mat-select>
             </div>
             <!-- Nombre del acuerdo-->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
                 <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
                     placeholder="Nombre del acuerdo">
             </div>
             <!-- Proveedor -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select [disabled]="true" id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor">
-                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
+                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>

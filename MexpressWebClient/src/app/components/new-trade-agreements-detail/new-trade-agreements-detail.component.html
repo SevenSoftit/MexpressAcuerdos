@@ -41,7 +41,7 @@
 
             </div>
             <!-- Nombre del acuerdo-->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
                 <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors" class="alert-error-required mt-2">
@@ -49,10 +49,10 @@
                 </div>
             </div>
             <!-- Proveedor -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
-                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
+                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider"  matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
@@ -88,19 +88,19 @@
                     </div>
                 </div>
             </div>
-            <!--Activador de acuerdos-->
-            <div class="col-md-2 agr-activator">
-                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
-                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
-                </mat-slide-toggle>
-            </div>
         </div>
         <div class="row ml-0 mr-0">
             <!--Descripción-->
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
+              <!--Activador de acuerdos-->
+              <div class="col-md-2">
+                    <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
+                    <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                    </mat-slide-toggle>
+                </div>
             <div class="col-md-2 mt-4" *ngIf="!disableHeader">
                 <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
