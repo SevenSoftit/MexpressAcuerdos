@@ -152,8 +152,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 {
                     if (model.Option == Agreement_Option.Process_Work_Table)
                     {
-                        var resultDetailList = repository.ExecuteProcess(model);
-                        resultMessage.MessageInfo = resultDetailList.Result.SerializeObject();;
+                        var resultDetailList = await repository.ExecuteProcess(model);
+                        resultMessage.MessageInfo = resultDetailList.SerializeObject();;
                     }
                     else
                     {

@@ -206,9 +206,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount: 5 };
+      this.pageSettings = { pageSize: 10, pageCount:8 };
     } else {
-      this.pageSettings = { pageSize: 6, pageCount: 5 };
+      this.pageSettings = { pageSize: 5, pageCount: 8 };
     }
   }
 
@@ -370,7 +370,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     data.pk_Glb_Products = (data.pk_Glb_Products != undefined && data.pk_Glb_Products != 0 && !Number.isNaN(data.pk_Glb_Products)) ? data.pk_Glb_Products : 1;
     data.product_Id_Alias = data.product_Id_Alias;
     data.product_Name = data.product_Name;
-    data.id_Currency = this.listsMoney.filter(x => x.name_Currency == data.name_Currency)[0].id_Currency;
+    // data.id_Currency = this.listsMoney.filter(x => x.name_Currency == data.name_Currency)[0].id_Currency;
+    data.id_Currency = data.name_Currency;
     data.recovery_Amount = data.recovery_Amount;
     data.active = (data.active != undefined && !Number.isNaN(data.active)) ? data.active : true;
     data.creation_User = this.infoUser.username;
@@ -435,9 +436,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     if (!isDelete) {
       args.data.product_Id_Alias = (args.data.product_Id_Alias != undefined) ? args.data.product_Id_Alias : '';
       args.data.product_Name = (args.data.product_Name != undefined) ? args.data.product_Name : '';
-      // args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
-      debugger;
-      args.data.id_Currency = this.listsMoney.filter(x => x.name_Currency == args.data.name_Currency)[0].id_Currency;
+      args.data.id_Currency = (args.data.id_Currency != undefined) ? args.data.id_Currency : '';
+      // args.data.id_Currency = this.listsMoney.filter(x => x.name_Currency == args.data.name_Currency)[0].id_Currency;
       args.data.product_Amount = (args.data.product_Amount != undefined) ? args.data.product_Amount : 0;
       args.data.creation_User = this.infoUser.username;
       args.data.pk_Ac_Trade_Agreement = (args.data.pk_Ac_Trade_Agreement != undefined && !Number.isNaN(args.data.pk_Ac_Trade_Agreement)) ? args.data.pk_Ac_Trade_Agreement : 0;

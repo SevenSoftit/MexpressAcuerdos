@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 export class ErrorDialogService {
 
     constructor(public matDialog: MatDialog, private router: Router) { }
-
+    debugger;
     openDialog(data): void {
+      debugger;
         const datafailed = {
             labelTitile: 'Error',
             icon: 'info',
