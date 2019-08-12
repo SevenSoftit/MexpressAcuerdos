@@ -46,3 +46,8 @@ MexpressWebClient/obj/Debug/netcoreapp2.2/project.razor.json
 *.cache
 *.cache
 *.cache
+*.json
+*.cache
+*.json
+*.cache
+Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Utilities.Extender.assets.cache

@@ -117,7 +117,7 @@
                     <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='name_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='recovery_Amount' type="number" format="N2" headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5' textAlign='Center'></e-column>

@@ -92,7 +92,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
   isEditable: boolean = true;
-
+  
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
@@ -346,7 +346,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
 
       if (args.action == "add" || args.action == "edit") {
-
         this.saveWorkLine(args.data);
       }
     }
@@ -509,7 +508,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.providerName = element.name_Provider
     });
   }
-
 
   openDialogImportProduct(): void {
     const dialogRef = this.matDialog.open(ImportProductComponent, {
