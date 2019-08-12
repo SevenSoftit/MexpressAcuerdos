@@ -73,6 +73,7 @@ export class AgreementTrackingComponent implements OnInit {
 * Description:
 *******************************************************/
 listHeaderAgreement() {
+  this._common._setLoading(true);
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
   this.isActiveAgreement = data.Active;
@@ -166,6 +167,7 @@ listAgreementStatus() {
   }
 
   viewAgreementTrackingDetails(args: any): void {
+    this._common._setLoading(true);
     let data: any = this.grid.getRowInfo(args.target).rowData;
     const agreementDet = {
       info: data

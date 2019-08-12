@@ -11,6 +11,9 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { CommonService } from 'src/app/services/common/common.service';
 import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
+import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
+import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { AgreementProductInfoDetailModel } from 'src/app/models/agreementProductInfoDetail.model';
 
 @Component({
   selector: 'app-agreement-tracking-detail',
@@ -44,8 +47,11 @@ export class AgreementTrackingDetailComponent implements OnInit {
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   public providerModel: ProviderModel = new ProviderModel();
   typeOfAgreementList: any = [];
+  behaviorTA: string = '';
+
  
-  constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService) {
+  constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
+    private tradeAgreementDetailService: TradeAgreementDetailService) {
       
       this.activated_route.queryParams.subscribe(params => {     
         var parameters = params["agreementDet"];
@@ -54,6 +60,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+          this.behaviorTA = this.agreementDetail.info.behavior;
         }
       }
       });    
@@ -70,7 +77,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     });
 
     // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-    this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
+    this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
 
     this.fillFormAgreementDetail();
@@ -144,12 +151,11 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   listTypeOfAgreement() {
-
+    this._common._setLoading(true);
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
         this.listProvider();
-        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
@@ -162,6 +168,22 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
         this.providerList = dataG;
+        this.listAgreementDResume();
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
+  listAgreementDResume() {
+    var agreementProductInfoModel = new AgreementProductInfoModel();
+    agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    agreementProductInfoModel.Behavior = this.behaviorTA;
+    this.tradeAgreementDetailService.listAgreementDetailsResume(agreementProductInfoModel).subscribe(
+      dataI => {
+        this.dataTable = dataI;
         this._common._setLoading(false);
       },
       error => {
@@ -170,5 +192,25 @@ export class AgreementTrackingDetailComponent implements OnInit {
       }
     )
   }
+
+  viewAgreementProductD(args: any): void {
+    let data: any = this.grid.getRowInfo(args.target).rowData;
+    var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
+    agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    agreementProductInfoDetailModel.Behavior = this.behaviorTA;
+    this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
+      dataI => {
+        this.dataTable = dataI;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+
+  }
+
+
 
 }

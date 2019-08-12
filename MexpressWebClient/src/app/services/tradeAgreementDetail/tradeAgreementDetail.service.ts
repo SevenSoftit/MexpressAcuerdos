@@ -2,8 +2,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { utiles } from 'src/environments/utiles';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
@@ -84,6 +85,48 @@ export class TradeAgreementDetailService {
       tap(() => console.log(''))
       );
   }
+
+      /*------------------------------------------------------------------
+  * Author: Gustavo ZC
+  * Creation date: 12/08/2019
+  * Description:
+ * *****************************************************
+  * Modifications
+ * *****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+  --------------------------------------------------------------------*/
+  listAgreementDetailsResume (contactInfoData: any) {
+    const url = this.apiUrl + 'api/agreementProductInfo/List';
+    return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
+      tap((product: any) => console.log('')),
+      catchError(this.handleError<any>(''))
+      );
+  }
+
+        /*------------------------------------------------------------------
+  * Author: Gustavo ZC
+  * Creation date: 12/08/2019
+  * Description:
+ * *****************************************************
+  * Modifications
+ * *****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+  --------------------------------------------------------------------*/
+  viewAgreementProductDetails (contactInfoData: any) {
+    const url = this.apiUrl + 'api/agreementProductInfoDetail/List';
+    return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
+      tap((product: any) => console.log('')),
+      catchError(this.handleError<any>(''))
+      );
+  }
   
   // HEADER OF THE AGREEMENT
 
@@ -114,6 +157,27 @@ export class TradeAgreementDetailService {
       tap(() => console.log(''))
       );
   }
+
+    /*******************************************************
+  * Author: Gustavo ZC
+  * Creation date: 12/08/2019
+  * Description:
+ * *****************************************************
+  * Modifications
+ * *****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+private handleError<T>(operation = 'operation', result?: T) {
+  return (error: any): Observable <T> => {
+  console.error(error);
+
+  return of (result as T);
+  };
+}
   
 
 }

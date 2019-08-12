@@ -31,18 +31,21 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         #region Region [Methods]
         public async Task<IEnumerable<Ac_Mtr_Agreement_Product_Info>> List(Ac_Mtr_Agreement_Product_Info model)
         {
+            
             using (var connection = new SqlConnection(ConnectionString))
-            {
-                var result = connection.Query<
-                    Common.Ac_Mtr_Agreement_Product_Info>
-                    ("PA_CON_AC_MTR_AGREEMENT_GET",
+            { 
+
+                var result = connection.Query<Common.Ac_Mtr_Agreement_Product_Info>
+                
+                    ("PA_CON_AC_MTR_AGREEMENT_DETAILS_RESUME_GET",
                     param: new
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         // P_PK_GLB_PRODUCTS = model.Pk_Glb_Products
+                        P_BEHAVIOR = model.Behavior
             },
                     commandType: CommandType.StoredProcedure);
-            return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Product_Info>>(result.ToList());
+                    return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Product_Info>>(result.ToList());           
         }
     }
 
@@ -52,11 +55,12 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Product_Info>
-                ("PA_CON_AC_MTR_AGREEMENT_GET",
+                ("PA_CON_AC_MTR_AGREEMENT_DETAILS_RESUME_GET",
                 param: new
                 {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         // P_PK_GLB_PRODUCTS = model.Pk_Glb_Products
+                        P_BEHAVIOR = model.Behavior
                 },
                 commandType: CommandType.StoredProcedure).FirstOrDefault();
             return await Task.FromResult<Common.Ac_Mtr_Agreement_Product_Info>(result);
@@ -68,21 +72,24 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             await connection.QueryAsync<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Product_Info>
-                ("PA_MAN_AC_MTR_AGREEMENT_SAVE",
+                ("PA_MAN_AC_MTR_AGREEMENT_DETAILS_RESUME_SAVE",
                 param: new
                 {
-                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
-                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
-                        P_PRODUCT_NAME = model.Product_Name,
-                        P_ID_CURRENCY = model.Id_Currency,
-                        P_RECOVERY_AMOUNT = model.Recovery_Amount,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_ACTIVE = model.Active
+                        P_PRODUCT_ID = model.Product_Id,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_PRODUCT_QUANTITY_SOLD= model.Product_Quantity_Sold,
+                        P_PRODUCT_AMOUNT_RECOVERY = model.Product_Amount_Recovery,
+                        
+                        // P_ID_CURRENCY = model.Id_Currency,                     
+                        // P_ACTIVE = model.Active
                 },
                 commandType: CommandType.StoredProcedure);
         }
@@ -94,21 +101,24 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Product_Info>
-                ("PA_MAN_AC_MTR_AGREEMENT_SAVE",
+                ("PA_MAN_AC_MTR_AGREEMENT_DETAILS_RESUME_SAVE",
                 param: new
                 {
-                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
-                        P_PRODUCT_ID_ALIAS = model.Product_Id_Alias,
-                        P_PRODUCT_NAME = model.Product_Name,
-                        P_ID_CURRENCY = model.Id_Currency,
-                        P_RECOVERY_AMOUNT = model.Recovery_Amount,
                         P_CREATION_DATE = model.Creation_Date,
                         P_CREATION_USER = model.Creation_User,
                         P_MODIFICATION_DATE = model.Modification_Date,
                         P_MODIFICATION_USER = model.Modification_User,
-                        P_ACTIVE = model.Active
+                        P_PRODUCT_ID = model.Product_Id,
+                        P_PRODUCT_NAME = model.Product_Name,
+                        P_PRODUCT_AMOUNT = model.Product_Amount,
+                        P_PRODUCT_QUANTITY_SOLD= model.Product_Quantity_Sold,
+                        P_PRODUCT_AMOUNT_RECOVERY = model.Product_Amount_Recovery,
+                        
+                        // P_ID_CURRENCY = model.Id_Currency,                     
+                        // P_ACTIVE = model.Active
                 },
                 commandType: CommandType.StoredProcedure).FirstOrDefault();
             return await Task.FromResult<Common.Ac_Mtr_Agreement_Product_Info>(result);
@@ -119,10 +129,10 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         using (var connection = new SqlConnection(ConnectionString))
         {
             await connection.ExecuteAsync(
-            sql: "PA_CON_AC_MTR_AGREEMENT_DELETE",
+            sql: "PA_CON_AC_MTR_AGREEMENT_DETAILS_RESUME_DELETE",
             param: new
             {
-                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
                         P_CREATION_USER = model.Creation_User,
@@ -139,10 +149,10 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         {
             var result = connection.Query<
                 Common.Ac_Mtr_Agreement_Product_Info>
-                ("PA_CON_AC_MTR_AGREEMENT_DELETE",
+                ("PA_CON_AC_MTR_AGREEMENT_DETAILS_RESUME_DELETE",
                 param: new
                 {
-                        P_PK_CAT_AGREEMENT_DETAILS = model.Pk_Cat_Agreement_Details,
+                        P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         P_PK_GLB_PRODUCTS = model.Pk_Glb_Products,
                         P_CREATION_USER = model.Creation_User,

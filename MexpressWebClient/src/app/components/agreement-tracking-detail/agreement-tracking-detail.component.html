@@ -78,26 +78,28 @@
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='name_Agreement' headerText='Código' width='150' textAlign='Center'></e-column>
-                    <e-column field='agreement_Status_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
-                    <e-column field='provider_Name' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' headerText='Cantidad de artículos vendidos' width='180' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
+                    <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
+                    <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
+                    <e-column field='product_Amount' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
+                    <e-column field='product_Quantity_Sold' headerText='Cantidad de artículos vendidos' width='180' textAlign='Center'></e-column>
+                    <e-column field='product_Amount_Recovery' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Cat_Agreement_Details_Resume' [isPrimaryKey]="true" [visible]="false" headerText='pk_Cat_Agreement_Details_Resume' width='5' textAlign='Center'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'></e-column>
-                    <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
+
 
                     <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementProductDetails($event)">remove_red_eye</mat-icon>
+                            <mat-icon (click)="viewAgreementProductD($event)">remove_red_eye</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>
             </ejs-grid>
         </div>
     </div>
+
+    <!-- Tabla para listar el detalle de cada producto -->
 
 
 
