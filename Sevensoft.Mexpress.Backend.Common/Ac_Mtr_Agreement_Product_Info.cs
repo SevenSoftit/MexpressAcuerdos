@@ -26,7 +26,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Behavior = "";
         }
         public Int64 Pk_Cat_Agreement_Details_Resume { get; set; }
-        public Int32 Pk_Ac_Trade_Agreement { get; set; }
+        public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int32 Pk_Glb_Products { get; set; }
         public DateTime Creation_Date { get; set; }
         public String Creation_User { get; set; }
