@@ -1,0 +1,95 @@
+@import "../../../styles.scss";
+
+.goals-loader-tittle {
+  font-family: $opensans-bold;
+  font-size: $font-size-big;
+  color: $light-blue;
+  text-align: center;
+}
+
+.goals-loader-header {
+  border: 1px solid #eeeeee;
+  background-color: #eee ;
+  align-items: center;
+}
+.goals-loader-icon-header {
+  display: flex;
+  justify-content: center;
+  background: $light-blue;
+  padding: 0.5rem;
+  mat-icon {
+    color: #fff;
+    cursor: pointer;
+  }
+}
+.goals-loader-header-label {
+  font-family: $opensans-semibold;
+  color: $light-blue ;
+}
+
+.goals-loader-inputs.form-control{
+    border: 1px solid transparent;
+    border-bottom: 1px solid  $light-blue-dark;
+    width: 85%;
+    box-shadow: none;
+    text-align: center;
+    background: transparent;
+
+}
+
+.goal-loader-input-col{
+    display: flex;
+    justify-content: center;
+}
+.goals-loader-date-picker{
+    height: calc(2.25rem + 2px);
+    border: 1px solid transparent;
+    border-bottom: 1px solid  $light-blue-dark;
+    width: 85%;
+    box-shadow: none;
+    text-align: center;
+    background: transparent;
+
+}
+.goals-loader-input-section{
+    border: 1px solid #eeeeee;
+    background: rgba(196, 196, 196, 0.15);
+    padding: 0.5rem;
+}
+.goals-loader-accept {
+    background: $light-blue;
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $white;
+    margin-left: 1rem;
+}
+.goals-loader-cancel-button {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $white;
+    background: $red;
+}
+.example-viewport{
+    height: 60vh;
+    margin-left: -0.9rem;
+    margin-right: -0.9rem;
+}
+.new-agreement-select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color:transparent;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    border-bottom: 1px solid  $light-blue-dark;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.goal-loader-percentage{
+    padding: 0.5rem 0 0 0!important;
+}

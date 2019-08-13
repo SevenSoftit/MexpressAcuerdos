@@ -11,6 +11,7 @@ import { ImportProductComponent } from './components/import-product/import-produ
 import { ListEvidencesModalComponent } from './components/list-evidences-modal/list-evidences-modal.component';
 import { AddAgreementEvidenceModalComponent } from './components/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { GoalsLoaderComponent } from './components/goals-loader/goals-loader.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'addAgreementEvidence', component: AddAgreementEvidenceModalComponent},
   {path: 'listEvidence', component: ListEvidencesModalComponent},
   {path: 'confirmModal', component: ConfirmModalComponent},
+  {path: 'goalsLoaderModal', component: GoalsLoaderComponent},
 
 
 ];

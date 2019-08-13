@@ -21,6 +21,7 @@ import { NewAgreementModel } from 'src/app/models/newAgreement.model';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
 import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
+import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
 
 
 
@@ -70,6 +71,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   public providerModel: ProviderModel = new ProviderModel();
   agreement_activator: boolean = false;
+  showGoals = false;
+  allproducts_activator = false;
   pk_Ac_Trade_Agreement: number = 0;
   newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
   infoUser = utiles.getInfoUser();
@@ -712,6 +715,14 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     setTimeout(() => dialogRef.close(), 3000);
   }
 
-
+  allProductsChange(){
+  this.showGoals = (this.allproducts_activator?true:false);
+  }
+  openGoals(){
+    const dialogRef = this.matDialog.open(GoalsLoaderComponent, {
+      data: { },
+      minWidth: '85vw', maxWidth: '85vw', maxHeight: '100vh', minHeight: '60vh'
+    });
+  }
 
 }
