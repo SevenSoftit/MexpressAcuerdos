@@ -1,10 +1,13 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, tooltipDestroy } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { Tooltip } from '@syncfusion/ej2-popups';
+import { QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
+
 
 @Component({
   selector: 'app-agreement-tracking',
@@ -25,6 +28,7 @@ export class AgreementTrackingComponent implements OnInit {
   statusList: any;
   public isActiveAgreement: Boolean = false;
   public toolbar: ToolbarItems[] | Object;
+
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
@@ -56,6 +60,7 @@ export class AgreementTrackingComponent implements OnInit {
 
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
+    
   }
 
 
@@ -182,5 +187,18 @@ listAgreementStatus() {
     this._common.asignHeaderTitle("Detalle del seguimiento");
   }
 
+  tooltip(args: QueryCellInfoEventArgs) {
+    debugger;
+    if(args.column.field === "provider_Name")  {
+    let tooltip: Tooltip = new Tooltip({
+        content: args.data[args.column.field].toString(),
+        animation: {
+          open: { effect: 'None', duration: 1000, delay: 200 },
+          close: { effect: 'None', duration: 600, delay: 200 }
+      }
+    }, args.cell as HTMLTableCellElement);
+
+  }  
+} 
 
 }

@@ -195,14 +195,13 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
   viewAgreementProductD(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
-    debugger;
     var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
     agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
-    agreementProductInfoDetailModel.Pk_Cat_Agreement_Details_Resume = 99;
+    agreementProductInfoDetailModel.Pk_Cat_Agreement_Details_Resume = data.pk_Cat_Agreement_Details_Resume;
     agreementProductInfoDetailModel.Behavior = this.behaviorTA;
     this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
-      dataI => {
-        this.dataTable = dataI;
+      dataJ => {
+        this.dataTable = dataJ;
         this._common._setLoading(false);
       },
       error => {

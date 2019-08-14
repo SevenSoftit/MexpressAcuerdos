@@ -98,7 +98,7 @@
             <!--Activador de acuerdos-->
             <div class="col-md-2">
                 <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activador de acuerdos</label>
-                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator" >
+                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
             </div>
             <div class="col-md-2 mt-4" *ngIf="!disableHeader">
@@ -106,17 +106,17 @@
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
                 </button>
             </div>
-             <!--Activa todos los productos-->
-             <div class="col-md-2" *ngIf="disableHeader">
+            <!--Activa todos los productos-->
+            <div class="col-md-2" *ngIf="disableHeader">
                 <label for="all_products" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Todos los articulos</label>
-                <mat-slide-toggle id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator"  (change)="allProductsChange()">
+                <mat-slide-toggle id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator" (change)="allProductsChange()">
                 </mat-slide-toggle>
             </div>
-             <!--Muestra las metas-->
-             <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
-                    <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
-                <label class="new-agreement-label-input w-100 text-center new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
-                
+            <!--Muestra las metas-->
+            <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
+                <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
+                <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
+
             </div>
         </div>
     </form>
