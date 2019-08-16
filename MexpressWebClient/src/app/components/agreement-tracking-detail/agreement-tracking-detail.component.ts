@@ -48,6 +48,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
   public providerModel: ProviderModel = new ProviderModel();
   typeOfAgreementList: any = [];
   behaviorTA: string = '';
+  showAgreementResumeTable: boolean = true;
+  showAgreementResultTable: boolean = false;
 
  
   constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
@@ -201,7 +203,10 @@ export class AgreementTrackingDetailComponent implements OnInit {
     agreementProductInfoDetailModel.Behavior = this.behaviorTA;
     this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
       dataJ => {
+        debugger;
         this.dataTable = dataJ;
+        this.showAgreementResumeTable = false;
+        this.showAgreementResultTable = true;
         this._common._setLoading(false);
       },
       error => {
