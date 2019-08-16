@@ -78,7 +78,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   pk_Ac_Trade_Agreement: number = 0;
   newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
   infoUser = utiles.getInfoUser();
-  allProducts: boolean = false;
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
@@ -114,8 +113,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
-
-
 
     this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
@@ -218,7 +215,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
-      this.allProducts = this.agreementDetail.info.all_Products;
+      this.allproducts_activator = this.agreementDetail.info.all_Products;
       this.providerName = this.agreementDetail.info.provider_Name;
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
@@ -308,7 +305,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
-      this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
+      this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
       this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
