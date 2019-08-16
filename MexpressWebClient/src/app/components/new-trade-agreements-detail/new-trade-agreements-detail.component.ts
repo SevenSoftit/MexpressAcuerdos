@@ -127,12 +127,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          this.nameAgree = this.agreementDetail.info.name_Agreement;
-          // if (this.agreementDetail.info.all_Products) {
-          this.listAgreementGoals(agreement);
-          //   }
-          //   else
-          //     this.listAgreement(agreement);
+          this.nameAgree = this.agreementDetail.info.name_Agreement
+          this.listAgreement(agreement);
         }
       }
     });
@@ -177,11 +173,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
 
-
-    this.toolbarGoal = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
-    // this.formatoptions = { type: 'dateTime', format: 'M/d/y hh:mm a ' }
-    this.dpParams = { params: { value: new Date() } };
-    this.ddParams = { params: { value: 'COLONES'}};
     this.listMoney();
 
 
@@ -210,15 +201,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.typeContactObj.dataBind();
       }
     };
-
     this.fillFormAgreementDetail();
   }
-
-  initializeCurrency() {
-
-  }
-
-
 
   fillFormAgreementDetail() {
     if (this.agreementDetail != undefined) {
@@ -367,7 +351,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.showErrors = true;
     this._common._setLoading(false);
   }
-
   dateChange() {
     // startDate.setHours(0);
     // endDate.setHours(0);
@@ -705,7 +688,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.listProvider();
     }
   }
-
+/*******************************************************
+* Author: esalas
+* Creation date:  16/08/2019
+* Description: method that helps infinite scroll to show more info
+****************************************************/
   providerSearch(event){
     this.providerModel.Name_Provider = event.target.value;
     this.pageNumber = 1;
@@ -747,20 +734,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
-
-  listAgreementGoals(data: NewAgreementModel) {
-
-    this.tradeAgreementDetailService.ListAgreementGoals(data).subscribe(
-      dataQ => {
-        this.dataTableGoal = dataQ.data;
-        console.log(this.dataTableGoal);
-        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
