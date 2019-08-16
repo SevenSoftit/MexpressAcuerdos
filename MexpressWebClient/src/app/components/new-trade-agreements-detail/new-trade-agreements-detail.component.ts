@@ -22,6 +22,8 @@ import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
 import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
 import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 
 
@@ -95,10 +97,26 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
   isEditable: boolean = true;
+
+  //#region InfiniteScrollVariables
+  total = 0;
+  data : any = [];
+  limit = 7;
+  offset = 0;
+  options = new BehaviorSubject<string[]>([]);
+  options$: Observable<string[]>;
+  pageNumber = 1;
+  completeLoad = false;
+  providerFilter= "";
+
+  //#endregion InfiniteScrollVariables
   
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
+
+     
+
     this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
       var parameters = params["agreementDet"];
@@ -125,6 +143,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   ngOnInit() {
     this.getScreenSize();
     this.getKeyStatus();
+
+    this.options$ = this.options.asObservable().pipe(
+      scan((acc, curr) => {
+        if(this.providerModel.Name_Provider === ''){
+           return [...acc, ...curr];
+        } else {
+          return [...curr];
+        }
+       
+      }, [])
+    );
+
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
@@ -602,7 +632,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
-
+  
   listTypeOfAgreement() {
 
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
@@ -616,12 +646,27 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
-
+/*******************************************************
+* Author: Gustavo ZC
+* Creation date:  08/07/2019
+* Description: method that list all providers
+****************************************************/
   listProvider() {
+    this.providerModel.Page_Number = this.pageNumber;
+    this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
-        this.providerList = dataG;
-        this._common._setLoading(false);
+        if (this.pageNumber == 1){
+          this.pageNumber = 1;
+          this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
+        }
+       
+         this.providerList = dataG;
+         this.options.next(this.providerList);
+         console.log(this.options$);;
+         this._common._setLoading(false);
+
+
       },
       error => {
         this._common._setLoading(false);
@@ -629,7 +674,26 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
+ 
+  
+/*******************************************************
+* Author: esalas
+* Creation date:  16/08/2019
+* Description: method that helps infinite scroll to show more info
+****************************************************/
+  getNextBatch() {
+   this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
+    this.pageNumber++; // variable for pagination
+    if(this.pageNumber <= this.total){
+      this.listProvider();
+    }
+  }
 
+  providerSearch(event){
+    this.providerModel.Name_Provider = event.target.value;
+    this.pageNumber = 1;
+    this.listProvider();
+  }
   // Opcion para Excel
   toolbarClick(args: ClickEventArgs): void {
     if (args.item.id == "export") {

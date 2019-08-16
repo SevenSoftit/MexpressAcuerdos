@@ -15,6 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MaterialModule } from 'src/app/material-module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+// Infinite scroll
+import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 
 setCulture('es-ES');
 
@@ -54,7 +56,8 @@ const routes: Routes = [
     DropDownListAllModule,
     MatDatepickerModule,
     MaterialModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectInfiniteScrollModule
   ],
   providers: [
     ToolbarService,

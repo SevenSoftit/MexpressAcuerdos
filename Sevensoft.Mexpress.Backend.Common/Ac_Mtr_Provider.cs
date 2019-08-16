@@ -18,6 +18,9 @@ namespace Sevensoft.Mexpress.Backend.Common
             Id_Provider_Pdv = "";
             Id_Provider_Erp = "";
             Active = false;
+            Total_Row = 0;
+            Page_Number = 0;
+            Rows_Page = 0;
         }
         public Int32 Pk_Ac_Cat_Provider { get; set; }
         public DateTime Creation_Date { get; set; }
@@ -31,5 +34,8 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Id_Provider_Pdv { get; set; }
         public String Id_Provider_Erp { get; set; }
         public Boolean Active { get; set; }
+        public int Total_Row { get; set; }
+        public int Page_Number { get; set; }
+        public int Rows_Page { get; set; }
     }
 }

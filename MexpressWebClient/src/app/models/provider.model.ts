@@ -26,6 +26,9 @@ export class ProviderModel {
   Id_Provider_Pdv: string;
   Id_Provider_Erp: string;
   Active: boolean;
+  Total_Row:number;
+  Page_Number:number;
+  Rows_Page: number;
 
   
   constructor() {
@@ -41,6 +44,9 @@ export class ProviderModel {
     this.Id_Provider_Pdv = '';
     this.Id_Provider_Erp = '';
     this.Active = false;
+    this.Total_Row = 0;
+    this.Page_Number = 0;
+    this.Rows_Page = 0;
 
   }
 }

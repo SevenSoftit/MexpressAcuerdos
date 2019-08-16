@@ -48,11 +48,18 @@
                     Debe escribir un nombre
                 </div>
             </div>
-            <!-- Proveedor -->
+            <!-- Proveedor // (selectionChange)="behaviorProvider($event)"-->
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
-                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
+                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" 
+                 placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()" [threshold]='5' [complete]="offset === total" >
+                 <mat-option disabled>
+                    <mat-form-field class="example-full-width" floatLabel="never" >
+                      <mat-icon class="icon-align">search</mat-icon>
+                      <input matInput placeholder="Buscar" type="text"  #myInput autofocus (keyup)="providerSearch($event)" >
+                    </mat-form-field>
+                  </mat-option> 
+                 <mat-option *ngFor="let provider of options$ | async" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>

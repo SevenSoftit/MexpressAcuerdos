@@ -49,7 +49,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_BUSINESS_NAME = model.Business_Name,
                         P_ID_PROVIDER_PDV = model.Id_Provider_Pdv,
                         P_ID_PROVIDER_ERP = model.Id_Provider_Erp,
-                        P_ACTIVE = model.Active
+                        P_ACTIVE = model.Active,
+                        P_PAGE_NUMBER = model.Page_Number > 0 ? model.Page_Number : 1,
+                        P_ROWS_PAGE = model.Rows_Page > 0 ? model.Rows_Page : int.MaxValue
 
                     },
                     commandType: CommandType.StoredProcedure);
