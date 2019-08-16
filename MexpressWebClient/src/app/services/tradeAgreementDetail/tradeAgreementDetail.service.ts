@@ -158,6 +158,20 @@ export class TradeAgreementDetailService {
       );
   }
 
+  ListAgreementGoals (agreement: any) {
+    const url = this.apiUrl + 'api/agreementGoals/List';
+    return this.http.post<any>(url, agreement, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
+
+  saveAgreementGoals (agreement: any) {
+    const url = this.apiUrl + 'api/agreementGoals/Save';
+    return this.http.post<any>(url, agreement, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
+
     /*******************************************************
   * Author: Gustavo ZC
   * Creation date: 12/08/2019

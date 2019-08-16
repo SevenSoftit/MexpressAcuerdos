@@ -100,22 +100,22 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   //#region InfiniteScrollVariables
   total = 0;
-  data : any = [];
+  data: any = [];
   limit = 7;
   offset = 0;
   options = new BehaviorSubject<string[]>([]);
   options$: Observable<string[]>;
   pageNumber = 1;
   completeLoad = false;
-  providerFilter= "";
+  providerFilter = "";
 
   //#endregion InfiniteScrollVariables
-  
+
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
-     
+
 
     this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
@@ -146,12 +146,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
-        if(this.providerModel.Name_Provider === ''){
-           return [...acc, ...curr];
+        if (this.providerModel.Name_Provider === '') {
+          return [...acc, ...curr];
         } else {
           return [...curr];
         }
-       
+
       }, [])
     );
 
@@ -239,7 +239,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount:8 };
+      this.pageSettings = { pageSize: 10, pageCount: 8 };
     } else {
       this.pageSettings = { pageSize: 5, pageCount: 8 };
     }
@@ -632,7 +632,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
-  
+
   listTypeOfAgreement() {
 
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
@@ -646,25 +646,25 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
-/*******************************************************
-* Author: Gustavo ZC
-* Creation date:  08/07/2019
-* Description: method that list all providers
-****************************************************/
+  /*******************************************************
+  * Author: Gustavo ZC
+  * Creation date:  08/07/2019
+  * Description: method that list all providers
+  ****************************************************/
   listProvider() {
     this.providerModel.Page_Number = this.pageNumber;
     this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
-        if (this.pageNumber == 1){
+        if (this.pageNumber == 1) {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
         }
-       
-         this.providerList = dataG;
-         this.options.next(this.providerList);
-         console.log(this.options$);;
-         this._common._setLoading(false);
+
+        this.providerList = dataG;
+        this.options.next(this.providerList);
+        console.log(this.options$);;
+        this._common._setLoading(false);
 
 
       },
@@ -674,26 +674,26 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
- 
-  
-/*******************************************************
-* Author: esalas
-* Creation date:  16/08/2019
-* Description: method that helps infinite scroll to show more info
-****************************************************/
+
+
+  /*******************************************************
+  * Author: esalas
+  * Creation date:  16/08/2019
+  * Description: method that helps infinite scroll to show more info
+  ****************************************************/
   getNextBatch() {
-   this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
+    this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
     this.pageNumber++; // variable for pagination
-    if(this.pageNumber <= this.total){
+    if (this.pageNumber <= this.total) {
       this.listProvider();
     }
   }
-/*******************************************************
-* Author: esalas
-* Creation date:  16/08/2019
-* Description: method that helps infinite scroll to show more info
-****************************************************/
-  providerSearch(event){
+  /*******************************************************
+  * Author: esalas
+  * Creation date:  16/08/2019
+  * Description: method that helps infinite scroll to show more info
+  ****************************************************/
+  providerSearch(event) {
     this.providerModel.Name_Provider = event.target.value;
     this.pageNumber = 1;
     this.listProvider();
@@ -783,12 +783,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     setTimeout(() => dialogRef.close(), 3000);
   }
 
-  allProductsChange(){
-  this.showGoals = (this.allproducts_activator?true:false);
+  allProductsChange() {
+    this.showGoals = (this.allproducts_activator ? true : false);
   }
-  openGoals(){
+
+  openGoals() {
+
+    let value = {
+      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement
+    }
+
     const dialogRef = this.matDialog.open(GoalsLoaderComponent, {
-      data: { },
+      data: value,
       minWidth: '85vw', maxWidth: '85vw', maxHeight: '100vh', minHeight: '60vh'
     });
   }

@@ -116,7 +116,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         /// <returns></returns>
         [Route("Save")]
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] Common.Ac_Cat_Agreement_Goals model)
+        public async Task<IActionResult> Save([FromBody] List<Common.Ac_Cat_Agreement_Goals> model)
         {
             try
             {
