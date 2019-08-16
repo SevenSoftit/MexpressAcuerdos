@@ -49,15 +49,15 @@
     border-top: 2px solid #DADADA;
 }
 
-::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper .dz-message {
-    padding-top: 6rem !important;
+::ng-deep .add-evidence-drop-zone dropzone>.dropzone.dz-wrapper .dz-message {
+    padding-top: 4rem !important;
 }
 
-::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper {
-    height: 8rem !important;
+::ng-deep .add-evidence-drop-zone dropzone>.dropzone.dz-wrapper {
+    height: 6rem !important;
 }
 
-::ng-depp .add-evidence-drop-zone>dropzone>.dropzone.dz-wrapper .dz-preview {
+::ng-deep .add-evidence-drop-zone dropzone>.dropzone.dz-wrapper .dz-preview {
     display: none;
 }
 

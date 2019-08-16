@@ -24,33 +24,33 @@
     background-color: lightblue;
 }
 
-::ng-deep dropzone>.dropzone.dz-wrapper .dz-message {
-    padding-top: 19rem;
-}
 
 .import-modal-label-title {
     font-family: $opensans-extrabold;
     font-size: $font-size-medium;
 }
+.import-product-button{
+    justify-content: center;
+}
+::ng-deep .import-dropzone dropzone {
+    height: 7rem !important;
+}
 
-::ng-depp .import-dropzone>dropzone {
+::ng-deep .import-dropzone dropzone>.dropzone.dz-wrapper .dz-message {
+    padding-top: 5rem !important;
+    border-radius: 0.8rem !important;
+}
+
+::ng-deep .import-dropzone dropzone>.dropzone.dz-wrapper {
     height: 20rem !important;
 }
 
-::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper .dz-message {
-    padding-top: 4rem !important;
-}
-
-::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper {
-    height: 20rem !important;
-}
-
-::ng-depp .import-dropzone>dropzone>.dropzone.dz-wrapper .dz-preview {
-    margin-left: 13vw !important;
+::ng-deep .import-dropzone dropzone>.dropzone.dz-wrapper .dz-preview {
+    margin-left: 13vw !important; 
 }
 
 @media (min-width: 1900px) {
-     ::ng-depp.import-dropzone>dropzone>.dropzone.dz-wrapper .dz-preview {
+    ::ng-deep .import-dropzone dropzone>.dropzone.dz-wrapper .dz-preview {
         margin-left: 10.5vw !important;
     }
 }

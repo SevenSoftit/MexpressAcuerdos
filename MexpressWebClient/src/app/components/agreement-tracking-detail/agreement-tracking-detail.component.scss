@@ -1,0 +1,37 @@
+@import "../../../styles.scss";
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background: $light-blue !important;
+}
+
+::ng-depp .e-pager .e-currentitem {
+    background: $light-blue;
+}
+
+::ng-depp .e-pager .e-currentitem:hover {
+    background: $light-blue;
+}
+
+::ng-depp .e-grid .e-content {
+    overflow-x: hidden !important;
+}
+
+::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+    font-family: $opensans-semibold !important;
+    font-size: $font-size-small!important;
+    color: $white!important;
+    background-color: $light-blue!important;
+    border-color: $light-blue!important;
+    border-radius: 0.437rem!important;
+    min-width: 7rem!important;
+}
+
+::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+    color: $white!important;
+}
+
+::ng-deep .date-picker-custom .mat-datepicker-toggle,
+.mat-datepicker-content .mat-calendar-next-button,
+.mat-datepicker-content .mat-calendar-previous-button {
+    margin-left: -2.35rem!important;
+}

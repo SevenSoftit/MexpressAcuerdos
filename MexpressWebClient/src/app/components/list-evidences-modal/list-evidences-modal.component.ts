@@ -53,7 +53,6 @@ export class ListEvidencesModalComponent implements OnInit {
     evidenceKey.Pk_Ac_Trade_Agreement = this.dataModal.confirmInfo.header_File;
     this.evidenceService.listEvidence(evidenceKey).subscribe(
       dataQ => {
-        debugger;
         this.evidenceList = dataQ;
 
         this.evidenceListCount = this.evidenceList.length;
@@ -128,7 +127,6 @@ deleteEvidence(evidence) {
    * Description:
    *******************************************************/
   downloadFile(url, archive) {
-debugger;
     try
     {
     var FileSaver = require('file-saver');
@@ -172,7 +170,7 @@ debugger;
       minWidth: "900px",
       maxWidth: "950px",
       maxHeight: "600px",
-      minHeight: "475px"
+      minHeight: "370px"
     });
 
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {

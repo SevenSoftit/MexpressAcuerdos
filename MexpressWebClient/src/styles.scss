@@ -531,3 +531,22 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+//#region mat-toogle
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+    background-color: $light-blue !important;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color: $light-blue-dark !important;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-ripple-element{
+    background-color: $light-blue-dark !important;
+}
+
+//#endregion mat-toogle
+
+//#region grid
+::ng-deep.e-pager .e-currentitem, .e-pager .e-currentitem:hover {
+    background-color: $light-blue !important
+}
+//#endregion grid

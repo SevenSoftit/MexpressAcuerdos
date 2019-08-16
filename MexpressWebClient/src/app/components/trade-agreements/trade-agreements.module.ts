@@ -11,17 +11,23 @@ import {EditService,PageService,FilterService,SortService,ResizeService,GridModu
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 
-
 setCulture('es-ES');
 
 L10n.load({
   'es-ES': {
       'grid': {
-          'EmptyRecord': 'Sin coincidencias'
+          'Add': 'Agregar',
+          'ExcelExport': 'Exportar a Excel',
+          'Edit': 'Editar',
+          'Delete': 'Eliminar',
+          'Update': 'Actualizar',
+          'Cancel': 'Cancelar',
+          'Search': 'Buscar',
+          'EmptyRecord': 'Sin coincidencias',
+          'PdfExport': 'Exportar a PDF'
       }
   }
 });
-
 const routes: Routes = [
   { path: '', component: TradeAgreementsComponent },
 

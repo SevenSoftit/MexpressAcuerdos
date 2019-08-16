@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
@@ -24,6 +24,7 @@ export class TradeAgreementsComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
+  public toolbar: ToolbarItems[] | Object;;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
@@ -32,6 +33,7 @@ export class TradeAgreementsComponent implements OnInit {
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
+    this.toolbar = ['Search'];
     this.listHeaderAgreement();
     this.listAgreementStatus();
   }
@@ -181,7 +183,7 @@ listAgreementStatus() {
       skipLocationChange: true
     };
     this.router.navigate(['newTradeAgreements'], navigationExtras);
-    this._common.asignHeaderTitle("Nuevo acuerdo comercial");
+    this._common.asignHeaderTitle("Editar acuerdo");
   }
 
 

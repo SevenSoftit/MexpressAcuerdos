@@ -92,7 +92,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
-  isEditable: boolean = false; 
+  isEditable: boolean = true; 
 
   dataTableGoal: any = [];
   toolbarGoal: ToolbarItems[] | Object;
@@ -403,7 +403,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       }, error => {
         this.dataTable = this.dataTable.filter(dt => dt.pk_Cat_Agreement_Details != 0);
-
+        var agreement = new NewAgreementModel();
+        agreement.Pk_Ac_Trade_Agreement = this.headerFile;
+        this.listAgreement(agreement);
       });
   }
 
@@ -506,7 +508,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
   }
- 
+
 
   behaviorTypeOfAgreement(value: any) {
     this.errorTypeOfAgreement = false;
@@ -531,7 +533,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(ImportProductComponent, {
       data: { confirmInfo: this.headerFile },
-      minWidth: '564px', maxWidth: '564px', minHeight: '406px', maxHeight: '420px'
+      minWidth: '750px', maxWidth: '750px', minHeight: '245px', maxHeight: '245px'
     });
     dialogRef.afterClosed().subscribe(
       result => {

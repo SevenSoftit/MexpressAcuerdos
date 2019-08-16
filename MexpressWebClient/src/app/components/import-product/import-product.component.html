@@ -1,14 +1,19 @@
-<div class="row text-center">
-    <div class="col-md-12">
-        <label class="import-modal-label-title">Importación de archivos</label>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <label class="import-modal-label-title">Importación de archivos</label>
+        </div>
     </div>
-</div>
-<div class="import-dropzone">
-    <dropzone class="" [config]="config" [message]="
+    <div class="import-dropzone">
+        <dropzone class="" [config]="config" [message]="
       'Arrastra el archivo dentro de este recuadro
  o haz click aquí para seleccionar tu archivo'
     " (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (sending)="onSending($event)">
-    </dropzone>
+        </dropzone>
+    </div>
+    <div class="row import-product-button">
+        <a mat-raised-button (click)="downloadFile()" id="dowloadFile" target="_self" class="save-button">
+            <mat-icon class="mr-2">import_export</mat-icon>Descargar plantilla de ejemplo
+        </a>
+    </div>
 </div>
-<a mat-raised-button (click)="downloadFile()" id="dowloadFile" target="_self" class="save-button">
-    <mat-icon class="mr-2">import_export</mat-icon>Descargar plantilla de ejemplo</a>
