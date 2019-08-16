@@ -13,14 +13,22 @@
   * Author: 
   * Description:
 *******************************************************/
-
+.home-header {
+    background: #eeeeee;
+    border-radius: 0rem;
+    padding: 1.3rem;
+    margin-left: 0;
+    margin-right: 0;
+}
 .home-title {
     font-size: $font-size-medium;
+    font-family: $opensans-bold;
+    color: $light-blue;
 }
-
-.home-title span {
+.home-description {
     font-family: $opensans-semibold;
 }
+
 
 .home-top {
     margin-top: 5vh;

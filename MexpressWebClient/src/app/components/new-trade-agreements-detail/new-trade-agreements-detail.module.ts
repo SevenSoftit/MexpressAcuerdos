@@ -13,6 +13,8 @@ import { L10n, setCulture } from '@syncfusion/ej2-base';
 import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MaterialModule } from 'src/app/material-module';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 setCulture('es-ES');
 
@@ -51,7 +53,8 @@ const routes: Routes = [
     ScrollDispatchModule,
     DropDownListAllModule,
     MatDatepickerModule,
-    MaterialModule 
+    MaterialModule,
+    MatTooltipModule
   ],
   providers: [
     ToolbarService,

@@ -3,15 +3,17 @@
     font-size: $font-size-medium;
     text-align: left;
     font-family: $opensans-bold;
-    color: $light-blue ;
+    color: $light-blue;
 }
-.trade-agreements-description{
+
+.trade-agreements-description {
     font-family: $opensans-semibold;
 }
 .agreement-top-header {
     margin-top: 2vh;
 }
-.trade-agreements-filters{
+
+.trade-agreements-filters {
     background: #EEE;
     margin-left: 0.9rem;
     margin-right: 0.9rem;
@@ -39,15 +41,15 @@
     background: $light-blue !important;
 }
 
-::ng-depp .e-pager .e-currentitem {
+::ng-deep .e-pager .e-currentitem {
     background: $light-blue;
 }
 
-::ng-depp .e-pager .e-currentitem:hover {
+::ng-deep .e-pager .e-currentitem:hover {
     background: $light-blue;
 }
 
-::ng-depp .e-grid .e-content {
+::ng-deep .e-grid .e-content {
     overflow-x: hidden !important;
 }
 
@@ -101,7 +103,7 @@
     content: '';
     width: 14px;
     height: 14px;
-    background: $light-blue ;
+    background: $light-blue;
     position: absolute;
     top: 2px;
     left: 2px;
@@ -164,25 +166,24 @@
     line-height: 1rem;
 }
 
-.trade-agreements-edit-icon{
+.trade-agreements-edit-icon {
     cursor: pointer;
 }
 
 //#region tableStyles
-
-::ng-deep .trade-agreements-grid .e-grid .e-columnheader {   
-    color: $light-blue  !important;
+::ng-deep .trade-agreements-grid .e-grid .e-columnheader {
+    color: $light-blue !important;
 }
 
-::ng-deep.trade-agreements-grid .e-grid .e-headercell, .e-grid .e-detailheadercell {
+::ng-deep.trade-agreements-grid .e-grid .e-headercell,
+.e-grid .e-detailheadercell {
     background-color: #eee !important;
 }
 
 ::ng-deep.trade-agreements-grid .e-grid .e-headercelldiv {
-    font-family:$opensans-bold !important;
+    font-family: $opensans-bold !important;
     font-size: $font-size-small!important;
     white-space: normal !important;
 }
-
 
 //#endregion tableStyles

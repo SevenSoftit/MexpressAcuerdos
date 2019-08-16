@@ -24,18 +24,18 @@ export class TradeAgreementsComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
-  public toolbar: ToolbarItems[] | Object;;
+  public toolbar: ToolbarItems[] | Object;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
   ngOnInit() {
+   this._common._setLoading(true);
 
+    this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
-    this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Search'];
     this.listHeaderAgreement();
-    this.listAgreementStatus();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -43,7 +43,7 @@ export class TradeAgreementsComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount: 5 };
+      this.pageSettings = { pageSize: 11, pageCount: 5 };
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
@@ -85,7 +85,7 @@ listHeaderAgreement() {
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
       this.dataTable = dataQ;
-      this._common._setLoading(false);
+      this.listAgreementStatus();
     },
     error => {
       this._common._setLoading(false);
@@ -121,6 +121,7 @@ listAgreementStatus() {
 * Description:
 *******************************************************/
   listSpecificHeaderAgreement(evt: any) {
+    this._common._setLoading(true);
     var data = new NewAgreementDetailHeaderModel();   
     this.resetRadio();
     var target = evt.target;
@@ -148,6 +149,7 @@ listAgreementStatus() {
   }
 
   behaviorStatus(evt: any) {
+    this._common._setLoading(true);
     var data = new NewAgreementDetailHeaderModel();
     data.Fk_Status_Agreement = evt.value;
     data.Active = this.isActiveAgreement;

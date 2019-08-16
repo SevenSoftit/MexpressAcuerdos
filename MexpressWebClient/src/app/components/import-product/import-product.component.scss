@@ -47,6 +47,7 @@
 
 ::ng-deep .import-dropzone dropzone>.dropzone.dz-wrapper .dz-preview {
     margin-left: 13vw !important; 
+    display: none!important;
 }
 
 @media (min-width: 1900px) {

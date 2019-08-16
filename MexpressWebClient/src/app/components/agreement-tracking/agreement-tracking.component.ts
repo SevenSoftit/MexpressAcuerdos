@@ -1,10 +1,13 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, tooltipDestroy } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { Tooltip } from '@syncfusion/ej2-popups';
+import { QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
+
 
 @Component({
   selector: 'app-agreement-tracking',
@@ -24,14 +27,16 @@ export class AgreementTrackingComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
+  public toolbar: ToolbarItems[] | Object;
+
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
 
   ngOnInit() {
-
+    this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
-    this.pageSettings = { pageSize: 8, pageCount: 5 };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
+    this.toolbar = ['Search'];
     this.listHeaderAgreement();
     this.listAgreementStatus();
   }
@@ -41,7 +46,7 @@ export class AgreementTrackingComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount: 5 };
+      this.pageSettings = { pageSize: 12, pageCount: 5 };
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
@@ -55,6 +60,7 @@ export class AgreementTrackingComponent implements OnInit {
 
   dataBound(args: any) {
     this.grid.gridLines = 'Both';
+    
   }
 
 
@@ -72,6 +78,7 @@ export class AgreementTrackingComponent implements OnInit {
 * Description:
 *******************************************************/
 listHeaderAgreement() {
+  this._common._setLoading(true);
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
   this.isActiveAgreement = data.Active;
@@ -165,6 +172,7 @@ listAgreementStatus() {
   }
 
   viewAgreementTrackingDetails(args: any): void {
+    this._common._setLoading(true);
     let data: any = this.grid.getRowInfo(args.target).rowData;
     const agreementDet = {
       info: data
@@ -175,9 +183,22 @@ listAgreementStatus() {
       },
       skipLocationChange: true
     };
-    this.router.navigate(['newTradeAgreements'], navigationExtras);
+    this.router.navigate(['agreementTrackingDetail'], navigationExtras);
     this._common.asignHeaderTitle("Detalle del seguimiento");
   }
 
+  tooltip(args: QueryCellInfoEventArgs) {
+    debugger;
+    if(args.column.field === "provider_Name")  {
+    let tooltip: Tooltip = new Tooltip({
+        content: args.data[args.column.field].toString(),
+        animation: {
+          open: { effect: 'None', duration: 1000, delay: 200 },
+          close: { effect: 'None', duration: 600, delay: 200 }
+      }
+    }, args.cell as HTMLTableCellElement);
+
+  }  
+} 
 
 }

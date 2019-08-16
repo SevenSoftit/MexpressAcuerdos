@@ -47,7 +47,8 @@ namespace Sevensoft.Mexpress.Backend.Common
             Update_Rows = false;
             Name_Currency = "";
             Pk_Cat_Agreement_Details = 0;
-            list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();      
+            list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();  
+            Behavior = "";    
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -91,6 +92,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Int64 Pk_Cat_Agreement_Details { get; set; }
 
         public List<Ac_Mtr_Agreement_Document> list_Agreement_Document { get; set; }
+        public String Behavior { get; set; }
         
         public static implicit operator long(Import_Product v)
         {

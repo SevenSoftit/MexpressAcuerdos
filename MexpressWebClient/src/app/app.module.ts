@@ -47,6 +47,7 @@ import { AuthGuard } from './services/auth/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { GoalsLoaderComponent } from './components/goals-loader/goals-loader.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,7 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
     ImportProductComponent,
     ListEvidencesModalComponent,
     AddAgreementEvidenceModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    GoalsLoaderComponent
   ],
   imports: [
     MaterialModule,

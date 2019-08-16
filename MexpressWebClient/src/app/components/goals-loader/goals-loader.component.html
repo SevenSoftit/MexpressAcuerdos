@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row">
+        <label for="" class="w-100 goals-loader-tittle">Cargador de Metas</label>
+    </div>
+    <hr>
+    <div class="row goals-loader-header">
+        <div class="col-md-2 text-center"> <label for="" class="goals-loader-header-label">Fecha Inicio</label>
+        </div>
+        <div class="col-md-2 text-center"><label for="" class="goals-loader-header-label">Fecha Fin</label></div>
+
+        <div class="col-md-1 text-center"><label for="" class="goals-loader-header-label">Moneda</label></div>
+        <div class="col-md-1 text-center"><label for="" class="goals-loader-header-label">Porcentual</label></div>
+
+        <div class="col-md-2 text-center"><label for="" class="goals-loader-header-label">Monto Meta</label>
+        </div>
+        <div class="col-md-3 text-center"><label for="" class="goals-loader-header-label">Porcentaje
+                    Bonificación</label></div>
+        <div class="col-md-1 goals-loader-icon-header">
+            <mat-icon (click)="addNewGoal()">add_circle_outline</mat-icon>
+        </div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+        <div class="row goals-loader-input-section" *ngFor="let goals of goalLine; let i = index; let j = index;">
+            <div class="col-md-2 p-0 goal-loader-input-col">
+                <div class="form-group text-center date-picker-custom mb-0">
+                    <input matInput [matDatepicker]="i" [attr.id]="dtPicker+i" placeholder="02/01/2019" class="goals-loader-date-picker">
+                    <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                    <mat-datepicker #i></mat-datepicker>
+
+                </div>
+            </div>
+            <div class="col-md-2 p-0 goal-loader-input-col">
+                <div class="form-group text-center date-picker-custom mb-0">
+                    <input matInput [matDatepicker]="j" [attr.id]="dtPickerF+j" placeholder="02/01/2019" class="goals-loader-date-picker">
+                    <mat-datepicker-toggle matSuffix [for]="j"></mat-datepicker-toggle>
+                    <mat-datepicker #j></mat-datepicker>
+
+                </div>
+            </div>
+            <div class="col-md-1 p-0 goal-loader-input-col">
+                <mat-select id="i" class="new-agreement-select text-center" placeholder="Moneda">
+                    <mat-option value="0">
+                        ¢
+                    </mat-option>
+                    <mat-option value="1">
+                        $
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="col-md-1 goal-loader-input-col goal-loader-percentage">
+                <mat-slide-toggle class="new-agreement-slide-toggle">
+                </mat-slide-toggle>
+            </div>
+            <div class="col-md-2  p-0 goal-loader-input-col">
+                <input type="text" class="form-control goals-loader-inputs mb-0" aria-describedby="Monto de la Meta" placeholder="Monto de la Meta">
+
+            </div>
+            <div class="col-md-3  p-0 goal-loader-input-col">
+                <input type="text" class="form-control goals-loader-inputs mb-0" aria-describedby="Porcentaje de Bonificación" placeholder="Porcentaje de Bonificación">
+            </div>
+            <div class="col-md-1 goals-loader-icon-goal">
+                <mat-icon>delete_outline</mat-icon>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="row mt-3">
+        <div class="offset-md-6 col-md-6 text-right">
+            <button mat-button class="goals-loader-cancel-button ">Cancelar</button>
+            <button mat-button class="goals-loader-accept">Aceptar</button>
+        </div>
+    </div>
+
+</div>

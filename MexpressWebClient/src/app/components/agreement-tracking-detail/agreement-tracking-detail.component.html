@@ -1,110 +1,105 @@
-<div class="container-fluid">
-
-    <div class="row agreement-top-header ml-0 mr-0 ">
-        <h5 class="tittle-agreement">Seguimiento del acuerdo</h5>
-    </div>
-
-    <div class="row create-agreement-sector agreement-top-header ml-0 mr-0">
-        <div class="col-md-12 text-right">
-            <button class="save-button" mat-raised-button (click)="openDialogImportProduct()"><mat-icon  class="mr-2">import_export</mat-icon>Subir excel de productos</button>
+<div class="container-fluid p-0">
+    <div class="create-agreement-sector">
+        <div class="row  ml-0 mr-0 ">
+            <h5 class="tittle-agreement">Detalle del seguimiento</h5>
+        </div>
+        <div class="row m-0 pl-5 pr-4">
+            <label class="trade-agreements-description">Esta sección  presenta el detalle del seguimiento de un acuerdo.</label>
+        </div>
+        <div class="row  ml-0 mr-0">
+            <div class="col-md-12 text-right">
+                <button class="save-button ml-4" mat-raised-button>
+                    <mat-icon class="mr-2">star</mat-icon>Ver detalle de todo el acuerdo
+                </button>
+            </div>
         </div>
     </div>
+
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
-        <div class="row mr-0 agreement-top">
+        <div class="row mr-0 ml-0 agreement-top">
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
-                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)"
-                    placeholder="Tipo de acuerdo">
+                <mat-select [disabled]="true" id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
                     <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
                         {{typeAgreement.name_Agreement}}
                     </mat-option>
                 </mat-select>
-                <div *ngIf="errorTypeOfAgreement" class="alert-error-required mt-2">
-                    Debe seleccionar el tipo de acuerdo
-                </div>
-
             </div>
             <!-- Nombre del acuerdo-->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
-                <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors" class="alert-error-required mt-2">
-                    Debe escribir un nombre
-                </div>
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
+                    placeholder="Nombre del acuerdo">
             </div>
             <!-- Proveedor -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" (selectionChange)="behaviorProvider($event)" placeholder="Proveedor">
-                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider">
+                <mat-select [disabled]="true" id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor">
+                    <mat-option *ngFor="let provider of providerList" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
-                <div *ngIf="errorProvider" class="alert-error-required mt-2">
-                    Debe seleccionar el proveedor
-                </div>
             </div>
             <!-- Fecha Inicio -->
             <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
-                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Inicio</label>
+                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Inicio</label>
                     <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
                         readonly>
-                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="true">
+                    </mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
-                    <div *ngIf="errorStartDate" class="alert-error-required mt-2">
-                        La fecha de inicio del acuerdo debe de ser mayor/igual a hoy
-                    </div>
                 </div>
             </div>
             <!-- Fecha Fin -->
             <div class="col-md-2 custom-padding-top">
                 <div class="form-group text date-picker-custom">
-                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha Fin</label>
+                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Fin</label>
                     <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
-                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker" [disabled]="true"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
-                    <div *ngIf="errorEndDate" class="alert-error-required mt-2">
-                        La fecha de fin del acuerdo debe de ser mayor/igual a la fecha de inicio
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row ml-0 mr-0">
             <!--Descripción-->
             <div class="col-md-10">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
         </div>
     </form>
 
     <!-- Listado de productos del acuerdo-->
-    <div class="row new-agreement-table-top">
+    <div class="row new-agreement-table-top ml-0 mr-0">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='name_Agreement' headerText='Código' width='150' textAlign='Center'></e-column>
-                    <e-column field='agreement_Status_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
-                    <e-column field='provider_Name' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' headerText='Cantidad de artículos vendidos' width='150' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
+                    <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
+                    <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
+                    <e-column field='product_Amount' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
+                    <e-column field='product_Quantity_Sold' headerText='Cantidad de artículos vendidos' width='180' textAlign='Center'></e-column>
+                    <e-column field='product_Amount_Recovery' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Cat_Agreement_Details_Resume' [isPrimaryKey]="true" [visible]="false" headerText='pk_Cat_Agreement_Details_Resume' width='5' textAlign='Center'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'></e-column>
-                    <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
+
 
                     <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementProductDetails($event)">remove_red_eye</mat-icon>
+                            <mat-icon (click)="viewAgreementProductD($event)">remove_red_eye</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>
             </ejs-grid>
         </div>
     </div>
+
+    <!-- Tabla para listar el detalle de cada producto -->
 
 
 

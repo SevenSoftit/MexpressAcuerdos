@@ -1,17 +1,18 @@
 <div class="container-fluid p-0">
-<div class="trade-agreements-header">
-      <div class="row ml-0 mr-0 ">
-        <h5 class="tittle-agreement">Acuerdos comerciales</h5>
-    </div>
-    <div class="row m-0 pl-5 pr-4">
-        <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes o bien agregar uno nuevo.</label>
-    </div>
+    <div class="trade-agreements-header">
+        <div class="row ml-0 mr-0 ">
+            <h5 class="tittle-agreement">Acuerdos comerciales</h5>
+        </div>
+        <div class="row m-0 pl-5 pr-4">
+            <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes, editar o bien agregar uno nuevo.</label>
+        </div>
 
-    <div class="row ml-0 mr-0">
-        <div class="offset-md-10 col-md-2">
-            <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
+        <div class="row ml-0 mr-0">
+            <div class="offset-md-10 col-md-2">
+                <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
                 <mat-icon class="mr-2">add_circle_outline</mat-icon>Crear acuerdo
             </button>
+            </div>
         </div>
     </div>
 </div>
@@ -48,9 +49,8 @@
     <!-- Listado de acuerdos -->
     <div class="row ml-0 mr-0 trade-agreements-grid">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' 
-            [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' 
-            (dataBound)="dataBound($event)" [allowResizing]='true' [toolbar]='toolbar' >
+            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'
+                [toolbar]='toolbar'>
                 <e-columns>
                     <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'>
                     </e-column>

@@ -13,6 +13,7 @@ export class NewAgreementModel {
     Modification_Date: Date;
     Modification_User: string;
     Active: Boolean;
+    Name_Currency: string;
 
     constructor() {
         this.Pk_Cat_Agreement_Details = 0;
@@ -27,5 +28,6 @@ export class NewAgreementModel {
         this.Modification_Date = new Date();
         this.Modification_User = '';
         this.Active = false;
+        this.Name_Currency = '';
     }
 }

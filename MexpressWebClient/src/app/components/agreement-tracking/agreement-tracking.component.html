@@ -1,10 +1,16 @@
-<div class="container-fluid">
-
-    <div class="row agreement-top-header ml-0 mr-0 ">
-        <h5 class="tittle-agreement">Seguimiento del acuerdo</h5>
+<div class="container-fluid p-0">
+    <div class="trade-agreements-header">
+        <div class="row ml-0 mr-0 ">
+            <h5 class="tittle-agreement">Seguimiento del acuerdo</h5>
+        </div>
+        <div class="row m-0 pl-5 pr-4">
+            <label class="trade-agreements-description">En esta sección se puede dar seguimiento a los acuerdos creados.</label>
+        </div>
     </div>
 
-    <div class="row new-agreement-table-top">
+
+
+    <div class="row new-agreement-table-top trade-agreements-filters">
         <div class="col-md-5 trade-agreements-radio-b">
             <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
 
@@ -32,17 +38,20 @@
     </div>
 
     <!-- Listado de acuerdos -->
-    <div class="row new-agreement-table-top">
+    <div class="row ml-0 mr-0 trade-agreements-grid">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
+            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)"
+                [allowResizing]='true' [toolbar]='toolbar' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
-                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'></e-column>
-                    <e-column field='agreement_Status_Name' headerText='Estado' width='120' textAlign='Center'></e-column>
+                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='155' textAlign='Center'>
+                    </e-column>
+                    <e-column field='agreement_Status_Name' headerText='Estado' width='105' textAlign='Center'>
+                    </e-column>
                     <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
-                    <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
-                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
-                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
-
+                    <e-column field='date_Start' headerText='Fecha de inicio' width='117' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
+                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
+                    </e-column>
+                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='136' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Cat_Provider' [visible]="false" headerText='pk_Ac_Cat_Provider' width='5' textAlign='Center'></e-column>
@@ -55,9 +64,9 @@
                     <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='edit' textAlign='center' headerText='Ver seguimiento' width=120>
+                    <e-column field='edit' textAlign='center' headerText='Ver seguimiento' width=125>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementTrackingDetails($event)">remove_red_eye</mat-icon>
+                            <mat-icon (click)="viewAgreementTrackingDetails($event)" class="trade-agreements-edit-icon">remove_red_eye</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>

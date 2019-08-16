@@ -19,6 +19,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Modification_Date = Convert.ToDateTime("1900-01-01");
             Modification_User = "";          
             Active = false;
+            Name_Currency = "";
         }
         public Int64 Pk_Cat_Agreement_Details { get; set; }
         public Int32 Pk_Ac_Trade_Agreement { get; set; }
@@ -31,6 +32,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
-        public Boolean Active { get; set; }       
+        public Boolean Active { get; set; }  
+        public String Name_Currency { get; set; }     
     }
 }

@@ -42,6 +42,7 @@ export class NewAgreementDetailHeaderModel {
     Name_Currency: String;
     Pk_Cat_Agreement_Details: Number;
     list_Agreement_Document: Array<AgreementDocumentModel>;
+    Behavior: string;
 
 
     constructor() {
@@ -86,6 +87,7 @@ export class NewAgreementDetailHeaderModel {
             this.Name_Currency = '';
             this.Pk_Cat_Agreement_Details = 0;
             this.list_Agreement_Document = [];
+            this.Behavior = '';
 
     }
 }

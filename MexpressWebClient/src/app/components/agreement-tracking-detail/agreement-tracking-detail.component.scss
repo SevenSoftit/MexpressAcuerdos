@@ -1,22 +1,129 @@
 @import "../../../styles.scss";
+.tittle-agreement {
+    font-size: $font-size-medium;
+    text-align: left;
+    font-family: $opensans-bold;
+    color: $light-blue;
+}
+
+.trade-agreements-description {
+    font-family: $opensans-semibold;
+}
+
+.agreement-top-header {
+    margin-top: 2vh;
+}
+
+.agreement-scroll {
+    height: 85vh!important;
+}
+
+.create-agreement-sector {
+    background: #eeeeee;
+    border-radius: 0rem;
+    padding: 1.3rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.new-agreement-form-top {
+    margin-top: 3vh;
+}
+
+.agreement-top {
+    margin-top: 2vh;
+}
+
+.new-agreement-label-input {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: #000;
+}
+
+.new-agreement-form-input {
+    background: $backgroud-input;
+    border-radius: 0.25rem;
+    color: $dark-gray !important;
+}
+
+.new-agreement-select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $backgroud-input;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.new-agreement-table-top {
+    margin-top: 4vh;
+}
+
+.new-agreement-doc-errors {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $red;
+    margin-left: 4rem;
+    margin-top: 1.2rem;
+}
+
+.new-agreement-buttons-top {
+    margin-top: 4vh;
+}
+
+.excel-button {
+    font-family: "Open Sans SemiBold";
+    font-size: 0.8rem;
+    color: #F9F9F9;
+    background-color: $light-blue;
+    border-color: $light-blue;
+    border-radius: 0.437rem;
+    min-width: 7rem;
+}
+
+.new-trade-agreement-modal-date-input {
+    font-family: $opensans-semibold;
+    display: inline-block;
+    width: 98%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $black;
+    background-color: $light-gray-softer;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    text-align: center;
+}
+
 .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
     background: $light-blue !important;
 }
 
-::ng-depp .e-pager .e-currentitem {
+::ng-deep .e-pager .e-currentitem {
     background: $light-blue;
 }
 
-::ng-depp .e-pager .e-currentitem:hover {
+::ng-deep .e-pager .e-currentitem:hover {
     background: $light-blue;
 }
 
-::ng-depp .e-grid .e-content {
+::ng-deep .e-grid .e-content {
     overflow-x: hidden !important;
 }
 
-::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
     font-family: $opensans-semibold !important;
     font-size: $font-size-small!important;
     color: $white!important;
@@ -26,8 +133,12 @@
     min-width: 7rem!important;
 }
 
-::ng-depp .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
     color: $white!important;
+}
+
+.new-trade-agreement-lbl-input {
+    display: block;
 }
 
 ::ng-deep .date-picker-custom .mat-datepicker-toggle,
@@ -35,3 +146,48 @@
 .mat-datepicker-content .mat-calendar-previous-button {
     margin-left: -2.35rem!important;
 }
+
+.new-trade-agr-toogle-lbl {
+    justify-content: center;
+}
+
+.disabled_button {
+    background-color: $light-gray !important;
+    border-color: $light-gray !important;
+}
+
+.custom-padding-top {
+    padding-top: 0.3rem !important;
+}
+
+.begin-agreement-creation {
+    font-family: $opensans-bold;
+    color: #bdbdbd;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10vh;
+}
+
+//#region tableStyles
+::ng-deep .new-agreement-table-top  .e-grid .e-columnheader {
+    color: $light-blue !important;
+}
+
+::ng-deep.new-agreement-table-top  .e-grid .e-headercell,
+.e-grid .e-detailheadercell {
+    background-color: #eee !important;
+}
+
+::ng-deep.new-agreement-table-top  .e-grid .e-headercelldiv {
+    font-family: $opensans-bold !important;
+    font-size: $font-size-small!important;
+    white-space: normal !important;
+}
+
+::ng-deep.new-agreement-table-top  .e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background-color: $light-blue !important
+}
+
+//#endregion tableStyles

@@ -10,6 +10,7 @@ import {EditService,PageService,FilterService,SortService,ResizeService,GridModu
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { AgreementTrackingComponent } from './agreement-tracking.component';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 
 
 setCulture('es-ES');
@@ -17,10 +18,11 @@ setCulture('es-ES');
 L10n.load({
   'es-ES': {
       'grid': {
-          'EmptyRecord': 'Sin coincidencias'
+          'EmptyRecord': 'Sin coincidencias',
+          'Search': 'Buscar'
       }
   }
-});
+});  
 
 const routes: Routes = [
   { path: '', component: AgreementTrackingComponent },
@@ -38,7 +40,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     GridModule,
-    MaterialModule 
+    MaterialModule,
+    ButtonModule
   ],
   providers: [
     EditService,
@@ -47,6 +50,8 @@ const routes: Routes = [
     SortService,
     ResizeService,
     
-  ]
+  ],
+  bootstrap: [AgreementTrackingComponent]
 })
+
 export class AgreementTrackingModule { }
