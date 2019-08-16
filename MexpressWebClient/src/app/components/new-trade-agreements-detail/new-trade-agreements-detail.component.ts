@@ -97,7 +97,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   fk_Glb_Mtr_Organization: number = 1;
   disableStartDate: boolean = false;
   isEditable: boolean = true;
-
+  option = true;
+  SearchInfo: any = [];
   //#region InfiniteScrollVariables
   total = 0;
   data : any = [];
@@ -146,6 +147,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
+        debugger
         if(this.providerModel.Name_Provider === ''){
            return [...acc, ...curr];
         } else {
@@ -638,7 +640,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
-        this.listProvider();
+        this.listProvider(this.option);
       },
       error => {
         this._common._setLoading(false);
@@ -651,7 +653,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Creation date:  08/07/2019
 * Description: method that list all providers
 ****************************************************/
-  listProvider() {
+  listProvider(option) {
     this.providerModel.Page_Number = this.pageNumber;
     this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
@@ -660,13 +662,24 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
         }
-       
-         this.providerList = dataG;
-         this.options.next(this.providerList);
-         console.log(this.options$);;
-         this._common._setLoading(false);
-
-
+        this.providerList = dataG;
+      if(option == true && this.providerModel.Name_Provider !== ""){
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+         });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+       } else if (option == false){
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+         });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+       } else if(option == true && this.providerModel.Name_Provider === ""){
+        this.options.next(this.providerList);
+        this._common._setLoading(false);
+       } 
+   
       },
       error => {
         this._common._setLoading(false);
@@ -682,21 +695,24 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description: method that helps infinite scroll to show more info
 ****************************************************/
   getNextBatch() {
+    this.option = true;
    this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
     this.pageNumber++; // variable for pagination
     if(this.pageNumber <= this.total){
-      this.listProvider();
+      this.listProvider(this.option);
     }
   }
 /*******************************************************
 * Author: esalas
 * Creation date:  16/08/2019
-* Description: method that helps infinite scroll to show more info
+* Description: method that search an specific provider
 ****************************************************/
   providerSearch(event){
+    this.SearchInfo = [];
     this.providerModel.Name_Provider = event.target.value;
     this.pageNumber = 1;
-    this.listProvider();
+    this.option = false;
+    this.listProvider(this.option);
   }
   // Opcion para Excel
   toolbarClick(args: ClickEventArgs): void {
