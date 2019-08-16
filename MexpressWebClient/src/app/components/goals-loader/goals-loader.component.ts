@@ -23,7 +23,8 @@ export class GoalsLoaderComponent implements OnInit {
   }
   addNewGoal() {
     var objGoalLine = {
-      pk_Ac_Trade_Agreement: 0,
+      pk_Cat_Agreement_Goals:0,
+      pk_Ac_Trade_Agreement: this.pk_Ac_Trade_Agreement,
       date_Start: new Date(),
       date_Finish: new Date(),
       goal_Amount: '',
