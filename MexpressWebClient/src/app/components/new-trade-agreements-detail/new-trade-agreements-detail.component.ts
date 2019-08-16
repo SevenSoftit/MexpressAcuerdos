@@ -78,7 +78,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   pk_Ac_Trade_Agreement: number = 0;
   newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
   infoUser = utiles.getInfoUser();
-  allProducts: boolean = false;
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
@@ -101,22 +100,20 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   SearchInfo: any = [];
   //#region InfiniteScrollVariables
   total = 0;
-  data : any = [];
+  data: any = [];
   limit = 7;
   offset = 0;
   options = new BehaviorSubject<string[]>([]);
   options$: Observable<string[]>;
   pageNumber = 1;
   completeLoad = false;
-  providerFilter= "";
+  providerFilter = "";
 
   //#endregion InfiniteScrollVariables
-  
+
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
-
-     
 
     this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
@@ -147,13 +144,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
-        debugger
         if(this.providerModel.Name_Provider === ''){
            return [...acc, ...curr];
         } else {
           return [...curr];
         }
-       
+
       }, [])
     );
 
@@ -220,7 +216,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
-      this.allProducts = this.agreementDetail.info.all_Products;
+      this.allproducts_activator = this.agreementDetail.info.all_Products;
       this.providerName = this.agreementDetail.info.provider_Name;
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
@@ -241,7 +237,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 10, pageCount:8 };
+      this.pageSettings = { pageSize: 10, pageCount: 8 };
     } else {
       this.pageSettings = { pageSize: 5, pageCount: 8 };
     }
@@ -310,7 +306,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
-      this.newAgreementDetailHeaderModel.All_Products = this.allProducts;
+      this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
       this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
@@ -634,7 +630,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
-  
+
   listTypeOfAgreement() {
 
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
@@ -658,7 +654,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
-        if (this.pageNumber == 1){
+        if (this.pageNumber == 1) {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
         }
@@ -687,13 +683,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     )
   }
- 
-  
-/*******************************************************
-* Author: esalas
-* Creation date:  16/08/2019
-* Description: method that helps infinite scroll to show more info
-****************************************************/
+
+
+  /*******************************************************
+  * Author: esalas
+  * Creation date:  16/08/2019
+  * Description: method that helps infinite scroll to show more info
+  ****************************************************/
   getNextBatch() {
     this.option = true;
    this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
@@ -799,12 +795,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     setTimeout(() => dialogRef.close(), 3000);
   }
 
-  allProductsChange(){
-  this.showGoals = (this.allproducts_activator?true:false);
+  allProductsChange() {
+    this.showGoals = (this.allproducts_activator ? true : false);
   }
-  openGoals(){
+
+  openGoals() {
+
+    let value = {
+      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement
+    }
+
     const dialogRef = this.matDialog.open(GoalsLoaderComponent, {
-      data: { },
+      data: value,
       minWidth: '85vw', maxWidth: '85vw', maxHeight: '100vh', minHeight: '60vh'
     });
   }

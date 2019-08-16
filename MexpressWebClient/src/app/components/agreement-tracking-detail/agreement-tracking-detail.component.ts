@@ -36,7 +36,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
   headerFile: number = 0;
   title = 'Todos los acuerdos comerciales';
   agreement_activator: boolean = false;
-  allProducts: boolean = false;
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   providerName;
@@ -98,7 +97,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
-      this.allProducts = this.agreementDetail.info.all_Products;
       this.providerName = this.agreementDetail.info.provider_Name;
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;

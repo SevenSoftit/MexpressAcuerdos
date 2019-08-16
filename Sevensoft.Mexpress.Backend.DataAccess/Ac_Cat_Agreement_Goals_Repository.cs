@@ -128,6 +128,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess.Repository
                         P_GOAL_AMOUNT = model.Goal_Amount,
                         P_TYPE_GOAL = model.Type_Goal,
                         P_BONUS = model.Bonus,
+                        P_ACTIVE = model.Active
                     },
                     commandType: CommandType.StoredProcedure);
             }

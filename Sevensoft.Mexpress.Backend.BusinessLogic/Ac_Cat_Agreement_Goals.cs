@@ -104,10 +104,16 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
             try
             {
                 var resultMessage = new Message();
-                var model = message.DeSerializeObject<Common.Ac_Cat_Agreement_Goals>();
+                var model = message.DeSerializeObject<List<Common.Ac_Cat_Agreement_Goals>>();
                 using (var repository = new Ac_Cat_Agreement_Goals_Repository(message.Connection))
                 {
-                    await repository.Save(model);
+
+                    foreach (var goal in model)
+                    {
+                        await repository.Save(goal);
+                    }
+
+
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                     resultMessage.MessageInfo = String.Empty;

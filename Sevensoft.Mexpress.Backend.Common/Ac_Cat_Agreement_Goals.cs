@@ -18,6 +18,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Type_Goal = false;
             Bonus = 0;
             Name_Currency = "";
+            Active = true;
         }
         public Int32 Pk_Cat_Agreement_Goals { get; set; }
         public DateTime Creation_Date { get; set; }
@@ -32,5 +33,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Boolean Type_Goal { get; set; }
         public Decimal Bonus { get; set; }
         public String Name_Currency { get; set; }
+         public Boolean Active { get; set; }
     }
 }
