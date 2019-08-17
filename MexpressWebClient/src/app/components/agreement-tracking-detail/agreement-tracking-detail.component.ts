@@ -49,6 +49,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   behaviorTA: string = '';
   showAgreementResumeTable: boolean = true;
   showAgreementResultTable: boolean = false;
+  heightGridLW: any;
 
  
   constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
@@ -116,10 +117,23 @@ export class AgreementTrackingDetailComponent implements OnInit {
   getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
+
+    if (this.screenWidth < 1536) {
+      this.heightGridLW = 220;
+    } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
+      this.heightGridLW = 213;
+    } 
+    else if (this.screenWidth > 1900) {
+      this.heightGridLW = 420;
+    }
+    else if (this.screenWidth == 1680) {
+      this.heightGridLW = 230;
+    }
+
     if (this.screenWidth >= 1900) {
       this.pageSettings = { pageSize: 9, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 4, pageCount: 5 };
+      this.pageSettings = { pageSize: 5, pageCount: 5 };
     }
   }
 
@@ -133,7 +147,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
   dataBound() {
     this.grid.gridLines = 'Both';
-  }
+ 
+    // if (this.grid.columns.length > 9) {
+    //   this.grid.autoFitColumns();
+    // }
+  }  
+
 
 
   // Opcion para Excel
@@ -194,14 +213,15 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   viewAgreementProductD(args: any): void {
-    let data: any = this.grid.getRowInfo(args.target).rowData;
+    let data: any = this.grid.getRowInfo(args.target).rowData;   
     var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
     agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoDetailModel.Pk_Cat_Agreement_Details_Resume = data.pk_Cat_Agreement_Details_Resume;
     agreementProductInfoDetailModel.Behavior = this.behaviorTA;
+    agreementProductInfoDetailModel.Product_Id = data.product_Id;
+
     this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
       dataJ => {
-        debugger;
         this.dataTable = dataJ;
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;

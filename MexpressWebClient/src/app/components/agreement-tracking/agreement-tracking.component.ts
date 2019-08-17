@@ -188,7 +188,6 @@ listAgreementStatus() {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    debugger;
     if(args.column.field === "provider_Name")  {
     let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),

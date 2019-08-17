@@ -42,7 +42,8 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         // P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
-                        P_BEHAVIOR = model.Behavior
+                        P_BEHAVIOR = model.Behavior,
+                        P_PRODUCT_ID = model.Product_Id
             },
                     commandType: CommandType.StoredProcedure);
                     return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Product_Info_Detail>>(result.ToList());           
@@ -60,7 +61,8 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                 {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
                         // P_PK_CAT_AGREEMENT_DETAILS_RESUME = model.Pk_Cat_Agreement_Details_Resume,
-                        P_BEHAVIOR = model.Behavior
+                        P_BEHAVIOR = model.Behavior,
+                        P_PRODUCT_ID = model.Product_Id
                 },
                 commandType: CommandType.StoredProcedure).FirstOrDefault();
             return await Task.FromResult<Common.Ac_Mtr_Agreement_Product_Info_Detail>(result);
