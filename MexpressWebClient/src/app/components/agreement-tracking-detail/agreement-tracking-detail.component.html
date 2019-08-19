@@ -8,7 +8,7 @@
         </div>
         <div class="row  ml-0 mr-0">
             <div class="col-md-12 text-right">
-                <button class="save-button ml-4" mat-raised-button>
+                <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()">
                     <mat-icon class="mr-2">star</mat-icon>Ver detalle de todo el acuerdo
                 </button>
             </div>
@@ -77,7 +77,7 @@
     <div *ngIf="showAgreementResumeTable" class="row new-agreement-table-top ml-0 mr-0">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='dataTable' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)"
-                [allowResizing]='true'>
+                [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
                     <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
                     <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
@@ -103,20 +103,20 @@
     <!-- Tabla para listar el detalle de cada producto -->
     <div *ngIf="showAgreementResultTable" class="row new-agreement-table-top ml-0 mr-0">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [frozenColumns]="2" allowScrolling='true' [dataSource]='dataTable' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)"
-                [allowResizing]='true'>
+            <ejs-grid #grid [frozenColumns]="2" allowScrolling='true' [dataSource]='dataTable' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
+                (dataBound)="dataBound($event)" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
-                    <e-column field='product_Id' headerText='Código' textAlign='Center' width='150'></e-column>
-                    <e-column field='product_Name' headerText='Nombre artículo' textAlign='Center' width='150'></e-column>
-                    <e-column field='name_Store' headerText='Tienda de venta' textAlign='Center' width='180'></e-column>
+                    <e-column field='product_Id' headerText='Código' textAlign='Center' width='120'></e-column>
+                    <e-column field='product_Name' headerText='Nombre artículo' textAlign='Center' width='180'></e-column>
+                    <e-column field='name_Store' headerText='Tienda de venta' textAlign='Center' width='170'></e-column>
                     <e-column field='name_Vendor' headerText='Nombre vendedor' textAlign='Center' width='180'></e-column>
-                    <e-column field='client_Name' headerText='Cliente' textAlign='Center' width='100'></e-column>
+                    <e-column field='client_Name' headerText='Cliente' textAlign='Center' width='150'></e-column>
                     <e-column field='name_Document' headerText='Tipo de factura' textAlign='Center' width='180'></e-column>
                     <e-column field='bill_Id' headerText='Nº Factura' textAlign='Center' width='180'></e-column>
                     <e-column field='product_Serie' headerText='Serie' textAlign='Center' width='180'></e-column>
                     <e-column field='product_Quantity' headerText='Cantidad' textAlign='Center' width='150'></e-column>
                     <e-column field='product_Cost' headerText='Costo' textAlign='Center' width='150'></e-column>
-                    <e-column field='date_Invoice' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}" headerText='Fecha de venta' textAlign='Center' width='120'></e-column>
+                    <e-column field='date_Invoice' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}" headerText='Fecha de venta' textAlign='Center' width='180'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' textAlign='Center' width='5'></e-column>
                     <e-column field='pk_Cat_Agreement_Details_Result' [isPrimaryKey]="true" [visible]="false" headerText='pk_Cat_Agreement_Details_Resume' textAlign='Center' width='5'></e-column>
