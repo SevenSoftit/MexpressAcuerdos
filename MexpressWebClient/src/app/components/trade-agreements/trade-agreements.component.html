@@ -36,7 +36,7 @@
     </div>
     <div class="col-md-3 trade-agreement-col-center">
         <span class="span-inactive d-inline-block">2: Nombre</span>
-        <input type="text" class="form-control new-agreement-form-input" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
+        <input type="text" class="form-control new-agreement-form-input" id="agreement_name" aria-describedby="agreement_name" #myInput autofocus (keyup)="nameAgreementSearch($event)" placeholder="Nombre del acuerdo">
 
     </div>
     <div class="col-md-3 trade-agreement-col-center-date">

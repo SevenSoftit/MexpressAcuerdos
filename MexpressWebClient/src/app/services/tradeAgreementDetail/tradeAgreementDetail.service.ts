@@ -127,6 +127,13 @@ export class TradeAgreementDetailService {
       catchError(this.handleError<any>(''))
       );
   }
+
+  listNameAgree (nameAgreement: any) {
+    const url = this.apiUrl + 'api/agreementDetailHeader/Get';
+    return this.http.post<any[]>(url, nameAgreement, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
   
   // HEADER OF THE AGREEMENT
 

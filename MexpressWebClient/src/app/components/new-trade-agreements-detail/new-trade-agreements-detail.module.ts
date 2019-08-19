@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollDispatchModule, ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ToolbarService,EditService,PageService,FilterService,SortService,FreezeService,ResizeService,GridModule, ExcelExportService, PdfExportService} from "@syncfusion/ej2-angular-grids";
 import { MatSelectModule } from '@angular/material/select';
@@ -57,7 +57,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MaterialModule,
     MatTooltipModule,
-    MatSelectInfiniteScrollModule
+    MatSelectInfiniteScrollModule,
+    ScrollingModule
   ],
   providers: [
     ToolbarService,

@@ -26,8 +26,11 @@ export class TradeAgreementsComponent implements OnInit {
   statusList: any;
   public isActiveAgreement: Boolean = false;
   public toolbar: ToolbarItems[] | Object;
+  SearchInfo: any = [];
 
-  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
+
+  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
+  }
 
   ngOnInit() {
    this._common._setLoading(true);
@@ -201,6 +204,31 @@ listAgreementStatus() {
 
   }  
 } 
+/*******************************************************
+* Author: Gustavo ZC
+* Creation date:  19/08/2019
+* Description: method that search an specific name agreement
+****************************************************/
+nameAgreementSearch(event){
+  var data = new NewAgreementDetailHeaderModel();
+  data.Name_Agreement = event.target.value;
+
+  this.listNameAgreement(data);
+}
+
+listNameAgreement(data) {
+
+  this.tradeAgreementDetailService.listNameAgree(data).subscribe(
+    dataV => {
+
+      this.dataTable = dataV;
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
 
 
 }

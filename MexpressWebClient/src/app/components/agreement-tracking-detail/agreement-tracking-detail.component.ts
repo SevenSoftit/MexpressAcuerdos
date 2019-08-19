@@ -51,6 +51,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
   showAgreementResumeTable: boolean = true;
   showAgreementResultTable: boolean = false;
   heightGridLW: any;
+  enableEntireAgreement: boolean = true;
+  enableArrow: boolean = false;
 
  
   constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
@@ -223,6 +225,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
     this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
       dataJ => {
+        this.enableEntireAgreement = false;
+        this.enableArrow = true;
         this.dataTable = dataJ;
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
@@ -239,11 +243,13 @@ export class AgreementTrackingDetailComponent implements OnInit {
     var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
     agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoDetailModel.Behavior = this.behaviorTA;
-    agreementProductInfoDetailModel.Product_Id = '0';
+    agreementProductInfoDetailModel.Product_Id = '';
 
     this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
-      dataJ => {
-        this.dataTable = dataJ;
+      dataS => {
+        this.enableEntireAgreement = false;
+        this.enableArrow = true;
+        this.dataTable = dataS;
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
         this._common._setLoading(false);
@@ -266,7 +272,16 @@ export class AgreementTrackingDetailComponent implements OnInit {
     }, args.cell as HTMLTableCellElement);
 
   }  
-} 
+}
+
+goListProductsResume(){
+  this.showAgreementResumeTable = true;
+ this.showAgreementResultTable = false;
+ this.enableArrow = false;
+ this.enableEntireAgreement = true;
+ this.listAgreementDResume();
+
+}
 
 
 

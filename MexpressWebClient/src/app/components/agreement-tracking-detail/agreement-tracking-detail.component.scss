@@ -170,26 +170,35 @@
 }
 
 //#region tableStyles
-::ng-deep .new-agreement-table-top  .e-grid .e-columnheader {
+::ng-deep .new-agreement-table-top .e-grid .e-columnheader {
     color: $light-blue !important;
 }
 
-::ng-deep.new-agreement-table-top  .e-grid .e-headercell,
+::ng-deep.new-agreement-table-top .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
     background-color: #eee !important;
 }
 
-::ng-deep.new-agreement-table-top  .e-grid .e-headercelldiv {
+::ng-deep.new-agreement-table-top .e-grid .e-headercelldiv {
     font-family: $opensans-bold !important;
     font-size: $font-size-small!important;
     white-space: normal !important;
 }
 
-::ng-deep.new-agreement-table-top  .e-pager .e-currentitem,
+::ng-deep.new-agreement-table-top .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
     background-color: $light-blue !important
 }
 
-
-
 //#endregion tableStyles
+.back-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.cursor_view {
+    cursor: pointer;
+}

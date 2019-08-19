@@ -4,9 +4,10 @@
             <h5 class="tittle-agreement">Detalle del seguimiento</h5>
         </div>
         <div class="row m-0 pl-5 pr-4">
+            <mat-icon *ngIf="enableArrow" (click)="goListProductsResume()" class="back-arrow">keyboard_backspace</mat-icon>
             <label class="trade-agreements-description">Esta sección  presenta el detalle del seguimiento de un acuerdo.</label>
         </div>
-        <div class="row  ml-0 mr-0">
+        <div class="row  ml-0 mr-0" *ngIf="enableEntireAgreement">
             <div class="col-md-12 text-right">
                 <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()">
                     <mat-icon class="mr-2">star</mat-icon>Ver detalle de todo el acuerdo
@@ -92,7 +93,7 @@
 
                     <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120>
                         <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementProductD($event)">remove_red_eye</mat-icon>
+                            <mat-icon (click)="viewAgreementProductD($event)" class="cursor_view">remove_red_eye</mat-icon>
                         </ng-template>
                     </e-column>
                 </e-columns>
