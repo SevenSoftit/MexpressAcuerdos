@@ -16,7 +16,6 @@
         </div>
     </div>
 </div>
-  
 
 
     <div class="row new-agreement-table-top trade-agreements-filters">
@@ -50,48 +49,48 @@
             <h5 class="radioButton-agreement d-inline-block">Estado</h5>
             <div class="form-check d-inline-block trade-agreement-select">
 
-                <mat-select id="agreement_status" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_status" class="agreement-status-select text-center" (selectionChange)="behaviorStatus($event)" placeholder="Estado">
-                    <mat-option *ngFor="let status of statusList" [value]="status.pk_Glb_Cat_Catalog">
-                        {{status.value}}
-                    </mat-option>
-                </mat-select>
-            </div>
+            <mat-select id="agreement_status" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_status" class="agreement-status-select text-center" (selectionChange)="behaviorStatus($event)" placeholder="Estado">
+                <mat-option *ngFor="let status of statusList" [value]="status.pk_Glb_Cat_Catalog">
+                    {{status.value}}
+                </mat-option>
+            </mat-select>
         </div>
     </div>
+</div>
 
-    <!-- Listado de acuerdos -->
-    <div class="row ml-0 mr-0 trade-agreements-grid">
-        <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'
-                [toolbar]='toolbar'>
-                <e-columns>
-                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'>
-                    </e-column>
-                    <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
-                    </e-column>
-                    <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
-                    <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
-                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
-                    </e-column>
-                    <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Ac_Cat_Provider' [visible]="false" headerText='pk_Ac_Cat_Provider' width='5' textAlign='Center'></e-column>
-                    <e-column field='description_Agreement' [visible]="false" headerText='description_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-                    <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
-                    </e-column>
-                    <e-column field='date_Process' [visible]="false" headerText='date_Process' width='5' textAlign='Center'></e-column>
-                    <e-column field='date_Reprocess' [visible]="false" headerText='date_Reprocess' width='5' textAlign='Center'></e-column>
-                    <e-column field='allProducts' [visible]="false" headerText='allProducts' width='5' textAlign='Center'></e-column>
-                    <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
+<!-- Listado de acuerdos -->
+<div class="row ml-0 mr-0 trade-agreements-grid">
+    <div class="col-lg-12 col-md-12">
+        <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'
+            [toolbar]='toolbar' (queryCellInfo)='tooltip($event)'>
+            <e-columns>
+                <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center'>
+                </e-column>
+                <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
+                </e-column>
+                <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
+                <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
+                <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
+                </e-column>
+                <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
+                <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
+                <e-column field='pk_Ac_Cat_Provider' [visible]="false" headerText='pk_Ac_Cat_Provider' width='5' textAlign='Center'></e-column>
+                <e-column field='description_Agreement' [visible]="false" headerText='description_Agreement' width='5' textAlign='Center'></e-column>
+                <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
+                <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
+                </e-column>
+                <e-column field='date_Process' [visible]="false" headerText='date_Process' width='5' textAlign='Center'></e-column>
+                <e-column field='date_Reprocess' [visible]="false" headerText='date_Reprocess' width='5' textAlign='Center'></e-column>
+                <e-column field='allProducts' [visible]="false" headerText='allProducts' width='5' textAlign='Center'></e-column>
+                <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
+                <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='edit' textAlign='center' headerText='Editar' width=120>
-                        <ng-template #template let-dataAgreements>
-                            <mat-icon (click)="viewAgreementDetails($event)" class="trade-agreements-edit-icon">border_color</mat-icon>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
-        </div>
+                <e-column field='edit' textAlign='center' headerText='Editar' width=120>
+                    <ng-template #template let-dataAgreements>
+                        <mat-icon (click)="viewAgreementDetails($event)" class="trade-agreements-edit-icon">border_color</mat-icon>
+                    </ng-template>
+                </e-column>
+            </e-columns>
+        </ejs-grid>
     </div>
+</div>

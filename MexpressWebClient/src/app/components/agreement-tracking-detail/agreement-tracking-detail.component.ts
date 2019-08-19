@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
-import { ExcelExportProperties, ToolbarItems } from '@syncfusion/ej2-grids';
+import { ExcelExportProperties, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { AgreementProductInfoDetailModel } from 'src/app/models/agreementProductInfoDetail.model';
+import { Tooltip } from '@syncfusion/ej2-popups';
 
 @Component({
   selector: 'app-agreement-tracking-detail',
@@ -210,7 +211,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         console.error(error);
       }
     )
-  }
+  }  
 
   viewAgreementProductD(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;   
@@ -232,8 +233,40 @@ export class AgreementTrackingDetailComponent implements OnInit {
         console.error(error);
       }
     )
-
   }
+
+  seeDetailOfTheEntireAgreement(): void {  
+    var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
+    agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    agreementProductInfoDetailModel.Behavior = this.behaviorTA;
+    agreementProductInfoDetailModel.Product_Id = '0';
+
+    this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
+      dataJ => {
+        this.dataTable = dataJ;
+        this.showAgreementResumeTable = false;
+        this.showAgreementResultTable = true;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+
+  tooltip(args: QueryCellInfoEventArgs) {
+    if(args.column.field === "product_Name")  {
+    let tooltip: Tooltip = new Tooltip({
+        content: args.data[args.column.field].toString(),
+        animation: {
+          open: { effect: 'None', duration: 1000, delay: 200 },
+          close: { effect: 'None', duration: 600, delay: 200 }
+      }
+    }, args.cell as HTMLTableCellElement);
+
+  }  
+} 
 
 
 

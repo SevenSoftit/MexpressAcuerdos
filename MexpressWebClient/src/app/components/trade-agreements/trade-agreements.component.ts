@@ -1,10 +1,11 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { Tooltip } from '@syncfusion/ej2-popups';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -187,6 +188,19 @@ listAgreementStatus() {
     this.router.navigate(['newTradeAgreements'], navigationExtras);
     this._common.asignHeaderTitle("Editar acuerdo");
   }
+
+  tooltip(args: QueryCellInfoEventArgs) {
+    if(args.column.field === "provider_Name")  {
+    let tooltip: Tooltip = new Tooltip({
+        content: args.data[args.column.field].toString(),
+        animation: {
+          open: { effect: 'None', duration: 1000, delay: 200 },
+          close: { effect: 'None', duration: 600, delay: 200 }
+      }
+    }, args.cell as HTMLTableCellElement);
+
+  }  
+} 
 
 
 }
