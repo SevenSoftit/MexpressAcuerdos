@@ -79,7 +79,7 @@ if(this.dataConfirm.evidence.pk_Cat_Document_Agreement > 0 && this.dataConfirm.e
 
   this.evidenceService.deleteEvidence(this.agreementDocumentModel).subscribe(
     data => {
-      this.closeConfirm();     
+      this.closeConfirm(true);     
       this.onAdd.emit(true);
       this.commonService._setLoading(false);
     },
@@ -87,7 +87,7 @@ if(this.dataConfirm.evidence.pk_Cat_Document_Agreement > 0 && this.dataConfirm.e
     this.commonService._setLoading(false);
     });
 }else{
-  this.closeConfirm();         
+  this.closeConfirm(true);         
   this.onAdd.emit(false);
   this.commonService._setLoading(false);
 }
@@ -128,7 +128,7 @@ if(this.dataConfirm.evidence.pk_Cat_Document_Agreement > 0 && this.dataConfirm.e
      * Author:
      * Description:
   **************************************************************************************/
-  closeConfirm() {
-    this.dialog.close();
+  closeConfirm(value) {
+    this.dialog.close(value);
   }
 }

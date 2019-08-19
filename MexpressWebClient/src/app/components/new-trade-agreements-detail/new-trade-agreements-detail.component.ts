@@ -145,6 +145,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
+        debugger;
         if(this.providerModel.Name_Provider === ''){
            return [...acc, ...curr];
         } else {
@@ -655,6 +656,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
+        debugger;
         if (this.pageNumber == 1) {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
@@ -692,6 +694,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   * Description: method that helps infinite scroll to show more info
   ****************************************************/
   getNextBatch() {
+    debugger;
     this.option = true;
    this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
     this.pageNumber++; // variable for pagination
@@ -705,6 +708,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description: method that search an specific provider
 ****************************************************/
   providerSearch(event){
+    debugger;
     this.SearchInfo = [];
     this.providerModel.Name_Provider = event.target.value;
     this.pageNumber = 1;
@@ -810,6 +814,28 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       data: value,
       minWidth: '85vw', maxWidth: '85vw', maxHeight: '100vh', minHeight: '60vh'
     });
+
+    dialogRef.afterClosed().subscribe( (data) => { 
+
+      if(data)
+      {
+        const dataSuccess = {
+          labelTitile: '¡Listo!',
+          icon: 'check_box',
+          textDescription: 'Se registraron las metas de manera correcta.',
+          status: 'success'
+        };
+
+        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+          data: { contactInfo: dataSuccess },
+          minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+        });
+        setTimeout(() => dialogRef.close(), 3000);
+      }  
+    
+    
+    } )
+    
   }
 
   hasMaxAmount(){
