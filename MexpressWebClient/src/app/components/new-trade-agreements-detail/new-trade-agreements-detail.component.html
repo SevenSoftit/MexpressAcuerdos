@@ -98,7 +98,7 @@
         </div>
         <div class="row ml-0 mr-0">
             <!--Descripción-->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
@@ -108,7 +108,19 @@
                 <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
             </div>
-            <div class="col-md-2 mt-4" *ngIf="!disableHeader">
+              <!--Activa input de monto maximo-->
+              <div class="col-md-1" >
+                    <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
+                    <mat-slide-toggle id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" (change)="hasMaxAmount()">
+                    </mat-slide-toggle>
+                </div>
+                <!--Muestra el input de monto maximo-->
+            <div class="col-md-1" *ngIf="showAmountInput">
+                    <label for="max_amount_input" class="new-agreement-label-input">Monto Máximo</label>
+                    <input type="text" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" placeholder="Monto">
+                   
+                </div>
+            <div class="col-md-2 mt-4 new-trade-agreement-detail-button" *ngIf="!disableHeader">
                 <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
                 </button>
@@ -125,6 +137,7 @@
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
 
             </div>
+           
         </div>
     </form>
 

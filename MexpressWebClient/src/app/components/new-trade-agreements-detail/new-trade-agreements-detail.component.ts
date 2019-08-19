@@ -108,7 +108,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   pageNumber = 1;
   completeLoad = false;
   providerFilter = "";
-
+  maxAmount = false;
+  showAmountInput = false;
   //#endregion InfiniteScrollVariables
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
@@ -809,6 +810,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       data: value,
       minWidth: '85vw', maxWidth: '85vw', maxHeight: '100vh', minHeight: '60vh'
     });
+  }
+
+  hasMaxAmount(){
+    this.showAmountInput = (this.maxAmount?true:false);
   }
 
 }
