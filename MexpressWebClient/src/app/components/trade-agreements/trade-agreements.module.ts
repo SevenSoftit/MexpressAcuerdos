@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {EditService,PageService,FilterService,SortService,ResizeService,GridModule} from "@syncfusion/ej2-angular-grids";
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 setCulture('es-ES');
 

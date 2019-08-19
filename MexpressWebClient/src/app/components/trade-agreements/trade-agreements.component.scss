@@ -18,6 +18,8 @@
     margin-left: 0.9rem;
     margin-right: 0.9rem;
     padding: 0.35rem;
+    justify-content: space-between;
+    align-items: baseline;
 }
 .agreement-scroll {
     height: 85vh!important;
@@ -187,3 +189,44 @@
 }
 
 //#endregion tableStyles
+
+.new-trade-agreement-modal-date-input {
+    font-family: $opensans-semibold;
+    display: inline-block;
+    width: 57%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $black;
+    background-color: $light-gray-softer;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    text-align: center;
+}
+
+.date-calendar-icon{
+    margin-left: -2.5rem;
+}
+
+.new-agreement-form-input{
+    border: 1px solid #ced4da;
+    color: $black;
+    font-family: $opensans-semibold;
+    width: 65%;
+    background-color: $light-gray-softer;
+    display: inline-block;
+}
+.trade-agreement-col-center{
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+.trade-agreement-col-center-date{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}

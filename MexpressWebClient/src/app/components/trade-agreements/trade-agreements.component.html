@@ -4,7 +4,7 @@
             <h5 class="tittle-agreement">Acuerdos comerciales</h5>
         </div>
         <div class="row m-0 pl-5 pr-4">
-            <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes, editar o bien agregar uno nuevo.</label>
+            <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes seleccionando los filtros necesarios, editar o bien agregar uno nuevo.</label>
         </div>
 
         <div class="row ml-0 mr-0">
@@ -20,11 +20,13 @@
 
 
     <div class="row new-agreement-table-top trade-agreements-filters">
-        <div class="col-md-5 trade-agreements-radio-b">
-            <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
-
+            <div class="col-md-1 trade-agreements-radio-b">
+                    <label class="span-active">Filtros </label>
+            </div>
+        <div class="col-md-2 trade-agreements-radio-b">
+                <span class="span-active">1: </span>
             <div class="form-check d-inline-block agreements-radio-buttons">
-                <span class="span-active">1: </span><input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
+                <input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
                 <label for="activeAgreements">Activos</label>
             </div>
             <div class="form-check d-inline-block agreements-radio-buttons">
@@ -32,9 +34,20 @@
                 <label for="inactiveAgreements">Inactivos</label>
             </div>
         </div>
-        <div class="col-md-4">
-            <span class="span-inactive">2: </span>
-            <h5 class="radioButton-agreement d-inline-block">Filtro de estado</h5>
+        <div class="col-md-3 trade-agreement-col-center">
+            <span class="span-inactive d-inline-block">2: Nombre</span>
+            <input type="text" class="form-control new-agreement-form-input"  id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
+
+        </div>
+        <div class="col-md-3 trade-agreement-col-center-date">
+                <span class="span-inactive  d-inline-block">3: Fecha</span>
+                <input matInput [matDatepicker]="filterDatePicker" id="filterDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"   readonly>
+                <mat-datepicker-toggle matSuffix [for]="filterDatePicker" class="date-calendar-icon"></mat-datepicker-toggle>
+                <mat-datepicker #filterDatePicker></mat-datepicker>
+        </div>
+        <div class="col-md-3 trade-agreement-col-center">
+            <span class="span-inactive">4: </span>
+            <h5 class="radioButton-agreement d-inline-block">Estado</h5>
             <div class="form-check d-inline-block trade-agreement-select">
 
                 <mat-select id="agreement_status" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_status" class="agreement-status-select text-center" (selectionChange)="behaviorStatus($event)" placeholder="Estado">
