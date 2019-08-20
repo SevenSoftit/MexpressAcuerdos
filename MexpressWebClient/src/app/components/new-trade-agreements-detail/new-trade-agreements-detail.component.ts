@@ -110,6 +110,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   providerFilter = "";
   maxAmount = false;
   showAmountInput = false;
+  percentage:string='25%'
   //#endregion InfiniteScrollVariables
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
@@ -125,8 +126,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
+
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           this.nameAgree = this.agreementDetail.info.name_Agreement
+          this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.listAgreement(agreement);
         }
       }
@@ -137,6 +140,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     } else {
       this.disableHeader = true;
     }
+
+    
+
+
   }
 
   ngOnInit() {
@@ -145,7 +152,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
-        debugger;
         if(this.providerModel.Name_Provider === ''){
            return [...acc, ...curr];
         } else {
@@ -154,6 +160,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       }, [])
     );
+
 
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
@@ -173,6 +180,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
 
+    this.listProvider(this.option);
     this.listMoney();
 
 
@@ -296,6 +304,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.errorTypeOfAgreement = true;
     }
 
+
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
@@ -309,7 +318,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
-      this.newAgreementDetailHeaderModel.Provider_Name = this.providerName;
+      this.newAgreementDetailHeaderModel.Provider_Name = '';
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
@@ -638,7 +647,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
-        this.listProvider(this.option);
+        
       },
       error => {
         this._common._setLoading(false);
@@ -656,29 +665,35 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.providerModel.Rows_Page = this.limit;
     this.providerService.listProvider(this.providerModel).subscribe(
       dataG => {
-        debugger;
+       
         if (this.pageNumber == 1) {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
         }
+
         this.providerList = dataG;
+
       if(option == true && this.providerModel.Name_Provider !== ""){
         this.providerList.forEach(element => {
           this.SearchInfo.push(element)
          });
         this.options.next(this.SearchInfo);
         this._common._setLoading(false);
-       } else if (option == false){
+       } 
+       
+       else if (option == false){
         this.providerList.forEach(element => {
           this.SearchInfo.push(element)
          });
         this.options.next(this.SearchInfo);
         this._common._setLoading(false);
-       } else if(option == true && this.providerModel.Name_Provider === ""){
+       } 
+       
+       else if(option == true && this.providerModel.Name_Provider === ""){
         this.options.next(this.providerList);
         this._common._setLoading(false);
        } 
-   
+
       },
       error => {
         this._common._setLoading(false);
@@ -694,10 +709,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   * Description: method that helps infinite scroll to show more info
   ****************************************************/
   getNextBatch() {
-    debugger;
+
     this.option = true;
-   this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
+    this.offset += this.limit; // variable that will set the end of infinite scroll when reach the total_rows
     this.pageNumber++; // variable for pagination
+    
     if(this.pageNumber <= this.total){
       this.listProvider(this.option);
     }
@@ -708,7 +724,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 * Description: method that search an specific provider
 ****************************************************/
   providerSearch(event){
-    debugger;
+
     this.SearchInfo = [];
     this.providerModel.Name_Provider = event.target.value;
     this.pageNumber = 1;
