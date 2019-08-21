@@ -47,6 +47,10 @@
     background: transparent;
 }
 
+.goals-loader-inputs.form-control-error {
+    border-bottom: 1px solid $red;
+}
+
 .goal-loader-input-col {
     display: flex;
     justify-content: center;
@@ -108,4 +112,8 @@
 
 .goal-loader-percentage {
     padding: 0.5rem 0 0 0!important;
+}
+.goals-loader-date-picker-error{
+    border-bottom: 1px solid $red;
+
 }

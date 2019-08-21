@@ -24,7 +24,7 @@
            
             <div class="col-md-2 p-0 goal-loader-input-col">
                 <div class="form-group text-center date-picker-custom mb-0">
-                    <input matInput [matDatepicker]="i" [attr.id]="dtPicker+i" placeholder="02/01/2019" [(ngModel)]="goals.date_Start" class="goals-loader-date-picker">
+                    <input matInput readonly [matDatepicker]="i" [min]="minDate" [attr.id]="dtPicker+i" placeholder="02/01/2019" [(ngModel)]="goals.date_Start" class="goals-loader-date-picker">
                     <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
                     <mat-datepicker #i></mat-datepicker>
 
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-2 p-0 goal-loader-input-col">
                 <div class="form-group text-center date-picker-custom mb-0">
-                    <input matInput [matDatepicker]="j" [attr.id]="dtPickerF+j" placeholder="02/01/2019" [(ngModel)]="goals.date_Finish" class="goals-loader-date-picker">
+                    <input matInput [matDatepicker]="j" [attr.id]="dtPickerF+j" [min]="minDate" placeholder="02/01/2019" [(ngModel)]="goals.date_Finish" class="goals-loader-date-picker" [ngClass]="{'goals-loader-date-picker-error': goals.errorFinishDate}" (dateChange)="changeFinishDate($event)">
                     <mat-datepicker-toggle matSuffix [for]="j"></mat-datepicker-toggle>
                     <mat-datepicker #j></mat-datepicker>
 
@@ -53,11 +53,11 @@
                 </mat-slide-toggle>
             </div>
             <div class="col-md-2  p-0 goal-loader-input-col">
-                <input type="text" [(ngModel)]="goals.goal_Amount" class="form-control goals-loader-inputs mb-0" aria-describedby="Monto de la Meta" placeholder="Monto de la Meta">
+                <input type="number" [(ngModel)]="goals.goal_Amount" class="form-control goals-loader-inputs mb-0"  [ngClass]="{'form-control-error': goals.errorGoal}" (keypress)="valueChange(goals,true)" aria-describedby="Monto de la Meta" placeholder="Monto de la Meta">
 
             </div>
             <div class="col-md-3  p-0 goal-loader-input-col">
-                <input type="text" [(ngModel)]="goals.bonus" class="form-control goals-loader-inputs mb-0" aria-describedby="Porcentaje de Bonificación" placeholder="Porcentaje de Bonificación">
+                <input type="number" [(ngModel)]="goals.bonus" class="form-control goals-loader-inputs mb-0" [ngClass]="{'form-control-error': goals.errorBonus}" aria-describedby="Porcentaje de Bonificación" (keypress)="valueChange(goals,false)" placeholder="Porcentaje de Bonificación">
             </div>
             <div class="col-md-1 goals-loader-icon-goal" (click)="deleteGoal(goals)">
                 <mat-icon>delete_outline</mat-icon>

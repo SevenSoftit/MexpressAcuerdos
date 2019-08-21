@@ -122,6 +122,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       var parameters = params["agreementDet"];
 
       if (parameters != undefined) {
+        debugger
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -130,6 +131,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           this.nameAgree = this.agreementDetail.info.name_Agreement
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
+          this.showGoals = this.agreementDetail.info.all_Products;
           this.listAgreement(agreement);
         }
       }
@@ -276,7 +278,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   saveAgreementHeader() {
     this._common._setLoading(true);
-    if (this.dataTable != undefined || this.workDataTable != undefined) {
+    if ((this.dataTable != undefined || this.workDataTable != undefined) && !this.showGoals) {
       this.grid.endEdit();
     }
     this.errorDate = false;
@@ -325,6 +327,14 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
+
+          const datafailed = {
+            labelTitile: '¡Atención!',
+            icon: 'new_releases',
+            textDescription: 'La información se actualizó guardó correctamente.',
+            status: 'success'
+          };
+
           this._common._setLoading(false);
           if (!this.enableUpdateAgreement) {
             this.enableExcel = true;
@@ -350,6 +360,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
             this.onAdd.emit(true);
 
           }
+
+          const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+            data: { contactInfo: datafailed },
+            minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
+          });
+        setTimeout(() => dialogRef.close(), 3000);
+
         },
         () => {
 
@@ -573,7 +590,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   processProductWork(updateRows) {
-    if (this.dataTable != undefined || this.workDataTable != undefined) {
+    if ((this.dataTable != undefined || this.workDataTable != undefined) && !this.showGoals) {
       this.grid.endEdit();
     }
     var object = {
@@ -784,7 +801,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   openListEvidenceModal() {
-    this.grid.endEdit();
+    if(!this.showGoals){
+      this.grid.endEdit();
+    }
     const object = {
       header_File: this.headerFile,
       name_Agree: this.nameAgree
@@ -817,7 +836,21 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   allProductsChange() {
+    const datafailed = {
+      labelTitile: '¡Atención!',
+      icon: 'new_releases',
+      textDescription: 'No olvides de actualizar el acuerdo para guardar los cambios realizados.',
+      status: 'warning'
+    };
     this.showGoals = (this.allproducts_activator ? true : false);
+  
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: datafailed },
+      minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
+    });
+  setTimeout(() => dialogRef.close(), 3000);
+  
+
   }
 
   openGoals() {

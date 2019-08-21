@@ -229,3 +229,17 @@
     display: flex;
     justify-content: center;
   }
+  .goals-info{
+    font-family: $opensans-bold;
+    font-size: 2.4rem;
+    color: #bdbdbd;
+    text-align: center;
+}
+
+.goals-info-content{
+    border: 1px solid $light-blue-dark;
+    margin: 19vh 0rem 19vh 2rem;
+    padding: 8vh;
+    border-radius: 0.8rem;
+    background: rgba(240, 240, 240, 0.5);
+}

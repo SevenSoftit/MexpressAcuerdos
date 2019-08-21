@@ -6,6 +6,7 @@ import { AllMoneyService } from "src/app/services/allMoney/allMoney.service";
 import { MoneyModel } from "src/app/models/money.model";
 import { ConfirmModalComponent } from "../confirm-modal/confirm-modal.component";
 import { CommonService } from "src/app/services/common/common.service";
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 
 @Component({
   selector: "app-goals-loader",
@@ -18,7 +19,7 @@ export class GoalsLoaderComponent implements OnInit {
   goalLineCounter = 0;
   pk_Ac_Trade_Agreement: number;
   moneyList: any = [];
-
+  minDate = new Date();
   constructor(
     @Inject(MAT_DIALOG_DATA) public params,
     public tradeAgreementDetailService: TradeAgreementDetailService,
@@ -42,12 +43,16 @@ export class GoalsLoaderComponent implements OnInit {
       goal_Amount: "",
       type_Goal: false,
       pk_Cat_Currency: 1,
+      name_Currency: "COLONES",
       bonus: 0,
       id: this.goalLineCounter,
       Creation_User: utiles.getInfoUser().username,
-      Modification_User: utiles.getInfoUser().username
+      Modification_User: utiles.getInfoUser().username,
+      errorGoal: false,
+      errorBonus: false,
+      errorFinishDate: false
     };
-  
+
     this.goalLine.push(objGoalLine);
   }
 
@@ -58,7 +63,7 @@ export class GoalsLoaderComponent implements OnInit {
       .subscribe(
         data => {
           this.goalLine = data.data;
-         
+
           this.goalLine.forEach(element => {
             element.Modification_User = utiles.getInfoUser().username;
           });
@@ -106,20 +111,56 @@ export class GoalsLoaderComponent implements OnInit {
   }
 
   saveGoals() {
-    this.closeModal(true);
-    this.goalLineDelete.forEach(element => {
-      this.goalLine.push(element);
-    });
-
+    var error = false;
     this.goalLine.forEach(element => {
-      element.pk_Cat_Currency = this.moneyList.filter(
-        m => m.name_Currency == element.name_Currency
-      )[0].id_Currency;
+      var startDate = new Date(element.date_Start);
+      var endDate= new Date(element.date_Finish);
+      if (element.goal_Amount == "" || element.goal_Amount == null) {
+        element.errorGoal = true;
+        error = true;
+      }
+
+      if (element.bonus == "" || element.bonus == null) {
+        element.errorBonus = true;
+        error = true;
+      }
+      
+      if (endDate.getTime()< startDate.getTime()){
+        element.errorFinishDate = true;
+        error = true;
+      }
+
     });
 
-    this.tradeAgreementDetailService
-      .saveAgreementGoals(this.goalLine)
-      .subscribe(data => {}, error => {});
+    if (!error) {
+      this.closeModal(true);
+      this.goalLineDelete.forEach(element => {
+        this.goalLine.push(element);
+      });
+
+      this.goalLine.forEach(element => {
+        element.pk_Cat_Currency = this.moneyList.filter(
+          m => m.name_Currency == element.name_Currency
+        )[0].id_Currency;
+      });
+
+      this.tradeAgreementDetailService
+        .saveAgreementGoals(this.goalLine)
+        .subscribe(data => {}, error => {});
+    } else {
+      const datafailed = {
+        labelTitile: '¡Atención!',
+        icon: 'warning',
+        textDescription: 'Las metas tienen campos con información incorrecta.',
+        status: 'warning'
+      };
+  
+      const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+        data: { contactInfo: datafailed },
+        minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
+      });
+    setTimeout(() => dialogRef.close(), 3000);
+    }
   }
 
   closeModal(value) {
@@ -148,5 +189,23 @@ export class GoalsLoaderComponent implements OnInit {
       },
       error => {}
     );
+  }
+
+  valueChange(goal, value) {
+    if (value) goal.errorGoal = false;
+    else goal.errorBonus = false;
+  }
+
+  changeFinishDate(event){
+    this.goalLine.forEach(element =>{
+      var startDate = new Date(element.date_Start);
+      var endDate= new Date(element.date_Finish);
+      if (endDate.getTime() >= startDate.getTime()){
+        element.errorFinishDate = false;
+      }else {
+        element.errorFinishDate = true;
+
+      }
+    })
   }
 }
