@@ -129,7 +129,7 @@ export class TradeAgreementDetailService {
   }
 
   listNameAgree (nameAgreement: any) {
-    const url = this.apiUrl + 'api/agreementDetailHeader/Get';
+    const url = this.apiUrl + 'api/agreementName/List';
     return this.http.post<any[]>(url, nameAgreement, httpOptions).pipe(
       tap(() => console.log(''))
       );

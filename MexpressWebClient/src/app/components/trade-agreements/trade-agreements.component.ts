@@ -24,10 +24,13 @@ export class TradeAgreementsComponent implements OnInit {
   public activeAgreements: boolean = true;
   public inactiveAgreements: boolean = false;
   statusList: any;
-  public isActiveAgreement: Boolean = false;
+  public isActiveAgreement: Boolean = true;
   public toolbar: ToolbarItems[] | Object;
   SearchInfo: any = [];
-
+  agreement_name_search: string = '';
+  agreement_status: number = 0;
+  any_date_agreement = new Date();
+  public nameAgreementList: Object[] = [];
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
   }
@@ -59,7 +62,7 @@ export class TradeAgreementsComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
-  dataBound(args: any) {
+  dataBound() {
     this.grid.gridLines = 'Both';
   }
 
@@ -86,9 +89,12 @@ listHeaderAgreement() {
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
   this.isActiveAgreement = data.Active;
+  this.nameAgreementList = [];
+
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
       this.dataTable = dataQ;
+      this.nameAgreementList = dataQ;
       this.listAgreementStatus();
     },
     error => {
@@ -103,14 +109,15 @@ listAgreementStatus() {
   this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
     dataQ => {
       this.statusList = dataQ;
-      this._common._setLoading(false);
+      this._common._setLoading(false); 
     },
     error => {
       this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error);
+      console.log('no se envio' + ' ' + error); 
     });
 }
 
+//INICIO SECCION DE BUSQUEDAS POR FILTRO
   /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  01/08/2019
@@ -124,9 +131,12 @@ listAgreementStatus() {
 * Author:
 * Description:
 *******************************************************/
+//Filtro por estados activos e inactivos
   listSpecificHeaderAgreement(evt: any) {
+    this.agreement_name_search = '';
+    this.nameAgreementList = [];
     this._common._setLoading(true);
-    var data = new NewAgreementDetailHeaderModel();   
+    var data = new NewAgreementDetailHeaderModel();     
     this.resetRadio();
     var target = evt.target;
 
@@ -141,9 +151,16 @@ listAgreementStatus() {
   data.Active = false;
   this.isActiveAgreement = data.Active;
 }
+data.Name_Agreement = this.agreement_name_search;
+data.Date_Start = this.any_date_agreement;
+data.Date_Finish = this.any_date_agreement; 
+data.Fk_Status_Agreement = this.agreement_status;
+
+
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
         this.dataTable = dataQ;
+        this.nameAgreementList = dataQ;
         this._common._setLoading(false);
       },
       error => {
@@ -152,11 +169,67 @@ listAgreementStatus() {
       });
   }
 
+    /*******************************************************
+* Author: Gustavo ZC
+* Creation date:  19/08/2019
+* Description: method that search an specific name agreement
+****************************************************/
+//Filtro por nombre del acuerdo
+
+listNameAgreement(evt: any) {
+  var data = new NewAgreementDetailHeaderModel();
+  data.Active = this.isActiveAgreement;
+  data.Name_Agreement = evt.value;
+  data.Date_Start = this.any_date_agreement;
+  data.Date_Finish = this.any_date_agreement;
+  data.Fk_Status_Agreement = this.agreement_status;
+  this.agreement_name_search = evt.value;
+  this.tradeAgreementDetailService.listNameAgree(data).subscribe(
+    dataV => {
+      this.dataTable = dataV;
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
+
+//Filtro por fecha (fecha de inicio o fecha de finalizacion)
+selectedDate(evt: any) {
+  this._common._setLoading(true);
+  var data = new NewAgreementDetailHeaderModel();
+  debugger;
+  data.Active = this.isActiveAgreement;
+  data.Name_Agreement = this.agreement_name_search;
+  data.Date_Start = evt.value;
+  data.Date_Finish = evt.value;
+  data.Fk_Status_Agreement = this.agreement_status;
+  this.any_date_agreement = evt.value; 
+
+  this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
+    dataQ => {
+      this.dataTable = dataQ;
+      this._common._setLoading(false);
+    },
+    error => {
+      this._common._setLoading(false);
+      console.log('no se envio' + ' ' + error);
+    });
+}
+
+
+//Filtro por los demas estados (En proceso, vencidos, finalizados, conciliados, todos los estados)
   behaviorStatus(evt: any) {
     this._common._setLoading(true);
     var data = new NewAgreementDetailHeaderModel();
-    data.Fk_Status_Agreement = evt.value;
     data.Active = this.isActiveAgreement;
+    data.Name_Agreement = this.agreement_name_search;
+    data.Date_Start = this.any_date_agreement;
+    data.Date_Finish = this.any_date_agreement;
+    data.Fk_Status_Agreement = evt.value;
+    
+    this.agreement_status = evt.value; 
     this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
       dataQ => {
         this.dataTable = dataQ;
@@ -167,6 +240,7 @@ listAgreementStatus() {
         console.log('no se envio' + ' ' + error);
       });
   }
+//FIN SECCION DE BUSQUEDAS POR FILTRO
 
   resetRadio() {
     if (this.inactiveAgreements) {
@@ -194,41 +268,10 @@ listAgreementStatus() {
 
   tooltip(args: QueryCellInfoEventArgs) {
     if(args.column.field === "provider_Name")  {
-    let tooltip: Tooltip = new Tooltip({
-        content: args.data[args.column.field].toString(),
-        animation: {
-          open: { effect: 'None', duration: 1000, delay: 200 },
-          close: { effect: 'None', duration: 600, delay: 200 }
-      }
-    }, args.cell as HTMLTableCellElement);
 
   }  
 } 
-/*******************************************************
-* Author: Gustavo ZC
-* Creation date:  19/08/2019
-* Description: method that search an specific name agreement
-****************************************************/
-nameAgreementSearch(event){
-  var data = new NewAgreementDetailHeaderModel();
-  data.Name_Agreement = event.target.value;
 
-  this.listNameAgreement(data);
-}
-
-listNameAgreement(data) {
-
-  this.tradeAgreementDetailService.listNameAgree(data).subscribe(
-    dataV => {
-
-      this.dataTable = dataV;
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
 
 
 }

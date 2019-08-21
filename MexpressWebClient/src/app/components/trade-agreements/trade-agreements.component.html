@@ -35,13 +35,19 @@
         </div>
     </div>
     <div class="col-md-3 trade-agreement-col-center">
-        <span class="span-inactive d-inline-block">2: Nombre</span>
-        <input type="text" class="form-control new-agreement-form-input" id="agreement_name" aria-describedby="agreement_name" #myInput autofocus (keyup)="nameAgreementSearch($event)" placeholder="Nombre del acuerdo">
+        <span class="span-inactive d-inline-block">2: Acuerdo</span>
+        <div class="form-check d-inline-block trade-agreement-select">
+            <mat-select id="agreement_name_search" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_name_search" class="agreement-status-select text-center" (selectionChange)="listNameAgreement($event)" placeholder="Nombre">
+                <mat-option *ngFor="let nameAgr of nameAgreementList" [value]="nameAgr.name_Agreement">
+                    {{nameAgr.name_Agreement}}
+                </mat-option>
+            </mat-select>
+        </div>
 
     </div>
     <div class="col-md-3 trade-agreement-col-center-date">
         <span class="span-inactive  d-inline-block">3: Fecha</span>
-        <input matInput [matDatepicker]="filterDatePicker" id="filterDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" readonly>
+        <input matInput [(ngModel)]="any_date_agreement" (dateChange)="selectedDate($event)" [matDatepicker]="filterDatePicker" id="filterDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" readonly>
         <mat-datepicker-toggle matSuffix [for]="filterDatePicker" class="date-calendar-icon"></mat-datepicker-toggle>
         <mat-datepicker #filterDatePicker></mat-datepicker>
     </div>
