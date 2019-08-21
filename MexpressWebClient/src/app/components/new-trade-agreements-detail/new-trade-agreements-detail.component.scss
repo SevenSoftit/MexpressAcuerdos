@@ -9,6 +9,7 @@
 .trade-agreements-description {
     font-family: $opensans-semibold;
 }
+
 .agreement-top-header {
     margin-top: 2vh;
 }
@@ -204,41 +205,43 @@
 }
 
 //#endregion tableStyles
-
-.new-trade-agreement-show-goals-icon{
- color:$light-blue-dark ;   
+.new-trade-agreement-show-goals-icon {
+    color: $light-blue-dark;
 }
 
-.new-trade-show-goals-content{
+.new-trade-show-goals-content {
     display: flex;
     align-items: center;
 }
 
-.new-trade-agreement-detail-goals-lbl{
+.new-trade-agreement-detail-goals-lbl {
     text-decoration: underline;
     cursor: pointer;
 }
-.new-trade-agreement-detail-goals-lbl:hover{
-    color: $light-blue ;   
-}
-.icon-align{
-    float: right;
-  }
 
-  .new-trade-agreement-detail-button{
+.new-trade-agreement-detail-goals-lbl:hover {
+    color: $light-blue;
+}
+
+.icon-align {
+    float: right;
+}
+
+.new-trade-agreement-detail-button {
     display: flex;
     justify-content: center;
-  }
-  .goals-info{
+}
+
+.goals-info {
     font-family: $opensans-bold;
     font-size: 2.4rem;
     color: #bdbdbd;
     text-align: center;
 }
 
-.goals-info-content{
+.goals-info-content {
     border: 1px solid $light-blue-dark;
-    margin: 19vh 0rem 19vh 2rem;
+    margin: 19vh 2rem 0 2rem;
     padding: 8vh;
     border-radius: 0.8rem;
     background: rgba(240, 240, 240, 0.5);

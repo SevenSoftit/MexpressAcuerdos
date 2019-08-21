@@ -1,12 +1,11 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
-import { Tooltip } from '@syncfusion/ej2-popups';
-
+import { Grid, Filter, IFilter } from '@syncfusion/ej2-grids';
 @Component({
   selector: 'app-trade-agreements',
   templateUrl: './trade-agreements.component.html',
@@ -31,6 +30,9 @@ export class TradeAgreementsComponent implements OnInit {
   agreement_status: number = 0;
   any_date_agreement = new Date();
   public nameAgreementList: Object[] = [];
+  // public searchOptions: SearchSettingsModel;
+  public filterOptions: FilterSettingsModel;
+  public filter: IFilter;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
   }
@@ -42,6 +44,36 @@ export class TradeAgreementsComponent implements OnInit {
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Search'];
+
+    this.filterOptions = {
+      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true,
+    columns: [{ field: 'name_Agreement', matchCase: false, operator: 'startsWith', value: 'prueba 4'}
+    //   // { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
+    //   // { field: 'provider_Name', matchCase: false, operator: 'contains'},
+    //   // { field: 'date_Start', matchCase: false, operator: 'equal'},
+    //   // { field: 'date_Finish', matchCase: false, operator: 'equal'}
+    //   { field: 'date_Finish', matchCase: false, operator: 'equal'}
+     ]
+  };
+    // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
+
+  //   this.grid = new Grid({
+  //     dataSource: this.dataTable,
+  //     allowFiltering: true,
+  //     columns: [
+  //         { field: 'OrderID', headerText: 'Order ID', textAlign: 'right', width: 100, allowFiltering: false },
+  //         { field: 'CustomerID', headerText: 'Customer ID', width: 120, allowFiltering: false },
+  //         { field: 'ShipCity', headerText: 'Ship City', width: 100 },
+  //         { field: 'ShipName', headerText: 'Ship Name', width: 100, allowFiltering: false }
+  //     ],
+  //     height: 273
+  // });
+  // this.grid.appendTo('#Grid');
+    
+  this.filter = {
+    type: 'CheckBox'
+};
+
     this.listHeaderAgreement();
   }
 
@@ -64,8 +96,9 @@ export class TradeAgreementsComponent implements OnInit {
 
   dataBound() {
     this.grid.gridLines = 'Both';
-  }
+    Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
 
+}
   redirectPageCreateNewAgreement() {
     this.router.navigate(["newTradeAgreements"]);
     this._common.asignHeaderTitle("Nuevo acuerdo comercial");
@@ -147,7 +180,7 @@ listAgreementStatus() {
         this.isActiveAgreement = data.Active;
 }else{
   this.inactiveAgreements = true;
-  this.activeAgreements = false;
+  this.activeAgreements = false;  
   data.Active = false;
   this.isActiveAgreement = data.Active;
 }
@@ -207,7 +240,7 @@ selectedDate(evt: any) {
   data.Fk_Status_Agreement = this.agreement_status;
   this.any_date_agreement = evt.value; 
 
-  this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
+  this.tradeAgreementDetailService.listAgreementDate(data).subscribe(
     dataQ => {
       this.dataTable = dataQ;
       this._common._setLoading(false);

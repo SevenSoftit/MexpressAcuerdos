@@ -134,6 +134,15 @@ export class TradeAgreementDetailService {
       tap(() => console.log(''))
       );
   }
+
+  listAgreementDate (dateAgreement: any) {
+    const url = this.apiUrl + 'api/agreementDate/List';
+    return this.http.post<any[]>(url, dateAgreement, httpOptions).pipe(
+      tap(() => console.log(''))
+      );
+  }
+
+  
   
   // HEADER OF THE AGREEMENT
 

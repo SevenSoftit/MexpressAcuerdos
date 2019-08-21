@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
                 <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
-                [threshold]="percentage" [complete]="offset === total">
+                    [threshold]="percentage" [complete]="offset === total">
                     <mat-option disabled>
                         <mat-form-field class="example-full-width" floatLabel="never">
                             <mat-icon class="icon-align">search</mat-icon>
@@ -108,18 +108,18 @@
                 <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
             </div>
-              <!--Activa input de monto maximo-->
-              <div class="col-md-2" >
-                    <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
-                    <mat-slide-toggle id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" (change)="hasMaxAmount()">
-                    </mat-slide-toggle>
-                </div>
-                <!--Muestra el input de monto maximo-->
+            <!--Activa input de monto maximo-->
+            <div class="col-md-2">
+                <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
+                <mat-slide-toggle id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" (change)="hasMaxAmount()">
+                </mat-slide-toggle>
+            </div>
+            <!--Muestra el input de monto maximo-->
             <div class="col-md-1" *ngIf="showAmountInput">
-                    <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
-                    <input type="text" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" placeholder="Monto">
-                   
-                </div>
+                <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
+                <input type="text" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" placeholder="Monto">
+
+            </div>
             <div class="col-md-2 mt-4 new-trade-agreement-detail-button" *ngIf="!disableHeader">
                 <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
@@ -137,12 +137,12 @@
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
 
             </div>
-           
+
         </div>
     </form>
 
     <div *ngIf="showGoals" class="goals-info-content">
-            <h2 class="goals-info">El acuerdo comercial esta siendo trabajado con metas.</h2>
+        <h2 class="goals-info">El acuerdo comercial esta siendo trabajado con metas.</h2>
     </div>
 
 
@@ -154,7 +154,7 @@
                     <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='name_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' type="number" format="N2" headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='recovery_Amount' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5' textAlign='Center'></e-column>
@@ -179,7 +179,7 @@
                     <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='id_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='product_Amount' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='product_Amount' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>

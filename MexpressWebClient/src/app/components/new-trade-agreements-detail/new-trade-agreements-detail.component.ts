@@ -122,7 +122,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       var parameters = params["agreementDet"];
 
       if (parameters != undefined) {
-        debugger
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -142,10 +141,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     } else {
       this.disableHeader = true;
     }
-
-    
-
-
   }
 
   ngOnInit() {
@@ -331,7 +326,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           const datafailed = {
             labelTitile: '¡Atención!',
             icon: 'new_releases',
-            textDescription: 'La información se actualizó guardó correctamente.',
+            textDescription: 'La información se guardó correctamente.',
             status: 'success'
           };
 
@@ -867,9 +862,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe( (data) => { 
 
       if(data)
-      {
+      {   
         const dataSuccess = {
-          labelTitile: '¡Listo!',
+          labelTitile: '¡Listo!', 
           icon: 'check_box',
           textDescription: 'Se registraron las metas de manera correcta.',
           status: 'success'
