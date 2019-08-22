@@ -19,12 +19,9 @@
 
 
 <div class="row new-agreement-table-top trade-agreements-filters">
-    <!-- <div class="col-md-1 trade-agreements-radio-b">
-                    <label class="span-active">Filtros </label>
-            </div> -->
     <div class="col-md-3 trade-agreements-radio-b">
-        <label class="span-active">Filtros </label>
-        <span class="span-active">1: </span>
+        <label class="span-active">Filtro</label>
+        <!-- <span class="span-active">1: </span> -->
         <div class="form-check d-inline-block agreements-radio-buttons">
             <input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
             <label for="activeAgreements">Activos</label>
@@ -34,7 +31,7 @@
             <label for="inactiveAgreements">Inactivos</label>
         </div>
     </div>
-    <div class="col-md-3 trade-agreement-col-center">
+    <!-- <div class="col-md-3 trade-agreement-col-center">
         <span class="span-inactive d-inline-block">2: Acuerdo</span>
         <div class="form-check d-inline-block trade-agreement-select">
             <mat-select id="agreement_name_search" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_name_search" class="agreement-status-select text-center" (selectionChange)="listNameAgreement($event)" placeholder="Nombre">
@@ -62,22 +59,22 @@
                 </mat-option>
             </mat-select>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Listado de acuerdos -->
 <div class="row ml-0 mr-0 trade-agreements-grid">
     <div class="col-lg-12 col-md-12">
         <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
-            (dataBound)='dataBound()' [allowResizing]='true' [toolbar]='toolbar' (queryCellInfo)='tooltip($event)'>
-            <e-columns>
+            (dataBound)='dataBound()' [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
+            <e-columns>tooltip
                 <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center' allowFiltering='false'>
                 </e-column>
                 <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
                 </e-column>
                 <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
-                <e-column field='date_Start' headerText='Fecha de inicio' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
-                <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
+                <e-column field='string_Date_Start' headerText='Fecha de inicio' width='150' textAlign='Center'></e-column>
+                <e-column field='string_Date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
                 </e-column>
                 <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                 <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
@@ -92,7 +89,7 @@
                 <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
                 <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                <e-column field='edit' textAlign='center' headerText='Editar' width=120>
+                <e-column field='edit' textAlign='center' headerText='Editar' width=120 [allowFiltering]='false'>
                     <ng-template #template let-dataAgreements>
                         <mat-icon (click)="viewAgreementDetails($event)" class="trade-agreements-edit-icon">border_color</mat-icon>
                     </ng-template>

@@ -98,6 +98,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   isEditable: boolean = true;
   option = true;
   SearchInfo: any = [];
+  heightGridLW: any;
   //#region InfiniteScrollVariables
   total = 0;
   data: any = [];
@@ -108,7 +109,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   pageNumber = 1;
   completeLoad = false;
   providerFilter = "";
-  maxAmount = false;
+  maxAmountToggle = false;
+  maxAmount: number = 0;
   showAmountInput = false;
   percentage:string='25%'
   //#endregion InfiniteScrollVariables
@@ -243,6 +245,19 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
+
+    if (this.screenWidth < 1536) {
+      this.heightGridLW = 220;
+    } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
+      this.heightGridLW = 213;
+    } 
+    else if (this.screenWidth > 1900) {
+      this.heightGridLW = 420;
+    }
+    else if (this.screenWidth == 1680) {
+      this.heightGridLW = 230;
+    }
+
     if (this.screenWidth >= 1900) {
       this.pageSettings = { pageSize: 10, pageCount: 8 };
     } else {
@@ -844,12 +859,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
     });
   setTimeout(() => dialogRef.close(), 3000);
-  
-
   }
 
   openGoals() {
-
     let value = {
       pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement
     }
@@ -875,15 +887,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
         });
         setTimeout(() => dialogRef.close(), 3000);
-      }  
-    
-    
+      }     
     } )
     
   }
 
   hasMaxAmount(){
-    this.showAmountInput = (this.maxAmount?true:false);
+    this.showAmountInput = (this.maxAmountToggle?true:false);
   }
 
 }

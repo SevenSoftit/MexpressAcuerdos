@@ -5,7 +5,7 @@ import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsMode
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
-import { Grid, Filter, IFilter } from '@syncfusion/ej2-grids';
+import { Tooltip } from '@syncfusion/ej2-popups';
 @Component({
   selector: 'app-trade-agreements',
   templateUrl: './trade-agreements.component.html',
@@ -24,7 +24,7 @@ export class TradeAgreementsComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = true;
-  public toolbar: ToolbarItems[] | Object;
+  // public toolbar: ToolbarItems[] | Object;
   SearchInfo: any = [];
   agreement_name_search: string = '';
   agreement_status: number = 0;
@@ -32,7 +32,6 @@ export class TradeAgreementsComponent implements OnInit {
   public nameAgreementList: Object[] = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
-  public filter: IFilter;
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
   }
@@ -43,37 +42,21 @@ export class TradeAgreementsComponent implements OnInit {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.toolbar = ['Search'];
+    // this.toolbar = ['Search'];
 
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true,
-    columns: [{ field: 'name_Agreement', matchCase: false, operator: 'startsWith', value: 'prueba 4'}
-    //   // { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
-    //   // { field: 'provider_Name', matchCase: false, operator: 'contains'},
-    //   // { field: 'date_Start', matchCase: false, operator: 'equal'},
-    //   // { field: 'date_Finish', matchCase: false, operator: 'equal'}
+    // columns: [{ field: 'name_Agreement'},
+    //   { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
+    //   { field: 'provider_Name', matchCase: false, operator: 'contains'},
+    //   { field: 'date_Start', matchCase: false, operator: 'equal'},
     //   { field: 'date_Finish', matchCase: false, operator: 'equal'}
-     ]
+    //  ]
   };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
 
-  //   this.grid = new Grid({
-  //     dataSource: this.dataTable,
-  //     allowFiltering: true,
-  //     columns: [
-  //         { field: 'OrderID', headerText: 'Order ID', textAlign: 'right', width: 100, allowFiltering: false },
-  //         { field: 'CustomerID', headerText: 'Customer ID', width: 120, allowFiltering: false },
-  //         { field: 'ShipCity', headerText: 'Ship City', width: 100 },
-  //         { field: 'ShipName', headerText: 'Ship Name', width: 100, allowFiltering: false }
-  //     ],
-  //     height: 273
-  // });
-  // this.grid.appendTo('#Grid');
-    
-  this.filter = {
-    type: 'CheckBox'
-};
 
+  
     this.listHeaderAgreement();
   }
 
@@ -301,10 +284,14 @@ selectedDate(evt: any) {
 
   tooltip(args: QueryCellInfoEventArgs) {
     if(args.column.field === "provider_Name")  {
+    let tooltip: Tooltip = new Tooltip({
+        content: args.data[args.column.field].toString(),
+        animation: {
+          open: { effect: 'None', duration: 1000, delay: 200 },
+          close: { effect: 'None', duration: 600, delay: 200 }
+      }
+    }, args.cell as HTMLTableCellElement);
 
   }  
 } 
-
-
-
 }

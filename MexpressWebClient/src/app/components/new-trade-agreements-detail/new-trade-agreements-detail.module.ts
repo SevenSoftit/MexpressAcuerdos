@@ -14,7 +14,6 @@ import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MaterialModule } from 'src/app/material-module';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
 // Infinite scroll
 import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 

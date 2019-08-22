@@ -7,15 +7,12 @@
             <label class="trade-agreements-description">En esta sección se puede dar seguimiento a los acuerdos creados.</label>
         </div>
     </div>
-
-
-
     <div class="row new-agreement-table-top trade-agreements-filters">
-        <div class="col-md-5 trade-agreements-radio-b">
-            <h5 class="radioButton-agreement d-inline-block m-0">Seleccione los filtros necesarios</h5>
-
+        <div class="col-md-3 trade-agreements-radio-b">
+            <label class="span-active">Filtro</label>
+            <!-- <span class="span-active">1: </span> -->
             <div class="form-check d-inline-block agreements-radio-buttons">
-                <span class="span-active">1: </span><input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
+                <input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
                 <label for="activeAgreements">Activos</label>
             </div>
             <div class="form-check d-inline-block agreements-radio-buttons">
@@ -23,33 +20,21 @@
                 <label for="inactiveAgreements">Inactivos</label>
             </div>
         </div>
-        <div class="col-md-4">
-            <span class="span-inactive">2: </span>
-            <h5 class="radioButton-agreement d-inline-block">Filtro de estado</h5>
-            <div class="form-check d-inline-block trade-agreement-select">
-
-                <mat-select id="agreement_status" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_status" class="agreement-status-select text-center" (selectionChange)="behaviorStatus($event)" placeholder="Estado">
-                    <mat-option *ngFor="let status of statusList" [value]="status.pk_Glb_Cat_Catalog">
-                        {{status.value}}
-                    </mat-option>
-                </mat-select>
-            </div>
-        </div>
     </div>
 
     <!-- Listado de acuerdos -->
     <div class="row ml-0 mr-0 trade-agreements-grid">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)"
-                [allowResizing]='true' [toolbar]='toolbar' (queryCellInfo)='tooltip($event)'>
+            <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
+                (dataBound)="dataBound($event)" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
                     <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='155' textAlign='Center'>
                     </e-column>
                     <e-column field='agreement_Status_Name' headerText='Estado' width='105' textAlign='Center'>
                     </e-column>
                     <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
-                    <e-column field='date_Start' headerText='Fecha de inicio' width='117' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"></e-column>
-                    <e-column field='date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}">
+                    <e-column field='string_Date_Start' headerText='Fecha de inicio' width='117' textAlign='Center'></e-column>
+                    <e-column field='string_Date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
                     </e-column>
                     <e-column field='recovery_Amount' headerText='Monto recuperado' width='136' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
@@ -64,7 +49,7 @@
                     <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='edit' textAlign='center' headerText='Ver seguimiento' width=125>
+                    <e-column field='edit' textAlign='center' headerText='Ver seguimiento' width=125 [allowFiltering]='false'>
                         <ng-template #template let-dataAgreements>
                             <mat-icon (click)="viewAgreementTrackingDetails($event)" class="trade-agreements-edit-icon">remove_red_eye</mat-icon>
                         </ng-template>

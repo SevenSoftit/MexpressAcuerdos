@@ -1,12 +1,12 @@
 import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems, tooltipDestroy } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { QueryCellInfoEventArgs, FilterSettingsModel} from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
-import { QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
 
 
 @Component({
@@ -27,7 +27,8 @@ export class AgreementTrackingComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
-  public toolbar: ToolbarItems[] | Object;
+  // public toolbar: ToolbarItems[] | Object;
+  public filterOptions: FilterSettingsModel;
 
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
@@ -36,9 +37,20 @@ export class AgreementTrackingComponent implements OnInit {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.toolbar = ['Search'];
+    // this.toolbar = ['Search'];
     this.listHeaderAgreement();
     this.listAgreementStatus();
+
+    this.filterOptions = {
+      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true,
+    // columns: [{ field: 'name_Agreement'},
+    //   { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
+    //   { field: 'provider_Name', matchCase: false, operator: 'contains'},
+    //   { field: 'date_Start', matchCase: false, operator: 'equal'},
+    //   { field: 'date_Finish', matchCase: false, operator: 'equal'}
+    //  ]
+  };
+    // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
   @HostListener('window:resize', ['$event'])
@@ -58,8 +70,9 @@ export class AgreementTrackingComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
-  dataBound(args: any) {
+  dataBound() {
     this.grid.gridLines = 'Both';
+    Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
     
   }
 

@@ -14,6 +14,16 @@
     margin-top: 2vh;
 }
 
+.agr-activator {
+    background: #E0E0E0;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+}
+
+.agr-activator-lbl {
+    display: block;
+}
+
 .agreement-scroll {
     height: 85vh!important;
 }
@@ -26,14 +36,12 @@
     margin-right: 0;
 }
 
-.new-agreement-form-top {
-    margin-top: 3vh;
-}
-
-.agreement-top {
-    margin-top: 2vh;
-}
-
+// .new-agreement-form-top {
+//     margin-top: 3vh;
+// }
+// .agreement-top {
+//     margin-top: 2vh;
+// }
 .new-agreement-label-input {
     font-family: $opensans-semibold;
     font-size: $font-size-small;
@@ -63,7 +71,7 @@
 }
 
 .new-agreement-table-top {
-    margin-top: 4vh;
+    margin-top: 2vh;
 }
 
 .new-agreement-doc-errors {
@@ -75,7 +83,7 @@
 }
 
 .new-agreement-buttons-top {
-    margin-top: 4vh;
+    margin-top: 1vh;
 }
 
 .excel-button {
@@ -109,6 +117,12 @@
 .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
     background: $light-blue !important;
+}
+
+.new-agreement-slide-toggle {
+    width: fit-content;
+    display: block;
+    margin: 0.35rem auto auto;
 }
 
 ::ng-deep .e-pager .e-currentitem {
@@ -170,35 +184,65 @@
 }
 
 //#region tableStyles
-::ng-deep .new-agreement-table-top .e-grid .e-columnheader {
+::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
     color: $light-blue !important;
 }
 
-::ng-deep.new-agreement-table-top .e-grid .e-headercell,
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
     background-color: #eee !important;
 }
 
-::ng-deep.new-agreement-table-top .e-grid .e-headercelldiv {
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
     font-family: $opensans-bold !important;
     font-size: $font-size-small!important;
     white-space: normal !important;
 }
 
-::ng-deep.new-agreement-table-top .e-pager .e-currentitem,
+::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
     background-color: $light-blue !important
 }
 
 //#endregion tableStyles
-.back-arrow {
+.new-trade-agreement-show-goals-icon {
+    color: $light-blue-dark;
+}
+
+.new-trade-show-goals-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
+}
+
+.new-trade-agreement-detail-goals-lbl {
+    text-decoration: underline;
     cursor: pointer;
 }
 
-.cursor_view {
-    cursor: pointer;
+.new-trade-agreement-detail-goals-lbl:hover {
+    color: $light-blue;
+}
+
+.icon-align {
+    float: right;
+}
+
+.new-trade-agreement-detail-button {
+    display: flex;
+    justify-content: center;
+}
+
+.goals-info {
+    font-family: $opensans-bold;
+    font-size: 2.4rem;
+    color: #bdbdbd;
+    text-align: center;
+}
+
+.goals-info-content {
+    border: 1px solid $light-blue-dark;
+    margin: 19vh 2rem 0 2rem;
+    padding: 8vh;
+    border-radius: 0.8rem;
+    background: rgba(240, 240, 240, 0.5);
 }
