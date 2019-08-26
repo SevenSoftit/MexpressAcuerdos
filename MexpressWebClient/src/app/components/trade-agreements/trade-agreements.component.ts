@@ -26,10 +26,6 @@ export class TradeAgreementsComponent implements OnInit {
   public isActiveAgreement: Boolean = true;
   // public toolbar: ToolbarItems[] | Object;
   SearchInfo: any = [];
-  agreement_name_search: string = '';
-  agreement_status: number = 0;
-  any_date_agreement = new Date();
-  public nameAgreementList: Object[] = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
 
@@ -45,13 +41,7 @@ export class TradeAgreementsComponent implements OnInit {
     // this.toolbar = ['Search'];
 
     this.filterOptions = {
-      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true,
-    // columns: [{ field: 'name_Agreement'},
-    //   { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
-    //   { field: 'provider_Name', matchCase: false, operator: 'contains'},
-    //   { field: 'date_Start', matchCase: false, operator: 'equal'},
-    //   { field: 'date_Finish', matchCase: false, operator: 'equal'}
-    //  ]
+      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
   };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
 
@@ -105,13 +95,12 @@ listHeaderAgreement() {
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
   this.isActiveAgreement = data.Active;
-  this.nameAgreementList = [];
-
+ 
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
+      debugger;
       this.dataTable = dataQ;
-      this.nameAgreementList = dataQ;
-      this.listAgreementStatus();
+      this._common._setLoading(false);
     },
     error => {
       this._common._setLoading(false);
@@ -119,19 +108,19 @@ listHeaderAgreement() {
     });
 }
 
-listAgreementStatus() {
-  var catalogModel = new CatalogModel();
-  catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
-  this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
-    dataQ => {
-      this.statusList = dataQ;
-      this._common._setLoading(false); 
-    },
-    error => {
-      this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error); 
-    });
-}
+// listAgreementStatus() {
+//   var catalogModel = new CatalogModel();
+//   catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
+//   this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
+//     dataQ => {
+//       this.statusList = dataQ;
+//       this._common._setLoading(false); 
+//     },
+//     error => {
+//       this._common._setLoading(false);
+//       console.log('no se envio' + ' ' + error); 
+//     });
+// }
 
 //INICIO SECCION DE BUSQUEDAS POR FILTRO
   /*******************************************************
@@ -149,8 +138,6 @@ listAgreementStatus() {
 *******************************************************/
 //Filtro por estados activos e inactivos
   listSpecificHeaderAgreement(evt: any) {
-    this.agreement_name_search = '';
-    this.nameAgreementList = [];
     this._common._setLoading(true);
     var data = new NewAgreementDetailHeaderModel();     
     this.resetRadio();
@@ -167,16 +154,12 @@ listAgreementStatus() {
   data.Active = false;
   this.isActiveAgreement = data.Active;
 }
-data.Name_Agreement = this.agreement_name_search;
-data.Date_Start = this.any_date_agreement;
-data.Date_Finish = this.any_date_agreement; 
-data.Fk_Status_Agreement = this.agreement_status;
-
 
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
+        debugger;
         this.dataTable = dataQ;
-        this.nameAgreementList = dataQ;
+        // this.nameAgreementList = dataQ;
         this._common._setLoading(false);
       },
       error => {
@@ -192,70 +175,70 @@ data.Fk_Status_Agreement = this.agreement_status;
 ****************************************************/
 //Filtro por nombre del acuerdo
 
-listNameAgreement(evt: any) {
-  var data = new NewAgreementDetailHeaderModel();
-  data.Active = this.isActiveAgreement;
-  data.Name_Agreement = evt.value;
-  data.Date_Start = this.any_date_agreement;
-  data.Date_Finish = this.any_date_agreement;
-  data.Fk_Status_Agreement = this.agreement_status;
-  this.agreement_name_search = evt.value;
-  this.tradeAgreementDetailService.listNameAgree(data).subscribe(
-    dataV => {
-      this.dataTable = dataV;
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
+// listNameAgreement(evt: any) {
+//   var data = new NewAgreementDetailHeaderModel();
+//   data.Active = this.isActiveAgreement;
+//   data.Name_Agreement = evt.value;
+//   data.Date_Start = this.any_date_agreement;
+//   data.Date_Finish = this.any_date_agreement;
+//   data.Fk_Status_Agreement = this.agreement_status;
+//   this.agreement_name_search = evt.value;
+//   this.tradeAgreementDetailService.listNameAgree(data).subscribe(
+//     dataV => {
+//       this.dataTable = dataV;
+//     },
+//     error => {
+//       this._common._setLoading(false);
+//       console.error(error);
+//     }
+//   )
+// }
 
 //Filtro por fecha (fecha de inicio o fecha de finalizacion)
-selectedDate(evt: any) {
-  this._common._setLoading(true);
-  var data = new NewAgreementDetailHeaderModel();
-  debugger;
-  data.Active = this.isActiveAgreement;
-  data.Name_Agreement = this.agreement_name_search;
-  data.Date_Start = evt.value;
-  data.Date_Finish = evt.value;
-  data.Fk_Status_Agreement = this.agreement_status;
-  this.any_date_agreement = evt.value; 
+// selectedDate(evt: any) {
+//   this._common._setLoading(true);
+//   var data = new NewAgreementDetailHeaderModel();
+//   debugger;
+//   data.Active = this.isActiveAgreement;
+//   data.Name_Agreement = this.agreement_name_search;
+//   data.Date_Start = evt.value;
+//   data.Date_Finish = evt.value;
+//   data.Fk_Status_Agreement = this.agreement_status;
+//   this.any_date_agreement = evt.value; 
 
-  this.tradeAgreementDetailService.listAgreementDate(data).subscribe(
-    dataQ => {
-      this.dataTable = dataQ;
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error);
-    });
-}
+//   this.tradeAgreementDetailService.listAgreementDate(data).subscribe(
+//     dataQ => {
+//       this.dataTable = dataQ;
+//       this._common._setLoading(false);
+//     },
+//     error => {
+//       this._common._setLoading(false);
+//       console.log('no se envio' + ' ' + error);
+//     });
+// }
 
 
 //Filtro por los demas estados (En proceso, vencidos, finalizados, conciliados, todos los estados)
-  behaviorStatus(evt: any) {
-    this._common._setLoading(true);
-    var data = new NewAgreementDetailHeaderModel();
-    data.Active = this.isActiveAgreement;
-    data.Name_Agreement = this.agreement_name_search;
-    data.Date_Start = this.any_date_agreement;
-    data.Date_Finish = this.any_date_agreement;
-    data.Fk_Status_Agreement = evt.value;
+  // behaviorStatus(evt: any) {
+  //   this._common._setLoading(true);
+  //   var data = new NewAgreementDetailHeaderModel();
+  //   data.Active = this.isActiveAgreement;
+  //   data.Name_Agreement = this.agreement_name_search;
+  //   data.Date_Start = this.any_date_agreement;
+  //   data.Date_Finish = this.any_date_agreement;
+  //   data.Fk_Status_Agreement = evt.value;
     
-    this.agreement_status = evt.value; 
-    this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
-      dataQ => {
-        this.dataTable = dataQ;
-        this._common._setLoading(false);
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
+  //   this.agreement_status = evt.value; 
+  //   this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
+  //     dataQ => {
+  //       this.dataTable = dataQ;
+  //       this._common._setLoading(false);
+  //     },
+  //     error => {
+  //       this._common._setLoading(false);
+  //       console.log('no se envio' + ' ' + error);
+  //     });
+  // }
 //FIN SECCION DE BUSQUEDAS POR FILTRO
 
   resetRadio() {
@@ -269,7 +252,9 @@ selectedDate(evt: any) {
 
   viewAgreementDetails(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
+    debugger;
     const agreementDet = {
+      
       info: data
     }
     const navigationExtras: NavigationExtras = {

@@ -50,7 +50,9 @@ namespace Sevensoft.Mexpress.Backend.Common
             list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();  
             Behavior = "";  
             String_Date_Start = "";  
-            String_Date_Finish = ""; 
+            String_Date_Finish = "";
+            Max_Amount = 0; 
+            Email = "";
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -97,6 +99,8 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Behavior { get; set; }
         public String String_Date_Start { get; set; }
         public String String_Date_Finish { get; set; }
+        public Decimal Max_Amount { get; set; }
+        public String Email { get; set; }
         
         public static implicit operator long(Import_Product v)
         {

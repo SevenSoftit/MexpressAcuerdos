@@ -1,4 +1,5 @@
 import { AgreementDocumentModel } from './agreementDocument.model';
+import { DecimalPipe } from '@angular/common';
 
 export class NewAgreementDetailHeaderModel {
 
@@ -43,6 +44,8 @@ export class NewAgreementDetailHeaderModel {
     Pk_Cat_Agreement_Details: Number;
     list_Agreement_Document: Array<AgreementDocumentModel>;
     Behavior: string;
+    Max_Amount: number;
+    Email: String;
 
 
     constructor() {
@@ -88,6 +91,8 @@ export class NewAgreementDetailHeaderModel {
             this.Pk_Cat_Agreement_Details = 0;
             this.list_Agreement_Document = [];
             this.Behavior = '';
+            this.Max_Amount = 0;
+            this.Email = '';
 
     }
 }

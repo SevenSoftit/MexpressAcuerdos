@@ -51,7 +51,7 @@
             <!-- Proveedor // (selectionChange)="behaviorProvider($event)"-->
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="provider" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
+                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
                     [threshold]="percentage" [complete]="offset === total">
                     <mat-option disabled>
                         <mat-form-field class="example-full-width" floatLabel="never">

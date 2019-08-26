@@ -57,7 +57,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_ACTIVE = model.Active,
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
+                        P_MAX_AMOUNT = model.Max_Amount,
+                        P_EMAIL = model.Email
                     },
                     commandType: CommandType.StoredProcedure);
                 return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
@@ -91,7 +93,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_ACTIVE = model.Active,
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
+                        P_MAX_AMOUNT = model.Max_Amount,
+                        P_EMAIL = model.Email
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
                     return await Task.FromResult<Common.Import_Product>(result);
@@ -124,7 +128,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_ACTIVE = model.Active,
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
+                        P_MAX_AMOUNT = model.Max_Amount,
+                        P_EMAIL = model.Email
                     },
                 commandType: CommandType.StoredProcedure);
                 return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
@@ -156,7 +162,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_PRODUCT_AMOUNT = model.Product_Amount,
                         P_ACTIVE = model.Active,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
+                        P_MAX_AMOUNT = model.Max_Amount,
+                        P_EMAIL = model.Email
                     },
                     commandType: CommandType.StoredProcedure);
             }
@@ -188,7 +196,9 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_PROVIDER_NAME = model.Provider_Name,
                         P_ACTIVE = model.Active,
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
-                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization
+                        P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
+                        P_MAX_AMOUNT = model.Max_Amount,
+                        P_EMAIL = model.Email
                     },
                 //     commandType: CommandType.StoredProcedure).FirstOrDefault();
                 // return await Task.FromResult<Common.Import_Product>(result);

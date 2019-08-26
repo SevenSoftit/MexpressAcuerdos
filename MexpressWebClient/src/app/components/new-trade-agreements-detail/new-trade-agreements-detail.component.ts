@@ -39,7 +39,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   errorStartDate: boolean = false;
   errorEndDate: boolean = false;
   type_of_agreement: any;
-  provider: any;
+  providerN: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
@@ -81,7 +81,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
-  providerName;
+  providerName: string = '';
   enableExcel: boolean = false;
   disableHeader: boolean = false;
   errorProvider: boolean = false;
@@ -114,6 +114,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   showAmountInput = false;
   percentage:string='25%';
   //#endregion InfiniteScrollVariables
+  email: string = '';
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -126,6 +127,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       if (parameters != undefined) {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
+          debugger;
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
 
@@ -133,6 +135,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.nameAgree = this.agreementDetail.info.name_Agreement
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
+          
+          if(this.agreementDetail.info.max_Amount !== 0){
+              this.maxAmountToggle = true;
+              this.showAmountInput = true;
+          }
           this.listAgreement(agreement);
         }
       }
@@ -227,7 +234,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
-      this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
+      this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
       this.allproducts_activator = this.agreementDetail.info.all_Products;
@@ -235,6 +242,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+      this.maxAmount= this.agreementDetail.info.max_Amount;
+      this.email = this.agreementDetail.info.email;
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -312,7 +321,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.errorDate = true;
       this.errorEndDate = true;
     }
-    if (this.provider == undefined) {
+    if (this.providerN == undefined) {
       this.errorProvider = true;
     }     
 
@@ -324,7 +333,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
-      this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.provider;
+      this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
       this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
       this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
       this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
@@ -338,6 +347,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
+      this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
+      this.newAgreementDetailHeaderModel.Email = this.email;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
@@ -703,7 +714,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }
 
         this.providerList = dataG;
-
+debugger;
       if(option == true && this.providerModel.Name_Provider !== ""){
         this.providerList.forEach(element => {
           this.SearchInfo.push(element)
