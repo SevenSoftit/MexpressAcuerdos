@@ -112,7 +112,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   maxAmountToggle = false;
   maxAmount: number = 0;
   showAmountInput = false;
-  percentage:string='25%'
+  percentage:string='25%';
   //#endregion InfiniteScrollVariables
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
@@ -179,7 +179,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
 
-    this.listProvider(this.option);
+    this.listProvider(this.option);  
     this.listMoney();
 
 
@@ -190,6 +190,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         return this.typeContacElem;
       },
       read: () => {
+        // if(this.typeContactObj.value == 'COLONES'){
+        //   this.symbol = '₡'
+        // }else{
+        //   this.symbol = '$'
+        // }
         return this.typeContactObj.value;
       },
       destroy: () => {
@@ -307,13 +312,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.errorDate = true;
       this.errorEndDate = true;
     }
-
     if (this.provider == undefined) {
       this.errorProvider = true;
-    }
+    }     
 
     if (this.type_of_agreement == undefined) {
-      this.errorTypeOfAgreement = true;
+      this.errorTypeOfAgreement = true;    
     }
 
 
@@ -545,7 +549,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   //Pinta los campos erroneos en rojo
-  rowDataBound(args: any): void {
+  rowDataBoundWork(args: any): void {
     if (args.data.error == true) {
 
       args.row.style.backgroundColor = "#F3C3C3";
@@ -821,11 +825,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object },
       minWidth: "900px",
-      maxWidth: "950px",
-      maxHeight: "600px",
-      minHeight: "475px"
+      maxWidth: "950px"
     });
-
   }
 
   public modalSelectedTypeAgreement() {
@@ -895,5 +896,24 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   hasMaxAmount(){
     this.showAmountInput = (this.maxAmountToggle?true:false);
   }
+
+
+
+public currencyFormatter = (field: string, data1: object, column: object) => {
+  if(data1['name_Currency'] == 'COLONES'){
+    return '₡' + data1['recovery_Amount'];
+  }else{
+    return '$' + data1['recovery_Amount'];
+  } 
+}
+
+public currencyFormatterWork = (field: string, data1: object, column: object) => {
+  if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+    return '₡' + data1['product_Amount'];
+  }else{
+    return '$' + data1['product_Amount'];
+  } 
+
+}
 
 }

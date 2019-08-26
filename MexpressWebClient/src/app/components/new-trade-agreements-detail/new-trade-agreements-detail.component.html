@@ -148,13 +148,13 @@
 
     <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="!showWorkTable && dataTable != undefined && !showGoals">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [height]="heightGridLW" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
-                [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
+            <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [height]="heightGridLW" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings'
+                [editSettings]='editSettings' [toolbar]='toolbar' (dataBound)="dataBound($event)" (actionBegin)='actionBegin($event)' [allowResizing]='true'>
                 <e-columns>
                     <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='name_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='recovery_Amount' [valueAccessor]='currencyFormatter' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5' textAlign='Center'></e-column>
@@ -173,13 +173,13 @@
 
     <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [height]="heightGridLW" [dataSource]='workDataTable' id='NormalgridWork' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowScrolling='true' scrollSettings='initialScroll' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettingsWork'
-                [toolbar]='toolbarWork' (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBound($event)" [allowResizing]='true'>
+            <ejs-grid #grid [height]="heightGridLW" [dataSource]='workDataTable' id='NormalgridWork' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowScrolling='true' scrollSettings='initialScroll' allowPaging='true' [pageSettings]='pageSettings'
+                [editSettings]='editSettingsWork' [toolbar]='toolbarWork' (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBoundWork($event)" [allowResizing]='true'>
                 <e-columns>
                     <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
                     <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
                     <e-column field='id_Currency' headerText='Moneda' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='product_Amount' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
+                    <e-column field='product_Amount' [valueAccessor]='currencyFormatterWork' type="number" editType='numericedit' headerText='Monto' width='150' textAlign='Center' [validationRules]='amountRules'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
