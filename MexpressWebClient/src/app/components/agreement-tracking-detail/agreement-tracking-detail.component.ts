@@ -19,6 +19,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
+import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
+import { utiles } from 'src/environments/utiles';
+import { CatalogModel } from '../common-model/catalog.Model';
 
 @Component({
   selector: 'app-agreement-tracking-detail',
@@ -28,7 +31,7 @@ import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
 export class AgreementTrackingDetailComponent implements OnInit {
   newAgreementForm: FormGroup;
   type_of_agreement: any;
-  provider: any;
+  providerN: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
@@ -45,7 +48,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
   allproducts_activator = false;
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
-  providerName;
   fk_Status_Agreement: number = 0;
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
@@ -70,12 +72,17 @@ export class AgreementTrackingDetailComponent implements OnInit {
     options$: Observable<string[]>;
     pageNumber = 1;
     completeLoad = false;
-    providerFilter = "";
+    percentage:string='25%'
+    //#endregion InfiniteScrollVariables
     maxAmountToggle = false;
     maxAmount: number = 0;
     showAmountInput = false;
-    percentage:string='25%'
-    //#endregion InfiniteScrollVariables
+    email: string = '';
+    enablePdfExport: boolean = false;
+    newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
+    infoUser = utiles.getInfoUser();
+    search_key: string = 'agreement_status_finished';
+    catalogModel: CatalogModel = new CatalogModel();
 
  
   constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
@@ -90,6 +97,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           this.behaviorTA = this.agreementDetail.info.behavior;
           this.showGoals = this.agreementDetail.info.all_Products;
+
+          if(this.agreementDetail.info.max_Amount !== 0){
+            this.maxAmountToggle = true;
+            this.showAmountInput = true;
+        }
+
         }
       }
       });    
@@ -97,6 +110,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getScreenSize();
+    this.getKeyStatus();
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
@@ -135,14 +149,15 @@ export class AgreementTrackingDetailComponent implements OnInit {
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
-      this.provider = this.agreementDetail.info.pk_Ac_Cat_Provider;
+      this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
       this.allproducts_activator = this.agreementDetail.info.all_Products;
-      this.providerName = this.agreementDetail.info.provider_Name;
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+      this.maxAmount= this.agreementDetail.info.max_Amount;
+      this.email = this.agreementDetail.info.email;
     }else{
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -152,6 +167,66 @@ export class AgreementTrackingDetailComponent implements OnInit {
       });
 
     }
+  }
+
+  saveAgreementHeader() {
+    //this._common._setLoading(true);
+      debugger;
+      var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
+      this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
+      this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
+      this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
+      this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
+      this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
+      this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
+      this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
+      this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
+      this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
+      this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
+      this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
+      this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
+      this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+      this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
+      this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
+      this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
+      this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
+      this.newAgreementDetailHeaderModel.Email = this.email;
+
+      this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
+        data => {
+
+          const datafailed = {
+            labelTitile: '¡Atención!',
+            icon: 'new_releases',
+            textDescription: 'El estado del acuerdo a pasado a finalizado',
+            status: 'success'
+          };
+          this._common._setLoading(false);
+
+          const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+            data: { contactInfo: datafailed },
+            minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
+          });
+        setTimeout(() => dialogRef.close(), 3000);
+
+        },
+        () => {
+
+        });
+  }
+
+  getKeyStatus() {
+    this.catalogModel.Search_Key = this.search_key;
+    this._common.listCatalog(this.catalogModel).subscribe(
+      dataF => {
+        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+
+      });
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -342,6 +417,7 @@ providerSearch(event){
   }
 
   seeDetailOfTheEntireAgreement(): void {  
+    this.enablePdfExport = true;
     var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
     agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoDetailModel.Behavior = this.behaviorTA;
@@ -361,6 +437,30 @@ providerSearch(event){
         console.error(error);
       }
     )
+  }
+
+  exportToPdf(): void { 
+    this.saveAgreementHeader(); 
+    // this.enablePdfExport = true;
+    // var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
+    // agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    // agreementProductInfoDetailModel.Behavior = this.behaviorTA;
+    // agreementProductInfoDetailModel.Product_Id = '';
+
+    // this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
+    //   dataS => {
+    //     this.enableEntireAgreement = false;
+    //     this.enableArrow = true;
+    //     this.dataTable = dataS;
+    //     this.showAgreementResumeTable = false;
+    //     this.showAgreementResultTable = true;
+    //     this._common._setLoading(false);
+    //   },
+    //   error => {
+    //     this._common._setLoading(false);
+    //     console.error(error);
+    //   }
+    // )
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
@@ -389,25 +489,10 @@ hasMaxAmount(){
   this.showAmountInput = (this.maxAmountToggle?true:false);
 }
 
-allProductsChange() {
-  const datafailed = {
-    labelTitile: '¡Atención!',
-    icon: 'new_releases',
-    textDescription: 'No olvides de actualizar el acuerdo para guardar los cambios realizados.',
-    status: 'warning'
-  };
-  this.showGoals = (this.allproducts_activator ? true : false);
-
-  const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-    data: { contactInfo: datafailed },
-    minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
-  });
-setTimeout(() => dialogRef.close(), 3000);
-}
-
 openGoals() {
   let value = {
-    pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement
+    pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement,
+    is_in_follow_up: true
   }
 
   const dialogRef = this.matDialog.open(GoalsLoaderComponent, {

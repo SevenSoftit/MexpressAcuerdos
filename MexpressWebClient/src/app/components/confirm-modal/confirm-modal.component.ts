@@ -65,7 +65,6 @@ onAdd = new EventEmitter();
  deleteEvidenceArchive(){
 
     this.commonService._setLoading(true);
-debugger;
 if(this.dataConfirm.evidence.pk_Cat_Document_Agreement > 0 && this.dataConfirm.evidence.pk_Cat_Document_Agreement != undefined)
 {
   this.agreementDocumentModel.Pk_Cat_Document_Agreement = this.dataConfirm.evidence.pk_Cat_Document_Agreement;

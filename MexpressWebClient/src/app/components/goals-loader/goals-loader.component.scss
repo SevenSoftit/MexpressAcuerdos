@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     background: $light-blue;
-    padding: 0.5rem;
+    padding: 0.2rem;
     mat-icon {
         color: #fff;
         cursor: pointer;
@@ -113,7 +113,7 @@
 .goal-loader-percentage {
     padding: 0.5rem 0 0 0!important;
 }
-.goals-loader-date-picker-error{
-    border-bottom: 1px solid $red;
 
+.goals-loader-date-picker-error {
+    border-bottom: 1px solid $red;
 }

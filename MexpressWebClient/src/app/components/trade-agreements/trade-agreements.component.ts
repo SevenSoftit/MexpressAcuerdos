@@ -98,7 +98,6 @@ listHeaderAgreement() {
  
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
-      debugger;
       this.dataTable = dataQ;
       this._common._setLoading(false);
     },
@@ -157,7 +156,6 @@ listHeaderAgreement() {
 
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
-        debugger;
         this.dataTable = dataQ;
         // this.nameAgreementList = dataQ;
         this._common._setLoading(false);
@@ -198,7 +196,6 @@ listHeaderAgreement() {
 // selectedDate(evt: any) {
 //   this._common._setLoading(true);
 //   var data = new NewAgreementDetailHeaderModel();
-//   debugger;
 //   data.Active = this.isActiveAgreement;
 //   data.Name_Agreement = this.agreement_name_search;
 //   data.Date_Start = evt.value;
@@ -252,7 +249,6 @@ listHeaderAgreement() {
 
   viewAgreementDetails(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
-    debugger;
     const agreementDet = {
       
       info: data

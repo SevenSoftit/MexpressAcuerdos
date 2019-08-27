@@ -81,7 +81,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
   onAdd = new EventEmitter();
-  providerName: string = '';
   enableExcel: boolean = false;
   disableHeader: boolean = false;
   errorProvider: boolean = false;
@@ -108,12 +107,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   options$: Observable<string[]>;
   pageNumber = 1;
   completeLoad = false;
-  providerFilter = "";
+  percentage:string='25%';
+  //#endregion InfiniteScrollVariables
   maxAmountToggle = false;
   maxAmount: number = 0;
   showAmountInput = false;
-  percentage:string='25%';
-  //#endregion InfiniteScrollVariables
   email: string = '';
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
@@ -127,7 +125,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       if (parameters != undefined) {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
-          debugger;
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
 
@@ -238,7 +235,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
       this.allproducts_activator = this.agreementDetail.info.all_Products;
-      this.providerName = this.agreementDetail.info.provider_Name;
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
@@ -331,6 +327,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
+
+      var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
@@ -343,7 +341,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
-      this.newAgreementDetailHeaderModel.Provider_Name = '';
+      this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
@@ -585,13 +583,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
   }
 
-  behaviorProvider(value: any) {
-    this.errorProvider = false;
-    var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
-    filterProviderName.forEach(element => {
-      this.providerName = element.name_Provider
-    });
-  }
+  // behaviorProvider(value: any) {
+  //   this.errorProvider = false;
+  //   var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
+  //   filterProviderName.forEach(element => {
+  //     // this.providerName = element.name_Provider
+  //   });
+  // }
 
   openDialogImportProduct(): void {
     const dialogRef = this.matDialog.open(ImportProductComponent, {
@@ -712,9 +710,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.pageNumber = 1;
           this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
         }
-
         this.providerList = dataG;
-debugger;
+
       if(option == true && this.providerModel.Name_Provider !== ""){
         this.providerList.forEach(element => {
           this.SearchInfo.push(element)
@@ -875,7 +872,8 @@ debugger;
 
   openGoals() {
     let value = {
-      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement
+      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement,
+      is_in_follow_up: false
     }
 
     const dialogRef = this.matDialog.open(GoalsLoaderComponent, {

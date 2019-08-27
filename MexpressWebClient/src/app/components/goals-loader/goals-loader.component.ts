@@ -20,6 +20,7 @@ export class GoalsLoaderComponent implements OnInit {
   pk_Ac_Trade_Agreement: number;
   moneyList: any = [];
   minDate = new Date();
+  followUp: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public params,
     public tradeAgreementDetailService: TradeAgreementDetailService,
@@ -29,6 +30,7 @@ export class GoalsLoaderComponent implements OnInit {
     private commonService: CommonService
   ) {
     this.pk_Ac_Trade_Agreement = params.pk_Ac_Trade_Agreement;
+    this.followUp = params.is_in_follow_up;
     this.listMoney();
     this.getGoalByAgreement();
   }
