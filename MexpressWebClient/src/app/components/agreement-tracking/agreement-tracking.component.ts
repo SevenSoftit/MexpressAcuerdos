@@ -39,16 +39,9 @@ export class AgreementTrackingComponent implements OnInit {
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     // this.toolbar = ['Search'];
     this.listHeaderAgreement();
-    this.listAgreementStatus();
 
     this.filterOptions = {
-      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true,
-    // columns: [{ field: 'name_Agreement'},
-    //   { field: 'agreement_Status_Name', matchCase: false, operator: 'contains'},
-    //   { field: 'provider_Name', matchCase: false, operator: 'contains'},
-    //   { field: 'date_Start', matchCase: false, operator: 'equal'},
-    //   { field: 'date_Finish', matchCase: false, operator: 'equal'}
-    //  ]
+      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
   };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
@@ -98,20 +91,6 @@ listHeaderAgreement() {
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
       this.dataTable = dataQ;
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error);
-    });
-}
-
-listAgreementStatus() {
-  var catalogModel = new CatalogModel();
-  catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
-  this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
-    dataQ => {
-      this.statusList = dataQ;
       this._common._setLoading(false);
     },
     error => {
