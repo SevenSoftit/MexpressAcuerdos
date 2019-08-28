@@ -113,7 +113,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   maxAmount: number = 0;
   showAmountInput = false;
   email: string = '';
-
+  emailNotification: string;
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {

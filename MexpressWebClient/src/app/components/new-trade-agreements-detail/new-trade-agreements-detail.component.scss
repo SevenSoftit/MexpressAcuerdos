@@ -246,3 +246,8 @@
     border-radius: 0.8rem;
     background: rgba(240, 240, 240, 0.5);
 }
+.buttons-content{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;  
+}

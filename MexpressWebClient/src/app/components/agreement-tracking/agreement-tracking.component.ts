@@ -54,7 +54,6 @@ public onChange(args: any): void {
 public dataProvider: object[];
 public dropdataProvider: string[];
 public onChangeProvider(args: any): void {
-  debugger
   if (args.value !== 'All'){
     this.grid.filterByColumn('provider_Name', 'equal', args.value);
   } else {
@@ -127,8 +126,8 @@ public onChangeProvider(args: any): void {
       dataQ => {
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         this.dataFilter = dataQ;
-this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
-this.dropdataProvider  = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];
+        this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
+        this.dropdataProvider  = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];
         
 
         this._common._setLoading(false);

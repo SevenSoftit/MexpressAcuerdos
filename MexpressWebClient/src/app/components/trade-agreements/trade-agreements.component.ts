@@ -46,7 +46,6 @@ public onChange(args: any): void {
 public dataProvider: object[];
 public dropdataProvider: string[];
 public onChangeProvider(args: any): void {
-  debugger
   if (args.value !== 'All'){
     this.grid.filterByColumn('provider_Name', 'equal', args.value);
   } else {
