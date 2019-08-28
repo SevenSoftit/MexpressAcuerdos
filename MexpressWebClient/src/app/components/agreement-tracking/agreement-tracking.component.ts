@@ -1,20 +1,19 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems, IFilterUI, Column } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ForeignKeyService, FilterService } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
-import { createElement } from '@syncfusion/ej2-base';
-import { DropDownList } from '@syncfusion/ej2-dropdowns';
-import { DataManager } from '@syncfusion/ej2-data';
+import { DataUtil } from '@syncfusion/ej2-data';
+
 
 
 @Component({
   selector: 'app-agreement-tracking',
   templateUrl: './agreement-tracking.component.html',
-  styleUrls: ['./agreement-tracking.component.scss']
+  styleUrls: ['./agreement-tracking.component.scss'],
 })
 export class AgreementTrackingComponent implements OnInit {
   public initialSort: Object;
@@ -31,7 +30,37 @@ export class AgreementTrackingComponent implements OnInit {
   public isActiveAgreement: Boolean = false;
   // public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
-  templateOptions: IFilterUI;
+  
+  //dataProvider: any;
+  dataFilter : any = [];
+    //prueba
+  
+  //fin prueba
+
+//config for status filter
+public data: object[];
+public height = '220px';
+public dropdata: string[];
+public onChange(args: any): void {
+  if (args.value !== 'All'){
+    this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
+  } else {
+    this.grid.removeFilteredColsByField('agreement_Status_Name');
+  }
+    
+}
+
+// config for provider filter
+public dataProvider: object[];
+public dropdataProvider: string[];
+public onChangeProvider(args: any): void {
+  debugger
+  if (args.value !== 'All'){
+    this.grid.filterByColumn('provider_Name', 'equal', args.value);
+  } else {
+    this.grid.removeFilteredColsByField('provider_Name');
+  }
+}
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
   }
@@ -47,33 +76,7 @@ export class AgreementTrackingComponent implements OnInit {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-      //prueba
-  this.templateOptions = {
-    create: (args: { element: Element, column: Column }) => {
-      return createElement('input', { className: 'flm-input' });
-    },
-    write: (args: { element: Element, column: Column }) => {
-      this.dataTable.splice(0, 0, { provider_Name: 'All' }); // for clear filtering
-      const dropInstance: DropDownList = new DropDownList({
-        dataSource: new DataManager(this.dataTable),
-        fields: { text: 'provider_Name' },
-        placeholder: 'Seleccione un valor',
-        popupHeight: '200px',
-        index: 0,
-        change: (e) => {
-          if (e.value !== 'All') {
-            this.grid.filterByColumn('provider_Name', 'equal', e.value);
-          } else {
-            this.grid.removeFilteredColsByField('provider_Name');
-          }
-        }
-      });
-      dropInstance.appendTo(args.element as HTMLTableCellElement);
-    }
-  };
-  //fin prueba
-
-
+   
 
 
   }
@@ -122,7 +125,12 @@ export class AgreementTrackingComponent implements OnInit {
     this.isActiveAgreement = data.Active;
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
-        this.dataTable = dataQ;
+        this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        this.dataFilter = dataQ;
+this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
+this.dropdataProvider  = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];
+        
+
         this._common._setLoading(false);
       },
       error => {
@@ -130,6 +138,9 @@ export class AgreementTrackingComponent implements OnInit {
         console.log('no se envio' + ' ' + error);
       });
   }
+
+
+ 
 
   /*******************************************************
 * Author: Gustavo ZC

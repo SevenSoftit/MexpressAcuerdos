@@ -4,8 +4,9 @@ import { CommonService } from 'src/app/services/common/common.service';
 import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
-import { CatalogModel } from '../common-model/catalog.Model';
 import { Tooltip } from '@syncfusion/ej2-popups';
+import { DataUtil } from '@syncfusion/ej2-data';
+
 @Component({
   selector: 'app-trade-agreements',
   templateUrl: './trade-agreements.component.html',
@@ -28,6 +29,31 @@ export class TradeAgreementsComponent implements OnInit {
   SearchInfo: any = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
+//config for status filter
+public data: object[];
+public height = '220px';
+public dropdata: string[];
+public onChange(args: any): void {
+  if (args.value !== 'All'){
+    this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
+  } else {
+    this.grid.removeFilteredColsByField('agreement_Status_Name');
+  }
+    
+}
+
+// config for provider filter
+public dataProvider: object[];
+public dropdataProvider: string[];
+public onChangeProvider(args: any): void {
+  debugger
+  if (args.value !== 'All'){
+    this.grid.filterByColumn('provider_Name', 'equal', args.value);
+  } else {
+    this.grid.removeFilteredColsByField('provider_Name');
+  }
+}
+//--------------------------------------------------
 
   constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
   }
@@ -41,10 +67,10 @@ export class TradeAgreementsComponent implements OnInit {
     // this.toolbar = ['Search'];
 
     this.filterOptions = {
-      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
+     type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
   };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-
+   
 
   
     this.listHeaderAgreement();
@@ -92,14 +118,19 @@ export class TradeAgreementsComponent implements OnInit {
 * Description:
 *******************************************************/
 listHeaderAgreement() {
+  let dataFilter: any;
   var data = new NewAgreementDetailHeaderModel();
   data.Active = true;
   this.isActiveAgreement = data.Active;
  
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
-      this.dataTable = dataQ;
-      this._common._setLoading(false);
+      debugger
+      this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+      dataFilter = dataQ;
+    this.dropdata  = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
+   this.dropdataProvider  = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
+    this._common._setLoading(false);
     },
     error => {
       this._common._setLoading(false);

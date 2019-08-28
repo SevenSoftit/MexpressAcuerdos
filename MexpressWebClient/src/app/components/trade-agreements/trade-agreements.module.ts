@@ -7,9 +7,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, SearchService, ToolbarService} from "@syncfusion/ej2-angular-grids";
+import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, SearchService, ToolbarService, ForeignKeyService} from "@syncfusion/ej2-angular-grids";
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
+import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
+
 
 setCulture('es-ES');
 
@@ -44,7 +46,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     GridModule,
-    MaterialModule
+    MaterialModule,
+    DropDownListAllModule,
   ],
   providers: [
     EditService,
@@ -53,7 +56,9 @@ const routes: Routes = [
     SortService,
     ResizeService,
     SearchService,
-    ToolbarService  
+    ToolbarService,
+    ForeignKeyService
+
   ]
 })
 export class TradeAgreementsModule { }

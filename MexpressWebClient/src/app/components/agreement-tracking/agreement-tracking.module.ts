@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { AgreementTrackingComponent } from './agreement-tracking.component';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 
 
 setCulture('es-ES');
@@ -41,7 +42,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     GridModule,
     MaterialModule,
-    ButtonModule
+    ButtonModule,
+    DropDownListAllModule
   ],
   providers: [
     EditService,
