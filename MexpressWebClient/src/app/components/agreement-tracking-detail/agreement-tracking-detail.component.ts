@@ -96,7 +96,10 @@ export class AgreementTrackingDetailComponent implements OnInit {
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           this.behaviorTA = this.agreementDetail.info.behavior;
+          this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
+
+
 
           if(this.agreementDetail.info.max_Amount !== 0){
             this.maxAmountToggle = true;
@@ -147,6 +150,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
 
       });
+
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
       this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
@@ -170,8 +174,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   saveAgreementHeader() {
-    //this._common._setLoading(true);
-      debugger;
+     this._common._setLoading(true);  
       var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;

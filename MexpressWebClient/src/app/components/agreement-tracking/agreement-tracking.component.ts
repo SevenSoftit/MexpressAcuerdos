@@ -1,12 +1,14 @@
-import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, IFilterUI, Column } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
-import { CatalogModel } from '../common-model/catalog.Model';
-import { QueryCellInfoEventArgs, FilterSettingsModel} from '@syncfusion/ej2-angular-grids';
+import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
+import { createElement } from '@syncfusion/ej2-base';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
+import { DataManager } from '@syncfusion/ej2-data';
 
 
 @Component({
@@ -29,9 +31,10 @@ export class AgreementTrackingComponent implements OnInit {
   public isActiveAgreement: Boolean = false;
   // public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
+  templateOptions: IFilterUI;
 
-
-  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { }
+  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
+  }
 
   ngOnInit() {
     this.getScreenSize();
@@ -42,8 +45,37 @@ export class AgreementTrackingComponent implements OnInit {
 
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
-  };
+    };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
+      //prueba
+  this.templateOptions = {
+    create: (args: { element: Element, column: Column }) => {
+      return createElement('input', { className: 'flm-input' });
+    },
+    write: (args: { element: Element, column: Column }) => {
+      this.dataTable.splice(0, 0, { provider_Name: 'All' }); // for clear filtering
+      const dropInstance: DropDownList = new DropDownList({
+        dataSource: new DataManager(this.dataTable),
+        fields: { text: 'provider_Name' },
+        placeholder: 'Seleccione un valor',
+        popupHeight: '200px',
+        index: 0,
+        change: (e) => {
+          if (e.value !== 'All') {
+            this.grid.filterByColumn('provider_Name', 'equal', e.value);
+          } else {
+            this.grid.removeFilteredColsByField('provider_Name');
+          }
+        }
+      });
+      dropInstance.appendTo(args.element as HTMLTableCellElement);
+    }
+  };
+  //fin prueba
+
+
+
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -66,11 +98,11 @@ export class AgreementTrackingComponent implements OnInit {
   dataBound() {
     this.grid.gridLines = 'Both';
     Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
-    
+
   }
 
 
-    /*******************************************************
+  /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  19/07/2019
 * Description: method that list the products of the agreement 
@@ -83,21 +115,21 @@ export class AgreementTrackingComponent implements OnInit {
 * Author:
 * Description:
 *******************************************************/
-listHeaderAgreement() {
-  this._common._setLoading(true);
-  var data = new NewAgreementDetailHeaderModel();
-  data.Active = true;
-  this.isActiveAgreement = data.Active;
-  this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
-    dataQ => {
-      this.dataTable = dataQ;
-      this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error);
-    });
-}
+  listHeaderAgreement() {
+    this._common._setLoading(true);
+    var data = new NewAgreementDetailHeaderModel();
+    data.Active = true;
+    this.isActiveAgreement = data.Active;
+    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+      dataQ => {
+        this.dataTable = dataQ;
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
 
   /*******************************************************
 * Author: Gustavo ZC
@@ -113,21 +145,21 @@ listHeaderAgreement() {
 * Description:
 *******************************************************/
   listSpecificHeaderAgreement(evt: any) {
-    var data = new NewAgreementDetailHeaderModel();   
+    var data = new NewAgreementDetailHeaderModel();
     this.resetRadio();
     var target = evt.target;
 
-    if(target.value == "option1"){
-        this.activeAgreements = true;
-        this.inactiveAgreements = false;
-        data.Active = this.activeAgreements;
-        this.isActiveAgreement = data.Active;
-}else{
-  this.inactiveAgreements = true;
-  this.activeAgreements = false;
-  data.Active = false;
-  this.isActiveAgreement = data.Active;
-}
+    if (target.value == "option1") {
+      this.activeAgreements = true;
+      this.inactiveAgreements = false;
+      data.Active = this.activeAgreements;
+      this.isActiveAgreement = data.Active;
+    } else {
+      this.inactiveAgreements = true;
+      this.activeAgreements = false;
+      data.Active = false;
+      this.isActiveAgreement = data.Active;
+    }
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
         this.dataTable = dataQ;
@@ -180,16 +212,16 @@ listHeaderAgreement() {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    if(args.column.field === "provider_Name")  {
-    let tooltip: Tooltip = new Tooltip({
+    if (args.column.field === "provider_Name") {
+      let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),
         animation: {
           open: { effect: 'None', duration: 1000, delay: 200 },
           close: { effect: 'None', duration: 600, delay: 200 }
-      }
-    }, args.cell as HTMLTableCellElement);
+        }
+      }, args.cell as HTMLTableCellElement);
 
-  }  
-} 
+    }
+  }
 
 }

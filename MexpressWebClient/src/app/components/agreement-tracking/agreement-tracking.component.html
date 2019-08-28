@@ -32,7 +32,7 @@
                     </e-column>
                     <e-column field='agreement_Status_Name' headerText='Estado' width='105' textAlign='Center'>
                     </e-column>
-                    <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
+                    <e-column field='provider_Name' [filterBarTemplate]='templateOptions' foreignKeyValue='provider_Name' headerText='Proveedor' width='170' textAlign='Center'></e-column>
                     <e-column field='string_Date_Start' headerText='Fecha de inicio' width='120' textAlign='Center'></e-column>
                     <e-column field='string_Date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
                     </e-column>
