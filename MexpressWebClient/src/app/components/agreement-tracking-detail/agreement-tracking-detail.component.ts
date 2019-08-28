@@ -35,6 +35,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
+  public dataTableDetail: any;
   public initialSort: Object;
   public pageSettings: Object;
   screenHeight: any;
@@ -407,7 +408,7 @@ providerSearch(event){
       dataJ => {
         this.enableEntireAgreement = false;
         this.enableArrow = true;
-        this.dataTable = dataJ;
+        this.dataTableDetail = dataJ;
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
         this._common._setLoading(false);
@@ -430,7 +431,7 @@ providerSearch(event){
       dataS => {
         this.enableEntireAgreement = false;
         this.enableArrow = true;
-        this.dataTable = dataS;
+        this.dataTableDetail = dataS;
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
         this._common._setLoading(false);
@@ -480,6 +481,7 @@ providerSearch(event){
 }
 
 goListProductsResume(){
+  this.enablePdfExport = false;
   this.showAgreementResumeTable = true;
  this.showAgreementResultTable = false;
  this.enableArrow = false;
