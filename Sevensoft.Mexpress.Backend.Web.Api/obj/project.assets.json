@@ -43,6 +43,37 @@
           "lib/netcoreapp2.0/ChiKien276.AspNetCore.MultipartHelper.dll": {}
         }
       },
+      "Common.Logging/3.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Common.Logging.Core": "3.4.1",
+          "Microsoft.CSharp": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Common.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Common.Logging.dll": {}
+        }
+      },
+      "Common.Logging.Core/3.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.0/Common.Logging.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Common.Logging.Core.dll": {}
+        }
+      },
       "Dapper/1.60.1": {
         "type": "package",
         "dependencies": {
@@ -120,6 +151,60 @@
         },
         "runtime": {
           "lib/netstandard1.6/Hanssens.Net.dll": {}
+        }
+      },
+      "itext7/7.1.7": {
+        "type": "package",
+        "dependencies": {
+          "Common.Logging": "3.4.1",
+          "Microsoft.Extensions.DependencyModel": "1.1.0",
+          "Portable.BouncyCastle": "1.8.1.3",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Diagnostics.Process": "4.3.0",
+          "System.Globalization.Extensions": "4.3.0",
+          "System.Net.Requests": "4.3.0",
+          "System.Runtime.Loader": "4.3.0",
+          "System.Runtime.Serialization.Formatters": "4.3.0",
+          "System.Security.Cryptography.Csp": "4.3.0",
+          "System.Text.Encoding.CodePages": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/itext.barcodes.dll": {},
+          "lib/netstandard1.6/itext.forms.dll": {},
+          "lib/netstandard1.6/itext.io.dll": {},
+          "lib/netstandard1.6/itext.kernel.dll": {},
+          "lib/netstandard1.6/itext.layout.dll": {},
+          "lib/netstandard1.6/itext.pdfa.dll": {},
+          "lib/netstandard1.6/itext.sign.dll": {},
+          "lib/netstandard1.6/itext.styledxmlparser.dll": {},
+          "lib/netstandard1.6/itext.svg.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/itext.barcodes.dll": {},
+          "lib/netstandard1.6/itext.forms.dll": {},
+          "lib/netstandard1.6/itext.io.dll": {},
+          "lib/netstandard1.6/itext.kernel.dll": {},
+          "lib/netstandard1.6/itext.layout.dll": {},
+          "lib/netstandard1.6/itext.pdfa.dll": {},
+          "lib/netstandard1.6/itext.sign.dll": {},
+          "lib/netstandard1.6/itext.styledxmlparser.dll": {},
+          "lib/netstandard1.6/itext.svg.dll": {}
+        }
+      },
+      "itext7.pdfhtml/2.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Common.Logging": "3.4.1",
+          "itext7": "7.1.7"
+        },
+        "compile": {
+          "lib/netstandard1.6/itext.html2pdf.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/itext.html2pdf.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -3730,6 +3815,15 @@
           "lib/mscorlib.dll": {}
         }
       },
+      "Portable.BouncyCastle/1.8.1.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -4489,7 +4583,7 @@
           "System.Runtime.InteropServices": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Globalization.Extensions.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll": {
@@ -4777,6 +4871,37 @@
           "ref/netstandard1.3/System.Net.Primitives.dll": {}
         }
       },
+      "System.Net.Requests/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Net.Http": "4.3.0",
+          "System.Net.Primitives": "4.3.0",
+          "System.Net.WebHeaderCollection": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Net.Requests.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.3/System.Net.Requests.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netstandard1.3/System.Net.Requests.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Net.Security/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4835,6 +4960,21 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Net.Sockets.dll": {}
+        }
+      },
+      "System.Net.WebHeaderCollection/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Net.WebHeaderCollection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Net.WebHeaderCollection.dll": {}
         }
       },
       "System.Net.WebSockets.WebSocketProtocol/4.5.3": {
@@ -5131,6 +5271,22 @@
           "lib/netstandard1.3/System.Runtime.Numerics.dll": {}
         }
       },
+      "System.Runtime.Serialization.Formatters/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Runtime.Serialization.Formatters.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.4/System.Runtime.Serialization.Formatters.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Json/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -5281,7 +5437,7 @@
           "System.Threading": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Security.Cryptography.Csp.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Security.Cryptography.Csp.dll": {
@@ -5563,7 +5719,7 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
@@ -5976,6 +6132,46 @@
         "lib/netcoreapp2.0/ChiKien276.AspNetCore.MultipartHelper.dll"
       ]
     },
+    "Common.Logging/3.4.1": {
+      "sha512": "5eZ/vgEOqzLg4PypZqnJ+wMhhgHyckicbZY4iDxqQ4FtOz0CpdYZ0xQ78aszMzeAJZiLLb5VdR9tPfunVQLz6g==",
+      "type": "package",
+      "path": "common.logging/3.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "common.logging.3.4.1.nupkg.sha512",
+        "common.logging.nuspec",
+        "lib/net35/Common.Logging.dll",
+        "lib/net35/Common.Logging.pdb",
+        "lib/net35/Common.Logging.xml",
+        "lib/net40/Common.Logging.dll",
+        "lib/net40/Common.Logging.pdb",
+        "lib/net40/Common.Logging.xml",
+        "lib/netstandard1.3/Common.Logging.dll",
+        "lib/netstandard1.3/Common.Logging.pdb",
+        "lib/netstandard1.3/Common.Logging.xml"
+      ]
+    },
+    "Common.Logging.Core/3.4.1": {
+      "sha512": "wLHldZHvxsSD6Ahonfj00/SkfHfKqO+YT6jsUwVm8Rch1REL9IArHAcSLXxYxYfu5/4ydGtmXvOtaH3AkVPu0A==",
+      "type": "package",
+      "path": "common.logging.core/3.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "common.logging.core.3.4.1.nupkg.sha512",
+        "common.logging.core.nuspec",
+        "lib/net40/Common.Logging.Core.XML",
+        "lib/net40/Common.Logging.Core.dll",
+        "lib/net40/Common.Logging.Core.pdb",
+        "lib/netstandard1.0/Common.Logging.Core.dll",
+        "lib/netstandard1.0/Common.Logging.Core.pdb",
+        "lib/netstandard1.0/Common.Logging.Core.xml",
+        "lib/portable-win+net40+sl40+wp7+wpa81/Common.Logging.Core.XML",
+        "lib/portable-win+net40+sl40+wp7+wpa81/Common.Logging.Core.dll",
+        "lib/portable-win+net40+sl40+wp7+wpa81/Common.Logging.Core.pdb"
+      ]
+    },
     "Dapper/1.60.1": {
       "sha512": "v8eekTHjIMEybch8VwkmaakAO1VpTA0q/kZlEjDlW74lP108UgFex1CyCV5FvgRuyHUkPSHTgYvs7loi3g+v/w==",
       "type": "package",
@@ -6080,6 +6276,72 @@
         "hanssens.net.extensions.2.1.1.nupkg.sha512",
         "hanssens.net.extensions.nuspec",
         "lib/netstandard1.6/Hanssens.Net.dll"
+      ]
+    },
+    "itext7/7.1.7": {
+      "sha512": "fTTfRC1KOk4ZefwWJsTwkgdmCWET1dArutLp95jnUpvFtC6EhzGtBjEDKF2rM+0eryRp6gsEbXAvJb38Nbdarg==",
+      "type": "package",
+      "path": "itext7/7.1.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itext7.7.1.7.nupkg.sha512",
+        "itext7.nuspec",
+        "lib/net40/itext.barcodes.dll",
+        "lib/net40/itext.barcodes.xml",
+        "lib/net40/itext.forms.dll",
+        "lib/net40/itext.forms.xml",
+        "lib/net40/itext.io.dll",
+        "lib/net40/itext.io.xml",
+        "lib/net40/itext.kernel.dll",
+        "lib/net40/itext.kernel.xml",
+        "lib/net40/itext.layout.dll",
+        "lib/net40/itext.layout.xml",
+        "lib/net40/itext.pdfa.dll",
+        "lib/net40/itext.pdfa.xml",
+        "lib/net40/itext.sign.dll",
+        "lib/net40/itext.sign.xml",
+        "lib/net40/itext.styledxmlparser.dll",
+        "lib/net40/itext.styledxmlparser.xml",
+        "lib/net40/itext.svg.dll",
+        "lib/net40/itext.svg.xml",
+        "lib/netstandard1.6/itext.barcodes.dll",
+        "lib/netstandard1.6/itext.barcodes.xml",
+        "lib/netstandard1.6/itext.forms.dll",
+        "lib/netstandard1.6/itext.forms.xml",
+        "lib/netstandard1.6/itext.io.dll",
+        "lib/netstandard1.6/itext.io.xml",
+        "lib/netstandard1.6/itext.kernel.dll",
+        "lib/netstandard1.6/itext.kernel.xml",
+        "lib/netstandard1.6/itext.layout.dll",
+        "lib/netstandard1.6/itext.layout.xml",
+        "lib/netstandard1.6/itext.pdfa.dll",
+        "lib/netstandard1.6/itext.pdfa.xml",
+        "lib/netstandard1.6/itext.sign.dll",
+        "lib/netstandard1.6/itext.sign.xml",
+        "lib/netstandard1.6/itext.styledxmlparser.dll",
+        "lib/netstandard1.6/itext.styledxmlparser.xml",
+        "lib/netstandard1.6/itext.svg.dll",
+        "lib/netstandard1.6/itext.svg.xml"
+      ]
+    },
+    "itext7.pdfhtml/2.1.4": {
+      "sha512": "bFDQcG/7vvqMR8/1uB+sMjUXvaJt4dKeRkj4OhqmlFharRsiSE2CByNpQwTWCoaU8EKhqvDZwCiv9oQIK59wIQ==",
+      "type": "package",
+      "path": "itext7.pdfhtml/2.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itext7.pdfhtml.2.1.4.nupkg.sha512",
+        "itext7.pdfhtml.nuspec",
+        "lib/net40/itext.html2pdf.dll",
+        "lib/net40/itext.html2pdf.xml",
+        "lib/netstandard1.6/itext.html2pdf.dll",
+        "lib/netstandard1.6/itext.html2pdf.xml"
       ]
     },
     "Libuv/1.10.0": {
@@ -9823,6 +10085,27 @@
         "package.mscorlib.nuspec"
       ]
     },
+    "Portable.BouncyCastle/1.8.1.3": {
+      "sha512": "1jUpszv0ETm+hl78HKnYgY3wPzt6qRtjxaPENNrGCuB8nondbR/j75WAKdd6sxXzOzBcX07WMZhZEYc4s5jVWg==",
+      "type": "package",
+      "path": "portable.bouncycastle/1.8.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/BouncyCastle.Crypto.dll",
+        "lib/net40/BouncyCastle.Crypto.xml",
+        "lib/netstandard1.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard1.0/BouncyCastle.Crypto.xml",
+        "lib/netstandard1.3/BouncyCastle.Crypto.dll",
+        "lib/netstandard1.3/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/BouncyCastle.Crypto.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/BouncyCastle.Crypto.xml",
+        "portable.bouncycastle.1.8.1.3.nupkg.sha512",
+        "portable.bouncycastle.nuspec"
+      ]
+    },
     "Remotion.Linq/2.2.0": {
       "sha512": "twDAH8dAXXCAf3sRv1Tf94u66eEHvgU75hfn1nn2v4fSWXD50XoDOAk8WpSrbViNuMkB4kN1ElnOGm1c519IHg==",
       "type": "package",
@@ -12206,6 +12489,89 @@
         "system.net.primitives.nuspec"
       ]
     },
+    "System.Net.Requests/4.3.0": {
+      "sha512": "OZNUuAs0kDXUzm7U5NZ1ojVta5YFZmgT2yxBqsQ7Eseq5Ahz88LInGRuNLJ/NP2F8W1q7tse1pKDthj3reF5QA==",
+      "type": "package",
+      "path": "system.net.requests/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net46/_._",
+        "ref/netcore50/System.Net.Requests.dll",
+        "ref/netcore50/System.Net.Requests.xml",
+        "ref/netcore50/de/System.Net.Requests.xml",
+        "ref/netcore50/es/System.Net.Requests.xml",
+        "ref/netcore50/fr/System.Net.Requests.xml",
+        "ref/netcore50/it/System.Net.Requests.xml",
+        "ref/netcore50/ja/System.Net.Requests.xml",
+        "ref/netcore50/ko/System.Net.Requests.xml",
+        "ref/netcore50/ru/System.Net.Requests.xml",
+        "ref/netcore50/zh-hans/System.Net.Requests.xml",
+        "ref/netcore50/zh-hant/System.Net.Requests.xml",
+        "ref/netstandard1.0/System.Net.Requests.dll",
+        "ref/netstandard1.0/System.Net.Requests.xml",
+        "ref/netstandard1.0/de/System.Net.Requests.xml",
+        "ref/netstandard1.0/es/System.Net.Requests.xml",
+        "ref/netstandard1.0/fr/System.Net.Requests.xml",
+        "ref/netstandard1.0/it/System.Net.Requests.xml",
+        "ref/netstandard1.0/ja/System.Net.Requests.xml",
+        "ref/netstandard1.0/ko/System.Net.Requests.xml",
+        "ref/netstandard1.0/ru/System.Net.Requests.xml",
+        "ref/netstandard1.0/zh-hans/System.Net.Requests.xml",
+        "ref/netstandard1.0/zh-hant/System.Net.Requests.xml",
+        "ref/netstandard1.1/System.Net.Requests.dll",
+        "ref/netstandard1.1/System.Net.Requests.xml",
+        "ref/netstandard1.1/de/System.Net.Requests.xml",
+        "ref/netstandard1.1/es/System.Net.Requests.xml",
+        "ref/netstandard1.1/fr/System.Net.Requests.xml",
+        "ref/netstandard1.1/it/System.Net.Requests.xml",
+        "ref/netstandard1.1/ja/System.Net.Requests.xml",
+        "ref/netstandard1.1/ko/System.Net.Requests.xml",
+        "ref/netstandard1.1/ru/System.Net.Requests.xml",
+        "ref/netstandard1.1/zh-hans/System.Net.Requests.xml",
+        "ref/netstandard1.1/zh-hant/System.Net.Requests.xml",
+        "ref/netstandard1.3/System.Net.Requests.dll",
+        "ref/netstandard1.3/System.Net.Requests.xml",
+        "ref/netstandard1.3/de/System.Net.Requests.xml",
+        "ref/netstandard1.3/es/System.Net.Requests.xml",
+        "ref/netstandard1.3/fr/System.Net.Requests.xml",
+        "ref/netstandard1.3/it/System.Net.Requests.xml",
+        "ref/netstandard1.3/ja/System.Net.Requests.xml",
+        "ref/netstandard1.3/ko/System.Net.Requests.xml",
+        "ref/netstandard1.3/ru/System.Net.Requests.xml",
+        "ref/netstandard1.3/zh-hans/System.Net.Requests.xml",
+        "ref/netstandard1.3/zh-hant/System.Net.Requests.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netstandard1.3/System.Net.Requests.dll",
+        "runtimes/win/lib/net46/_._",
+        "runtimes/win/lib/netstandard1.3/System.Net.Requests.dll",
+        "system.net.requests.4.3.0.nupkg.sha512",
+        "system.net.requests.nuspec"
+      ]
+    },
     "System.Net.Security/4.3.0": {
       "sha512": "IgJKNfALqw7JRWp5LMQ5SWHNKvXVz094U6wNE3c1i8bOkMQvgBL+MMQuNt3xl9Qg9iWpj3lFxPZEY6XHmROjMQ==",
       "type": "package",
@@ -12282,6 +12648,45 @@
         "ref/xamarinwatchos10/_._",
         "system.net.sockets.4.3.0.nupkg.sha512",
         "system.net.sockets.nuspec"
+      ]
+    },
+    "System.Net.WebHeaderCollection/4.3.0": {
+      "sha512": "XZrXYG3c7QV/GpWeoaRC02rM6LH2JJetfVYskf35wdC/w2fFDFMphec4gmVH2dkll6abtW14u9Rt96pxd9YH2A==",
+      "type": "package",
+      "path": "system.net.webheadercollection/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/_._",
+        "lib/netstandard1.3/System.Net.WebHeaderCollection.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/_._",
+        "ref/netstandard1.3/System.Net.WebHeaderCollection.dll",
+        "ref/netstandard1.3/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/de/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/es/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/fr/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/it/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/ja/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/ko/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/ru/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/zh-hans/System.Net.WebHeaderCollection.xml",
+        "ref/netstandard1.3/zh-hant/System.Net.WebHeaderCollection.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.net.webheadercollection.4.3.0.nupkg.sha512",
+        "system.net.webheadercollection.nuspec"
       ]
     },
     "System.Net.WebSockets.WebSocketProtocol/4.5.3": {
@@ -13335,6 +13740,34 @@
         "ref/xamarinwatchos10/_._",
         "system.runtime.numerics.4.3.0.nupkg.sha512",
         "system.runtime.numerics.nuspec"
+      ]
+    },
+    "System.Runtime.Serialization.Formatters/4.3.0": {
+      "sha512": "KT591AkTNFOTbhZlaeMVvfax3RqhH1EJlcwF50Wm7sfnBLuHiOeZRRKrr1ns3NESkM20KPZ5Ol/ueMq5vg4QoQ==",
+      "type": "package",
+      "path": "system.runtime.serialization.formatters/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Runtime.Serialization.Formatters.dll",
+        "lib/netstandard1.4/System.Runtime.Serialization.Formatters.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Runtime.Serialization.Formatters.dll",
+        "ref/netstandard1.3/System.Runtime.Serialization.Formatters.dll",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.runtime.serialization.formatters.4.3.0.nupkg.sha512",
+        "system.runtime.serialization.formatters.nuspec"
       ]
     },
     "System.Runtime.Serialization.Json/4.3.0": {
@@ -15295,6 +15728,8 @@
       "System.Configuration.ConfigurationManager >= 4.5.0",
       "System.Data.Entity.Reactive >= 0.1.0",
       "System.Runtime >= 4.3.1",
+      "itext7 >= 7.1.7",
+      "itext7.pdfhtml >= 2.1.4",
       "package.mscorlib >= 1.0.1"
     ]
   },
@@ -15305,11 +15740,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
+      "projectUniqueName": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
       "projectName": "Sevensoft.Mexpress.Backend.Web.Api",
-      "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
+      "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
       "packagesPath": "C:\\Users\\Gustavo ZC\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\obj\\",
+      "outputPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -15328,14 +15763,14 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj": {
-              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj"
+            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj": {
+              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj"
             },
-            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj": {
-              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj"
+            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj": {
+              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj"
             },
-            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj": {
-              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj"
+            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj": {
+              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj"
             }
           }
         }
@@ -15497,6 +15932,14 @@
           "System.Runtime": {
             "target": "Package",
             "version": "[4.3.1, )"
+          },
+          "itext7": {
+            "target": "Package",
+            "version": "[7.1.7, )"
+          },
+          "itext7.pdfhtml": {
+            "target": "Package",
+            "version": "[2.1.4, )"
           },
           "package.mscorlib": {
             "target": "Package",
