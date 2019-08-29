@@ -15740,11 +15740,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
+      "projectUniqueName": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
       "projectName": "Sevensoft.Mexpress.Backend.Web.Api",
-      "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
+      "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\Sevensoft.Mexpress.Backend.Web.Api.csproj",
       "packagesPath": "C:\\Users\\Gustavo ZC\\.nuget\\packages\\",
-      "outputPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\obj\\",
+      "outputPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -15763,14 +15763,14 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj": {
-              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj"
+            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj": {
+              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.BusinessLogic\\Sevensoft.Mexpress.Backend.BusinessLogic.csproj"
             },
-            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj": {
-              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj"
+            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj": {
+              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj"
             },
-            "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj": {
-              "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj"
+            "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj": {
+              "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj"
             }
           }
         }

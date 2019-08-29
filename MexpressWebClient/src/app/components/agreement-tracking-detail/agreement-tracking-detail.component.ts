@@ -5,7 +5,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ProviderService } from 'src/app/services/TaProvider/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
 import { CommonService } from 'src/app/services/common/common.service';
@@ -87,7 +87,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
  
   constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
-    private tradeAgreementDetailService: TradeAgreementDetailService) {
+    private tradeAgreementDetailService: TradeAgreementDetailService, private router: Router) {
       
       this.activated_route.queryParams.subscribe(params => {     
         var parameters = params["agreementDet"];
@@ -445,26 +445,19 @@ providerSearch(event){
 
   exportToPdf(): void { 
     this.saveAgreementHeader(); 
-    // this.enablePdfExport = true;
-    // var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
-    // agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
-    // agreementProductInfoDetailModel.Behavior = this.behaviorTA;
-    // agreementProductInfoDetailModel.Product_Id = '';
 
-    // this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
-    //   dataS => {
-    //     this.enableEntireAgreement = false;
-    //     this.enableArrow = true;
-    //     this.dataTable = dataS;
-    //     this.showAgreementResumeTable = false;
-    //     this.showAgreementResultTable = true;
-    //     this._common._setLoading(false);
-    //   },
-    //   error => {
-    //     this._common._setLoading(false);
-    //     console.error(error);
-    //   }
-    // )
+      const reportInfo = {
+        infoTable: this.dataTableDetail
+      }
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          'reportInfo': JSON.stringify(reportInfo)
+        },
+        skipLocationChange: true
+      };
+      this.router.navigate(['agreementReport'], navigationExtras);
+      this._common.asignHeaderTitle("Detalle del reporte");
+    
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
