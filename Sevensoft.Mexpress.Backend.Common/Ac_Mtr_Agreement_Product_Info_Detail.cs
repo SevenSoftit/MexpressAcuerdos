@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Sevensoft.Mexpress.Backend.Common
 {
@@ -38,6 +39,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Active = false;
             Name_Currency = "";
             Behavior = "";
+            AgreementProductInfoDetailList = new List<Ac_Mtr_Agreement_Product_Info_Detail>();
         }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int64 Pk_Cat_Agreement_Details_Result { get; set; }
@@ -71,5 +73,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Boolean Active { get; set; }  
         public String Name_Currency { get; set; }    
          public String Behavior { get; set; } 
+         public List<Ac_Mtr_Agreement_Product_Info_Detail> AgreementProductInfoDetailList { get; set; }
     }
 }

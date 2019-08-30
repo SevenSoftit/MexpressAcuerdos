@@ -199,19 +199,19 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
 
-          const datafailed = {
-            labelTitile: '¡Atención!',
-            icon: 'new_releases',
-            textDescription: 'El estado del acuerdo a pasado a finalizado',
-            status: 'success'
-          };
+          // const datafailed = {
+          //   labelTitile: '¡Atención!',
+          //   icon: 'new_releases',
+          //   textDescription: 'El estado del acuerdo a pasado a finalizado',
+          //   status: 'success'
+          // };
           this._common._setLoading(false);
 
-          const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-            data: { contactInfo: datafailed },
-            minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
-          });
-        setTimeout(() => dialogRef.close(), 3000);
+        //   const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+        //     data: { contactInfo: datafailed },
+        //     minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
+        //   });
+        // setTimeout(() => dialogRef.close(), 3000);
 
         },
         () => {

@@ -124,7 +124,6 @@ listHeaderAgreement() {
  
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
-      debugger
       this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
       dataFilter = dataQ;
     this.dropdata  = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
