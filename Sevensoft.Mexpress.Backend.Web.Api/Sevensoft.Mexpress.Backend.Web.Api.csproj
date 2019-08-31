@@ -46,8 +46,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0-preview3.19153.1"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-preview3.19153.1"/>
 
-    <PackageReference Include="itext7.pdfhtml" Version="2.1.4"/>
-    <PackageReference Include="itext7" Version="7.1.7"/>
+    <PackageReference Include="iTextSharp" Version="5.5.13.1"/>
   </ItemGroup>
 
   <ItemGroup>
