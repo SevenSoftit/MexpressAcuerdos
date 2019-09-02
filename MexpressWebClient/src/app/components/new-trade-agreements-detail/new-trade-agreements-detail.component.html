@@ -20,10 +20,10 @@
                 <button *ngIf="enableUpdateAgreement && !showWorkTable" class="excel-button float-right mr-3" (click)="saveAgreementHeader()" mat-raised-button>Actualizar acuerdo
                     <mat-icon class="ml-2">autorenew</mat-icon>
                 </button>
-                
+
             </div>
-             <!--Activador de acuerdos-->
-             <div class="col-md-1">
+            <!--Activador de acuerdos-->
+            <div class="col-md-1">
                 <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activar</label>
                 <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
@@ -109,12 +109,18 @@
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
-           <!--Muestra el input de emal-->
-           <div class="col-md-2" >
-            <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
-            <input type="email" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" [ngModelOptions]="{standalone: true}" [(ngModel)]="emailNotification" placeholder="Correo">
-
-        </div>
+            <!--Muestra el input de email-->
+            <div class="col-md-2">
+                <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
+                <input type="email" [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
+                    placeholder="Correo">
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['required']" class="alert-error-required">
+                    El correo electrónico es requerido
+                </div>
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['email']" class="alert-error-required">
+                    El formato de correo es incorrecto
+                </div>
+            </div>
             <!--Activa input de monto maximo-->
             <div class="col-md-2">
                 <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
@@ -125,7 +131,6 @@
             <div class="col-md-1" *ngIf="showAmountInput">
                 <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
                 <input type="number" min="0" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
-
             </div>
             <div class="col-md-2 mt-4 new-trade-agreement-detail-button" *ngIf="!disableHeader">
                 <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">

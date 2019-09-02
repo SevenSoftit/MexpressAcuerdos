@@ -5,6 +5,8 @@ import { Tooltip } from '@syncfusion/ej2-popups';
 import { AgreementReportService } from 'src/app/services/agreementReport/agreementReport.service';
 import { AgreementProductInfoDetailModel } from 'src/app/models/agreementProductInfoDetail.model';
 import { CommonService } from 'src/app/services/common/common.service';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-agreement-report',
@@ -24,7 +26,7 @@ export class AgreementReportComponent implements OnInit {
   public editSettings: Object;
   public titulo: string = 'Esto es una prueba';
 
-  constructor(private _common: CommonService, private activated_route: ActivatedRoute, private reportService: AgreementReportService) {
+  constructor(public matDialog: MatDialog, private _common: CommonService, private activated_route: ActivatedRoute, private reportService: AgreementReportService) {
     this.activated_route.queryParams.subscribe(params => {
       var parameters = params["reportInfo"];
 
@@ -41,7 +43,6 @@ export class AgreementReportComponent implements OnInit {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.getPdf();
   }
 
 
@@ -93,20 +94,6 @@ export class AgreementReportComponent implements OnInit {
     }
   }
 
-  getPdf(): void{
-    var generatePDF = new AgreementProductInfoDetailModel();
-    generatePDF.AgreementProductInfoDetailList = this.dataTableReport;
-    this.reportService.saveReport(generatePDF).subscribe(
-      dataS => {
-          debugger;
-        this._common._setLoading(false);
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
 
-  }
 
 }

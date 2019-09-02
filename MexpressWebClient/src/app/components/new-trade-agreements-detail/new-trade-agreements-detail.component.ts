@@ -112,8 +112,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   maxAmountToggle = false;
   maxAmount: number = 0;
   showAmountInput = false;
-  email: string = '';
-  emailNotification: string;
+  emailNotification: string = '';
+  submitted = false;
+
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
@@ -169,7 +170,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
-      description: new FormControl('')
+      description: new FormControl(''),
+      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
 
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
@@ -227,6 +229,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
+        emailNotification: this.agreementDetail.info.email
 
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -239,7 +242,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount= this.agreementDetail.info.max_Amount;
-      this.email = this.agreementDetail.info.email;
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -297,6 +299,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   saveAgreementHeader() {
+    this.submitted = true;
     this._common._setLoading(true);
     if ((this.dataTable != undefined || this.workDataTable != undefined) && !this.showGoals) {
       this.grid.endEdit();
@@ -346,7 +349,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
       this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
-      this.newAgreementDetailHeaderModel.Email = this.email;
+      this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {

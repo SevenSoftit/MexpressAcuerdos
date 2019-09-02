@@ -33,9 +33,7 @@ export class AgreementTrackingComponent implements OnInit {
   
   //dataProvider: any;
   dataFilter : any = [];
-    //prueba
-  
-  //fin prueba
+
 
 //config for status filter
 public data: object[];
@@ -124,6 +122,9 @@ public onChangeProvider(args: any): void {
     this.isActiveAgreement = data.Active;
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
+        this.dropdata = [];
+        this.dropdataProvider = [];
+
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         this.dataFilter = dataQ;
         this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
@@ -155,6 +156,8 @@ public onChangeProvider(args: any): void {
 * Description:
 *******************************************************/
   listSpecificHeaderAgreement(evt: any) {
+    this._common._setLoading(true);
+    let dataFilter: any;
     var data = new NewAgreementDetailHeaderModel();
     this.resetRadio();
     var target = evt.target;
@@ -172,7 +175,13 @@ public onChangeProvider(args: any): void {
     }
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
-        this.dataTable = dataQ;
+        this.dropdata = [];
+        this.dropdataProvider = [];
+        
+        this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        dataFilter = dataQ;
+        this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
+        this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
         this._common._setLoading(false);
       },
       error => {

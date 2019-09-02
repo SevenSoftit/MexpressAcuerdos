@@ -22,6 +22,8 @@ import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { CatalogModel } from '../common-model/catalog.Model';
+import { AgreementReportService } from 'src/app/services/agreementReport/agreementReport.service';
+declare var require: any
 
 @Component({
   selector: 'app-agreement-tracking-detail',
@@ -78,15 +80,15 @@ export class AgreementTrackingDetailComponent implements OnInit {
     maxAmountToggle = false;
     maxAmount: number = 0;
     showAmountInput = false;
-    email: string = '';
+    emailNotification: string = '';
     enablePdfExport: boolean = false;
     newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
     infoUser = utiles.getInfoUser();
     search_key: string = 'agreement_status_finished';
     catalogModel: CatalogModel = new CatalogModel();
-
+    nameAgree: string = '';
  
-  constructor(public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
+  constructor(private reportService: AgreementReportService, public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
     private tradeAgreementDetailService: TradeAgreementDetailService, private router: Router) {
       
       this.activated_route.queryParams.subscribe(params => {     
@@ -99,6 +101,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.behaviorTA = this.agreementDetail.info.behavior;
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
+          this.nameAgree = this.agreementDetail.info.name_Agreement;
 
 
 
@@ -131,7 +134,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
-      description: new FormControl('')
+      description: new FormControl(''),
+      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
 
     // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
@@ -149,6 +153,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
+        emailNotification: this.agreementDetail.info.email
 
       });
 
@@ -162,7 +167,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount= this.agreementDetail.info.max_Amount;
-      this.email = this.agreementDetail.info.email;
     }else{
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -194,7 +198,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
       this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
-      this.newAgreementDetailHeaderModel.Email = this.email;
+      this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
@@ -446,18 +450,72 @@ providerSearch(event){
   exportToPdf(): void { 
     this.saveAgreementHeader(); 
 
-      const reportInfo = {
-        infoTable: this.dataTableDetail
-      }
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          'reportInfo': JSON.stringify(reportInfo)
-        },
-        skipLocationChange: true
-      };
-      this.router.navigate(['agreementReport'], navigationExtras);
-      this._common.asignHeaderTitle("Detalle del reporte");
+      // const reportInfo = {
+      //   infoTable: this.dataTableDetail
+      // }
+      // const navigationExtras: NavigationExtras = {
+      //   queryParams: {
+      //     'reportInfo': JSON.stringify(reportInfo)
+      //   },
+      //   skipLocationChange: true
+      // };
+      // this.router.navigate(['agreementReport'], navigationExtras);
+      // this._common.asignHeaderTitle("Detalle del reporte");
+      this.getPdf();
     
+  }
+
+  getPdf(): void{
+    var generatePDF = new AgreementProductInfoDetailModel();
+    generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
+    generatePDF.Name_Agreement = this.nameAgree;
+    this.reportService.saveReport(generatePDF).subscribe(
+      dataS => {
+          var url = dataS;
+          this.downloadFile(url, "Informe_General_Acuerdo"+"_"+this.nameAgree+".pdf");
+
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        // console.error(error);
+        const dataSuccess = {
+          icon: 'warning',
+          labelTitile: '¡Atención!',
+          textDescription: 'Cierre el PDF actual para guardar el siguiente',
+          // btnClose: 'Cerrar',
+          status: 'warning'
+        };
+  
+        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+          data: { contactInfo: dataSuccess },
+          minWidth: '500px', maxWidth: '500px', maxHeight: '320px', minHeight: '320px'
+        });
+        setTimeout(() => dialogRef.close(), 2500);
+      }
+    )
+  }
+  downloadFile(url, archive) {
+    try {
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(url, archive);
+    }
+    catch
+    {
+      const dataSuccess = {
+        icon: 'warning',
+        labelTitile: '¡Atención!',
+        textDescription: 'No se puede descargar el archivo',
+        // btnClose: 'Cerrar',
+        status: 'warning'
+      };
+
+      const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+        data: { contactInfo: dataSuccess },
+        minWidth: '500px', maxWidth: '500px', maxHeight: '320px', minHeight: '320px'
+      });
+      setTimeout(() => dialogRef.close(), 2500);
+    }
   }
 
   tooltip(args: QueryCellInfoEventArgs) {

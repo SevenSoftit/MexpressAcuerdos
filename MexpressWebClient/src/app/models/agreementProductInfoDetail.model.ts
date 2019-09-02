@@ -33,6 +33,7 @@ export class AgreementProductInfoDetailModel {
     Name_Currency: string;
     Behavior: string;
     AgreementProductInfoDetailList : Array<AgreementProductInfoDetailModel>;
+    Name_Agreement: string;
 
     constructor() {
         this.Pk_Ac_Trade_Agreement = 0;
@@ -68,5 +69,6 @@ export class AgreementProductInfoDetailModel {
         this.Name_Currency = '';
         this.Behavior = '';
         this.AgreementProductInfoDetailList = [];
+        this.Name_Agreement = '';
     }
 }

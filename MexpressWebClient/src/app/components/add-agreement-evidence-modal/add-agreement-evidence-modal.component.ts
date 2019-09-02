@@ -59,7 +59,8 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     acceptedFiles: '.xlsx,.xls,.txt,.pdf,.rar,.zip,.docx, .png, .jpg, .msg, .eml, .tiff, .tif',
     uploadMultiple: true,
     autoProcessQueue: false,
-    parallelUploads: 10
+    parallelUploads: 10,
+    timeout: 600000
   };
 
   ngAfterViewInit() {

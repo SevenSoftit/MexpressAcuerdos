@@ -3,22 +3,23 @@
         <div class="row  ml-0 mr-0 ">
             <h5 class="tittle-agreement">Detalle del seguimiento</h5>
         </div>
-        <div class="row m-0 pl-5 pr-4">
-            <mat-icon *ngIf="enableArrow" (click)="goListProductsResume()" class="back-arrow">keyboard_backspace</mat-icon>
+        <div class="row m-0 pl-3">
+            <span><mat-icon *ngIf="enableArrow" (click)="goListProductsResume()" class="back-arrow">keyboard_backspace</mat-icon></span>
             <label class="trade-agreements-description">Esta sección  presenta el detalle del seguimiento de un acuerdo.</label>
-        </div>
-        <div class="row  ml-0 mr-0" *ngIf="enableEntireAgreement">
-            <div class="col-md-12 text-right">
-                <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()">
+            <div class="offset-md-8 col-md-3 buttons-content">
+                <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()" *ngIf="enableEntireAgreement">
                     <mat-icon class="mr-2">star</mat-icon>Ver detalle de todo el acuerdo
                 </button>
-            </div>
-        </div>
-        <div class="row  ml-0 mr-0" *ngIf="enablePdfExport">
-            <div class="col-md-12 text-right">
-                <button class="save-button ml-4" mat-raised-button (click)="exportToPdf()">
+
+                <button class="save-button ml-4" mat-raised-button (click)="exportToPdf()" *ngIf="enablePdfExport">
                     <mat-icon class="mr-2">description</mat-icon>Generar acuerdo en Pdf
                 </button>
+            </div>
+            <!--Activador de acuerdos-->
+            <div class="col-md-1">
+                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activar</label>
+                <mat-slide-toggle disabled id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                </mat-slide-toggle>
             </div>
         </div>
     </div>
@@ -86,12 +87,19 @@
                 <label for="description" class="new-agreement-label-input">Descripción</label>
                 <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
-            <!--Activador de acuerdos-->
+            <!--Muestra el input de email-->
             <div class="col-md-2">
-                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activar acuerdos</label>
-                <mat-slide-toggle disabled id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
-                </mat-slide-toggle>
+                <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
+                <input readonly type="email" [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
+                    placeholder="Correo">
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['required']" class="alert-error-required">
+                    El correo electrónico es requerido
+                </div>
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['email']" class="alert-error-required">
+                    El formato de correo es incorrecto
+                </div>
             </div>
+
             <!--Activa input de monto maximo-->
             <div class="col-md-2">
                 <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
@@ -114,9 +122,7 @@
             <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
                 <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
-
             </div>
-
         </div>
     </form>
 

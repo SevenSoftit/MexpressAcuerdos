@@ -29,36 +29,36 @@ export class TradeAgreementsComponent implements OnInit {
   SearchInfo: any = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
-//config for status filter
-public data: object[];
-public height = '220px';
-public dropdata: string[];
-public onChange(args: any): void {
-  if (args.value !== 'All'){
-    this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
-  } else {
-    this.grid.removeFilteredColsByField('agreement_Status_Name');
-  }
-    
-}
 
-// config for provider filter
-public dataProvider: object[];
-public dropdataProvider: string[];
-public onChangeProvider(args: any): void {
-  if (args.value !== 'All'){
-    this.grid.filterByColumn('provider_Name', 'equal', args.value);
-  } else {
-    this.grid.removeFilteredColsByField('provider_Name');
+  //config for status filter
+  public data: object[];
+  public height = '220px';
+  public dropdata: string[];
+  public onChange(args: any): void {
+    if (args.value !== 'All') {
+      this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
+    } else {
+      this.grid.removeFilteredColsByField('agreement_Status_Name');
+    }
   }
-}
-//--------------------------------------------------
 
-  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) { 
+  // config for provider filter
+  public dataProvider: object[];
+  public dropdataProvider: string[];
+  public onChangeProvider(args: any): void {
+    if (args.value !== 'All') {
+      this.grid.filterByColumn('provider_Name', 'equal', args.value);
+    } else {
+      this.grid.removeFilteredColsByField('provider_Name');
+    }
+  }
+  //--------------------------------------------------
+
+  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
   }
 
   ngOnInit() {
-   this._common._setLoading(true);
+    this._common._setLoading(true);
 
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
@@ -66,12 +66,12 @@ public onChangeProvider(args: any): void {
     // this.toolbar = ['Search'];
 
     this.filterOptions = {
-     type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
-  };
+      type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
+    };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-   
 
-  
+
+
     this.listHeaderAgreement();
   }
 
@@ -96,14 +96,14 @@ public onChangeProvider(args: any): void {
     this.grid.gridLines = 'Both';
     Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
 
-}
+  }
   redirectPageCreateNewAgreement() {
     this.router.navigate(["newTradeAgreements"]);
     this._common.asignHeaderTitle("Nuevo acuerdo comercial");
 
   }
 
-    /*******************************************************
+  /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  19/07/2019
 * Description: method that list the products of the agreement 
@@ -116,41 +116,44 @@ public onChangeProvider(args: any): void {
 * Author:
 * Description:
 *******************************************************/
-listHeaderAgreement() {
-  let dataFilter: any;
-  var data = new NewAgreementDetailHeaderModel();
-  data.Active = true;
-  this.isActiveAgreement = data.Active;
- 
-  this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
-    dataQ => {
-      this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
-      dataFilter = dataQ;
-    this.dropdata  = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
-   this.dropdataProvider  = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
-    this._common._setLoading(false);
-    },
-    error => {
-      this._common._setLoading(false);
-      console.log('no se envio' + ' ' + error);
-    });
-}
+  listHeaderAgreement() {
+    let dataFilter: any;
+    var data = new NewAgreementDetailHeaderModel();
+    data.Active = true;
+    this.isActiveAgreement = data.Active;
 
-// listAgreementStatus() {
-//   var catalogModel = new CatalogModel();
-//   catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
-//   this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
-//     dataQ => {
-//       this.statusList = dataQ;
-//       this._common._setLoading(false); 
-//     },
-//     error => {
-//       this._common._setLoading(false);
-//       console.log('no se envio' + ' ' + error); 
-//     });
-// }
+    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+      dataQ => {
+        this.dropdata = [];
+        this.dropdataProvider = [];
+        
+        this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        dataFilter = dataQ;
+        this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
+        this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
+        this._common._setLoading(false);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
 
-//INICIO SECCION DE BUSQUEDAS POR FILTRO
+  // listAgreementStatus() {
+  //   var catalogModel = new CatalogModel();
+  //   catalogModel.Fk_Glb_Cat_Type_Catalog = 1;
+  //   this.tradeAgreementDetailService.ListAgreementStatus(catalogModel).subscribe(
+  //     dataQ => {
+  //       this.statusList = dataQ;
+  //       this._common._setLoading(false); 
+  //     },
+  //     error => {
+  //       this._common._setLoading(false);
+  //       console.log('no se envio' + ' ' + error); 
+  //     });
+  // }
+
+  //INICIO SECCION DE BUSQUEDAS POR FILTRO
   /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  01/08/2019
@@ -164,29 +167,35 @@ listHeaderAgreement() {
 * Author:
 * Description:
 *******************************************************/
-//Filtro por estados activos e inactivos
+  //Filtro por estados activos e inactivos
   listSpecificHeaderAgreement(evt: any) {
     this._common._setLoading(true);
-    var data = new NewAgreementDetailHeaderModel();     
+    let dataFilter: any;
+    var data = new NewAgreementDetailHeaderModel();
     this.resetRadio();
     var target = evt.target;
 
-    if(target.value == "option1"){
-        this.activeAgreements = true;
-        this.inactiveAgreements = false;
-        data.Active = this.activeAgreements;
-        this.isActiveAgreement = data.Active;
-}else{
-  this.inactiveAgreements = true;
-  this.activeAgreements = false;  
-  data.Active = false;
-  this.isActiveAgreement = data.Active;
-}
+    if (target.value == "option1") {
+      this.activeAgreements = true;
+      this.inactiveAgreements = false;
+      data.Active = this.activeAgreements;
+      this.isActiveAgreement = data.Active;
+    } else {
+      this.inactiveAgreements = true;
+      this.activeAgreements = false;
+      data.Active = false;
+      this.isActiveAgreement = data.Active;
+    }
 
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
-        this.dataTable = dataQ;
-        // this.nameAgreementList = dataQ;
+        this.dropdata = [];
+        this.dropdataProvider = [];
+
+        this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        dataFilter = dataQ;
+        this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
+        this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
         this._common._setLoading(false);
       },
       error => {
@@ -195,56 +204,56 @@ listHeaderAgreement() {
       });
   }
 
-    /*******************************************************
+  /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  19/08/2019
 * Description: method that search an specific name agreement
 ****************************************************/
-//Filtro por nombre del acuerdo
+  //Filtro por nombre del acuerdo
 
-// listNameAgreement(evt: any) {
-//   var data = new NewAgreementDetailHeaderModel();
-//   data.Active = this.isActiveAgreement;
-//   data.Name_Agreement = evt.value;
-//   data.Date_Start = this.any_date_agreement;
-//   data.Date_Finish = this.any_date_agreement;
-//   data.Fk_Status_Agreement = this.agreement_status;
-//   this.agreement_name_search = evt.value;
-//   this.tradeAgreementDetailService.listNameAgree(data).subscribe(
-//     dataV => {
-//       this.dataTable = dataV;
-//     },
-//     error => {
-//       this._common._setLoading(false);
-//       console.error(error);
-//     }
-//   )
-// }
+  // listNameAgreement(evt: any) {
+  //   var data = new NewAgreementDetailHeaderModel();
+  //   data.Active = this.isActiveAgreement;
+  //   data.Name_Agreement = evt.value;
+  //   data.Date_Start = this.any_date_agreement;
+  //   data.Date_Finish = this.any_date_agreement;
+  //   data.Fk_Status_Agreement = this.agreement_status;
+  //   this.agreement_name_search = evt.value;
+  //   this.tradeAgreementDetailService.listNameAgree(data).subscribe(
+  //     dataV => {
+  //       this.dataTable = dataV;
+  //     },
+  //     error => {
+  //       this._common._setLoading(false);
+  //       console.error(error);
+  //     }
+  //   )
+  // }
 
-//Filtro por fecha (fecha de inicio o fecha de finalizacion)
-// selectedDate(evt: any) {
-//   this._common._setLoading(true);
-//   var data = new NewAgreementDetailHeaderModel();
-//   data.Active = this.isActiveAgreement;
-//   data.Name_Agreement = this.agreement_name_search;
-//   data.Date_Start = evt.value;
-//   data.Date_Finish = evt.value;
-//   data.Fk_Status_Agreement = this.agreement_status;
-//   this.any_date_agreement = evt.value; 
+  //Filtro por fecha (fecha de inicio o fecha de finalizacion)
+  // selectedDate(evt: any) {
+  //   this._common._setLoading(true);
+  //   var data = new NewAgreementDetailHeaderModel();
+  //   data.Active = this.isActiveAgreement;
+  //   data.Name_Agreement = this.agreement_name_search;
+  //   data.Date_Start = evt.value;
+  //   data.Date_Finish = evt.value;
+  //   data.Fk_Status_Agreement = this.agreement_status;
+  //   this.any_date_agreement = evt.value; 
 
-//   this.tradeAgreementDetailService.listAgreementDate(data).subscribe(
-//     dataQ => {
-//       this.dataTable = dataQ;
-//       this._common._setLoading(false);
-//     },
-//     error => {
-//       this._common._setLoading(false);
-//       console.log('no se envio' + ' ' + error);
-//     });
-// }
+  //   this.tradeAgreementDetailService.listAgreementDate(data).subscribe(
+  //     dataQ => {
+  //       this.dataTable = dataQ;
+  //       this._common._setLoading(false);
+  //     },
+  //     error => {
+  //       this._common._setLoading(false);
+  //       console.log('no se envio' + ' ' + error);
+  //     });
+  // }
 
 
-//Filtro por los demas estados (En proceso, vencidos, finalizados, conciliados, todos los estados)
+  //Filtro por los demas estados (En proceso, vencidos, finalizados, conciliados, todos los estados)
   // behaviorStatus(evt: any) {
   //   this._common._setLoading(true);
   //   var data = new NewAgreementDetailHeaderModel();
@@ -253,7 +262,7 @@ listHeaderAgreement() {
   //   data.Date_Start = this.any_date_agreement;
   //   data.Date_Finish = this.any_date_agreement;
   //   data.Fk_Status_Agreement = evt.value;
-    
+
   //   this.agreement_status = evt.value; 
   //   this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
   //     dataQ => {
@@ -265,7 +274,7 @@ listHeaderAgreement() {
   //       console.log('no se envio' + ' ' + error);
   //     });
   // }
-//FIN SECCION DE BUSQUEDAS POR FILTRO
+  //FIN SECCION DE BUSQUEDAS POR FILTRO
 
   resetRadio() {
     if (this.inactiveAgreements) {
@@ -279,7 +288,7 @@ listHeaderAgreement() {
   viewAgreementDetails(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
     const agreementDet = {
-      
+
       info: data
     }
     const navigationExtras: NavigationExtras = {
@@ -293,15 +302,15 @@ listHeaderAgreement() {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    if(args.column.field === "provider_Name")  {
-    let tooltip: Tooltip = new Tooltip({
+    if (args.column.field === "provider_Name") {
+      let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),
         animation: {
           open: { effect: 'None', duration: 1000, delay: 200 },
           close: { effect: 'None', duration: 600, delay: 200 }
-      }
-    }, args.cell as HTMLTableCellElement);
+        }
+      }, args.cell as HTMLTableCellElement);
 
-  }  
-} 
+    }
+  }
 }

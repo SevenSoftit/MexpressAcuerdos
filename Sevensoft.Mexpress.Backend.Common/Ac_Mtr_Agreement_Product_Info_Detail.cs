@@ -40,6 +40,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Currency = "";
             Behavior = "";
             AgreementProductInfoDetailList = new List<Ac_Mtr_Agreement_Product_Info_Detail>();
+            Name_Agreement = "";
         }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int64 Pk_Cat_Agreement_Details_Result { get; set; }
@@ -74,5 +75,6 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Name_Currency { get; set; }    
          public String Behavior { get; set; } 
          public List<Ac_Mtr_Agreement_Product_Info_Detail> AgreementProductInfoDetailList { get; set; }
+         public String Name_Agreement { get; set; } 
     }
 }
