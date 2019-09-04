@@ -252,7 +252,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                                 }
                             }
 
-                                //var lista_trola = GetArchives(formAccumulator.GetResults());
+                            //var lista_trola = GetArchives(formAccumulator.GetResults());
 
 
 
@@ -368,7 +368,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         obj.Name_Agreement = dictionary.Value[x];
 
                     else if (dictionary.Key == "Active")
-                        obj.Active = Convert.ToBoolean(dictionary.Value[x]);                  
+                        obj.Active = Convert.ToBoolean(dictionary.Value[x]);
                 }
 
                 list.Add(obj);
@@ -395,10 +395,10 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 {
                     string Path = string.Format("{0}{1}{2}\\", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement);
 
+                    StringBuilder sb = new StringBuilder(item.Archive_New_Name);
                     if (item.Archive_New_Name != item.Archive_Original_Name)
                     {
                         this.correctName = "";
-                        StringBuilder sb = new StringBuilder(item.Archive_New_Name);
                         this.correctName = Convert.ToString(sb);
                         if (item.Archive_New_Name.Contains("/"))
                         {
@@ -432,14 +432,27 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         {
                             this.correctName = Convert.ToString(sb.Replace("|", "_"));
                         }
+                        if (item.Archive_New_Name.Contains("%"))
+                        {
+                            this.correctName = Convert.ToString(sb.Replace("%", "_"));
+                        }
 
                         item.Archive_New_Name = actualDate + "_" + this.correctName + correctExtension;
 
                         targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
+
                     else
                     {
-                        this.correctName = item.Archive_New_Name;
+                        if (item.Archive_New_Name.Contains("%"))
+                        {
+                            this.correctName = "";
+                            this.correctName = Convert.ToString(sb.Replace("%", "_"));
+                        }
+                        else
+                        {
+                            this.correctName = item.Archive_New_Name;
+                        }
                         item.Archive_New_Name = actualDate + "_" + this.correctName;
                         targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }

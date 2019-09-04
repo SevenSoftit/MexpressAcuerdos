@@ -22,6 +22,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
   step = 0;
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
+  invalidArchive: boolean = false;
 
   //#endregion Variables
 
@@ -60,7 +61,9 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     uploadMultiple: true,
     autoProcessQueue: false,
     parallelUploads: 10,
-    timeout: 600000
+    timeout: 600000,
+    dictFileTooBig: "El archivo es muy grande ({{filesize}}) para cargarlo en el sistema. Capacidad máxima {{maxFilesize}}MB",
+    dictUploadCanceled: "La carga de archivos ha sido cancelada."
   };
 
   ngAfterViewInit() {
@@ -109,6 +112,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
 * Description:
 **************************************************************************************/
   onAddedFile(file) {
+    this.invalidArchive = false;
     let data = {
       archive_Original_Name: file.name,
       archive_New_Name: file.name,
@@ -165,10 +169,18 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
     * Description:
   **************************************************************************************/
   public onUploadError(args: any): void {
+    var error = '';
+    this.invalidArchive = true;
+
+    if(args[1] == "You can't upload files of this type."){
+      error = "El archivo "+args[0].name+" contiene una extensión no permitida."
+      
+    }
+
     const datafailed = {
       labelTitile: '¡Atención!',
       icon: 'warning',
-      textDescription: args[1],
+      textDescription: error != ""?error:args[1],
       status: 'warning'
     };
 
@@ -226,7 +238,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
       textDescriptionEnd: 'para volver, haz click en',
       finalCustomLabel: 'Cancelar.',
       status: false,
-      clickFunction: 'deleteArchiveNote'
+      clickFunction: 'removeArchive'
     };
     const dialogRef = this.matDialog.open(ConfirmModalComponent, {
       data: { confirmInfo: dataConfirm, File },

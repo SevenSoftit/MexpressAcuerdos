@@ -91,7 +91,7 @@
             <button mat-button mat-dialog-close class="save-button">Cancelar</button>
         </div>
         <div class="col-md-6 text-right">
-            <button mat-button class="save-button" [ngClass]="{'disabled_button': files.length == 0}" (click)="saveEvidence()" [disabled]="files.length == 0">
+            <button mat-button class="save-button" [ngClass]="{'disabled_button': files.length == 0 || invalidArchive}" (click)="saveEvidence()" [disabled]="files.length == 0 || invalidArchive">
         Subir archivo<mat-icon class="ml-2"> cloud_upload</mat-icon>
       </button>
         </div>

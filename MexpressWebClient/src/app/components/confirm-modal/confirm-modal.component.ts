@@ -49,6 +49,11 @@ onAdd = new EventEmitter();
    
   }
 
+  removeArchive(){
+    this.closeConfirm(true); 
+    this.onAdd.emit(false);          
+  }
+
   /***********************************************************************************
     * Author: Gustavo ZC
     * Creation date: 05/08/2019
@@ -110,6 +115,9 @@ if(this.dataConfirm.evidence.pk_Cat_Document_Agreement > 0 && this.dataConfirm.e
       case 'deleteEvidenceArchive':
       this.deleteEvidenceArchive();
       break;
+      case 'removeArchive':
+        this.removeArchive();
+        break;
 
     } 
   }
