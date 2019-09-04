@@ -131,7 +131,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           this.nameAgree = this.agreementDetail.info.name_Agreement;
-          debugger;
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
           
@@ -235,7 +234,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
-      debugger;
       this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
@@ -336,7 +334,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
 
-      var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
+      // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
@@ -349,12 +347,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
-      debugger;
-      this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+      // this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+      this.newAgreementDetailHeaderModel.Provider_Name = '';
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
-      this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
+      this.newAgreementDetailHeaderModel.Max_Amount = (this.maxAmount!== null)?this.maxAmount:0;
       this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
@@ -592,13 +590,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
   }
 
-  // behaviorProvider(value: any) {
-  //   this.errorProvider = false;
-  //   var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
-  //   filterProviderName.forEach(element => {
-  //     // this.providerName = element.name_Provider
-  //   });
-  // }
+  behaviorProvider(value: any) {
+    this.errorProvider = false;
+    // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == value.value);
+    // filterProviderName.forEach(element => {
+    //   // this.providerName = element.name_Provider
+    // });
+  }
 
   openDialogImportProduct(): void {
     const dialogRef = this.matDialog.open(ImportProductComponent, {
