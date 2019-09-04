@@ -53,6 +53,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             String_Date_Finish = "";
             Max_Amount = 0; 
             Email = "";
+            Status_Option = false;
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -101,6 +102,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String String_Date_Finish { get; set; }
         public Decimal Max_Amount { get; set; }
         public String Email { get; set; }
+         public bool Status_Option { get; set; }
         
         public static implicit operator long(Import_Product v)
         {

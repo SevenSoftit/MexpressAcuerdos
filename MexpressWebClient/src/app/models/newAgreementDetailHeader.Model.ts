@@ -46,6 +46,7 @@ export class NewAgreementDetailHeaderModel {
     Behavior: string;
     Max_Amount: number;
     Email: String;
+    Status_Option: Boolean;
 
 
     constructor() {
@@ -93,6 +94,6 @@ export class NewAgreementDetailHeaderModel {
             this.Behavior = '';
             this.Max_Amount = 0;
             this.Email = '';
-
+            this.Status_Option = false;
     }
 }

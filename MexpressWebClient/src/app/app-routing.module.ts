@@ -27,7 +27,9 @@ const routes: Routes = [
       {path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements-detail/new-trade-agreements-detail.module#NewTradeAgreementsDetailModule'},
       {path: 'agreementTracking', loadChildren: './components/agreement-tracking/agreement-tracking.module#AgreementTrackingModule'},
       {path: 'agreementTrackingDetail', loadChildren: './components/agreement-tracking-detail/agreement-tracking-detail.module#AgreementTrackingDetailModule'},
-      {path: 'agreementReport', loadChildren: './components/agreement-report/agreement-report.module#AgreementReportModule'}
+      {path: 'agreementReport', loadChildren: './components/agreement-report/agreement-report.module#AgreementReportModule'},
+      {path: 'agreementConciliation', loadChildren: './components/agreement-conciliation/agreement-conciliation.module#AgreementConciliationModule'},
+      // {path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule'}
     ]
   }, 
 
