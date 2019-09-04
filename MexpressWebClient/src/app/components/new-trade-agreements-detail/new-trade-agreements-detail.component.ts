@@ -130,7 +130,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           var agreement = new NewAgreementModel();
 
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          this.nameAgree = this.agreementDetail.info.name_Agreement
+          this.nameAgree = this.agreementDetail.info.name_Agreement;
+          debugger;
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
           
@@ -234,6 +235,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
+      debugger;
       this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
@@ -307,6 +309,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.errorDate = false;
     this.errorStartDate = false;
     this.errorEndDate = false;
+    this.errorProvider = false;
+    this.errorTypeOfAgreement = false;
     // var today = new Date();
     // today.setHours(0, 0, 0, 0);
     // this.newAgreementForm.value.startDatePicker.setHours(0, 0, 0, 0);
@@ -320,6 +324,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.errorDate = true;
       this.errorEndDate = true;
     }
+
     if (this.providerN == undefined) {
       this.errorProvider = true;
     }     
@@ -344,6 +349,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
+      debugger;
       this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;

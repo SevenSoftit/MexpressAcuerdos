@@ -4,15 +4,18 @@
             <h5 class="tittle-agreement">Acuerdos comerciales</h5>
         </div>
         <div class="row m-0 pl-5 pr-4">
-            <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes seleccionando los filtros necesarios, editar o bien agregar uno nuevo.</label>
-        </div>
+            <div class="col-md-9">
+                <label class="trade-agreements-description">En esta sección se pueden visualizar los acuerdos comerciales existentes seleccionando los filtros necesarios, editar o bien agregar uno nuevo.</label>
+            </div>
+            <!-- </div> -->
 
-        <div class="row ml-0 mr-0">
-            <div class="offset-md-10 col-md-2">
+            <!-- <div class="row ml-0 mr-0"> -->
+            <div class="offset-md-1 col-md-2">
                 <button class="save-button" mat-raised-button (click)="redirectPageCreateNewAgreement()">
                 <mat-icon class="mr-2">add_circle_outline</mat-icon>Crear acuerdo
             </button>
             </div>
+            <!-- </div> -->
         </div>
     </div>
 </div>
@@ -71,19 +74,17 @@
                 <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='150' textAlign='Center' allowFiltering='false'>
                 </e-column>
                 <e-column field='agreement_Status_Name' headerText='Estado' width='170' textAlign='Center'>
-                        <ng-template #filterTemplate let-data>
-                                <ejs-dropdownlist id='dropdown' [(ngModel)]="data.Name" 
-                                (change)=onChange($event) [dataSource]='dropdata' [fields]='fields'[popupHeight]='height' >
-                            
-                            </ejs-dropdownlist>
-                           </ng-template>
+                    <ng-template #filterTemplate let-data>
+                        <ejs-dropdownlist id='dropdown' [(ngModel)]="data.Name" (change)=onChange($event) [dataSource]='dropdata' [fields]='fields' [popupHeight]='height'>
+
+                        </ejs-dropdownlist>
+                    </ng-template>
                 </e-column>
                 <e-column field='provider_Name' headerText='Proveedor' width='170' textAlign='Center'>
-                        <ng-template #filterTemplate let-data>
-                                <ejs-dropdownlist id='dropdownProvider' [(ngModel)]="data.Name" 
-                                (change)=onChangeProvider($event) [dataSource]='dropdataProvider' [fields]='fields'[popupHeight]='height' >
-                           </ejs-dropdownlist>
-                           </ng-template>
+                    <ng-template #filterTemplate let-data>
+                        <ejs-dropdownlist id='dropdownProvider' [(ngModel)]="data.Name" (change)=onChangeProvider($event) [dataSource]='dropdataProvider' [fields]='fields' [popupHeight]='height'>
+                        </ejs-dropdownlist>
+                    </ng-template>
                 </e-column>
                 <e-column field='string_Date_Start' headerText='Fecha de inicio' width='150' textAlign='Center'></e-column>
                 <e-column field='string_Date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>

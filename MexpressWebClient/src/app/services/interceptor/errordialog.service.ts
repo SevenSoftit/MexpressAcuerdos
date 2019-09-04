@@ -26,6 +26,10 @@ export class ErrorDialogService {
             this.router.navigate(['login']);
           }
 
+          else if (data.error == 'error_PDF') {
+            datafailed.textDescription = "Debe cerrar el PDF anterior para guardar el siguiente";
+          }
+
           const dialogRef = this.matDialog.open(FeedbackModalComponent, {data: {contactInfo: datafailed},
             minWidth: '478px', maxWidth: '478px', maxHeight: '277px', minHeight: '277px'});
             setTimeout(() => dialogRef.close(), 3000);

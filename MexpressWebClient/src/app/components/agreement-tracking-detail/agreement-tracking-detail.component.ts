@@ -425,6 +425,7 @@ providerSearch(event){
   }
 
   seeDetailOfTheEntireAgreement(): void {  
+    this._common._setLoading(true);
     this.enablePdfExport = true;
     var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
     agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
@@ -477,21 +478,6 @@ providerSearch(event){
         this._common._setLoading(false);
       },
       error => {
-        this._common._setLoading(false);
-        // console.error(error);
-        const dataSuccess = {
-          icon: 'warning',
-          labelTitile: '¡Atención!',
-          textDescription: 'Cierre el PDF actual para guardar el siguiente',
-          // btnClose: 'Cerrar',
-          status: 'warning'
-        };
-  
-        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-          data: { contactInfo: dataSuccess },
-          minWidth: '500px', maxWidth: '500px', maxHeight: '320px', minHeight: '320px'
-        });
-        setTimeout(() => dialogRef.close(), 2500);
       }
     )
   }
@@ -502,19 +488,19 @@ providerSearch(event){
     }
     catch
     {
-      const dataSuccess = {
-        icon: 'warning',
-        labelTitile: '¡Atención!',
-        textDescription: 'No se puede descargar el archivo',
-        // btnClose: 'Cerrar',
-        status: 'warning'
-      };
+      // const dataSuccess = {
+      //   icon: 'warning',
+      //   labelTitile: '¡Atención!',
+      //   textDescription: 'No se puede descargar el archivo',
+      //   // btnClose: 'Cerrar',
+      //   status: 'warning'
+      // };
 
-      const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-        data: { contactInfo: dataSuccess },
-        minWidth: '500px', maxWidth: '500px', maxHeight: '320px', minHeight: '320px'
-      });
-      setTimeout(() => dialogRef.close(), 2500);
+      // const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      //   data: { contactInfo: dataSuccess },
+      //   minWidth: '500px', maxWidth: '500px', maxHeight: '320px', minHeight: '320px'
+      // });
+      // setTimeout(() => dialogRef.close(), 2500);
     }
   }
 
