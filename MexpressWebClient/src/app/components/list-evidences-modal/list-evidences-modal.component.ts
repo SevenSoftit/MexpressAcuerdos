@@ -21,6 +21,7 @@ export class ListEvidencesModalComponent implements OnInit {
   evidenceListCount: any = 0;
   notRepeatEvidence: any;
   onAdd = new EventEmitter();
+  step = 0;
 
 
 
@@ -177,6 +178,18 @@ deleteEvidence(evidence) {
         this.listAllEvidences();
       }
     });
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
   
 }

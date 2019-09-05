@@ -91,6 +91,16 @@
     width: 100%
 }
 
+.mat-accordion .mat-expansion-panel:first-of-type {
+    margin-bottom: 0.8rem !important;
+}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded),
+.mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+    margin-bottom: 0.8rem !important;
+}
+
+// End acordion material
 .style-row-buttons {
     margin-top: 2rem;
 }

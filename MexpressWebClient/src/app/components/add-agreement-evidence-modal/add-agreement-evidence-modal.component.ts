@@ -22,7 +22,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
   step = 0;
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
-  invalidArchive: boolean = false;
+  invalidArchive: boolean = false;  
 
   //#endregion Variables
 

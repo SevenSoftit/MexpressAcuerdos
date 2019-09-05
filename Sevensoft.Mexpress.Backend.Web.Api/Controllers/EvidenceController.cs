@@ -438,7 +438,6 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         }
 
                         item.Archive_New_Name = actualDate + "_" + this.correctName + correctExtension;
-
                         targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
 
