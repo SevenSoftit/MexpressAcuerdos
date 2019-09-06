@@ -65,6 +65,7 @@ public onChangeProvider(args: any): void {
   }
 
   ngOnInit() {
+    this._common._setLoading(true);
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
@@ -114,7 +115,6 @@ public onChangeProvider(args: any): void {
 * Description:
 *******************************************************/
   listHeaderAgreement() {
-    this._common._setLoading(true);
     var data = new NewAgreementDetailHeaderModel();
     data.Active = true;
     this.isActiveAgreement = data.Active;

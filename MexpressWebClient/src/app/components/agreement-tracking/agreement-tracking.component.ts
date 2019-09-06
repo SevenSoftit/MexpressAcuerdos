@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { GridComponent, ForeignKeyService, FilterService } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
@@ -30,9 +30,10 @@ export class AgreementTrackingComponent implements OnInit {
   public isActiveAgreement: Boolean = false;
   // public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
-  
   //dataProvider: any;
   dataFilter : any = [];
+  agreementOption: any;
+  status: boolean = true;
 
 
 //config for status filter
@@ -59,23 +60,33 @@ public onChangeProvider(args: any): void {
   }
 }
 
-  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
+  constructor(private activated_route: ActivatedRoute, private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
+    this.activated_route.queryParams.subscribe(params => {     
+      var parameters = params["active_Agreements"];
+
+     if(parameters != undefined){
+      this.agreementOption = JSON.parse(parameters);
+      if (this.agreementOption.info !== null && this.agreementOption.info !== undefined) {
+        this.status = this.agreementOption.info;
+        this.listHeaderAgreement(this.status);
+        this.activeAgreements = false;
+        this.inactiveAgreements = true;
+      }
+    }
+    });  
   }
 
   ngOnInit() {
+    this._common._setLoading(true);
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     // this.toolbar = ['Search'];
-    this.listHeaderAgreement();
-
+    
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-   
-
-
   }
 
   @HostListener('window:resize', ['$event'])
@@ -87,6 +98,7 @@ public onChangeProvider(args: any): void {
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
+    this.listHeaderAgreement(this.status);
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -115,10 +127,9 @@ public onChangeProvider(args: any): void {
 * Author:
 * Description:
 *******************************************************/
-  listHeaderAgreement() {
-    this._common._setLoading(true);
+  listHeaderAgreement(status: boolean) {
     var data = new NewAgreementDetailHeaderModel();
-    data.Active = true;
+    data.Active = status;
     this.isActiveAgreement = data.Active;
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {

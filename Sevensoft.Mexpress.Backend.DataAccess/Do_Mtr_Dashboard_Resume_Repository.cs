@@ -37,7 +37,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Common.Do_Mtr_Dashboard_Resume>
-                    ("PA_CON_DO_GBL_MTR_ER_DASHBOARD_RESUME_GET",
+                    ("PA_CON_AC_GBL_MTR_AGREEMENT_DASHBOARD_RESUME_GET",
                     param: new
                     {
     
@@ -52,7 +52,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Common.Do_Mtr_Dashboard_Resume>
-                    ("PA_CON_DO_GBL_MTR_ER_DASHBOARD_RESUME_GET",
+                    ("PA_CON_AC_GBL_MTR_AGREEMENT_DASHBOARD_RESUME_GET",
                     param: new
                     {
 
@@ -67,7 +67,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 var result = connection.Query<
                     Sevensoft.Mexpress.Backend.Common.Do_Mtr_Dashboard_Resume>
-                    ("PA_CON_DO_GBL_MTR_ER_DASHBOARD_RESUME_GET",
+                    ("PA_CON_AC_GBL_MTR_AGREEMENT_DASHBOARD_RESUME_GET",
                     param: new
                     {
 
@@ -82,7 +82,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             {
                 await connection.QueryAsync<
                     Sevensoft.Mexpress.Backend.Common.Do_Mtr_Dashboard_Resume>
-                    ("PA_MAN_DO_GBL_MTR_ER_DASHBOARD_RESUME_SAVE",
+                    ("PA_MAN_AC_GBL_MTR_AGREEMENT_DASHBOARD_RESUME_SAVE",
                     param: new
                     {
 
@@ -95,7 +95,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 await connection.ExecuteAsync(
-                sql: "PA_CON_DO_GBL_MTR_ER_DASHBOARD_RESUME_DELETE",
+                sql: "PA_CON_AC_GBL_MTR_AGREEMENT_DASHBOARD_RESUME_DELETE",
                 param: new
                 {
 

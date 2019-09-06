@@ -1,22 +1,22 @@
 <div class="container-fluid p-0">
     <div class="home-header">
         <div class="row">
-        <h5 class=" ml-4 home-title">
-            Datos generales
-        </h5>
-    </div>
-    <div class="row m-0 pl-5 pr-4">
+            <h5 class=" ml-4 home-title">
+                Datos generales
+            </h5>
+        </div>
+        <div class="row m-0 pl-5 pr-4">
             <label class="home-description">En esta sección se pueden visualizar datos generales con respecto a los acuerdos existentes</label>
         </div>
     </div>
-    
+
     <div class="row home-top-header mt-5 ml-0 mr-0">
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">Para este mes se contabilizan</p>
+                <h2 class="home-card-title mb-0">{{inProcessAgreementsCount}}</h2>
+                <p>acuerdo(s) en proceso</p>
+                <button mat-raised-button class="home-card-button" (click)="redirectToAgreementTracking()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>
@@ -24,10 +24,10 @@
 
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">En el mes actual se registran</p>
+                <h2 class="home-card-title mb-0">{{finishedAgreementsCount}}</h2>
+                <p>acuerdo(s) finalizado(s)</p>
+                <button mat-raised-button class="home-card-button" (click)="redirectToAgreementTracking()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>
@@ -35,10 +35,10 @@
 
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">Para el mes de {{actualMonth | date:'MMMM'}} se registran</p>
+                <h2 class="home-card-title mb-0">{{conciledAgreementsCount}}</h2>
+                <p>acuerdo(s) conciliado(s)</p>
+                <button mat-raised-button class="home-card-button" (click)="redirectToAgreementTracking()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>
@@ -48,30 +48,27 @@
     <div class="row home-top ml-0 mr-0">
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">Total de acuerdos vencidos</p>
+                <h2 class="home-card-title mb-0">{{expiredAgreementsCount}}</h2>
+                <button mat-raised-button class="home-card-button" (click)="redirectToAgreementTracking()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">Acuerdos activos</p>
+                <h2 class="home-card-title mb-0">{{activeAgreementsCount}}</h2>
+                <button mat-raised-button class="home-card-button" (click)="redirectToAgreementTracking()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="col-md-11 mx-auto pb-4 pt-3 material-card home-card text-center ">
-                <p class="mb-0">Acuerdos activos del día</p>
-                <!-- <h2 class="home-card-title mb-0">{{activeErCount}}</h2> -->
-                <h2 class="home-card-title mb-0">3</h2>
-                <button mat-raised-button class="home-card-button" (click)="RedirectPage('')">
+                <p class="mb-0">Acuerdos inactivos</p>
+                <h2 class="home-card-title mb-0">{{inactiveAgreementsCount}}</h2>
+                <button mat-raised-button class="home-card-button" (click)="RedirectPageInactiveAgreements()">
           Detalles <mat-icon>list</mat-icon>
         </button>
             </div>

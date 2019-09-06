@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
@@ -23,6 +23,7 @@ import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetail
 import { utiles } from 'src/environments/utiles';
 import { CatalogModel } from '../common-model/catalog.Model';
 import { AgreementReportService } from 'src/app/services/agreementReport/agreementReport.service';
+import { FeedbackDescriptionModalComponent } from '../feedback-description-modal/feedback-description-modal.component';
 declare var require: any
 
 @Component({
@@ -87,6 +88,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
     search_key: string = 'agreement_status_finished';
     catalogModel: CatalogModel = new CatalogModel();
     nameAgree: string = '';
+    listValidation: any = [];
+    onAdd = new EventEmitter();
+    disabledButtonFinalization: boolean = false;
  
   constructor(private reportService: AgreementReportService, public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService,  private typeOfAgreementService: TypeOfAgreementService,
     private tradeAgreementDetailService: TradeAgreementDetailService, private router: Router) {
@@ -102,8 +106,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
           this.nameAgree = this.agreementDetail.info.name_Agreement;
-
-
+          this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado')?true:false; 
 
           if(this.agreementDetail.info.max_Amount !== 0){
             this.maxAmountToggle = true;
@@ -203,6 +206,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
           this._common._setLoading(false);
+          this.directFinalizationModal();
         },
         () => {
 
@@ -433,24 +437,77 @@ providerSearch(event){
     )
   }
 
-  exportToPdf(): void { 
-    this.saveAgreementHeader(); 
+  finishAgreement(): void {  
+    this.listHeaderAgreement();
+}
 
-      // const reportInfo = {
-      //   infoTable: this.dataTableDetail
-      // }
-      // const navigationExtras: NavigationExtras = {
-      //   queryParams: {
-      //     'reportInfo': JSON.stringify(reportInfo)
-      //   },
-      //   skipLocationChange: true
-      // };
-      // this.router.navigate(['agreementReport'], navigationExtras);
-      // this._common.asignHeaderTitle("Detalle del reporte");
-      this.getPdf();
-    
+  listHeaderAgreement() {
+    var data = new NewAgreementDetailHeaderModel();
+    data.Active = this.agreement_activator;
+    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+      dataQ => {
+       debugger;
+       this._common._setLoading(false);
+       this.listValidation = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All' && dataOpt.pk_Ac_Trade_Agreement == this.headerFile);
+        
+       if(this.listValidation[0].expired_Indicator == true){
+        this.expiryIndicationModal();
+       }else{
+        this.disabledButtonFinalization = true;
+        this.saveAgreementHeader();
+       }
+      },
+      error => { 
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
   }
 
+  public expiryIndicationModal() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'Está finalizando el acuerdo antes de su fecha de vencimiento. Desea continuar? Este proceso no es reversible',
+      btnAccept: 'Aceptar',
+      btnCancel: 'Cancelar',
+      status: 'warning'
+    };
+    const dialogRef = this.matDialog.open(FeedbackDescriptionModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+
+    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
+      if (data) {
+        this.disabledButtonFinalization = true;
+        this.saveAgreementHeader();
+      }else{
+        this.disabledButtonFinalization = false;
+      }
+    });
+  }
+
+  public directFinalizationModal() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'El acuerdo a pasado a estado finalizado',
+      status: 'warning'
+    };
+
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3000);
+  }
+
+
+  exportToPdf(): void {  
+      this.getPdf();  
+  }
   getPdf(): void{
     var generatePDF = new AgreementProductInfoDetailModel();
     generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
@@ -471,19 +528,7 @@ providerSearch(event){
       var FileSaver = require('file-saver');
       FileSaver.saveAs(url, archive);
 
-      const datafailed = {
-        labelTitile: '¡Atención!',
-        icon: 'new_releases',
-        textDescription: 'El estado del acuerdo a pasado a finalizado',
-        status: 'success'
-      };
       this._common._setLoading(false);
-
-      const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-        data: { contactInfo: datafailed },
-        minWidth: '500px', maxWidth: '500px', maxHeight: '250px', minHeight: '250px'
-      });
-    setTimeout(() => dialogRef.close(), 3000);
     }
     catch
     {

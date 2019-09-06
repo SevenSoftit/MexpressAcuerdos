@@ -37,7 +37,7 @@ export class DashboardResumeService {
   * Author:
   * Description:
   --------------------------------------------------------------------*/
-  ListErDashboardResume (resume: HomeModel) {
+  ListAgreementsDashboardResume (resume: HomeModel) {
     const url = this.apiUrl + 'api/dashboardresume/ListDashboardResume';
     return this.http.post<HomeModel[]>(url, resume, httpOptions).pipe(
       tap((product: HomeModel[]) => console.log(''))

@@ -6,13 +6,17 @@
         <div class="row m-0 pl-3">
             <span><mat-icon *ngIf="enableArrow" (click)="goListProductsResume()" class="back-arrow">keyboard_backspace</mat-icon></span>
             <label class="trade-agreements-description">Esta sección  presenta el detalle del seguimiento de un acuerdo.</label>
-            <div class="offset-md-8 col-md-3 buttons-content">
+            <div class="offset-md-6 col-md-5 buttons-content">
                 <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()" *ngIf="enableEntireAgreement">
                     <mat-icon class="mr-2">star</mat-icon>Ver detalle de todo el acuerdo
                 </button>
 
                 <button class="save-button ml-4" mat-raised-button (click)="exportToPdf()" *ngIf="enablePdfExport">
                     <mat-icon class="mr-2">description</mat-icon>Generar acuerdo en Pdf
+                </button>
+
+                <button [disabled]='disabledButtonFinalization' class="save-button ml-4" mat-raised-button (click)="finishAgreement()" *ngIf="enablePdfExport">
+                    <mat-icon class="mr-2">done_all</mat-icon>Finalizar acuerdo
                 </button>
             </div>
             <!--Activador de acuerdos-->

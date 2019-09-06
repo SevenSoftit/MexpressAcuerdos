@@ -69,9 +69,6 @@ export class TradeAgreementsComponent implements OnInit {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-
-
-
     this.listHeaderAgreement();
   }
 

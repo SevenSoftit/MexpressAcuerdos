@@ -3,12 +3,15 @@
     font-family: $opensans-semibold;
     font-size: $font-size-small;
     color: $white;
+    background: $red;
+}
+
+.confirm-modal-accept-button {
     background: $light-blue;
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $white;
     margin-left: 1rem;
-    min-height: 2.5rem;
-    width: 8rem;
-    min-width: 8rem;
-    border-radius: 0.43rem;
 }
 
 .confirm-modal-description {
@@ -54,9 +57,14 @@
     margin: 0 auto;
 }
 
-.success{
+.success {
     color: $light-blue;
 }
-.error{
+
+.error {
     color: $red;
+}
+
+.warning {
+    color: $yellow;
 }
