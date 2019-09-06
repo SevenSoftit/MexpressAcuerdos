@@ -30,9 +30,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             {
 
                 string output = string.Empty;
-                output = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaDestinoReporteAcuerdos"), "Informe_General_Acuerdo" + "_" + list.Name_Agreement + ".pdf");
+                output = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaDestinoReporteAcuerdos"), "Informe_General_Acuerdo" + "_" + list.Name_Agree + ".pdf");
                 FileStream fs = new FileStream(output, FileMode.Create);
-                Document document = new Document(iTextSharp.text.PageSize.A2, 30f, 20f, 50f, 40f);
+                Document document = new Document(iTextSharp.text.PageSize.A2, 20f, 20f, 0f, 40f); //30f, 20f, 0f, 40f
                 PdfWriter pw = PdfWriter.GetInstance(document, fs);
                 document.Open();
                 pw.PageEvent = new HeaderFooter();
@@ -50,16 +50,16 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 pdfTableBlack.AddCell(new Phrase(" "));
 
                 // Insertar imagen en el documento:
-                string imageURL = @"C:\inetpub\wwwroot\Archivos\Acuerdos\Reportes\Recursos\MexpressLogo.jpg";
+                string imageURL = @"C:\inetpub\wwwroot\Archivos\Acuerdos\Reportes\Recursos\Header_Mexpress.png";
                 iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
                 // Reescalar imagen:
-                jpg.ScaleToFit(140f, 120f);
+                jpg.ScaleToFit(1587f, 270f);  //140f, 120f
                 // Agregar espacio antes de la imagen:
-                jpg.SpacingBefore = 10f;
+                jpg.SpacingBefore = 0f;//10f;
                 // Agregar espacio despues de la imagen:
-                jpg.SpacingAfter = 1f;
+                jpg.SpacingAfter = 2f;
                 //Alineacion de la imagen:
-                jpg.Alignment = Element.ALIGN_RIGHT;
+                jpg.Alignment = Element.ALIGN_CENTER;
                 document.Add(jpg);
 
                 //Tabla para insertar informacion varia del reporte:
@@ -68,7 +68,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 pdfTableVariedInformation.WidthPercentage = 100f;
                 pdfTableVariedInformation.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
 
-                PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: "+list.Name_Agreement, fontVariedInformation));
+                PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: "+list.Name_Agree, fontVariedInformation));
                 cellInfo1.Border = 0;
                 pdfTableVariedInformation.AddCell(cellInfo1);
 
@@ -172,20 +172,20 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     {
         public override void OnEndPage(PdfWriter writer, Document document)
         {
-            // Inicio configuracion Header
-            PdfPTable tbHeader = new PdfPTable(3);
-            tbHeader.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin;
-            tbHeader.DefaultCell.Border = 0;
-            tbHeader.AddCell(new Paragraph());
+            // // Inicio configuracion Header
+            // PdfPTable tbHeader = new PdfPTable(3);
+            // tbHeader.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin;
+            // tbHeader.DefaultCell.Border = 0;
+            // tbHeader.AddCell(new Paragraph());
 
-            PdfPCell _cell = new PdfPCell(new Paragraph("Lista de productos"));
-            _cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            _cell.Border = 0;
-            tbHeader.AddCell(_cell);
+            // PdfPCell _cell = new PdfPCell(new Paragraph("Lista de productos"));
+            // _cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            // _cell.Border = 0;
+            // tbHeader.AddCell(_cell);
 
-            tbHeader.AddCell(new Paragraph());
-            tbHeader.WriteSelectedRows(0, -1, document.LeftMargin, writer.PageSize.GetTop(document.TopMargin) + 40, writer.DirectContent);
-            // Fin configuracion Header
+            // tbHeader.AddCell(new Paragraph());
+            // tbHeader.WriteSelectedRows(0, -1, document.LeftMargin, writer.PageSize.GetTop(document.TopMargin) + 40, writer.DirectContent);
+            // // Fin configuracion Header
 
             // Inicio configuracion Footer
             PdfPTable tbFooter = new PdfPTable(3);
@@ -193,7 +193,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             tbFooter.DefaultCell.Border = 0;
             tbFooter.AddCell(new Paragraph());
 
-            _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress"));
+             PdfPCell _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress"));
             _cell.HorizontalAlignment = Element.ALIGN_CENTER;
             _cell.Border = 0;
             tbFooter.AddCell(_cell);

@@ -920,6 +920,7 @@ public currencyFormatter = (field: string, data1: object, column: object) => {
     return '₡' + data1['recovery_Amount'];
   }else{
     return '$' + data1['recovery_Amount'];
+
   } 
 }
 
@@ -929,7 +930,6 @@ public currencyFormatterWork = (field: string, data1: object, column: object) =>
   }else{
     return '$' + data1['product_Amount'];
   } 
-
 }
 
 }

@@ -6,6 +6,8 @@ import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetail
 import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -29,6 +31,7 @@ export class TradeAgreementsComponent implements OnInit {
   SearchInfo: any = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
+  disableEdit: boolean = false;
 
   //config for status filter
   public data: object[];
@@ -54,7 +57,7 @@ export class TradeAgreementsComponent implements OnInit {
   }
   //--------------------------------------------------
 
-  constructor(private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
+  constructor(public matDialog: MatDialog, private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
   }
 
   ngOnInit() {
@@ -94,6 +97,7 @@ export class TradeAgreementsComponent implements OnInit {
     Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
 
   }
+
   redirectPageCreateNewAgreement() {
     this.router.navigate(["newTradeAgreements"]);
     this._common.asignHeaderTitle("Nuevo acuerdo comercial");
@@ -282,18 +286,37 @@ export class TradeAgreementsComponent implements OnInit {
 
   viewAgreementDetails(args: any): void {
     let data: any = this.grid.getRowInfo(args.target).rowData;
-    const agreementDet = {
-
-      info: data
+    if (data.agreement_Status_Name != 'Finalizado') {
+      const agreementDet = {
+        info: data
+      }
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          'agreementDet': JSON.stringify(agreementDet)
+        },
+        skipLocationChange: true
+      };
+      this.router.navigate(['newTradeAgreements'], navigationExtras);
+      this._common.asignHeaderTitle("Editar acuerdo");
+    } else {
+        this.agreementFinalizedAlertModal();
     }
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        'agreementDet': JSON.stringify(agreementDet)
-      },
-      skipLocationChange: true
+  }
+
+  public agreementFinalizedAlertModal() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'No puede editar este acuerdo pues ya se encuentra en estado finalizado',
+      status: 'warning'
     };
-    this.router.navigate(['newTradeAgreements'], navigationExtras);
-    this._common.asignHeaderTitle("Editar acuerdo");
+
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3200);
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
@@ -305,7 +328,6 @@ export class TradeAgreementsComponent implements OnInit {
           close: { effect: 'None', duration: 600, delay: 200 }
         }
       }, args.cell as HTMLTableCellElement);
-
     }
   }
 }

@@ -40,7 +40,11 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Currency = "";
             Behavior = "";
             AgreementProductInfoDetailList = new List<Ac_Mtr_Agreement_Product_Info_Detail>();
-            Name_Agreement = "";
+            Name_Agree = "";
+            Agreement_Type_Name = "";
+            Provider_Name = "";
+            Date_Start = Convert.ToDateTime("1900-01-01");
+            Date_Finish = Convert.ToDateTime("1900-01-01");
         }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int64 Pk_Cat_Agreement_Details_Result { get; set; }
@@ -75,6 +79,10 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Name_Currency { get; set; }    
          public String Behavior { get; set; } 
          public List<Ac_Mtr_Agreement_Product_Info_Detail> AgreementProductInfoDetailList { get; set; }
-         public String Name_Agreement { get; set; } 
+         public String Name_Agree { get; set; } 
+         public String Agreement_Type_Name { get; set; }
+         public String Provider_Name { get; set; }
+         public DateTime Date_Start { get; set; }
+         public DateTime Date_Finish { get; set; }
     }
 }

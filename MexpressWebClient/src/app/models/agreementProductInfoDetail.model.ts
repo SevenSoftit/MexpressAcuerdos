@@ -27,13 +27,16 @@ export class AgreementProductInfoDetailModel {
     Client_Name: string;
     Date_Process: Date;
 
-   
     Id_Currency: string;
     Active: Boolean;
     Name_Currency: string;
     Behavior: string;
     AgreementProductInfoDetailList : Array<AgreementProductInfoDetailModel>;
-    Name_Agreement: string;
+    Name_Agree: string;
+    Agreement_Type_Name: string;
+    Provider_Name: string;
+    Date_Start: Date;
+    Date_Finish: Date;
 
     constructor() {
         this.Pk_Ac_Trade_Agreement = 0;
@@ -69,6 +72,10 @@ export class AgreementProductInfoDetailModel {
         this.Name_Currency = '';
         this.Behavior = '';
         this.AgreementProductInfoDetailList = [];
-        this.Name_Agreement = '';
+        this.Name_Agree = '';
+        this.Agreement_Type_Name = '';
+        this.Provider_Name = '';
+        this.Date_Start = new Date();
+        this.Date_Finish = new Date();
     }
 }

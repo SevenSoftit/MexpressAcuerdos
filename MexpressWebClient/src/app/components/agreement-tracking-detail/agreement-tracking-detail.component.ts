@@ -446,10 +446,9 @@ providerSearch(event){
     data.Active = this.agreement_activator;
     this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
       dataQ => {
-       debugger;
+
        this._common._setLoading(false);
        this.listValidation = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All' && dataOpt.pk_Ac_Trade_Agreement == this.headerFile);
-        
        if(this.listValidation[0].expired_Indicator == true){
         this.expiryIndicationModal();
        }else{
@@ -468,14 +467,14 @@ providerSearch(event){
     const dataSuccess = {
       icon: 'warning',
       labelTitile: '¡Atención!',
-      textDescription: 'Está finalizando el acuerdo antes de su fecha de vencimiento. Desea continuar? Este proceso no es reversible',
+      textDescription: 'Está finalizando el acuerdo antes de su fecha de vencimiento. ¿Desea continuar? Este proceso no es reversible',
       btnAccept: 'Aceptar',
       btnCancel: 'Cancelar',
       status: 'warning'
     };
     const dialogRef = this.matDialog.open(FeedbackDescriptionModalComponent, {
       data: { contactInfo: dataSuccess },
-      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+      minWidth: '480px', maxWidth: '480px', maxHeight: '340px', minHeight: '308px'
     });
 
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
@@ -511,7 +510,11 @@ providerSearch(event){
   getPdf(): void{
     var generatePDF = new AgreementProductInfoDetailModel();
     generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
-    generatePDF.Name_Agreement = this.nameAgree;
+    generatePDF.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
+    generatePDF.Name_Agree = this.nameAgree;
+    generatePDF.Provider_Name = this.dataTableDetail[0].provider_Name;
+    generatePDF.Date_Start = this.dataTableDetail[0].date_Start;
+    generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
     this.reportService.saveReport(generatePDF).subscribe(
       dataS => {
           var url = dataS;
