@@ -71,7 +71,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: "+list.Name_Agree, fontVariedInformation));
                 cellInfo1.Border = 0;
                 pdfTableVariedInformation.AddCell(cellInfo1);
-
+                
                 document.Add(pdfTableVariedInformation);
                 document.Add(pdfTableBlack);
 
