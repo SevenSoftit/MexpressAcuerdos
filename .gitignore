@@ -58,3 +58,4 @@ Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpres
 *.stackdump
 *.json
 *.json
+*.cache

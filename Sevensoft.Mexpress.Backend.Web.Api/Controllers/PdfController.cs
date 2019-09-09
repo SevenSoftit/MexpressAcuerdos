@@ -39,9 +39,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
 
                 BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
                 Font fontVariedInformation = new Font(bf, 16, 0, BaseColor.BLACK);
-                Font fontTextTittle = new Font(bf, 18, 1, BaseColor.BLUE);
-                Font fontTextE = new Font(bf, 14, 1, BaseColor.BLACK);
-                Font fontTextT = new Font(bf, 12, 0, BaseColor.BLACK);
+                Font fontTextTittle = new Font(bf, 24, 1, new BaseColor(0, 173, 239));
+                Font fontTextColumnHeader = new Font(bf, 14, 1, BaseColor.WHITE);
+                Font fontTextTable = new Font(bf, 12, 0, BaseColor.BLACK);
 
                 //Tabla para insertar espacios en blanco
                 PdfPTable pdfTableBlack = new PdfPTable(1);
@@ -70,7 +70,28 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
 
                 PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: "+list.Name_Agree, fontVariedInformation));
                 cellInfo1.Border = 0;
+                cellInfo1.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo1);
+    
+                PdfPCell cellInfo2 = new PdfPCell(new Paragraph("Tipo de acuerdo: "+list.Agreement_Type_Name, fontVariedInformation));
+                cellInfo2.Border = 0;
+                cellInfo2.ExtraParagraphSpace = 10;
+                pdfTableVariedInformation.AddCell(cellInfo2);
+
+                PdfPCell cellInfo3 = new PdfPCell(new Paragraph("Proveedor: "+list.Provider_Name, fontVariedInformation));
+                cellInfo3.Border = 0;
+                cellInfo3.ExtraParagraphSpace = 10;
+                pdfTableVariedInformation.AddCell(cellInfo3);
+
+                PdfPCell cellInfo4 = new PdfPCell(new Paragraph("Fecha inicial del acuerdo: "+list.Date_Start, fontVariedInformation));
+                cellInfo4.Border = 0;
+                cellInfo4.ExtraParagraphSpace = 10;
+                pdfTableVariedInformation.AddCell(cellInfo4);
+
+                PdfPCell cellInfo5 = new PdfPCell(new Paragraph("Fecha de finalización del acuerdo: "+list.Date_Finish, fontVariedInformation));
+                cellInfo5.Border = 0;
+                cellInfo5.ExtraParagraphSpace = 10;
+                pdfTableVariedInformation.AddCell(cellInfo5);
                 
                 document.Add(pdfTableVariedInformation);
                 document.Add(pdfTableBlack);
@@ -97,57 +118,57 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 foreach (string val in oddArray)
                 {
                     PdfPCell cell = new PdfPCell();
-                    cell = new PdfPCell(new Paragraph(val, fontTextE));
+                    cell = new PdfPCell(new Paragraph(val, fontTextColumnHeader));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell.BackgroundColor = new BaseColor(31, 136, 176); 
                     table.AddCell(cell);
                 }
                 foreach (var item in list.AgreementProductInfoDetailList)
 
                 {
                     PdfPCell cell = new PdfPCell();
-
-                    cell = new PdfPCell(new Paragraph(item.Product_Id, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Product_Id, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Product_Name, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Product_Name, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Name_Store, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Name_Store, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Name_Vendor, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Name_Vendor, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Client_Name, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Client_Name, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Name_Document, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Name_Document, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Bill_Id.ToString(), fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Bill_Id.ToString(), fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Product_Serie, fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Product_Serie, fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Product_Quantity.ToString(), fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Product_Quantity.ToString(), fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
 
-                    cell = new PdfPCell(new Paragraph(item.Product_Cost.ToString(), fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Product_Cost.ToString(), fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Paragraph(item.Date_Invoice.ToString(), fontTextT));
+                    cell = new PdfPCell(new Paragraph(item.Date_Invoice.ToString(), fontTextTable));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
                 }
@@ -172,6 +193,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     {
         public override void OnEndPage(PdfWriter writer, Document document)
         {
+                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+                Font fontTextFooter = new Font(bf, 14, 1, BaseColor.BLACK);
+
             // // Inicio configuracion Header
             // PdfPTable tbHeader = new PdfPTable(3);
             // tbHeader.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin;
@@ -193,12 +217,12 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             tbFooter.DefaultCell.Border = 0;
             tbFooter.AddCell(new Paragraph());
 
-             PdfPCell _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress"));
+             PdfPCell _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress", fontTextFooter));
             _cell.HorizontalAlignment = Element.ALIGN_CENTER;
             _cell.Border = 0;
             tbFooter.AddCell(_cell);
 
-            _cell = new PdfPCell(new Paragraph("Página " + writer.PageNumber));
+            _cell = new PdfPCell(new Paragraph("Página " + writer.PageNumber, fontTextFooter));
             _cell.HorizontalAlignment = Element.ALIGN_RIGHT;
             _cell.Border = 0;
             tbFooter.AddCell(_cell);
