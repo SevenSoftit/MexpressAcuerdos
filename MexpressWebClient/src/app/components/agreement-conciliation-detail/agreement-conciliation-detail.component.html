@@ -1,0 +1,122 @@
+<div class="container-fluid p-0">
+    <div class="create-agreement-sector">
+        <div class="row  ml-0 mr-0 ">
+            <h5 class="tittle-agreement">Detalle de la conciliación del acuerdo</h5>
+        </div>
+        <div class="row m-0 pl-3">
+            <div class="col-md-5">
+                <label class="trade-agreements-description">En esta sección se puede ver el detalle de la conciliación del acuerdo seleccionado.</label>
+            </div>
+            <div class="col-md-6 buttons-content">
+
+                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
+                    <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
+                </button>
+            </div>
+            <!--Activador de acuerdos-->
+            <div class="col-md-1">
+                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Activar</label>
+                <mat-slide-toggle disabled id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                </mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
+        <div class="row mr-0 ml-0 agreement-top">
+            <!-- Tipo de acuerdo -->
+            <div class="col-md-2">
+                <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
+                <mat-select disabled id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
+                    <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
+                        {{typeAgreement.name_Agreement}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <!-- Nombre del acuerdo-->
+            <div class="col-md-3">
+                <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
+                    placeholder="Nombre del acuerdo">
+            </div>
+            <!--Proveedor-->
+            <div class="col-md-3">
+                <label for="provider" class="new-agreement-label-input">Proveedor</label>
+                <mat-select disabled id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
+                    [threshold]="percentage" [complete]="offset === total">
+                    <mat-option disabled>
+                        <mat-form-field class="example-full-width" floatLabel="never">
+                            <mat-icon class="icon-align">search</mat-icon>
+                            <input matInput placeholder="Buscar" type="text" #myInput autofocus (keyup)="providerSearch($event)">
+                        </mat-form-field>
+                    </mat-option>
+                    <mat-option *ngFor="let provider of options$ | async" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
+                        {{provider.name_Provider}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <!-- Fecha Inicio -->
+            <div class="col-md-2 custom-padding-top">
+                <div class="form-group text date-picker-custom">
+                    <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Inicio</label>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
+                        readonly>
+                    <mat-datepicker-toggle disabled matSuffix [for]="startDatePicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                </div>
+            </div>
+            <!-- Fecha Fin -->
+            <div class="col-md-2 custom-padding-top">
+                <div class="form-group text date-picker-custom">
+                    <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Fin</label>
+                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
+                    <mat-datepicker-toggle disabled matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-0 mr-0">
+            <!--Descripción-->
+            <div class="col-md-3">
+                <label for="description" class="new-agreement-label-input">Descripción</label>
+                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+            </div>
+            <!--Muestra el input de email-->
+            <div class="col-md-2">
+                <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
+                <input readonly type="email" [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
+                    placeholder="Correo">
+            </div>
+            <!--Activa input de monto maximo-->
+            <div class="col-md-2">
+                <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
+                <mat-slide-toggle disabled id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
+                </mat-slide-toggle>
+            </div>
+            <!--Muestra el input de monto maximo-->
+            <div class="col-md-1" *ngIf="showAmountInput">
+                <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
+                <input readonly type="number" min="0" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
+            </div>
+            <!--Activa todos los productos-->
+            <div class="col-md-2">
+                <label for="all_products" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Todos los articulos</label>
+                <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator" (change)="allProductsChange()">
+                </mat-slide-toggle>
+            </div>
+            <!--Muestra las metas-->
+            <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
+                <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
+                <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
+            </div>
+
+        </div>
+    </form>
+
+    <div *ngIf="showGoals" class="goals-info-content">
+        <h2 class="goals-info">El acuerdo comercial esta siendo trabajado con metas.</h2>
+    </div>
+</div>

@@ -308,7 +308,7 @@ export class TradeAgreementsComponent implements OnInit {
     const dataSuccess = {
       icon: 'warning',
       labelTitile: '¡Atención!',
-      textDescription: 'No puede editar este acuerdo pues ya se encuentra en estado finalizado',
+      textDescription: 'No puede editar este acuerdo pues ya se encuentra en estado finalizado. Favor, pasar a la sección de conciliación',
       status: 'warning'
     };
 
@@ -316,7 +316,7 @@ export class TradeAgreementsComponent implements OnInit {
       data: { contactInfo: dataSuccess },
       minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
     });
-    setTimeout(() => dialogRef.close(), 3200);
+    setTimeout(() => dialogRef.close(), 4000);
   }
 
   tooltip(args: QueryCellInfoEventArgs) {

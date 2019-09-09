@@ -29,7 +29,7 @@ const routes: Routes = [
       {path: 'agreementTrackingDetail', loadChildren: './components/agreement-tracking-detail/agreement-tracking-detail.module#AgreementTrackingDetailModule'},
       {path: 'agreementReport', loadChildren: './components/agreement-report/agreement-report.module#AgreementReportModule'},
       {path: 'agreementConciliation', loadChildren: './components/agreement-conciliation/agreement-conciliation.module#AgreementConciliationModule'},
-      // {path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule'}
+      {path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule'}
     ]
   }, 
 

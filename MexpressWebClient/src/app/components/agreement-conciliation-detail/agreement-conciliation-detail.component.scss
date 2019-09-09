@@ -1,0 +1,254 @@
+@import "../../../styles.scss";
+.tittle-agreement {
+    font-size: $font-size-medium;
+    text-align: left;
+    font-family: $opensans-bold;
+    color: $light-blue;
+}
+
+.trade-agreements-description {
+    font-family: $opensans-semibold;
+}
+
+.agreement-top-header {
+    margin-top: 2vh;
+}
+
+.agr-activator {
+    background: #E0E0E0;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+}
+
+.agr-activator-lbl {
+    display: block;
+}
+
+.agreement-scroll {
+    height: 85vh!important;
+}
+
+.create-agreement-sector {
+    background: #eeeeee;
+    border-radius: 0rem;
+    padding: 1.3rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+// .new-agreement-form-top {
+//     margin-top: 3vh;
+// }
+// .agreement-top {
+//     margin-top: 2vh;
+// }
+.new-agreement-label-input {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: #000;
+}
+
+.new-agreement-form-input {
+    background: $backgroud-input;
+    border-radius: 0.25rem;
+    color: $dark-gray !important;
+}
+
+.new-agreement-select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $backgroud-input;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.new-agreement-table-top {
+    margin-top: 2vh;
+}
+
+.new-agreement-doc-errors {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $red;
+    margin-left: 4rem;
+    margin-top: 1.2rem;
+}
+
+.new-agreement-buttons-top {
+    margin-top: 1vh;
+}
+
+.excel-button {
+    font-family: "Open Sans SemiBold";
+    font-size: 0.8rem;
+    color: #F9F9F9;
+    background-color: $light-blue;
+    border-color: $light-blue;
+    border-radius: 0.437rem;
+    min-width: 7rem;
+}
+
+.new-trade-agreement-modal-date-input {
+    font-family: $opensans-semibold;
+    display: inline-block;
+    width: 98%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $black;
+    background-color: $light-gray-softer;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    text-align: center;
+}
+
+.e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background: $light-blue !important;
+}
+
+.new-agreement-slide-toggle {
+    width: fit-content;
+    display: block;
+    margin: 0.35rem auto auto;
+}
+
+::ng-deep .e-pager .e-currentitem {
+    background: $light-blue;
+}
+
+::ng-deep .e-pager .e-currentitem:hover {
+    background: $light-blue;
+}
+
+::ng-deep .e-grid .e-content {
+    overflow-x: hidden !important;
+}
+
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+    font-family: $opensans-semibold !important;
+    font-size: $font-size-small!important;
+    color: $white!important;
+    background-color: $light-blue!important;
+    border-color: $light-blue!important;
+    border-radius: 0.437rem!important;
+    min-width: 7rem!important;
+}
+
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+    color: $white!important;
+}
+
+.new-trade-agreement-lbl-input {
+    display: block;
+}
+
+::ng-deep .date-picker-custom .mat-datepicker-toggle,
+.mat-datepicker-content .mat-calendar-next-button,
+.mat-datepicker-content .mat-calendar-previous-button {
+    margin-left: -2.35rem!important;
+}
+
+.new-trade-agr-toogle-lbl {
+    justify-content: center;
+}
+
+.disabled_button {
+    background-color: $light-gray !important;
+    border-color: $light-gray !important;
+}
+
+.custom-padding-top {
+    padding-top: 0.3rem !important;
+}
+
+.begin-agreement-creation {
+    font-family: $opensans-bold;
+    color: #bdbdbd;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10vh;
+}
+
+//#region tableStyles
+::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
+    color: $light-blue !important;
+}
+
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
+.e-grid .e-detailheadercell {
+    background-color: #eee !important;
+}
+
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
+    font-family: $opensans-bold !important;
+    font-size: $font-size-small!important;
+    white-space: normal !important;
+}
+
+::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background-color: $light-blue !important
+}
+
+//#endregion tableStyles
+.new-trade-agreement-show-goals-icon {
+    color: $light-blue-dark;
+}
+
+.new-trade-show-goals-content {
+    display: flex;
+    align-items: center;
+}
+
+.new-trade-agreement-detail-goals-lbl {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.new-trade-agreement-detail-goals-lbl:hover {
+    color: $light-blue;
+}
+
+.icon-align {
+    float: right;
+}
+
+.new-trade-agreement-detail-button {
+    display: inline-block;
+    justify-content: center;
+}
+
+.goals-info {
+    font-family: $opensans-bold;
+    font-size: 2.4rem;
+    color: #bdbdbd;
+    text-align: center;
+}
+
+.goals-info-content {
+    border: 1px solid #1F88B0;
+    margin: 4vh 2rem 0 2rem;
+    /* padding: 0vh; */
+    border-radius: 0.8rem;
+    background: rgba(240, 240, 240, 0.5);
+}
+
+.buttons-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
