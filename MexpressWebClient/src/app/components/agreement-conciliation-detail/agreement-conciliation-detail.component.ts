@@ -94,8 +94,8 @@ export class AgreementConciliationDetailComponent implements OnInit {
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
-          
-          if(this.agreementDetail.info.max_Amount !== 0){
+             
+          if(this.agreementDetail.info.max_Amount !== 0){ 
               this.maxAmountToggle = true;
               this.showAmountInput = true;
           }

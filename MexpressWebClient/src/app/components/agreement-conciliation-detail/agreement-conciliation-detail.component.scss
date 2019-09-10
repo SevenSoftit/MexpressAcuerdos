@@ -20,10 +20,9 @@
     border-radius: 0.8rem;
 }
 
-.agr-activator-lbl {
-    display: block;
-}
-
+// .agr-activator-lbl {
+//     display: block;
+// }
 .agreement-scroll {
     height: 85vh!important;
 }
@@ -251,4 +250,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.agreement-top {
+    margin-top: 2vh;
 }

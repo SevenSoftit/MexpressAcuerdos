@@ -509,12 +509,22 @@ providerSearch(event){
   }
   getPdf(): void{
     var generatePDF = new AgreementProductInfoDetailModel();
+    debugger;
+    if(this.dataTableDetail.length != 0){
     generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
     generatePDF.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
     generatePDF.Name_Agree = this.nameAgree;
     generatePDF.Provider_Name = this.dataTableDetail[0].provider_Name;
     generatePDF.Date_Start = this.dataTableDetail[0].date_Start;
     generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
+  }else{
+    generatePDF.AgreementProductInfoDetailList = [];
+    generatePDF.Agreement_Type_Name = '';
+    generatePDF.Name_Agree = this.nameAgree;
+    generatePDF.Provider_Name = '';
+    generatePDF.Date_Start = new Date();
+    generatePDF.Date_Finish = new Date();
+    }
     this.reportService.saveReport(generatePDF).subscribe(
       dataS => {
           var url = dataS;

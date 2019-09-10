@@ -12,6 +12,10 @@
                 <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
                     <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
                 </button>
+
+                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListCreditNotesModal()" mat-raised-button>
+                    <mat-icon class="mr-2">note</mat-icon>Mostrar notas de crédito
+                </button>
             </div>
             <!--Activador de acuerdos-->
             <div class="col-md-1">
@@ -23,7 +27,7 @@
     </div>
 
     <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
-        <div class="row mr-0 ml-0 agreement-top">
+        <div class="row mr-0 ml-0">
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
@@ -92,7 +96,7 @@
             </div>
             <!--Activa input de monto maximo-->
             <div class="col-md-2">
-                <label for="max_amount" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Monto Máximo</label>
+                <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máximo</label>
                 <mat-slide-toggle disabled id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
                 </mat-slide-toggle>
             </div>
@@ -103,7 +107,7 @@
             </div>
             <!--Activa todos los productos-->
             <div class="col-md-2">
-                <label for="all_products" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Todos los articulos</label>
+                <label for="all_products" class="new-agreement-label-input w-100 text-center">Todos los articulos</label>
                 <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator" (change)="allProductsChange()">
                 </mat-slide-toggle>
             </div>
@@ -112,7 +116,13 @@
                 <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
             </div>
-
+        </div>
+        <div class="row ml-0 mr-0 agreement-top">
+            <!--Muestra el input de monto recuperado-->
+            <div class="col-md-2">
+                <label for="recovery_amount" class="new-agreement-label-input">Monto recuperado</label>
+                <input readonly type="number" class="form-control new-agreement-form-input" id="recovery_amount" aria-describedby="Monto recuperado" [(ngModel)]="recovery_amount" placeholder="Monto recuperado">
+            </div>
         </div>
     </form>
 
