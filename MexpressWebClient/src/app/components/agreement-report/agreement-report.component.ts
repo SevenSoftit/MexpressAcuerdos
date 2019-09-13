@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridComponent, QueryCellInfoEventArgs } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
-import { AgreementReportService } from 'src/app/services/agreementReport/agreementReport.service';
-import { AgreementProductInfoDetailModel } from 'src/app/models/agreementProductInfoDetail.model';
-import { CommonService } from 'src/app/services/common/common.service';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { MatDialog } from '@angular/material';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { AgreementReportService } from 'src/app/shared/services/agreementReport/agreementReport.service';
 
 @Component({
   selector: 'app-agreement-report',

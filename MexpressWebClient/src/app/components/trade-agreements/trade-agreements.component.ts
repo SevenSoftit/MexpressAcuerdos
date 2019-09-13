@@ -1,13 +1,13 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { CommonService } from 'src/app/services/common/common.service';
 import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
-import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { MatDialog } from '@angular/material';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -72,7 +72,6 @@ export class TradeAgreementsComponent implements OnInit {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
-    this.listHeaderAgreement();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -84,6 +83,7 @@ export class TradeAgreementsComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
+    this.listHeaderAgreement();
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -285,6 +285,7 @@ export class TradeAgreementsComponent implements OnInit {
   }
 
   viewAgreementDetails(args: any): void {
+    this._common._setLoading(true);
     let data: any = this.grid.getRowInfo(args.target).rowData;
     if (data.agreement_Status_Name != 'Finalizado') {
       const agreementDet = {
@@ -299,6 +300,7 @@ export class TradeAgreementsComponent implements OnInit {
       this.router.navigate(['newTradeAgreements'], navigationExtras);
       this._common.asignHeaderTitle("Editar acuerdo");
     } else {
+      this._common._setLoading(false);
         this.agreementFinalizedAlertModal();
     }
   }
@@ -320,7 +322,7 @@ export class TradeAgreementsComponent implements OnInit {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    if (args.column.field === "provider_Name") {
+    if (args.column.field === "provider_Name" || args.column.field === "name_Agreement") {
       let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),
         animation: {

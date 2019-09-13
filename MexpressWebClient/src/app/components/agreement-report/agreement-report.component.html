@@ -10,7 +10,7 @@
     <div class="row new-agreement-table-top ml-0 mr-0">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [frozenColumns]="2" allowScrolling='true' [dataSource]='dataTableReport' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
-                (dataBound)="dataBound($event)" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
+                (dataBound)="dataBound()" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
                     <e-column field='product_Id' headerText='Código' textAlign='Center' width='120'></e-column>
                     <e-column field='product_Name' headerText='Nombre artículo' textAlign='Center' width='180'></e-column>

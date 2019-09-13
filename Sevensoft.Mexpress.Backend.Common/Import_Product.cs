@@ -55,6 +55,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Email = "";
             Status_Option = false;
             Expired_Indicator = false;
+            Type_Agreement_Name = "";
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -105,6 +106,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Email { get; set; }
          public bool Status_Option { get; set; }
          public bool Expired_Indicator { get; set; }
+         public String Type_Agreement_Name { get; set; }
         
         public static implicit operator long(Import_Product v)
         {

@@ -1,12 +1,12 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { CommonService } from 'src/app/services/common/common.service';
-import { GridComponent, ForeignKeyService, FilterService } from '@syncfusion/ej2-angular-grids';
+import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
-import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
 
 
 
@@ -31,49 +31,49 @@ export class AgreementTrackingComponent implements OnInit {
   // public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
   //dataProvider: any;
-  dataFilter : any = [];
+  dataFilter: any = [];
   agreementOption: any;
   status: boolean = true;
+  public tooltipp: Tooltip;
 
 
-//config for status filter
-public data: object[];
-public height = '220px';
-public dropdata: string[];
-public onChange(args: any): void {
-  if (args.value !== 'All'){
-    this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
-  } else {
-    this.grid.removeFilteredColsByField('agreement_Status_Name');
+  //config for status filter
+  public data: object[];
+  public height = '220px';
+  public dropdata: string[];
+  public onChange(args: any): void {
+    if (args.value !== 'All') {
+      this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
+    } else {
+      this.grid.removeFilteredColsByField('agreement_Status_Name');
+    }
   }
-    
-}
 
-// config for provider filter
-public dataProvider: object[];
-public dropdataProvider: string[];
-public onChangeProvider(args: any): void {
-  if (args.value !== 'All'){
-    this.grid.filterByColumn('provider_Name', 'equal', args.value);
-  } else {
-    this.grid.removeFilteredColsByField('provider_Name');
+  // config for provider filter
+  public dataProvider: object[];
+  public dropdataProvider: string[];
+  public onChangeProvider(args: any): void {
+    if (args.value !== 'All') {
+      this.grid.filterByColumn('provider_Name', 'equal', args.value);
+    } else {
+      this.grid.removeFilteredColsByField('provider_Name');
+    }
   }
-}
 
   constructor(private activated_route: ActivatedRoute, private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
-    this.activated_route.queryParams.subscribe(params => {     
+    this.activated_route.queryParams.subscribe(params => {
       var parameters = params["active_Agreements"];
 
-     if(parameters != undefined){
-      this.agreementOption = JSON.parse(parameters);
-      if (this.agreementOption.info !== null && this.agreementOption.info !== undefined) {
-        this.status = this.agreementOption.info;
-        this.listHeaderAgreement(this.status);
-        this.activeAgreements = false;
-        this.inactiveAgreements = true;
+      if (parameters != undefined) {
+        this.agreementOption = JSON.parse(parameters);
+        if (this.agreementOption.info !== null && this.agreementOption.info !== undefined) {
+          this.status = this.agreementOption.info;
+          this.listHeaderAgreement(this.status);
+          this.activeAgreements = false;
+          this.inactiveAgreements = true;
+        }
       }
-    }
-    });  
+    });
   }
 
   ngOnInit() {
@@ -82,12 +82,14 @@ public onChangeProvider(args: any): void {
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     // this.toolbar = ['Search'];
-    
+
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
+
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
+
 
   @HostListener('window:resize', ['$event'])
   getScreenSize() {
@@ -138,10 +140,9 @@ public onChangeProvider(args: any): void {
 
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         this.dataFilter = dataQ;
-        this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
-        this.dropdataProvider  = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];
-        
-
+        this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
+        this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    
+          
         this._common._setLoading(false);
       },
       error => {
@@ -150,8 +151,6 @@ public onChangeProvider(args: any): void {
       });
   }
 
-
- 
 
   /*******************************************************
 * Author: Gustavo ZC
@@ -188,26 +187,11 @@ public onChangeProvider(args: any): void {
       dataQ => {
         this.dropdata = [];
         this.dropdataProvider = [];
-        
+
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
-        this._common._setLoading(false);
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
-
-  behaviorStatus(evt: any) {
-    var data = new NewAgreementDetailHeaderModel();
-    data.Fk_Status_Agreement = evt.value;
-    data.Active = this.isActiveAgreement;
-    this.tradeAgreementDetailService.ListHeaderAgreementDetailStatus(data).subscribe(
-      dataQ => {
-        this.dataTable = dataQ;
         this._common._setLoading(false);
       },
       error => {
@@ -242,7 +226,7 @@ public onChangeProvider(args: any): void {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    if (args.column.field === "provider_Name") {
+    if (args.column.field === "provider_Name" || args.column.field === "name_Agreement") {
       let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),
         animation: {
@@ -250,8 +234,9 @@ public onChangeProvider(args: any): void {
           close: { effect: 'None', duration: 600, delay: 200 }
         }
       }, args.cell as HTMLTableCellElement);
-
     }
   }
+
+
 
 }

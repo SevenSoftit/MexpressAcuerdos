@@ -9,11 +9,11 @@
             </div>
             <div class="col-md-6 buttons-content">
 
-                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
+                <button class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
                     <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
                 </button>
 
-                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListCreditNotesModal()" mat-raised-button>
+                <button class="excel-button float-right mr-3" (click)="openListCreditNotesModal()" mat-raised-button>
                     <mat-icon class="mr-2">note</mat-icon>Mostrar notas de crédito
                 </button>
             </div>
@@ -31,7 +31,7 @@
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
-                <mat-select disabled id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
+                <mat-select disabled id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" class="new-agreement-select text-center" placeholder="Tipo de acuerdo">
                     <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
                         {{typeAgreement.name_Agreement}}
                     </mat-option>
@@ -40,13 +40,13 @@
             <!-- Nombre del acuerdo-->
             <div class="col-md-3">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
-                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
+                <input readonly type="text" class="form-control new-agreement-form-input" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
                     placeholder="Nombre del acuerdo">
             </div>
             <!--Proveedor-->
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select disabled id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
+                <mat-select disabled id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
                     [threshold]="percentage" [complete]="offset === total">
                     <mat-option disabled>
                         <mat-form-field class="example-full-width" floatLabel="never">
@@ -64,7 +64,7 @@
                 <div class="form-group text date-picker-custom">
                     <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Inicio</label>
-                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" (dateChange)="dateChange()"
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" (dateChange)="dateChange()"
                         readonly>
                     <mat-datepicker-toggle disabled matSuffix [for]="startDatePicker">
                     </mat-datepicker-toggle>
@@ -76,7 +76,7 @@
                 <div class="form-group text date-picker-custom">
                     <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Fin</label>
-                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" (dateChange)="dateChange()" readonly>
+                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" (dateChange)="dateChange()" readonly>
                     <mat-datepicker-toggle disabled matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </div>
@@ -86,12 +86,12 @@
             <!--Descripción-->
             <div class="col-md-3">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
-                <input readonly type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+                <input readonly type="text" class="form-control new-agreement-form-input"  formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
             </div>
             <!--Muestra el input de email-->
             <div class="col-md-2">
                 <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
-                <input readonly type="email" [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
+                <input readonly type="email" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
                     placeholder="Correo">
             </div>
             <!--Activa input de monto maximo-->
@@ -108,7 +108,7 @@
             <!--Activa todos los productos-->
             <div class="col-md-2">
                 <label for="all_products" class="new-agreement-label-input w-100 text-center">Todos los articulos</label>
-                <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator" (change)="allProductsChange()">
+                <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator">
                 </mat-slide-toggle>
             </div>
             <!--Muestra las metas-->
@@ -121,7 +121,7 @@
             <!--Muestra el input de monto recuperado-->
             <div class="col-md-2">
                 <label for="recovery_amount" class="new-agreement-label-input">Monto recuperado</label>
-                <input readonly type="number" class="form-control new-agreement-form-input" id="recovery_amount" aria-describedby="Monto recuperado" [(ngModel)]="recovery_amount" placeholder="Monto recuperado">
+                <input readonly type="number" class="form-control new-agreement-form-input" id="recovery_amount" aria-describedby="Monto recuperado" [(ngModel)]="recovery_amount" [ngModelOptions]="{standalone: true}" placeholder="Monto recuperado">
             </div>
         </div>
     </form>

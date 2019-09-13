@@ -1,26 +1,23 @@
-import { Component, OnInit, HostListener, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IEditCell } from '@syncfusion/ej2-grids';
-import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
-import { CommonService } from 'src/app/services/common/common.service';
 import { MoneyModel } from 'src/app/models/money.model';
-import { AllMoneyService } from 'src/app/services/allMoney/allMoney.service';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
-import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
-import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
-import { ProviderService } from 'src/app/services/TaProvider/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
-import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
-import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
-import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
-import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
+import { CatalogModel } from 'src/app/models/catalog.Model';
+import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
+import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-loader.component';
+import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { AllMoneyService } from 'src/app/shared/services/allMoney/allMoney.service';
+import { TypeOfAgreementService } from 'src/app/shared/services/typeOfAgreement/typeOfAgreement.service';
+import { ProviderService } from 'src/app/shared/services/TaProvider/provider.service';
+
 
 
 
@@ -36,9 +33,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
   screenHeight: any;
   screenWidth: any;
   public moneyTypeParams: IEditCell;
-  private typeContacElem: HTMLElement;
-  private typeContactObj: DropDownList;
-  listsMoney: { [key: string]: Object }[] = [];
   typeOfAgreementList: any;
   providerList: any = [];
   headerFile: number = 0;
@@ -52,11 +46,8 @@ export class AgreementConciliationDetailComponent implements OnInit {
   allproducts_activator = false;
   dateProcess: Date = new Date();
   dateReprocess: Date = new Date();
-  enableEvidence: boolean = false;
   listHeader: any = [];
   catalogModel: CatalogModel = new CatalogModel();
-  search_key: string = 'agreement_status_in_process';
-  fk_Status_Agreement: number = 0;
   agreementDetail: any;
   fk_Glb_Mtr_Organization: number = 1;
   option = true;
@@ -75,13 +66,14 @@ export class AgreementConciliationDetailComponent implements OnInit {
   maxAmount: number = 0;
   showAmountInput = false;
   emailNotification: string = '';
+  recovery_amount: number = 0;
 
   constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
     this._common._setLoading(true);
-    this.activated_route.queryParams.subscribe(params => {
+    this.activated_route.queryParams.subscribe(params => {  
       var parameters = params["agreementDet"];
 
       if (parameters != undefined) {
@@ -99,15 +91,14 @@ export class AgreementConciliationDetailComponent implements OnInit {
               this.maxAmountToggle = true;
               this.showAmountInput = true;
           }
-          this.listAgreement(agreement);
         }
       }
     });
   }
 
   ngOnInit() {
+    this._common._setLoading(true);
     this.getScreenSize();
-    this.getKeyStatus();
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
@@ -127,37 +118,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
-
-    this.listProvider(this.option);  
-    this.listMoney();
-
-
-    this.moneyTypeParams = {
-      params: { popupHeight: '300px' },
-      create: () => {
-        this.typeContacElem = document.createElement("input");
-        return this.typeContacElem;
-      },
-      read: () => {
-        return this.typeContactObj.value;
-      },
-      destroy: () => {
-        this.typeContactObj.destroy();
-      },
-      write: () => {
-        this.typeContactObj = new DropDownList({
-          dataSource: this.listsMoney,
-
-          fields: { value: "name_Currency", text: "name_Currency" },
-          enabled: true,
-          placeholder: "Seleccione la moneda",
-          floatLabelType: "Never"
-        });
-        this.typeContactObj.appendTo(this.typeContacElem);
-        this.typeContactObj.dataBind();
-      }
-    };
-    this.fillFormAgreementDetail();
   }
 
   fillFormAgreementDetail() {
@@ -176,7 +136,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
       this.allproducts_activator = this.agreementDetail.info.all_Products;
-      this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount= this.agreementDetail.info.max_Amount;
@@ -186,9 +145,11 @@ export class AgreementConciliationDetailComponent implements OnInit {
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
+        emailNotification: ''
       });
 
     }
+    this.listProvider(this.option); 
   }
 
   @HostListener('window:resize', ['$event'])
@@ -207,6 +168,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
     if (this.screenWidth >= 1900) {
     } else {
     }
+    this.listTypeOfAgreement();
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -214,21 +176,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
     { id: 'Bottom', newRowPosition: 'Bottom' }
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
-
-
-  getKeyStatus() {
-    this.catalogModel.Search_Key = this.search_key;
-    this._common.listCatalog(this.catalogModel).subscribe(
-      dataF => {
-        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-
-      });
-
-  }
 
   dateChange() {
     var diff = this.newAgreementForm.value.endDatePicker.getTime() - this.newAgreementForm.value.startDatePicker.getTime();
@@ -241,44 +188,11 @@ export class AgreementConciliationDetailComponent implements OnInit {
       diffDays = 1;
   }
 
-  /*******************************************************
-* Author: Gustavo ZC
-* Creation date:  08/07/2019
-* Description: method that list all types of moneys
-****************************************************
-* Modifications
-****************************************************
-* Number:
-* Date:
-* Ticket:
-* Author:
-* Description:
-*******************************************************/
-  listMoney() {
-
-    this.allMoneyService.listMoney(this.moneyModel).subscribe(
-      dataS => {
-        const that = this;
-        dataS.forEach(function (item) {
-          that.listsMoney.push({
-            id_Currency: item.id_Currency,
-            name_Currency: item.name_Currency
-          });
-        });
-        this.listTypeOfAgreement();
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
-  }
-
-  listTypeOfAgreement() {
-
+  listTypeOfAgreement() { 
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
+        this.fillFormAgreementDetail();
         
       },
       error => {
@@ -363,40 +277,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
     this.listProvider(this.option);
   }
 
-
-  /*******************************************************
-* Author: Gustavo ZC
-* Creation date:  19/07/2019
-* Description: method that list the products of the agreement 
-****************************************************
-* Modifications
-****************************************************
-* Number:
-* Date:
-* Ticket:
-* Author:
-* Description:
-*******************************************************/
-  listAgreement(data: NewAgreementModel) {
-    this.tradeAgreementDetailService.ListTradeAgreementDetail(data).subscribe(
-      dataQ => {
-        if ((dataQ.length == 0 || dataQ.length != 0) && dataQ != undefined) {
-          this.enableEvidence = true;
-        }
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
-
-  cancel(): void {
-    this.title == 'Todos los productos';
-    var pkH = new NewAgreementModel();
-    pkH.Pk_Ac_Trade_Agreement = this.headerFile;
-    this.listAgreement(pkH);
-  }
-
   openListEvidenceModal() {
     const object = {
       header_File: this.headerFile,
@@ -407,6 +287,18 @@ export class AgreementConciliationDetailComponent implements OnInit {
       minWidth: "900px",
       maxWidth: "950px"
     });
+  }
+
+  openListCreditNotesModal() {
+    // const object = {
+    //   header_File: this.headerFile,
+    //   name_Agree: this.nameAgree
+    // }
+    // const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
+    //   data: { confirmInfo: object },
+    //   minWidth: "900px",
+    //   maxWidth: "950px"
+    // });
   }
 
   openGoals() {

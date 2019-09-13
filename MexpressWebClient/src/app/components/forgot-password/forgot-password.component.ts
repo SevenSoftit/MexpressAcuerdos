@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { ForgotModel } from './forgot-password.Model';
 import { environment } from '../../../environments/environment';
-import { CommonService } from 'src/app/services/common/common.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: "app-forgot-password",

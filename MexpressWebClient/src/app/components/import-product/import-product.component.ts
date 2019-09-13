@@ -2,11 +2,10 @@ import { Component, OnInit, ɵConsole, Inject } from '@angular/core';
 import { UploaderComponent } from '@syncfusion/ej2-angular-inputs';
 import { utiles } from 'src/environments/utiles';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FeedbackDescriptionModalComponent } from '../feedback-description-modal/feedback-description-modal.component';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
-import { CommonService } from 'src/app/services/common/common.service';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import * as $ from 'jquery';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: 'app-import-product',

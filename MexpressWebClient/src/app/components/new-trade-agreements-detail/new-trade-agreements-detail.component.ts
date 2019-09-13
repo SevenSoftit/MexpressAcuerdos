@@ -6,24 +6,24 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
-import { CommonService } from 'src/app/services/common/common.service';
 import { MoneyModel } from 'src/app/models/money.model';
-import { AllMoneyService } from 'src/app/services/allMoney/allMoney.service';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
-import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
-import { TypeOfAgreementService } from 'src/app/services/typeOfAgreement/typeOfAgreement.service';
-import { ProviderService } from 'src/app/services/TaProvider/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { utiles } from 'src/environments/utiles';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import { CatalogModel } from '../common-model/catalog.Model';
 import { ActivatedRoute } from '@angular/router';
-import { ListEvidencesModalComponent } from '../list-evidences-modal/list-evidences-modal.component';
-import { GoalsLoaderComponent } from '../goals-loader/goals-loader.component';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
+import { CatalogModel } from 'src/app/models/catalog.Model';
+import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { AllMoneyService } from 'src/app/shared/services/allMoney/allMoney.service';
+import { TypeOfAgreementService } from 'src/app/shared/services/typeOfAgreement/typeOfAgreement.service';
+import { ProviderService } from 'src/app/shared/services/TaProvider/provider.service';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
+import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-loader.component';
 
 
 
@@ -151,8 +151,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._common._setLoading(true);
     this.getScreenSize();
-    this.getKeyStatus();
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
@@ -164,7 +164,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       }, [])
     );
-
 
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
@@ -184,10 +183,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.productNameRules = { required: [true, 'Nombre requerido'] };
     this.moneyRules = { required: [true, 'Moneda requerida'] };
     this.amountRules = { required: [true, 'Monto requerido'] };
-
-    this.listProvider(this.option);  
-    this.listMoney();
-
 
     this.moneyTypeParams = {
       params: { popupHeight: '300px' },
@@ -219,7 +214,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.typeContactObj.dataBind();
       }
     };
-    this.fillFormAgreementDetail();
   }
 
   fillFormAgreementDetail() {
@@ -248,9 +242,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
+        emailNotification: ''
       });
-
     }
+    this.listProvider(this.option);  
   }
 
   @HostListener('window:resize', ['$event'])
@@ -275,6 +270,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 5, pageCount: 8 };
     }
+    this.listMoney();
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -289,13 +285,12 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this._common.listCatalog(this.catalogModel).subscribe(
       dataF => {
         this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
+        this.fillFormAgreementDetail();
       },
       error => {
         this._common._setLoading(false);
         console.log('no se envio' + ' ' + error);
-
       });
-
   }
 
   saveAgreementHeader() {
@@ -694,6 +689,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
+        this.getKeyStatus();
         
       },
       error => {

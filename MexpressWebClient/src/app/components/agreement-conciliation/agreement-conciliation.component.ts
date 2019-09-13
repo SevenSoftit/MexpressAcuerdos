@@ -1,15 +1,13 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { CommonService } from 'src/app/services/common/common.service';
 import { GridComponent, ForeignKeyService, FilterService } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
-import { TradeAgreementDetailService } from 'src/app/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
-import { CatalogModel } from '../common-model/catalog.Model';
-
-
+import { CatalogModel } from 'src/app/models/catalog.Model';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
 
 @Component({
   selector: 'app-agreement-conciliation',
@@ -47,9 +45,7 @@ public onChange(args: any): void {
   } else {
     this.grid.removeFilteredColsByField('agreement_Status_Name');
   }
-    
 }
-
 // config for provider filter
 public dataProvider: object[];
 public dropdataProvider: string[];
@@ -130,7 +126,6 @@ public onChangeProvider(args: any): void {
         this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider  = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];
         
-
         this._common._setLoading(false);
       },
       error => {
@@ -138,9 +133,6 @@ public onChangeProvider(args: any): void {
         console.log('no se envio' + ' ' + error);
       });
   }
-
-
- 
 
   /*******************************************************
 * Author: Gustavo ZC
@@ -232,7 +224,7 @@ public onChangeProvider(args: any): void {
   }
 
   tooltip(args: QueryCellInfoEventArgs) {
-    if (args.column.field === "provider_Name") {
+    if (args.column.field === "provider_Name" || args.column.field === "name_Agreement") {
       let tooltip: Tooltip = new Tooltip({
         content: args.data[args.column.field].toString(),
         animation: {

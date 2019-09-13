@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { LoginModel } from "../../components/login/login.Model"
-import { CommonService } from 'src/app/services/common/common.service';
 import { environment } from 'src/environments/environment';
 import {utiles} from "../../../environments/utiles"
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: "app-change-password-modal",

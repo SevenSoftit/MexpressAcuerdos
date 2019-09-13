@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '../app/components/login/login.component';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { LayoutComponent } from './components/layout/layout.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
-import { FeedbackDescriptionModalComponent } from './components/feedback-description-modal/feedback-description-modal.component';
-import { FeedbackModalComponent } from './components/feedback-modal/feedback-modal.component';
-import { ImportProductComponent } from './components/import-product/import-product.component';
-import { ListEvidencesModalComponent } from './components/list-evidences-modal/list-evidences-modal.component';
-import { AddAgreementEvidenceModalComponent } from './components/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
-import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { GoalsLoaderComponent } from './components/goals-loader/goals-loader.component';
+import { LayoutComponent } from './shared/layout/layout.component';
+import { AuthGuard } from './shared/services/auth/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  {path: '', loadChildren: './components/login/login.module#LoginModule'},
+  { path:'forgotPassword', loadChildren: './components/forgot-password/forgot-password.module#ForgotPasswordModule'},
+  {path: 'changePass', loadChildren: './components/change-password/change-password-modal.module#ChangePasswordModalModule'},
+  {path: 'feedbackDescription', loadChildren: './components/feedback-description-modal/feedback-description-modal.module#FeedbackDescriptionModalComponent'},
+  {path: 'feedbackModal', loadChildren: './components/feedback-modal/feedback-modal.module#FeedbackModalComponent'},
+  { path: 'importProduct', pathMatch: 'full', loadChildren: './components/import-product/import-product.module#ImportProductModule' },
+  {path: 'addAgreementEvidence', loadChildren: './components/add-agreement-evidence-modal/add-agreement-evidence-modal.module#AddEvidenceModalModule'},
+  {path: 'listEvidence', loadChildren: './components/list-evidences-modal/list-evidences-modal.module#ListEvidencesModalModule'},
+  {path: 'confirmModal', loadChildren: './components/confirm-modal/confirm-modal.module#ConfirmModalModule'},
+  {path: 'goalsLoaderModal', loadChildren: './components/goals-loader/goals-loader.module#GoalsLoaderModule'},
+  
   {
     path: '',
     component: LayoutComponent,  
@@ -31,18 +29,7 @@ const routes: Routes = [
       {path: 'agreementConciliation', loadChildren: './components/agreement-conciliation/agreement-conciliation.module#AgreementConciliationModule'},
       {path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule'}
     ]
-  }, 
-
-  {path:'changePass', component: ChangePasswordModalComponent},
-  {path: 'feedbackDescription', component: FeedbackDescriptionModalComponent},
-  {path: 'feedbackModal', component: FeedbackModalComponent},
-  { path: 'importProduct', pathMatch: 'full', component: ImportProductComponent },
-  {path: 'addAgreementEvidence', component: AddAgreementEvidenceModalComponent},
-  {path: 'listEvidence', component: ListEvidencesModalComponent},
-  {path: 'confirmModal', component: ConfirmModalComponent},
-  {path: 'goalsLoaderModal', component: GoalsLoaderComponent},
-
-
+  }
 ];
 
 @NgModule({

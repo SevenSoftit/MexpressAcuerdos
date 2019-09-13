@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <h5 for="" class="add-evidence-title">Sube el archivo de evidencia</h5>
+    </div>
+    <hr />
+    <div class="row ml-5">
+        <label for="" class="add-evidence-label-optional">Archivo de la evidencia (obligatorio)</label>
+    </div>
+
+    <div id="manejoDocs" class="row col-md-12">
+
+        <mat-accordion class="example-headers-align modal-document-expansion-panel">
+
+            <mat-expansion-panel *ngFor="let item of files; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{item.archive_New_Name}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Nuevo archivo pendiente de cargar
+                        <mat-icon (click)="onDeleteArchive(item)">delete</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="file-name-label">Descripción del archivo (opcional)</label>
+                            <textarea class="form-control" rows="4" type="text" id="fileDescription" [(ngModel)]="item.file_Description" placeholder="Descripción(opcional)">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group add-evidence-drop-zone">
+                <dropzone [config]="config" [message]="'Arrastra el archivo o haz click aquí, para seleccionarlo de tus archivos'" (error)="onUploadError($event)" (success)="onUploadSuccess()" (addedFile)="onAddedFile($event)" (sending)="onSending($event)">
+                </dropzone>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="evidence-modal-line">
+        </div>
+    </div>
+    <div class="row add-evidence-modal-row-buttons">
+        <div class="col-md-6 text-left">
+            <button mat-button mat-dialog-close class="save-button">Cancelar</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button mat-button class="save-button" [ngClass]="{'disabled_button': files.length == 0 || invalidArchive}" (click)="saveEvidence()" [disabled]="files.length == 0 || invalidArchive">
+        Subir archivo<mat-icon class="ml-2"> cloud_upload</mat-icon>
+      </button>
+        </div>
+    </div>
+</div>

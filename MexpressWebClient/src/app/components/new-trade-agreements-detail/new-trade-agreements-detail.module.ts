@@ -16,6 +16,7 @@ import { MaterialModule } from 'src/app/material-module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 // Infinite scroll
 import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 setCulture('es-ES');
 
@@ -42,33 +43,34 @@ const routes: Routes = [
 @NgModule({
   declarations: [NewTradeAgreementsDetailComponent],
   imports: [
-    CommonModule,
+    SharedModule,
+    // CommonModule,
     RouterModule.forChild(routes),
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    GridModule,
-    ScrollDispatchModule,
-    DropDownListAllModule,
-    MatDatepickerModule,
-    MaterialModule,
-    MatTooltipModule,
-    MatSelectInfiniteScrollModule,
-    ScrollingModule
+    // MatButtonModule,
+    // MatIconModule,
+    // MatCardModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // MatSelectModule,
+    // GridModule,
+    // ScrollDispatchModule,
+    // DropDownListAllModule,
+    // MatDatepickerModule,
+    // MaterialModule,
+    // MatTooltipModule,
+    // MatSelectInfiniteScrollModule,
+    // ScrollingModule
   ],
   providers: [
-    ToolbarService,
-    EditService,
-    PageService,
-    FilterService,
-    SortService,
-    FreezeService,
-    ResizeService,
-    ExcelExportService,
-    PdfExportService
+    // ToolbarService,
+    // EditService,
+    // PageService,
+    // FilterService,
+    // SortService,
+    // FreezeService,
+    // ResizeService,
+    // ExcelExportService,
+    // PdfExportService
   ]
 })
 export class NewTradeAgreementsDetailModule { }

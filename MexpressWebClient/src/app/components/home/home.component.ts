@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HomeModel } from './home.Model';
 import { Router, NavigationExtras } from '@angular/router';
-import { CommonService } from '../../services/common/common.service';
-import { DashboardResumeService } from 'src/app/services/dashboardResume/dashboardResume.service';
 import { utiles } from 'src/environments/utiles';
+import { DashboardResumeService } from 'src/app/shared/services/dashboardResume/dashboardResume.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 
 @Component({

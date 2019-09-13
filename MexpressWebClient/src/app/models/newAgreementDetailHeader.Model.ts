@@ -48,6 +48,7 @@ export class NewAgreementDetailHeaderModel {
     Email: String;
     Status_Option: Boolean;
     Expired_Indicator: Boolean;
+    Type_Agreement_Name: String;
 
 
     constructor() {
@@ -97,5 +98,7 @@ export class NewAgreementDetailHeaderModel {
             this.Email = '';
             this.Status_Option = false;
             this.Expired_Indicator = false;
+            this.Email = '';
+            this.Type_Agreement_Name = '';
     }
 }

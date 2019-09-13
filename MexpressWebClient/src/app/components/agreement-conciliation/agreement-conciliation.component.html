@@ -26,27 +26,27 @@
     <div class="row ml-0 mr-0 trade-agreements-grid">
         <div class="col-lg-12 col-md-12">
             <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
-                (dataBound)="dataBound($event)" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
+                (dataBound)="dataBound()" [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
                 <e-columns>
-                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='155' textAlign='Center'>
+                    <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='190' textAlign='Center'>
                     </e-column>
-                    <e-column field='agreement_Status_Name' headerText='Estado' width='105' textAlign='Center'>
+                    <e-column field='type_Agreement_Name' headerText='Tipo de acuerdo' width='162' textAlign='Center'></e-column>
+                    <e-column field='agreement_Status_Name' headerText='Estado' width='124' textAlign='Center'>
                         <ng-template #filterTemplate let-data>
                             <ejs-dropdownlist id='dropdown' [(ngModel)]="data.Name" (change)=onChange($event) [dataSource]='dropdata' [fields]='fields' [popupHeight]='height'>
-
                             </ejs-dropdownlist>
                         </ng-template>
                     </e-column>
-                    <e-column field='provider_Name' foreignKeyValue='provider_Name' headerText='Proveedor' width='170' textAlign='Center'>
+                    <e-column field='provider_Name' foreignKeyValue='provider_Name' headerText='Proveedor' width='210' textAlign='Center'>
                         <ng-template #filterTemplate let-data>
                             <ejs-dropdownlist id='dropdownProvider' [(ngModel)]="data.Name" (change)=onChangeProvider($event) [dataSource]='dropdataProvider' [fields]='fields' [popupHeight]='height'>
                             </ejs-dropdownlist>
                         </ng-template>
                     </e-column>
-                    <e-column field='string_Date_Start' headerText='Fecha de inicio' width='120' textAlign='Center'></e-column>
-                    <e-column field='string_Date_Finish' headerText='Fecha de finalización' width='150' textAlign='Center'>
+                    <e-column field='string_Date_Start' headerText='Fecha inicial' width='139' textAlign='Center'></e-column>
+                    <e-column field='string_Date_Finish' headerText='Fecha final' width='130' textAlign='Center'>
                     </e-column>
-                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='136' textAlign='Center'></e-column>
+                    <e-column field='recovery_Amount' headerText='Monto recuperado' width='179' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Cat_Type_Agreement' [visible]="false" headerText='pk_Cat_Type_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Ac_Cat_Provider' [visible]="false" headerText='pk_Ac_Cat_Provider' width='5' textAlign='Center'></e-column>

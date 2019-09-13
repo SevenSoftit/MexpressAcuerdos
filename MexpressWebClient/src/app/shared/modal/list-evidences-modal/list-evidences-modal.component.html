@@ -1,0 +1,91 @@
+<div class="container-fluid">
+    <div class="row">
+        <h5 class="list-evidences-title">Evidencia de esta planilla</h5>
+    </div>
+    <!-- <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scroll list-evidence-scroll">
+        <mat-card class="mb-3" *ngFor="let evidence of evidenceList">
+            <div class="row">
+                <div class="col-md-7">
+                    <label for="" class="evidence-file-name">{{evidence.archive_New_Name}}</label>
+                </div>
+                <div class="offset-md-2 col-md-3 text-right">
+                    <button mat-icon-button target="_self" id="dowloadFile" (click)="downloadFile(evidence.url_Attachment, evidence.archive_New_Name)">
+                        <mat-icon class="icons">arrow_downward</mat-icon>
+                    </button>
+
+                    <button mat-icon-button (click)="deleteEvidence(evidence)" [ngClass]="{'button-disabled': paySlipStatus == 5}" [disabled]="paySlipStatus == 5">
+                        <mat-icon class="icons">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+
+        <div class="row ml-0 mr-0 mt-4" *ngIf="evidenceListCount == 0">
+            <h5 class="w-100 text-left without-evidences">No se registran evidencias para este acuerdo</h5>
+        </div>
+
+    </cdk-virtual-scroll-viewport> -->
+
+    <!-- INICIO PRUEBA -->
+    <div id="manejoDocs" class="row col-md-12">
+
+        <mat-accordion class="example-headers-align modal-document-expansion-panel">
+
+            <mat-expansion-panel *ngFor="let evidence of evidenceList; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="" class="evidence-file-name">{{evidence.archive_New_Name}}</label>
+                            </div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div class="col-md-12 text-right">
+                            <button mat-icon-button target="_self" id="dowloadFile" (click)="downloadFile(evidence.url_Attachment, evidence.archive_New_Name)">
+                                <mat-icon class="icons">arrow_downward</mat-icon>
+                            </button>
+
+                            <button mat-icon-button (click)="deleteEvidence(evidence)" [ngClass]="{'button-disabled': paySlipStatus == 5}" [disabled]="paySlipStatus == 5">
+                                <mat-icon class="icons">delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="file-name-label">Descripción del archivo (opcional)</label>
+                            <textarea readonly class="form-control" rows="4" type="text" id="fileDescription" [(ngModel)]="evidence.file_Description" placeholder="Descripción(opcional)">
+                                </textarea>
+                        </div>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <div class="row ml-0 mr-0 mt-4" *ngIf="evidenceListCount == 0">
+            <h5 class="w-100 text-left without-evidences">No se registran evidencias para este acuerdo</h5>
+        </div>
+
+    </div>
+    <!-- FIN PRUEBA -->
+
+    <div class="row list-evidence-buttons-top">
+        <div class="col-md-6">
+            <button mat-button class="save-button " (click)="openAddEvidenceModal()" >Añadir evidencia <mat-icon class="pending-employee-roster-detail-note"
+            >add_circle_outline</mat-icon></button>
+        </div>
+
+        <div class=" offset-md-4 col-md-2">
+            <button mat-button mat-dialog-close class="save-button">Cerrar</button>
+        </div>
+    </div>
+
+</div>
