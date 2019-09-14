@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es');
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
@@ -33,8 +33,6 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { HttpinterceptorService } from './shared/services/interceptor/httpinterceptor.service';
 import { LoginComponent } from './components/login/login.component';
-import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
-import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
 import { ImportProductComponent } from './components/import-product/import-product.component';
 import { AddAgreementEvidenceModalComponent } from './shared/modal/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { ListEvidencesModalComponent } from './shared/modal/list-evidences-modal/list-evidences-modal.component';
@@ -51,6 +49,8 @@ import { AgreementTrackingModule } from './components/agreement-tracking/agreeme
 import { AgreementConciliationModule } from './components/agreement-conciliation/agreement-conciliation.module';
 import { AgreementConciliationDetailModule } from './components/agreement-conciliation-detail/agreement-conciliation-detail.module';
 import { AgreementReportModule } from './components/agreement-report/agreement-report.module';
+import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
+import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -61,8 +61,8 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     LoginComponent,
-    FeedbackDescriptionModalComponent,
     FeedbackModalComponent,
+    FeedbackDescriptionModalComponent,
     ImportProductComponent,
     AddAgreementEvidenceModalComponent,
     ListEvidencesModalComponent,
@@ -72,17 +72,11 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
@@ -103,8 +97,14 @@ export function createTranslateLoader(http: HttpClient) {
     AgreementTrackingDetailModule,
     AgreementConciliationModule,
     AgreementConciliationDetailModule,
-    AgreementReportModule
-
+    AgreementReportModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   entryComponents: [
     

@@ -444,23 +444,18 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         item.Archive_New_Name = actualDate + "_" + this.correctName + correctExtension;
                         targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
-
                     else
-                    {
+                    {      
+                        this.correctName = item.Archive_New_Name;            
                         if (item.Archive_New_Name.Contains("%"))
                         {
-                            this.correctName = "";
                             this.correctName = Convert.ToString(sb.Replace("%", "_"));
                         }
                         if (item.Archive_New_Name.Contains("#"))
                         {
-                            this.correctName = "";
                             this.correctName = Convert.ToString(sb.Replace("#", "_"));
                         }
-                        else
-                        {
-                            this.correctName = item.Archive_New_Name;
-                        }
+                        
                         item.Archive_New_Name = actualDate + "_" + this.correctName;
                         targetFilePath = string.Format("{0}{1}{2}\\{3}", configuration.GetValue<string>("Files:RutaEvidencia"), "Archivo evidencia acuerdo-", item.Name_Agreement, item.Archive_New_Name);
                     }
