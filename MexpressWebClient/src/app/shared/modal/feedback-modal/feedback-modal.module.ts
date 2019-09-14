@@ -5,7 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { FeedbackModalComponent } from './feedback-modal.component';
 
 @NgModule({
-  declarations: [FeedbackModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
     MatIconModule

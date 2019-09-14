@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { tap} from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { LoginModel } from 'src/app/components/login/login.Model';
 import { environment } from 'src/environments/environment';
+import { LoginModel } from 'src/app/models/login.Model';
 
 
 /*Constants */

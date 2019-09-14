@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MaterialModule } from 'src/app/material-module';
 
 @NgModule({
-  declarations: [GoalsLoaderComponent],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,

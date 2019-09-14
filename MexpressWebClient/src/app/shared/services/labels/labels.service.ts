@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginModel } from 'src/app/components/login/login.Model';
 import { utiles } from 'src/environments/utiles';
 import { LabelModel } from 'src/app/models/label.model';
+import { LoginModel } from 'src/app/models/login.Model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 

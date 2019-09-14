@@ -6,7 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { ChangePasswordModalComponent } from './change-password-modal.component';
 @NgModule({
-  declarations: [ ChangePasswordModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,

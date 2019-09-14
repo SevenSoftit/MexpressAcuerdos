@@ -41,6 +41,10 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [AgreementConciliationDetailComponent],
+  exports: [
+    AgreementConciliationDetailComponent
+  ],
+  entryComponents: [AgreementConciliationDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

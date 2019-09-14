@@ -31,6 +31,10 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [AgreementConciliationComponent],
+  exports: [
+    AgreementConciliationComponent
+  ],
+  entryComponents: [AgreementConciliationComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -53,7 +57,6 @@ const routes: Routes = [
     ResizeService,
     
   ],
-  bootstrap: [AgreementConciliationComponent]
 })
 
 export class AgreementConciliationModule { }

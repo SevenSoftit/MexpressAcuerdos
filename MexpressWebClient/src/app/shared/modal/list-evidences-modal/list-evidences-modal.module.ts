@@ -7,15 +7,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListEvidencesModalComponent } from './list-evidences-modal.component';
 import { MaterialModule } from 'src/app/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-const routes: Routes = [
-  { path: '', component: ListEvidencesModalComponent },
 
-];
 @NgModule({
-  declarations: [ListEvidencesModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     MatCardModule,
     MatButtonModule,
     MatIconModule,

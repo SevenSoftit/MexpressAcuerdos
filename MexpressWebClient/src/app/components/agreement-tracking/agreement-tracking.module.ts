@@ -31,6 +31,10 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [AgreementTrackingComponent],
+  exports: [
+    AgreementTrackingComponent
+  ],
+  entryComponents: [AgreementTrackingComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

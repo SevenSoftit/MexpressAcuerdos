@@ -15,6 +15,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { NgxLoadingModule } from 'ngx-loading';
 import {MatMenuModule} from '@angular/material/menu';
 import { ArraySortPipe } from 'src/app/shared/helper/helperfilter.pipe';
+import { LoadingModule } from '../loading/loading.module';
 
 const routes: Routes = [{ path: "", component: LayoutComponent }];
 @NgModule({
@@ -28,6 +29,7 @@ const routes: Routes = [{ path: "", component: LayoutComponent }];
     MatIconModule,
     MatBadgeModule,
     MatMenuModule,
+    LoadingModule
     // NgxLoadingModule.forRoot({})
   ],
   declarations: [
@@ -38,5 +40,5 @@ const routes: Routes = [{ path: "", component: LayoutComponent }];
     ArraySortPipe
   ],
   exports: [RouterModule]
-})
+})   
 export class LayoutModule {}

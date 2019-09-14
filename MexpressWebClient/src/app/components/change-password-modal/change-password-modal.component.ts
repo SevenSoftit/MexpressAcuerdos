@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { LoginModel } from "../../components/login/login.Model"
 import { environment } from 'src/environments/environment';
 import {utiles} from "../../../environments/utiles"
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -8,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { LoginModel } from 'src/app/models/login.Model';
 
 @Component({
   selector: "app-change-password-modal",

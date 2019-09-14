@@ -23,11 +23,14 @@ L10n.load({
 
 const routes: Routes = [
   { path: '', component: AgreementReportComponent },
-
 ];
 
 @NgModule({
   declarations: [AgreementReportComponent],
+  exports: [
+    AgreementReportComponent,
+  ],
+  entryComponents: [AgreementReportComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

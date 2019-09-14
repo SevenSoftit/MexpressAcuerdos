@@ -15,7 +15,7 @@ import { NgxLoadingModule } from 'ngx-loading';
   ],
   imports: [
     CommonModule,
-    // NgxLoadingModule.forRoot({}),
+    NgxLoadingModule.forRoot({}),
   ]
 })
 export class LoadingModule { }

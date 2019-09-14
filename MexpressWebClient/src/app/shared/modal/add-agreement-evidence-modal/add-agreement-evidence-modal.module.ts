@@ -7,16 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { AddAgreementEvidenceModalComponent } from './add-agreement-evidence-modal.component';
 import { MaterialModule } from 'src/app/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-const routes: Routes = [
-  { path: '', component: AddAgreementEvidenceModalComponent },
-
-];
 
 @NgModule({
-  declarations: [AddAgreementEvidenceModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     DropzoneModule,
     MatButtonModule,
     MatIconModule,

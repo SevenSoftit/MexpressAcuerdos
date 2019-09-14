@@ -4,7 +4,7 @@ import { ConfirmModalComponent } from './confirm-modal.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 @NgModule({
-  declarations: [ConfirmModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
     MatButtonModule,

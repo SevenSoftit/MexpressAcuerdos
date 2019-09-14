@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { utiles } from '../../../environments/utiles'
-import { LoginModel } from '../../components/login/login.Model'
 import { MatDialog } from '@angular/material/dialog';
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { LoginService } from 'src/app/shared/services/login/login.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { LoginModel } from 'src/app/models/login.Model';
 
 
 @Component({

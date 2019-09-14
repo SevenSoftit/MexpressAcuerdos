@@ -5,10 +5,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from './../auth/auth.service';
 import { Router } from '@angular/router';
-import { LoginModel } from 'src/app/components/login/login.Model';
 import { utiles } from 'src/environments/utiles';
 import { LanguageModel } from 'src/app/models/language.model';
 import { FeedbackDescriptionModalComponent } from '../../modal/feedback-description-modal/feedback-description-modal.component';
+import { LoginModel } from 'src/app/models/login.Model';
 /*Constants */
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 // const methodApi = "/token"

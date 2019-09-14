@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
-import { ForgotModel } from './forgot-password.Model';
 import { environment } from '../../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { ForgotModel } from 'src/app/models/forgot-password.Model';
 
 @Component({
   selector: "app-forgot-password",

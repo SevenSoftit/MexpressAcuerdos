@@ -6,7 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { ImportProductComponent } from './import-product.component';
 
 @NgModule({
-  declarations: [ ImportProductComponent],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,

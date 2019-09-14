@@ -5,7 +5,7 @@ import { FeedbackDescriptionModalComponent } from './feedback-description-modal.
 //import { FeedbackDescriptionModalComponent } from './feedback-description-modal.component';
 
 @NgModule({
-  declarations: [FeedbackDescriptionModalComponent],
+  declarations: [],
   imports: [
     CommonModule,
     MatIconModule

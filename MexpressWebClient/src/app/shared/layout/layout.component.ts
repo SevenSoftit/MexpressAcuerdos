@@ -31,7 +31,7 @@ export class LayoutComponent implements OnInit {
    }
   }
 
-  onCollapseMenu(data: boolean) {
+  onCollapseMenu(data: boolean) {  
     if(data){
       this.sccsLeft = 'content-with-left-open';
       this.sccsContent = 'content-with-content-open';

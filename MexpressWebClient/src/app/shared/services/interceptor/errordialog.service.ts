@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FeedbackModalComponent } from 'src/app/components/feedback-modal/feedback-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { utiles } from 'src/environments/utiles';
 import { Router } from '@angular/router';
+import { FeedbackModalComponent } from '../../modal/feedback-modal/feedback-modal.component';
 
 @Injectable()
 export class ErrorDialogService {

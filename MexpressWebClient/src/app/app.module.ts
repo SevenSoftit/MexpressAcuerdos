@@ -23,7 +23,6 @@ import { AppRoutingModule } from './app-routing.module';
 // servicios
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { LayoutModule } from '@angular/cdk/layout';
 import { environment } from 'src/environments/environment';
 import { MaterialModule } from './material-module';
 import { ApplicationPipesModule } from './shared/helper/application-pipes.module';
@@ -33,6 +32,25 @@ import { ErrorDialogService } from './shared/services/interceptor/errordialog.se
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { HttpinterceptorService } from './shared/services/interceptor/httpinterceptor.service';
+import { LoginComponent } from './components/login/login.component';
+import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
+import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
+import { ImportProductComponent } from './components/import-product/import-product.component';
+import { AddAgreementEvidenceModalComponent } from './shared/modal/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
+import { ListEvidencesModalComponent } from './shared/modal/list-evidences-modal/list-evidences-modal.component';
+import { ConfirmModalComponent } from './shared/modal/confirm-modal/confirm-modal.component';
+import { GoalsLoaderComponent } from './shared/modal/goals-loader/goals-loader.component';
+import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { LayoutModule } from './shared/layout/layout.module';
+import { LoadingModule } from './shared/loading/loading.module';
+import { TradeAgreementsModule } from './components/trade-agreements/trade-agreements.module';
+import { NewTradeAgreementsDetailModule } from './components/new-trade-agreements-detail/new-trade-agreements-detail.module';
+import { AgreementTrackingDetailModule } from './components/agreement-tracking-detail/agreement-tracking-detail.module';
+import { AgreementTrackingModule } from './components/agreement-tracking/agreement-tracking.module';
+import { AgreementConciliationModule } from './components/agreement-conciliation/agreement-conciliation.module';
+import { AgreementConciliationDetailModule } from './components/agreement-conciliation-detail/agreement-conciliation-detail.module';
+import { AgreementReportModule } from './components/agreement-report/agreement-report.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -41,11 +59,20 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    FeedbackDescriptionModalComponent,
+    FeedbackModalComponent,
+    ImportProductComponent,
+    AddAgreementEvidenceModalComponent,
+    ListEvidencesModalComponent,
+    ConfirmModalComponent,
+    GoalsLoaderComponent,
+    ChangePasswordModalComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     MaterialModule,
-    LayoutModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -67,7 +94,17 @@ export function createTranslateLoader(http: HttpClient) {
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    LayoutModule,
+    LoadingModule,
+    TradeAgreementsModule,
+    NewTradeAgreementsDetailModule,
+    AgreementTrackingModule,
+    AgreementTrackingDetailModule,
+    AgreementConciliationModule,
+    AgreementConciliationDetailModule,
+    AgreementReportModule
+
   ],
   entryComponents: [
     

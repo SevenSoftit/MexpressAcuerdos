@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { utiles } from 'src/environments/utiles';
 import { tap} from 'rxjs/operators';
-import { HomeModel } from 'src/app/components/home/home.Model';
 import { Router } from '@angular/router';
+import { HomeModel } from 'src/app/models/home.Model';
 
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
