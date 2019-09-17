@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MexpressWebClient.Controllers
+namespace AcuerdosWebClient.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

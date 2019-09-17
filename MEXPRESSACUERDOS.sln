@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sevensoft.Mexpress.Backend.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sevensoft.Mexpress.Utilities.Extender", "Sevensoft.Mexpress.Utilities.Extender\Sevensoft.Mexpress.Utilities.Extender.csproj", "{38769256-17DA-4AED-933C-6BF8CC50857E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MexpressWebClient", "MexpressWebClient\MexpressWebClient.csproj", "{449551BF-0AF6-43E1-A972-2CC30382E33B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcuerdosWebClient", "AcuerdosWebClient\AcuerdosWebClient.csproj", "{449551BF-0AF6-43E1-A972-2CC30382E33B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sevensoft.Mexpress.Backend.Web.Api", "Sevensoft.Mexpress.Backend.Web.Api\Sevensoft.Mexpress.Backend.Web.Api.csproj", "{E684FC2F-C6F6-402E-AFF3-E253E5CB9FEA}"
 EndProject

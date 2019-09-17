@@ -4,12 +4,12 @@ FioWebAdmin/
 *.dll
 *.txt
 *.pdb
-MexpressWebClient/bin/Debug/netcoreapp2.2/MexpressWebClient.deps.json
-MexpressWebClient/bin/Debug/netcoreapp2.2/MexpressWebClient.runtimeconfig.dev.json
-MexpressWebClient/bin/Debug/netcoreapp2.2/MexpressWebClient.runtimeconfig.json
-MexpressWebClient/obj/Debug/netcoreapp2.2/MexpressWebClient.AssemblyInfo.cs
-MexpressWebClient/obj/Debug/netcoreapp2.2/MexpressWebClient.assets.cache
-MexpressWebClient/obj/Debug/netcoreapp2.2/MexpressWebClient.RazorAssemblyInfo.cs
+AcuerdosWebClient/bin/Debug/netcoreapp2.2/AcuerdosWebClient.deps.json
+AcuerdosWebClient/bin/Debug/netcoreapp2.2/AcuerdosWebClient.runtimeconfig.dev.json
+AcuerdosWebClient/bin/Debug/netcoreapp2.2/AcuerdosWebClient.runtimeconfig.json
+AcuerdosWebClient/obj/Debug/netcoreapp2.2/AcuerdosWebClient.AssemblyInfo.cs
+AcuerdosWebClient/obj/Debug/netcoreapp2.2/AcuerdosWebClient.assets.cache
+AcuerdosWebClient/obj/Debug/netcoreapp2.2/AcuerdosWebClient.RazorAssemblyInfo.cs
 *.cache
 Sevensoft.Mexpress.Backend.BusinessLogic/bin/Debug/netstandard2.0/Sevensoft.Mexpress.Backend.BusinessLogic.deps.json
 Sevensoft.Mexpress.Backend.BusinessLogic/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Backend.BusinessLogic.AssemblyInfo.cs
@@ -40,7 +40,7 @@ Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpres
 *.cache
 *.cache
 Sevensoft.Mexpress.Backend.Web.Api/obj/Debug/netcoreapp2.2/project.razor.json
-MexpressWebClient/obj/Debug/netcoreapp2.2/project.razor.json
+AcuerdosWebClient/obj/Debug/netcoreapp2.2/project.razor.json
 *.cache
 *.cache
 *.cache
