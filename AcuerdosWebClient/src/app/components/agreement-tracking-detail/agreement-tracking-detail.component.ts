@@ -106,7 +106,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
           this.nameAgree = this.agreementDetail.info.name_Agreement;
-          this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado') ? true : false;
+          this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado' || this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
 
           if (this.agreementDetail.info.max_Amount !== 0) {
             this.maxAmountToggle = true;
@@ -178,7 +178,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
   saveAgreementHeader() {
     this._common._setLoading(true);
-    var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
+    // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
     this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
     this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
     this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
@@ -191,7 +191,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
     this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
     this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
-    this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+    // this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+    this.newAgreementDetailHeaderModel.Provider_Name = '';
     this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
     this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
     this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;

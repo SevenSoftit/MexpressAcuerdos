@@ -32,7 +32,7 @@ export class AgreementConciliationComponent implements OnInit {
   //dataProvider: any;
   dataFilter : any = [];
   fk_Status_Agreement: number = 0;
-  search_key: string = 'agreement_status_finished';
+  search_key: string = 'agreement_status_hibrid';
   catalogModel: CatalogModel = new CatalogModel();
 
 //config for status filter
@@ -120,7 +120,6 @@ public onChangeProvider(args: any): void {
       dataQ => {
         this.dropdata = [];
         this.dropdataProvider = [];
-
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         this.dataFilter = dataQ;
         this.dropdata  = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];

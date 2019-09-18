@@ -255,3 +255,22 @@
 .agreement-top {
     margin-top: 2vh;
 }
+
+.conciliation-resume {
+    background: $disable-button;
+    border-radius: 0.4rem 0.7rem 7.7rem;
+    padding: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: 40%;
+}
+
+.label-resume-conciliation {
+    font-family: $opensans-regular;
+    font-size: 1rem;
+    color: #000;
+}
+
+.span-resume-conciliation {
+    font-family: $opensans-semibold;
+}

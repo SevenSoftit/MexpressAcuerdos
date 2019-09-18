@@ -6,7 +6,7 @@ import { MoneyModel } from 'src/app/models/money.model';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 import { ProviderModel } from 'src/app/models/provider.model';
 import { NewAgreementModel } from 'src/app/models/newAgreement.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { CatalogModel } from 'src/app/models/catalog.Model';
@@ -17,6 +17,10 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { AllMoneyService } from 'src/app/shared/services/allMoney/allMoney.service';
 import { TypeOfAgreementService } from 'src/app/shared/services/typeOfAgreement/typeOfAgreement.service';
 import { ProviderService } from 'src/app/shared/services/TaProvider/provider.service';
+import { FeedbackDescriptionModalComponent } from 'src/app/shared/modal/feedback-description-modal/feedback-description-modal.component';
+import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
+import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
+import { utiles } from 'src/environments/utiles';
 
 
 
@@ -67,8 +71,18 @@ export class AgreementConciliationDetailComponent implements OnInit {
   showAmountInput = false;
   emailNotification: string = '';
   recovery_amount: number = 0;
+  fk_Status_Agreement: number = 0;
+  search_key: string = 'agreement_status_conciled';
+  newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
+  infoUser = utiles.getInfoUser();
+  provid_Name: string = '';
+  status_agree: string = '';
+  status_type: string = ''
+  initial_Date: string = '';
+  end_Date: string = '';
+  disabledButtonConciliation: boolean = false;
 
-  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
+  constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
@@ -83,9 +97,18 @@ export class AgreementConciliationDetailComponent implements OnInit {
           var agreement = new NewAgreementModel();
 
           agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          this.nameAgree = this.agreementDetail.info.name_Agreement;
+          
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
+          this.disabledButtonConciliation = (this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
+          // Resumen table
+          this.nameAgree = this.agreementDetail.info.name_Agreement;
+          this.status_agree = this.agreementDetail.info.agreement_Status_Name;
+          this.status_type = this.agreementDetail.info.type_Agreement_Name;
+          this.provid_Name = this.agreementDetail.info.provider_Name; 
+          this.initial_Date = this.agreementDetail.info.string_Date_Start;
+          this.end_Date = this.agreementDetail.info.string_Date_Finish;
+          //End resumen table
              
           if(this.agreementDetail.info.max_Amount !== 0){ 
               this.maxAmountToggle = true;
@@ -136,6 +159,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
       this.dateProcess = this.agreementDetail.info.date_Process;
       this.dateReprocess = this.agreementDetail.info.date_Reprocess;
       this.allproducts_activator = this.agreementDetail.info.all_Products;
+      this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount= this.agreementDetail.info.max_Amount;
@@ -149,7 +173,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
       });
 
     }
-    this.listProvider(this.option); 
+    this.getKeyStatus();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -289,16 +313,91 @@ export class AgreementConciliationDetailComponent implements OnInit {
     });
   }
 
-  openListCreditNotesModal() {
-    // const object = {
-    //   header_File: this.headerFile,
-    //   name_Agree: this.nameAgree
-    // }
-    // const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
-    //   data: { confirmInfo: object },
-    //   minWidth: "900px",
-    //   maxWidth: "950px"
-    // });
+  public conciliateAgreement() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'El acuerdo pasará a estado conciliado ¿Está seguro(a) de esta acción? Este proceso no es reversible',
+      btnAccept: 'Aceptar',
+      btnCancel: 'Cancelar',
+      status: 'warning'
+    };
+    const dialogRef = this.matDialog.open(FeedbackDescriptionModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '480px', maxWidth: '480px', maxHeight: '340px', minHeight: '308px'
+    });
+
+    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
+      if (data) {
+        this.saveAgreementHeader();
+        this.router.navigate(['agreementConciliation']);
+        this._common.asignHeaderTitle("Conciliación de acuerdos");
+      } else {
+
+      }
+    });
+  }
+  saveAgreementHeader() {
+    this._common._setLoading(true);
+    // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
+    this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
+    this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
+    this.newAgreementDetailHeaderModel.Creation_User = this.infoUser.username;
+    this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
+    this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
+    this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
+    this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
+    this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
+    this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
+    this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
+    this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
+    // this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
+    this.newAgreementDetailHeaderModel.Provider_Name = '';
+    this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
+    this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
+    this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
+    this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
+    this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
+
+    this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
+      data => {
+        this._common._setLoading(false);
+        this.lastConciliationModal();
+      },
+      () => {
+
+      });
+  }
+
+  public lastConciliationModal() {
+
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'El acuerdo a pasado a estado conciliado',
+      status: 'warning'
+    };
+
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3000);
+  }
+
+  getKeyStatus() {
+    this.catalogModel.Search_Key = this.search_key;
+    this._common.listCatalog(this.catalogModel).subscribe(
+      dataF => {
+        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
+        this.listProvider(this.option);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
   }
 
   openGoals() {

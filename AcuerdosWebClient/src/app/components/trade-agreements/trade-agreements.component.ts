@@ -287,7 +287,7 @@ export class TradeAgreementsComponent implements OnInit {
   viewAgreementDetails(args: any): void {
     this._common._setLoading(true);
     let data: any = this.grid.getRowInfo(args.target).rowData;
-    if (data.agreement_Status_Name != 'Finalizado') {
+    if (data.agreement_Status_Name != 'Finalizado' && data.agreement_Status_Name != 'Conciliado') {
       const agreementDet = {
         info: data
       }
@@ -301,16 +301,20 @@ export class TradeAgreementsComponent implements OnInit {
       this._common.asignHeaderTitle("Editar acuerdo");
     } else {
       this._common._setLoading(false);
+      if(data.agreement_Status_Name == 'Finalizado'){
         this.agreementFinalizedAlertModal();
+      }
+      if(data.agreement_Status_Name == 'Conciliado'){
+        this.agreementConciledAlertModal();
+      }
     }
   }
 
   public agreementFinalizedAlertModal() {
-
     const dataSuccess = {
       icon: 'warning',
       labelTitile: '¡Atención!',
-      textDescription: 'No puede editar este acuerdo pues ya se encuentra en estado finalizado. Favor, pasar a la sección de conciliación',
+      textDescription: 'No puede editar este acuerdo pues ya se encuentra en estado finalizado. Favor, pasar a la sección de SEGUIMIENTO para ver los detalles del acuerdo',
       status: 'warning'
     };
 
@@ -318,7 +322,22 @@ export class TradeAgreementsComponent implements OnInit {
       data: { contactInfo: dataSuccess },
       minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
     });
-    setTimeout(() => dialogRef.close(), 4000);
+    setTimeout(() => dialogRef.close(), 5000);
+  }
+
+  public agreementConciledAlertModal() {
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'No se pueden editar los acuerdos en estado conciliado. Favor, pasar a la sección de SEGUIMIENTO para ver los detalles del acuerdo',
+      status: 'warning'
+    };
+
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 5000);
   }
 
   tooltip(args: QueryCellInfoEventArgs) {

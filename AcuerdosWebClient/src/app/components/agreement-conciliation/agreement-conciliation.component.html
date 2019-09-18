@@ -59,7 +59,7 @@
                     <e-column field='fk_Status_Agreement' [visible]="false" headerText='fk_Status_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='fk_Glb_Mtr_Organization' [visible]="false" headerText='fk_Glb_Mtr_Organization' width='5' textAlign='Center'></e-column>
 
-                    <e-column field='edit' textAlign='center' headerText='Conciliar acuerdo' width=125 [allowFiltering]='false'>
+                    <e-column field='edit' textAlign='center' headerText='Detalles' width=125 [allowFiltering]='false'>
                         <ng-template #template let-dataAgreements>
                             <mat-icon (click)="viewAgreementConciliationDetails($event)" class="trade-agreements-edit-icon">remove_red_eye</mat-icon>
                         </ng-template>
