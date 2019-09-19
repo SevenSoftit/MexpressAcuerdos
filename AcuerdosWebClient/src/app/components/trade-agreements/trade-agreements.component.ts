@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel, ExcelExportProperties } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -27,12 +28,11 @@ export class TradeAgreementsComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = true;
-  // public toolbar: ToolbarItems[] | Object;
   SearchInfo: any = [];
   // public searchOptions: SearchSettingsModel;
   public filterOptions: FilterSettingsModel;
   disableEdit: boolean = false;
-
+  public toolbar: ToolbarItems[] | Object;
   //config for status filter
   public data: object[];
   public height = '220px';
@@ -66,11 +66,11 @@ export class TradeAgreementsComponent implements OnInit {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    // this.toolbar = ['Search'];
-
+  
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
+    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
@@ -351,4 +351,18 @@ export class TradeAgreementsComponent implements OnInit {
       }, args.cell as HTMLTableCellElement);
     }
   }
+
+    // Opcion para Excel
+    toolbarClick(args: ClickEventArgs): void {
+      if (args.item.id == "export") {
+        var date = new Date().toISOString().slice(0, 10);
+        var archiveName = 'Reporte_De_Acuerdos_' + date + '.xlsx'
+  
+        const excelExportProperties: ExcelExportProperties = {
+          fileName: archiveName
+        };
+  
+        this.grid.excelExport(excelExportProperties);
+      }
+    }
 }

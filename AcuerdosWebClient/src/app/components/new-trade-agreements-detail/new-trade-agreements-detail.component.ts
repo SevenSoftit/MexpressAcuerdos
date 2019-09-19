@@ -245,7 +245,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         emailNotification: ''
       });
     }
-    this.listProvider(this.option);  
+    this.getKeyStatus(); 
   }
 
   @HostListener('window:resize', ['$event'])
@@ -285,7 +285,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this._common.listCatalog(this.catalogModel).subscribe(
       dataF => {
         this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
-        this.fillFormAgreementDetail();
+        this.listProvider(this.option); 
       },
       error => {
         this._common._setLoading(false);
@@ -344,6 +344,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
       // this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
       this.newAgreementDetailHeaderModel.Provider_Name = '';
+      debugger;
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
@@ -689,8 +690,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
-        this.getKeyStatus();
-        
+        this.fillFormAgreementDetail();    
       },
       error => {
         this._common._setLoading(false);

@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { GridComponent, ForeignKeyService, FilterService } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ForeignKeyService, FilterService, ExcelExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
@@ -8,6 +8,7 @@ import { DataUtil } from '@syncfusion/ej2-data';
 import { CatalogModel } from 'src/app/models/catalog.Model';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 @Component({
   selector: 'app-agreement-conciliation',
@@ -27,9 +28,8 @@ export class AgreementConciliationComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
-  // public toolbar: ToolbarItems[] | Object;
+  public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
-  //dataProvider: any;
   dataFilter : any = [];
   fk_Status_Agreement: number = 0;
   search_key: string = 'agreement_status_hibrid';
@@ -65,10 +65,10 @@ public onChangeProvider(args: any): void {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    // this.toolbar = ['Search'];
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
+    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
@@ -234,5 +234,18 @@ public onChangeProvider(args: any): void {
 
     }
   }
+        // Opcion para Excel
+        toolbarClick(args: ClickEventArgs): void {
+          if (args.item.id == "export") {
+            var date = new Date().toISOString().slice(0, 10);
+            var archiveName = 'Reporte_De_Acuerdos_' + date + '.xlsx'
+      
+            const excelExportProperties: ExcelExportProperties = {
+              fileName: archiveName
+            };
+      
+            this.grid.excelExport(excelExportProperties);
+          }
+        }
 
 }

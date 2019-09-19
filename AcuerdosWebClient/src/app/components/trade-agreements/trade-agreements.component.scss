@@ -57,6 +57,23 @@
     overflow-x: hidden !important;
 }
 
+// Toolbar
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
+    font-family: $opensans-semibold !important;
+    font-size: $font-size-small!important;
+    color: $white!important;
+    background-color: $light-blue!important;
+    border-color: $light-blue!important;
+    border-radius: 0.437rem!important;
+    min-width: 7rem!important;
+}
+
+::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
+    color: $white!important;
+}
+
+//End toolbar
+// RadioButtons
 .radioButton-agreement {
     font-family: $opensans-bold;
     font-style: normal;
@@ -64,7 +81,6 @@
     line-height: 1rem;
 }
 
-// RadioButtons
 .agreements-radio-buttons {
     font-family: $opensans-regular;
     font-style: normal;
@@ -175,19 +191,24 @@
 }
 
 //#region tableStyles
-::ng-deep .trade-agreements-grid .e-grid .e-columnheader {
+::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
     color: $light-blue !important;
 }
 
-::ng-deep.trade-agreements-grid .e-grid .e-headercell,
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
     background-color: #eee !important;
 }
 
-::ng-deep.trade-agreements-grid .e-grid .e-headercelldiv {
+::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
     font-family: $opensans-bold !important;
     font-size: $font-size-small!important;
     white-space: normal !important;
+}
+
+::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
+.e-pager .e-currentitem:hover {
+    background-color: $light-blue !important
 }
 
 //#endregion tableStyles

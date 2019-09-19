@@ -1,12 +1,13 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, ExcelExportProperties } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 
 
@@ -28,7 +29,7 @@ export class AgreementTrackingComponent implements OnInit {
   public inactiveAgreements: boolean = false;
   statusList: any;
   public isActiveAgreement: Boolean = false;
-  // public toolbar: ToolbarItems[] | Object;
+  public toolbar: ToolbarItems[] | Object;
   public filterOptions: FilterSettingsModel;
   //dataProvider: any;
   dataFilter: any = [];
@@ -81,12 +82,10 @@ export class AgreementTrackingComponent implements OnInit {
     this.getScreenSize();
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    // this.toolbar = ['Search'];
-
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
-
+    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
@@ -236,7 +235,17 @@ export class AgreementTrackingComponent implements OnInit {
       }, args.cell as HTMLTableCellElement);
     }
   }
-
-
-
+      // Opcion para Excel
+      toolbarClick(args: ClickEventArgs): void {
+        if (args.item.id == "export") {
+          var date = new Date().toISOString().slice(0, 10);
+          var archiveName = 'Reporte_De_Acuerdos_' + date + '.xlsx'
+    
+          const excelExportProperties: ExcelExportProperties = {
+            fileName: archiveName
+          };
+    
+          this.grid.excelExport(excelExportProperties);
+        }
+      }
 }

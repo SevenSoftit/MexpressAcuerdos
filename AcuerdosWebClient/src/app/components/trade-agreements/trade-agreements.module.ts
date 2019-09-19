@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, SearchService, ToolbarService, ForeignKeyService} from "@syncfusion/ej2-angular-grids";
+import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, SearchService, ToolbarService, ForeignKeyService, ExcelExportService} from "@syncfusion/ej2-angular-grids";
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
@@ -61,7 +61,8 @@ const routes: Routes = [
     ResizeService,
     SearchService,
     ToolbarService,
-    ForeignKeyService
+    ForeignKeyService,
+    ExcelExportService
 
   ]
 })

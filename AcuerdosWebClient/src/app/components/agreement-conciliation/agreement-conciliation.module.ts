@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EditService,PageService,FilterService,SortService,ResizeService,GridModule} from "@syncfusion/ej2-angular-grids";
+import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, ExcelExportService, ToolbarService} from "@syncfusion/ej2-angular-grids";
 import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { AgreementConciliationComponent } from './agreement-conciliation.component';
@@ -20,7 +20,8 @@ L10n.load({
   'es-ES': {
       'grid': {
           'EmptyRecord': 'Sin coincidencias',
-          'Search': 'Buscar'
+          'Search': 'Buscar',
+          'ExcelExport': 'Exportar a Excel'
       }
   }
 });  
@@ -55,6 +56,8 @@ const routes: Routes = [
     FilterService,
     SortService,
     ResizeService,
+    ToolbarService,
+    ExcelExportService
     
   ],
 })

@@ -24,7 +24,6 @@
 <div class="row new-agreement-table-top trade-agreements-filters">
     <div class="col-md-3 trade-agreements-radio-b">
         <label class="span-active">Filtro</label>
-        <!-- <span class="span-active">1: </span> -->
         <div class="form-check d-inline-block agreements-radio-buttons">
             <input type="radio" name="activeAgreements" id="activeAgreements" value="option1" [checked]="activeAgreements" (change)="listSpecificHeaderAgreement($event)">
             <label for="activeAgreements">Activos</label>
@@ -68,9 +67,9 @@
 <!-- Listado de acuerdos -->
 <div class="row ml-0 mr-0 trade-agreements-grid">
     <div class="col-lg-12 col-md-12">
-        <ejs-grid #grid [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'
-            (dataBound)='dataBound()' [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
-            <e-columns>tooltip
+        <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [allowExcelExport]='true' [toolbar]='toolbar' [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort'
+            allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)='dataBound()' [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
+            <e-columns>
                 <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='142' textAlign='Center'>
                 </e-column>
                 <e-column field='type_Agreement_Name' headerText='Tipo de acuerdo' width='122' textAlign='Center'>

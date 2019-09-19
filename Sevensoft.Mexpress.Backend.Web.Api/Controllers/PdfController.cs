@@ -26,15 +26,14 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         [HttpPost]
         public IActionResult CreatePdf([FromBody] Common.Ac_Mtr_Agreement_Product_Info_Detail list)
         {
-            try
-            {
 
-                string output = string.Empty;
+            try
+            {   
+                String output = "";
                 output = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaDestinoReporteAcuerdos"), "Informe_General_Acuerdo" + "_" + list.Name_Agree + ".pdf");
                 FileStream fs = new FileStream(output, FileMode.Create);
-                Document document = new Document(iTextSharp.text.PageSize.A2, 20f, 20f, 0f, 40f); //30f, 20f, 0f, 40f
+                Document document = new Document(iTextSharp.text.PageSize.A2, 20f, 20f, 0f, 40f); //30f, 20f, 0f, 40f             
                 PdfWriter pw = PdfWriter.GetInstance(document, fs);
-                document.Open();
                 pw.PageEvent = new HeaderFooter();
 
                 BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
@@ -43,6 +42,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 Font fontTextColumnHeader = new Font(bf, 14, 1, BaseColor.WHITE);
                 Font fontTextTable = new Font(bf, 12, 0, BaseColor.BLACK);
 
+                
                 //Tabla para insertar espacios en blanco
                 PdfPTable pdfTableBlack = new PdfPTable(1);
                 pdfTableBlack.DefaultCell.Border = 0;
@@ -60,6 +60,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 jpg.SpacingAfter = 2f;
                 //Alineacion de la imagen:
                 jpg.Alignment = Element.ALIGN_CENTER;
+                document.Open();
                 document.Add(jpg);
 
                 //Tabla para insertar informacion varia del reporte:
@@ -68,31 +69,31 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 pdfTableVariedInformation.WidthPercentage = 100f;
                 pdfTableVariedInformation.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
 
-                PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: "+list.Name_Agree, fontVariedInformation));
+                PdfPCell cellInfo1 = new PdfPCell(new Paragraph("Nombre del acuerdo: " + list.Name_Agree, fontVariedInformation));
                 cellInfo1.Border = 0;
                 cellInfo1.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo1);
-    
-                PdfPCell cellInfo2 = new PdfPCell(new Paragraph("Tipo de acuerdo: "+list.Agreement_Type_Name, fontVariedInformation));
+
+                PdfPCell cellInfo2 = new PdfPCell(new Paragraph("Tipo de acuerdo: " + list.Agreement_Type_Name, fontVariedInformation));
                 cellInfo2.Border = 0;
                 cellInfo2.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo2);
 
-                PdfPCell cellInfo3 = new PdfPCell(new Paragraph("Proveedor: "+list.Provider_Name, fontVariedInformation));
+                PdfPCell cellInfo3 = new PdfPCell(new Paragraph("Proveedor: " + list.Provider_Name, fontVariedInformation));
                 cellInfo3.Border = 0;
                 cellInfo3.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo3);
 
-                PdfPCell cellInfo4 = new PdfPCell(new Paragraph("Fecha inicial del acuerdo: "+list.Date_Start, fontVariedInformation));
+                PdfPCell cellInfo4 = new PdfPCell(new Paragraph("Fecha inicial del acuerdo: " + list.Date_Start, fontVariedInformation));
                 cellInfo4.Border = 0;
                 cellInfo4.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo4);
 
-                PdfPCell cellInfo5 = new PdfPCell(new Paragraph("Fecha de finalización del acuerdo: "+list.Date_Finish, fontVariedInformation));
+                PdfPCell cellInfo5 = new PdfPCell(new Paragraph("Fecha de finalización del acuerdo: " + list.Date_Finish, fontVariedInformation));
                 cellInfo5.Border = 0;
                 cellInfo5.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo5);
-                
+
                 document.Add(pdfTableVariedInformation);
                 document.Add(pdfTableBlack);
 
@@ -120,7 +121,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                     PdfPCell cell = new PdfPCell();
                     cell = new PdfPCell(new Paragraph(val, fontTextColumnHeader));
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    cell.BackgroundColor = new BaseColor(31, 136, 176); 
+                    cell.BackgroundColor = new BaseColor(31, 136, 176);
                     table.AddCell(cell);
                 }
                 foreach (var item in list.AgreementProductInfoDetailList)
@@ -174,10 +175,10 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 }
 
                 document.Add(table);
-
+                document.Close();
 
                 var Url_Attachment = output.Replace(configuration.GetValue<string>("Files:FilePathReplace"), configuration.GetValue<string>("Files:FilePathDownload"));
-                document.Close();
+                fs.Close();
                 return Ok(Url_Attachment);
             }
             catch (Exception ex)
@@ -193,8 +194,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
     {
         public override void OnEndPage(PdfWriter writer, Document document)
         {
-                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
-                Font fontTextFooter = new Font(bf, 14, 1, BaseColor.BLACK);
+            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font fontTextFooter = new Font(bf, 14, 1, BaseColor.BLACK);
 
             // // Inicio configuracion Header
             // PdfPTable tbHeader = new PdfPTable(3);
@@ -217,7 +218,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             tbFooter.DefaultCell.Border = 0;
             tbFooter.AddCell(new Paragraph());
 
-             PdfPCell _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress", fontTextFooter));
+            PdfPCell _cell = new PdfPCell(new Paragraph("Acuerdos Mexpress", fontTextFooter));
             _cell.HorizontalAlignment = Element.ALIGN_CENTER;
             _cell.Border = 0;
             tbFooter.AddCell(_cell);
