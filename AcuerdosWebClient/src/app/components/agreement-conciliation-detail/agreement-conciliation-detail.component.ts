@@ -201,17 +201,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
-  dateChange() {
-    var diff = this.newAgreementForm.value.endDatePicker.getTime() - this.newAgreementForm.value.startDatePicker.getTime();
-
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-
-    if (diffDays < 0)
-      diffDays = 0;
-    else if (diffDays == 0)
-      diffDays = 1;
-  }
-
   listTypeOfAgreement() { 
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {

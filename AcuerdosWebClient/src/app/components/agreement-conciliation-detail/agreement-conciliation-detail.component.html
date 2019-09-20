@@ -62,7 +62,7 @@
                 <div class="form-group text date-picker-custom">
                     <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Inicio</label>
-                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" (dateChange)="dateChange()" readonly>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" readonly>
                     <mat-datepicker-toggle disabled matSuffix [for]="startDatePicker">
                     </mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
@@ -73,7 +73,7 @@
                 <div class="form-group text date-picker-custom">
                     <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Fin</label>
-                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" (dateChange)="dateChange()" readonly>
+                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" readonly>
                     <mat-datepicker-toggle disabled matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </div>

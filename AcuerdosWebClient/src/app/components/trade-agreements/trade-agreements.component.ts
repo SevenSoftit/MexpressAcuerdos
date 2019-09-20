@@ -320,9 +320,9 @@ export class TradeAgreementsComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(FeedbackModalComponent, {
       data: { contactInfo: dataSuccess },
-      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '40vh', minHeight: '23vh'
     });
-    setTimeout(() => dialogRef.close(), 5000);
+    setTimeout(() => dialogRef.close(), 5300);
   }
 
   public agreementConciledAlertModal() {
@@ -335,9 +335,9 @@ export class TradeAgreementsComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(FeedbackModalComponent, {
       data: { contactInfo: dataSuccess },
-      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '40vh', minHeight: '23vh'
     });
-    setTimeout(() => dialogRef.close(), 5000);
+    setTimeout(() => dialogRef.close(), 5300);
   }
 
   tooltip(args: QueryCellInfoEventArgs) {

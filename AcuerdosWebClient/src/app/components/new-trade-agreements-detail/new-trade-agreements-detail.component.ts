@@ -221,8 +221,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementForm.patchValue({
         agreement_name: this.agreementDetail.info.name_Agreement,
         description: this.agreementDetail.info.description_Agreement,
-        startDatePicker: new Date(this.agreementDetail.info.date_Start),
-        endDatePicker: new Date(this.agreementDetail.info.date_Finish),
+        startDatePicker: this.agreementDetail.info.date_Start,
+        endDatePicker: this.agreementDetail.info.date_Finish,
         emailNotification: this.agreementDetail.info.email
 
       });
@@ -329,7 +329,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
 
-      // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
@@ -342,9 +341,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;
-      // this.newAgreementDetailHeaderModel.Provider_Name = (filterProviderName.length == 0 ? '' : filterProviderName[0].name_Provider);
       this.newAgreementDetailHeaderModel.Provider_Name = '';
-      debugger;
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
@@ -407,14 +404,14 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     // startDate.setHours(0);
     // endDate.setHours(0);
 
-    var diff = this.newAgreementForm.value.endDatePicker.getTime() - this.newAgreementForm.value.startDatePicker.getTime();
+    // var diff = this.newAgreementForm.value.endDatePicker.getTime() - this.newAgreementForm.value.startDatePicker.getTime();
 
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    // var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
-    if (diffDays < 0)
-      diffDays = 0;
-    else if (diffDays == 0)
-      diffDays = 1;
+    // if (diffDays < 0)
+    //   diffDays = 0;
+    // else if (diffDays == 0)
+    //   diffDays = 1;
 
     // this.newAgreementForm.patchValue({
     //   workedDays: diffDays + 1
