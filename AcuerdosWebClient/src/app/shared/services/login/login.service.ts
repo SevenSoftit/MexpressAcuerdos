@@ -60,7 +60,6 @@ export class LoginService {
 loginLocalApi(loginData:LoginModel) {
 
   //var data = "grant_type=password&username=" + loginData.Usuario_Autenticacion + "&password=" + loginData.Password_Autenticacion + "&client_id=" + environment.clientId;
-
   const url = loginData.apiServiceBaseUri +"api/token/"+ loginData.Metodo_Autenticacion;
   return this.http.post<LoginModel>(url,loginData,httpOptions).pipe(
     tap((product:LoginModel) => console.log(''))

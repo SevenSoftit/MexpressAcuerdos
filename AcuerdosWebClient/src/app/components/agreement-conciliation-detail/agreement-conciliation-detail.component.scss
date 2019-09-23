@@ -253,24 +253,46 @@
 }
 
 .agreement-top {
-    margin-top: 2vh;
+    margin-top: 5vh;
 }
 
-.conciliation-resume {
-    background: $disable-button;
-    border-radius: 0.4rem 0.7rem 7.7rem;
-    padding: 0.5rem;
-    margin-left: 0;
-    margin-right: 0;
-    width: 40%;
+.border-section {
+    border: 1px solid #EEEEEE;
+}
+
+.border-section-header {
+    border: 1px solid $light-blue;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
 .label-resume-conciliation {
-    font-family: $opensans-regular;
-    font-size: 1rem;
-    color: #000;
+    font-family: $opensans-bold;
+    font-size: 1.2rem;
+    color: $light-blue;
 }
 
-.span-resume-conciliation {
-    font-family: $opensans-semibold;
+.label-conciliation-statistics {
+    font-family: $opensans-bold;
+    font-size: 1.1rem;
+    color: $black;
+}
+
+.label-conciliation-detail {
+    font-family: $opensans-regular;
+    font-size: 1rem;
+    color: $black;
+    margin-top: 0.5rem;
+}
+
+.format-column {
+    text-align: center;
+    display: inline-grid;
+    margin-top: 1rem;
+}
+
+.provider-margin {
+    margin-left: 1.5rem;
 }

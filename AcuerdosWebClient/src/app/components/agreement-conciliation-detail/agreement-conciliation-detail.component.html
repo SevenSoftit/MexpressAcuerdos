@@ -91,13 +91,13 @@
                 <input readonly type="email" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification" placeholder="Correo">
             </div>
             <!--Activa input de monto maximo-->
-            <div class="col-md-2">
-                <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máximo</label>
+            <div class="col-md-1">
+                <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máx</label>
                 <mat-slide-toggle disabled id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
                 </mat-slide-toggle>
             </div>
             <!--Muestra el input de monto maximo-->
-            <div class="col-md-1" *ngIf="showAmountInput">
+            <div class="col-md-2" *ngIf="showAmountInput">
                 <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
                 <input readonly type="number" min="0" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
             </div>
@@ -113,31 +113,54 @@
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
             </div>
         </div>
-        <div class="row ml-0 mr-0 agreement-top conciliation-resume">
-            <!--Muestra el input de monto recuperado-->
-            <div class="col-md-12">
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="nameAgree" class="label-resume-conciliation"><span class="span-resume-conciliation">Acuerdo:</span>&nbsp;&nbsp;&nbsp;{{nameAgree}}</label>
-                </div>
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="status_agree" class="label-resume-conciliation"><span class="span-resume-conciliation">Estado del acuerdo:</span>&nbsp;&nbsp;&nbsp;{{status_agree}}</label>
-                </div>
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="status_type" class="label-resume-conciliation"><span class="span-resume-conciliation">Tipo de acuerdo:</span>&nbsp;&nbsp;&nbsp;{{status_type}}</label>
-                </div>
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="recovery_amount" class="label-resume-conciliation"><span class="span-resume-conciliation">Monto recuperado:</span>&nbsp;&nbsp;&nbsp;{{recovery_amount}}</label>
-                </div>
-                <!-- <input readonly type="number" class="form-control new-agreement-form-input" id="recovery_amount" aria-describedby="Monto recuperado" [(ngModel)]="recovery_amount" [ngModelOptions]="{standalone: true}" placeholder="Monto recuperado"> -->
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="provid_Name" class="label-resume-conciliation"><span class="span-resume-conciliation">Proveedor:</span>&nbsp;&nbsp;&nbsp;{{provid_Name}}</label>
-                </div>
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="initial_Date" class="label-resume-conciliation"><span class="span-resume-conciliation">Fecha inicial del acuerdo:</span>&nbsp;&nbsp;&nbsp;{{initial_Date}}</label>
-                </div>
-                <div class="row ml-0 mr-0 agreement-top">
-                    <label for="end_Date" class="label-resume-conciliation"><span class="span-resume-conciliation">Fecha final del acuerdo:</span>&nbsp;&nbsp;&nbsp;{{end_Date}}</label>
-                </div>
+        <hr class="border-section">
+
+        <div class="row ml-0 mr-0 agreement-top">
+            <div class="col-md-4 text-center">
+                <label for="general" class="label-resume-conciliation">General</label>
+            </div>
+            <div class="col-md-4 text-center">
+                <label for="status" class="label-resume-conciliation">Estado</label>
+            </div>
+            <div class="col-md-4 text-center">
+                <label for="date" class="label-resume-conciliation">Fecha</label>
+            </div>
+        </div>
+        <hr class="border-section-header">
+        <div class="row ml-0 mr-0">
+            <div class="col-md-4 format-column">
+                <label for="agreementType" class="label-conciliation-statistics">Tipo de acuerdo</label>
+                <label for="agreementTypeDetail" class="label-conciliation-detail">{{status_type}}</label>
+            </div>
+            <div class="col-md-4 format-column">
+                <label for="recoveryAmmount" class="label-conciliation-statistics">Monto recuperado</label>
+                <label for="recoveryAmmountDetail" class="label-conciliation-detail">{{recovery_amount}}</label>
+            </div>
+            <div class="col-md-4 format-column">
+                <label for="startDate" class="label-conciliation-statistics">Fecha inicial del acuerdo</label>
+                <label for="startDateDetail" class="label-conciliation-detail">{{initial_Date}}</label>
+            </div>
+        </div>
+        <hr class="border-section-header">
+        <div class="row ml-0 mr-0">
+            <div class="col-md-4 format-column">
+                <label for="agreementName" class="label-conciliation-statistics">Nombre del acuerdo</label>
+                <label for="agreementNameDetail" class="label-conciliation-detail">{{nameAgree}}</label>
+            </div>
+            <div class="col-md-4 format-column">
+                <label for="agreementStatus" class="label-conciliation-statistics">Estado del acuerdo</label>
+                <label for="agreementStatusDetail" class="label-conciliation-detail">{{status_agree}}</label>
+            </div>
+            <div class="col-md-4 format-column">
+                <label for="finishDate" class="label-conciliation-statistics">Fecha final del acuerdo</label>
+                <label for="finishDateDetail" class="label-conciliation-detail">{{end_Date}}</label>
+            </div>
+        </div>
+        <hr class="border-section-header">
+        <div class="row ml-0 mr-0">
+            <div class="col-md-4 format-column">
+                <label for="providerName" class="label-conciliation-statistics">Proveedor</label>
+                <label for="providerNameDetail" class="label-conciliation-detail provider-margin">{{provid_Name}}</label>
             </div>
         </div>
     </form>

@@ -183,7 +183,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                var error = "Debe cerrar el PDF anterior para guardar el siguiente";
+                var error = ex.Message;
                 return BadRequest(error);
             }
         }

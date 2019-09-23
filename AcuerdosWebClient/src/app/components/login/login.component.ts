@@ -100,7 +100,6 @@ export class LoginComponent implements OnInit {
 
             this.loginService.loginLocalApi(this.loginModel).subscribe(
               data => {
-
                 utiles.createCacheAuthorizationClient(data.value);
 
                 if (this.loginModel !== undefined || this.loginModel != null) {

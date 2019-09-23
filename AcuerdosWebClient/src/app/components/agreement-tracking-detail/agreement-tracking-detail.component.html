@@ -94,13 +94,13 @@
             </div>
 
             <!--Activa input de monto maximo-->
-            <div class="col-md-2">
-                <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máximo</label>
+            <div class="col-md-1">
+                <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máx</label>
                 <mat-slide-toggle disabled id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
                 </mat-slide-toggle>
             </div>
             <!--Muestra el input de monto maximo-->
-            <div class="col-md-1" *ngIf="showAmountInput">
+            <div class="col-md-2" *ngIf="showAmountInput">
                 <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
                 <input readonly type="number" min="0" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
             </div>

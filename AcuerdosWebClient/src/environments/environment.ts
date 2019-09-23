@@ -10,7 +10,7 @@ export const environment = {
     production: false,                                                   // Producción: http://192.168.20.114/SevenSoft.Security.BackEnd.Web.Api.MExp/
                                                                          // Producción Desarrollo: http://74.208.253.79/SevenSoft.Security.BackEnd.Web.Api/  
     //options: options,
-    clientId: 'MEXPRESS_AC',
+    clientId: 'MEXPRESS_AC', 
   
     /************** INFO SISTEMA *******************/
 
