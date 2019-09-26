@@ -22,10 +22,12 @@
                 </button>
             </div>
             <!--Activador de acuerdos-->
-            <div class="col-md-2">
-                <label for="agreement_activator " class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del acuerdo</label>
-                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+            <div class="col-md-2 text-center">
+                <label for="agreement_activator" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del acuerdo</label>
+                <span class="label-status-inactive">Inactivo</span>
+                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle-special" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
+                <span class="label-status-active">Activo</span>
             </div>
         </div>
     </div>

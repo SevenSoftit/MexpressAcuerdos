@@ -118,6 +118,12 @@
     background: $light-blue !important;
 }
 
+.new-agreement-slide-toggle-special {
+    width: fit-content;
+    // display: block;
+    margin: 0.35rem auto auto;
+}
+
 .new-agreement-slide-toggle {
     width: fit-content;
     display: block;
@@ -250,4 +256,21 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.label-status-inactive {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $black;
+    line-height: 0.8rem;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.label-status-active {
+    font-family: $opensans-semibold;
+    font-size: $font-size-small;
+    color: $black;
+    line-height: 0.8rem;
+    margin-left: 1rem;
 }

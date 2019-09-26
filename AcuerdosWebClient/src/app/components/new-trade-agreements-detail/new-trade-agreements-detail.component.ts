@@ -72,7 +72,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public moneyModel: MoneyModel = new MoneyModel();
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   public providerModel: ProviderModel = new ProviderModel();
-  agreement_activator: boolean = false;
+  agreement_activator: boolean = true;
   showGoals = false;
   allproducts_activator = false;
   pk_Ac_Trade_Agreement: number = 0;
@@ -324,7 +324,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     if (this.type_of_agreement == undefined) {
       this.errorTypeOfAgreement = true;    
-    }
+    } 
 
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
