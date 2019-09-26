@@ -24,6 +24,7 @@ import { ProviderService } from 'src/app/shared/services/TaProvider/provider.ser
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
 import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-loader.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -114,8 +115,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   showAmountInput = false;
   emailNotification: string = '';
   submitted = false;
+  yearStart: number = 0;
+  yearEnd: number = 0;
 
-  constructor(private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
+  constructor(private datePipe: DatePipe, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
@@ -167,7 +170,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
-      startDatePicker: new FormControl(new Date()),
+      startDatePicker: new FormControl(new Date()), //new Date(this.doo.getTime() - this.doo.getTimezoneOffset() * -60000)
       endDatePicker: new FormControl(new Date()),
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
@@ -313,7 +316,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     //   this.errorDate = true;
     //   this.errorStartDate = true;
     // }
-    if (this.newAgreementForm.value.startDatePicker > this.newAgreementForm.value.endDatePicker) {
+   
+    if (this.datePipe.transform(this.newAgreementForm.value.startDatePicker, 'yyyy/MM/dd') > this.datePipe.transform(this.newAgreementForm.value.endDatePicker, 'yyyy/MM/dd')) {
       this.errorDate = true;
       this.errorEndDate = true;
     }
@@ -328,7 +332,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
 
     if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
-
+      var fechaInicial = new Date(this.datePipe.transform(this.newAgreementForm.value.startDatePicker, 'yyyy/MM/dd'));
+      var fechaFinal = new Date(this.datePipe.transform(this.newAgreementForm.value.endDatePicker, 'yyyy/MM/dd'));
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
       this.newAgreementDetailHeaderModel.Pk_Cat_Type_Agreement = this.type_of_agreement;
       this.newAgreementDetailHeaderModel.Pk_Ac_Cat_Provider = this.providerN;
@@ -336,8 +341,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Modification_User = this.infoUser.username;
       this.newAgreementDetailHeaderModel.Name_Agreement = this.newAgreementForm.value.agreement_name;
       this.newAgreementDetailHeaderModel.Description_Agreement = this.newAgreementForm.value.description;
-      this.newAgreementDetailHeaderModel.Date_Start = this.newAgreementForm.value.startDatePicker;
-      this.newAgreementDetailHeaderModel.Date_Finish = this.newAgreementForm.value.endDatePicker;
+      this.newAgreementDetailHeaderModel.Date_Start = fechaInicial;
+      this.newAgreementDetailHeaderModel.Date_Finish = fechaFinal;
       this.newAgreementDetailHeaderModel.Date_Process = this.dateProcess;
       this.newAgreementDetailHeaderModel.Date_Reprocess = this.dateReprocess;
       this.newAgreementDetailHeaderModel.All_Products = this.allproducts_activator;

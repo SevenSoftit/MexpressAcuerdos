@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NewTradeAgreementsDetailComponent } from './new-trade-agreements-detail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,10 +18,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectInfiniteScrollModule } from 'ng-mat-select-infinite-scroll';
 
 
-setCulture('es-ES');
+setCulture('es-LATAM');
 
 L10n.load({
-  'es-ES': {
+  'es-LATAM': {
     'grid': {
       'Add': 'Agregar',
       'ExcelExport': 'Exportar a Excel',
@@ -73,7 +73,8 @@ const routes: Routes = [
     FreezeService,
     ResizeService,
     ExcelExportService,
-    PdfExportService
+    PdfExportService,
+    DatePipe
   ]
 })
 export class NewTradeAgreementsDetailModule { }
