@@ -59,3 +59,11 @@ Sevensoft.Mexpress.Utilities.Extender/obj/Debug/netstandard2.0/Sevensoft.Mexpres
 *.json
 *.json
 *.cache
+AcuerdosWebClient/publish/index.html
+AcuerdosWebClient/publish/main-es2015.8de38dc0d24d20718c39.js
+AcuerdosWebClient/publish/main-es2015.d976e31e3626b5563e70.js
+AcuerdosWebClient/publish/main-es5.2fe8d9e37ece0312cb69.js
+AcuerdosWebClient/publish/main-es5.8c4f956e1452c13eb773.js
+Sevensoft.Mexpress.Backend.BusinessLogic/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Backend.BusinessLogic.assets.cache
+Sevensoft.Mexpress.Backend.Common/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Backend.Common.assets.cache
+Sevensoft.Mexpress.Backend.DataAccess/obj/Debug/netstandard2.0/Sevensoft.Mexpress.Backend.DataAccess.assets.cache
