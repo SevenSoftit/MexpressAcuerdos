@@ -316,7 +316,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     //   this.errorDate = true;
     //   this.errorStartDate = true;
     // }
-   
+   //Validación de fechas 
     if (this.datePipe.transform(this.newAgreementForm.value.startDatePicker, 'yyyy/MM/dd') > this.datePipe.transform(this.newAgreementForm.value.endDatePicker, 'yyyy/MM/dd')) {
       this.errorDate = true;
       this.errorEndDate = true;
