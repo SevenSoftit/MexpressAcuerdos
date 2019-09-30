@@ -81,9 +81,10 @@ export class AgreementConciliationDetailComponent implements OnInit {
   initial_Date: string = '';
   end_Date: string = '';
   disabledButtonConciliation: boolean = false;
+  statusValidation: boolean = false;
 
-  constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
-    private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
+  constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
+    private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
     this._common._setLoading(true);
@@ -95,12 +96,11 @@ export class AgreementConciliationDetailComponent implements OnInit {
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
           var agreement = new NewAgreementModel();
-
-          agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          
+          agreement.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;       
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
           this.disabledButtonConciliation = (this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
+          this.statusValidation = (this.agreementDetail.info.agreement_Status_Name == 'Conciliado' || this.agreementDetail.info.agreement_Status_Name == 'Finalizado') ? true : false;
           // Resumen table
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.status_agree = this.agreementDetail.info.agreement_Status_Name;
@@ -293,7 +293,8 @@ export class AgreementConciliationDetailComponent implements OnInit {
   openListEvidenceModal() {
     const object = {
       header_File: this.headerFile,
-      name_Agree: this.nameAgree
+      name_Agree: this.nameAgree,
+      status_validation: this.statusValidation
     }
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object },

@@ -9,8 +9,8 @@
             </div>
             <div class="col-md-5 buttons-content">
 
-                <button [disabled]='disabledButtonConciliation' class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
-                    <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
+                <button class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
+                    <mat-icon class="mr-2">attachment</mat-icon>Ver adjuntos
                 </button>
 
                 <button [disabled]='disabledButtonConciliation' class="excel-button float-right mr-3" (click)="conciliateAgreement()" mat-raised-button>
@@ -21,7 +21,7 @@
             <div class="col-md-2 text-center">
                 <label for="agreement_activator" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del acuerdo</label>
                 <span class="label-status-inactive">Inactivo</span>
-                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle-special" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                <mat-slide-toggle disabled id="agreement_activator" class="new-agreement-slide-toggle-special" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
                 <span class="label-status-active">Activo</span>
             </div>

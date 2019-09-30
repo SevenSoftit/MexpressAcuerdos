@@ -46,7 +46,7 @@
                                 <mat-icon class="icons">arrow_downward</mat-icon>
                             </button>
 
-                            <button mat-icon-button (click)="deleteEvidence(evidence)" [ngClass]="{'button-disabled': paySlipStatus == 5}" [disabled]="paySlipStatus == 5">
+                            <button mat-icon-button (click)="deleteEvidence(evidence)" [ngClass]="{'button-disabled': disableButton}" [disabled]="disableButton">
                                 <mat-icon class="icons">delete</mat-icon>
                             </button>
                         </div>
@@ -79,8 +79,9 @@
 
     <div class="row list-evidence-buttons-top">
         <div class="col-md-6">
-            <button mat-button class="save-button " (click)="openAddEvidenceModal()">Añadir evidencia <mat-icon class="pending-employee-roster-detail-note"
-            >add_circle_outline</mat-icon></button>
+            <button mat-button [ngClass]="{'button-disabled': disableButton}" [disabled]="disableButton" class="save-button " (click)="openAddEvidenceModal()">Añadir evidencia 
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
         </div>
 
         <div class=" offset-md-4 col-md-2">

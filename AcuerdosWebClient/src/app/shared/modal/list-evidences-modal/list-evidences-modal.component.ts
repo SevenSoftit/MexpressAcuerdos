@@ -22,11 +22,12 @@ export class ListEvidencesModalComponent implements OnInit {
   notRepeatEvidence: any;
   onAdd = new EventEmitter();
   step = 0;
+  disableButton: boolean = false;
 
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataModal: any, private matDialog: MatDialog, private commonService: CommonService, private evidenceService: EvidenceService, private _common: CommonService,public dialog: MatDialog, private activated_route: ActivatedRoute) { 
-    
+    this.disableButton = this.dataModal.confirmInfo.status_validation;
   }
 
   ngOnInit() {
