@@ -10,11 +10,11 @@
             </div>
             <div class="col-md-5 buttons-content">
                 <button *ngIf="enableExcel" class="excel-button float-right mr-3" (click)="openDialogImportProduct()" mat-raised-button [disabled]="showGoals"> 
-                    <mat-icon class="mr-2">import_export</mat-icon>Subir excel
+                    <mat-icon class="mr-0">import_export</mat-icon>Subir excel
                 </button>
 
                 <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
-                    <mat-icon class="mr-2">attachment</mat-icon>Subir adjuntos
+                    <mat-icon class="mr-0">attachment</mat-icon>Subir adjuntos
                 </button>
 
                 <button *ngIf="enableUpdateAgreement && !showWorkTable" class="excel-button float-right mr-3" (click)="saveAgreementHeader()" mat-raised-button>Actualizar acuerdo

@@ -133,14 +133,14 @@
                 <e-columns>
                     <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
                     <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
-                    <e-column field='product_Amount' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
+                    <e-column field='product_Amount' [valueAccessor]='currencyFormatter' type="number" editType='numericedit' headerText='Monto del acuerdo' width='170' textAlign='Center'></e-column>
                     <e-column field='product_Quantity_Sold' headerText='Cantidad de artículos vendidos' width='180' textAlign='Center'></e-column>
-                    <e-column field='product_Amount_Recovery' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
+                    <e-column field='product_Amount_Recovery' type="number" editType='numericedit' headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='pk_Cat_Agreement_Details_Resume' [isPrimaryKey]="true" [visible]="false" headerText='pk_Cat_Agreement_Details_Resume' width='5' textAlign='Center'></e-column>
                     <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-
+                    <e-column field='id_Currency' [visible]="false" headerText='Moneda(COLONES, DOLARES)' textAlign='Center'></e-column>
 
                     <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120>
                         <ng-template #template let-dataAgreements>
@@ -167,7 +167,7 @@
                     <e-column field='bill_Id' headerText='Nº Factura' textAlign='Center' width='180'></e-column>
                     <e-column field='product_Serie' headerText='Serie' textAlign='Center' width='180'></e-column>
                     <e-column field='product_Quantity' headerText='Cantidad' textAlign='Center' width='150'></e-column>
-                    <e-column field='product_Cost' headerText='Costo' textAlign='Center' width='150'></e-column>
+                    <e-column field='product_Cost' type="number" editType='numericedit' headerText='Costo' textAlign='Center' width='150'></e-column>
                     <e-column field='date_Invoice' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}" headerText='Fecha de venta' textAlign='Center' width='180'></e-column>
 
                     <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Ac_Trade_Agreement' textAlign='Center' width='5'></e-column>

@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changePassword() {
-    const dialogRef = this.matDialog.open(ChangePasswordModalComponent, {
+      this.matDialog.open(ChangePasswordModalComponent, {
       minWidth: "650px",
       maxWidth: "650px",
       maxHeight: "438px",

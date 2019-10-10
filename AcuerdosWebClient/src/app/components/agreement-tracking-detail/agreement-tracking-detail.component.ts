@@ -609,6 +609,14 @@ export class AgreementTrackingDetailComponent implements OnInit {
       });
   }
 
+  public currencyFormatter = (field: string, data1: object, column: object) => {
+    if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+      return '₡' + data1['product_Amount'];  
+    }else{
+      return '$' + data1['product_Amount'];
+  
+    } 
+  }
 
 
 }
