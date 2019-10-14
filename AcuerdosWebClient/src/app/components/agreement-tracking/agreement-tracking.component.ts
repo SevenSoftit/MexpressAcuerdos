@@ -138,6 +138,7 @@ export class AgreementTrackingComponent implements OnInit {
         this.dropdataProvider = [];
 
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        debugger;
         this.dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    

@@ -13,6 +13,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Product_Name = "";
             Id_Currency = "";
             Product_Amount = 0;
+            Recovery_Amount = 0;
             
             Pk_Ac_Trade_Agreement = 0;
             Pk_Cat_Type_Agreement = 0;
@@ -62,7 +63,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Product_Name { get; set; }
         public String Id_Currency { get; set; }
         public Decimal Product_Amount { get; set; }
-        
+        public Decimal Recovery_Amount { get; set; }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int32 Pk_Cat_Type_Agreement { get; set; }
         public Int32 Pk_Ac_Cat_Provider { get; set; }
