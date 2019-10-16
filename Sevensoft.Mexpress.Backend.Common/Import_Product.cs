@@ -57,6 +57,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Status_Option = false;
             Expired_Indicator = false;
             Type_Agreement_Name = "";
+            String_Recovery_Amount = "";
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -108,6 +109,7 @@ namespace Sevensoft.Mexpress.Backend.Common
          public bool Status_Option { get; set; }
          public bool Expired_Indicator { get; set; }
          public String Type_Agreement_Name { get; set; }
+         public String String_Recovery_Amount { get; set; }
         
         public static implicit operator long(Import_Product v)
         {

@@ -282,3 +282,16 @@
     // display: block;
     margin: 0.35rem auto auto;
 }
+
+.label-date-process {
+    font-family: $opensans-regular;
+    font-size: 1rem;
+    color: $light-blue;
+    margin-top: 0.5rem;
+}
+
+.icon-process {
+    color: $light-blue;
+    vertical-align: text-bottom !important;
+    margin-top: 1rem !important;
+}

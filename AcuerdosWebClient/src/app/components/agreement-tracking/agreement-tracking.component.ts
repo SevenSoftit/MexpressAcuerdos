@@ -138,7 +138,6 @@ export class AgreementTrackingComponent implements OnInit {
         this.dropdataProvider = [];
 
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
-        debugger;
         this.dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    
@@ -248,5 +247,13 @@ export class AgreementTrackingComponent implements OnInit {
     
           this.grid.excelExport(excelExportProperties);
         }
+      }
+
+      public currencyFormatterRecovery = (field: string, data1: object, column: object) => {
+        if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+          return '₡' + data1['string_Recovery_Amount'];    
+        }else{
+          return '$' + data1['string_Recovery_Amount'];
+        } 
       }
 }

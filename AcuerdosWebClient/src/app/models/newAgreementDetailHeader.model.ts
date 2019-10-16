@@ -49,6 +49,7 @@ export class NewAgreementDetailHeaderModel {
     Status_Option: Boolean;
     Expired_Indicator: Boolean;
     Type_Agreement_Name: String;
+    String_Recovery_Amount: String;
 
 
     constructor() {
@@ -100,5 +101,6 @@ export class NewAgreementDetailHeaderModel {
             this.Expired_Indicator = false;
             this.Email = '';
             this.Type_Agreement_Name = '';
+            this.String_Recovery_Amount = '';
     }
 }

@@ -82,6 +82,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
   end_Date: string = '';
   disabledButtonConciliation: boolean = false;
   statusValidation: boolean = false;
+  currencyName: string = '';
 
   constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private typeOfAgreementService: TypeOfAgreementService,
@@ -108,8 +109,10 @@ export class AgreementConciliationDetailComponent implements OnInit {
           this.provid_Name = this.agreementDetail.info.provider_Name; 
           this.initial_Date = this.agreementDetail.info.string_Date_Start;
           this.end_Date = this.agreementDetail.info.string_Date_Finish;
+          this.recovery_amount = this.agreementDetail.info.string_Recovery_Amount;
+          this.currencyName = this.agreementDetail.info.id_Currency;
           //End resumen table
-             
+               
           if(this.agreementDetail.info.max_Amount !== 0){ 
               this.maxAmountToggle = true;
               this.showAmountInput = true;

@@ -108,6 +108,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado' || this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
 
+
           if (this.agreementDetail.info.max_Amount !== 0) {
             this.maxAmountToggle = true;
             this.showAmountInput = true;
@@ -152,8 +153,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
         emailNotification: this.agreementDetail.info.email
-      });
-
+      });  
+    
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
       this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
       this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
@@ -164,9 +165,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount = this.agreementDetail.info.max_Amount;
-    } else {
+    } else {  
       this.newAgreementForm.setValue({
-        agreement_name: '',
+        agreement_name: '',  
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),

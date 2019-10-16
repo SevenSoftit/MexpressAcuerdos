@@ -248,4 +248,12 @@ public onChangeProvider(args: any): void {
           }
         }
 
+        public currencyFormatterRecovery = (field: string, data1: object, column: object) => {
+          if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+            return '₡' + data1['string_Recovery_Amount'];    
+          }else{
+            return '$' + data1['string_Recovery_Amount'];
+          } 
+        }
+
 }
