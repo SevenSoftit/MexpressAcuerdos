@@ -23,7 +23,7 @@ export class TradeAgreementsComponent implements OnInit {
   screenWidth: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
-  public dataTable: Object[] = [];
+  public dataTable: any = [];
   public activeAgreements: boolean = true;
   public inactiveAgreements: boolean = false;
   statusList: any;
@@ -128,6 +128,14 @@ export class TradeAgreementsComponent implements OnInit {
         this.dropdata = [];
         this.dropdataProvider = [];
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        
+        let hash = {};
+        this.dataTable = this.dataTable.filter(function(current) {
+          let exists = (!hash[current.pk_Ac_Trade_Agreement] || false);
+          hash[current.pk_Ac_Trade_Agreement] = true;
+          return exists;
+        });
+
         dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
@@ -192,6 +200,14 @@ export class TradeAgreementsComponent implements OnInit {
         this.dropdata = [];
         this.dropdataProvider = [];
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        
+        let hash = {};
+        this.dataTable = this.dataTable.filter(function(current) {
+          let exists = (!hash[current.pk_Ac_Trade_Agreement] || false);
+          hash[current.pk_Ac_Trade_Agreement] = true;
+          return exists;
+        });
+        
         dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
