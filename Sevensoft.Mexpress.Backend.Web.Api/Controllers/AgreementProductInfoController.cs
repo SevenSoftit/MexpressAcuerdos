@@ -146,6 +146,44 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         }
 
         /// <summary>
+        /// Nombre: Guardar Ac_Mtr_Agreement_Product_Info
+        /// Descripcion: Metodo utilizado para guardar un objeto de tipo Ac_Mtr_Agreement_Product_Info.
+        /// Fecha de creacion: 20/11/2019
+        /// Autor: Gustavo ZC
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [Route("CalculateAmounts")]
+        [HttpPost]
+        public async Task<IActionResult> CalculateAmounts([FromBody] Common.Ac_Mtr_Agreement_Product_Info model)
+        {
+            try
+            {
+
+                var message = new Message();
+                message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Ac_Mtr_Agreement_Product_Info");
+                message.Operation = Operation.CalculateAmounts;
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
+                message.MessageInfo = model.SerializeObject();
+                using (var businessLgic = new ServiceManager())
+                {
+                    var result = await businessLgic.DoWork(message);
+                    if (result.Status == Status.Failed)
+                    {
+                        return BadRequest(result.Result);
+                    }
+                    var resultModel = result.DeSerializeObject<Common.Ac_Mtr_Agreement_Product_Info>();
+
+                    return Ok(resultModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        /// <summary>
         /// Nombre: Eliminar Ac_Mtr_Agreement_Product_Info
         /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Ac_Mtr_Agreement_Product_Info.
         /// Fecha de creacion: 09/08/2019

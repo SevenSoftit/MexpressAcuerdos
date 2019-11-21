@@ -355,7 +355,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
-
+          var agreementRefresh = new NewAgreementModel();
+          agreementRefresh.Pk_Ac_Trade_Agreement = this.headerFile;
+          this.listAgreement(agreementRefresh);
           const datafailed = {
             labelTitile: '¡Atención!',
             icon: 'new_releases',
@@ -811,6 +813,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         }
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
+        this.grid.refresh();
       },
       error => {
         this._common._setLoading(false);

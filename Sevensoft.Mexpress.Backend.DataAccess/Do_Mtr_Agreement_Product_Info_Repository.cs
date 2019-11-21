@@ -95,6 +95,22 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         }
     }
 
+        public async Task CalculateAmounts(Common.Ac_Mtr_Agreement_Product_Info model)
+    {
+        using (var connection = new SqlConnection(ConnectionString))
+        {
+            await connection.QueryAsync<
+                Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Product_Info>
+                ("PA_MAN_AC_MTR_CALCULATE_AMOUNTS",
+                param: new
+                {
+                        P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
+                        P_BEHAVIOR = model.Behavior
+                },
+                commandType: CommandType.StoredProcedure);
+        }
+    }
+
     public async Task<Common.Ac_Mtr_Agreement_Product_Info> SaveScalar(Common.Ac_Mtr_Agreement_Product_Info model)
     {
         using (var connection = new SqlConnection(ConnectionString))

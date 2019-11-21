@@ -3453,11 +3453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj",
+      "projectUniqueName": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj",
       "projectName": "Sevensoft.Mexpress.Utilities.Extender",
-      "projectPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj",
+      "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\Sevensoft.Mexpress.Utilities.Extender.csproj",
       "packagesPath": "C:\\Users\\Gustavo ZC\\.nuget\\packages\\",
-      "outputPath": "c:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\obj\\",
+      "outputPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Utilities.Extender\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3515,10 +3515,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

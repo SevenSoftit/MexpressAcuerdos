@@ -76,7 +76,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   options$: Observable<string[]>;
   pageNumber = 1;
   completeLoad = false;
-  percentage: string = '25%'
+  percentage: string = '25%'  
   //#endregion InfiniteScrollVariables
   maxAmountToggle = false;
   maxAmount: number = 0;
@@ -364,6 +364,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.tradeAgreementDetailService.listAgreementDetailsResume(agreementProductInfoModel).subscribe(
       dataI => {
         this.dataTable = dataI;
+        this.grid.refresh();
         this.getKeyStatus();
       },
       error => {
@@ -386,6 +387,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         this.enableEntireAgreement = false;
         this.enableArrow = true;
         this.dataTableDetail = dataJ;
+        this.grid.refresh();
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
       },

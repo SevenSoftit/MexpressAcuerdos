@@ -23,6 +23,7 @@
             Generatem,
             Create,
             DeleteSpecific,
+            CalculateAmounts
         }
 
         public enum Status

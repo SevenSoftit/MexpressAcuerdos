@@ -107,6 +107,14 @@ export class TradeAgreementDetailService {
       );
   }
 
+  calculateAmounts (contactInfoData: any) {
+    const url = this.apiUrl + 'api/agreementProductInfo/CalculateAmounts';
+    return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
+      tap((product: any) => console.log('')),
+      catchError(this.handleError<any>(''))
+      );
+  }
+
         /*------------------------------------------------------------------
   * Author: Gustavo ZC
   * Creation date: 12/08/2019

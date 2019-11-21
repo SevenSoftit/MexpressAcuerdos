@@ -32,6 +32,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                         return await Save(message);
                     case Operation.Delete:
                         return await Delete(message);
+                    case Operation.CalculateAmounts:
+                        return await CalculateAmounts(message);
                     default:
                         var resultMessage = new Message();
                         resultMessage.Status = Status.Failed;
@@ -111,6 +113,47 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                     resultMessage.MessageInfo = returObject.SerializeObject();
                     return resultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                var resultMessage = new Message();
+                resultMessage.Status = Status.Failed;
+                resultMessage.Result = string.Format("{0}", ex.Message);
+                resultMessage.MessageInfo = string.Empty;
+                return resultMessage;
+            }
+        }
+
+        public async virtual Task<Message> CalculateAmounts(Message message)
+        {
+            try
+            {
+                var resultMessage = new Message();
+                var model = message.DeSerializeObject<Common.Ac_Mtr_Agreement_Product_Info>();
+                using (var repository = new Do_Mtr_Agreement_Product_Info_Repository(message.Connection))
+                {               
+                    if (model.Agreement_Product_Info_List != null && model.Agreement_Product_Info_List.Count > 0)
+                    {
+                        foreach (var product in model.Agreement_Product_Info_List)
+                        {
+                            model.Pk_Ac_Trade_Agreement = product.Pk_Ac_Trade_Agreement;
+                            model.Behavior = product.Behavior;
+
+                            await repository.CalculateAmounts(model);
+                            resultMessage.Status = Status.Success;
+                            resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+                            resultMessage.MessageInfo = String.Empty;
+                        }
+
+                    }else{
+                    await repository.Save(model);
+                    resultMessage.Status = Status.Success;
+                    resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+                    resultMessage.MessageInfo = String.Empty;
+                    }
+                    return resultMessage;
+
                 }
             }
             catch (Exception ex)

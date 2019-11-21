@@ -1,3 +1,4 @@
+import { NewAgreementDetailHeaderModel } from './newAgreementDetailHeader.model';
 
 export class AgreementProductInfoModel {
 
@@ -19,6 +20,7 @@ export class AgreementProductInfoModel {
     Active: Boolean;
     Name_Currency: string;
     Behavior: string;
+    Agreement_Product_Info_List : Array<NewAgreementDetailHeaderModel>;
 
     constructor() {
         this.Pk_Cat_Agreement_Details_Resume = 0;
@@ -38,5 +40,6 @@ export class AgreementProductInfoModel {
         this.Active = false;
         this.Name_Currency = '';
         this.Behavior = '';
+        this.Agreement_Product_Info_List = [];
     }
 }

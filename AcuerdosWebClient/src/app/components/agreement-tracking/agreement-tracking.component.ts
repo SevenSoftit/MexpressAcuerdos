@@ -8,6 +8,7 @@ import { DataUtil } from '@syncfusion/ej2-data';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
 
 
 
@@ -36,6 +37,8 @@ export class AgreementTrackingComponent implements OnInit {
   agreementOption: any;
   status: boolean = true;
   public tooltipp: Tooltip;
+  agreementProductInfoModel = new AgreementProductInfoModel();
+  public arrayPost: any = [];
 
 
   //config for status filter
@@ -136,13 +139,29 @@ export class AgreementTrackingComponent implements OnInit {
       dataQ => {
         this.dropdata = [];
         this.dropdataProvider = [];
+        this.arrayPost = [];
 
         this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        this.arrayPost = this.dataTable;
+        this.grid.refreshDataSource;
         this.dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    
-          
         this._common._setLoading(false);
+
+        //Insertar logica para el calculo posterior de montos,
+        //esta logica va a eliminar e insertar la nueva data en la tabla details resume
+        debugger;        
+          this.agreementProductInfoModel.Agreement_Product_Info_List = this.arrayPost;
+          this.tradeAgreementDetailService.calculateAmounts(this.agreementProductInfoModel).subscribe(
+            dataI => {
+            },
+            error => {
+              this._common._setLoading(false);
+              console.error(error);
+            }
+          )
+        
       },
       error => {
         this._common._setLoading(false);
