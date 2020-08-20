@@ -1,9 +1,0 @@
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.deps.json
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.csprojAssemblyReference.cache
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.csproj.CoreCompileInputs.cache
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.AssemblyInfoInputs.cache
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.AssemblyInfo.cs
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
-E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.Common\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
