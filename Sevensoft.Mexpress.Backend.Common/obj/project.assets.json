@@ -30,7 +30,7 @@
   },
   "libraries": {
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "a/iSwnRZb+LHFk49hQOyThh/ZNC3vsbZsF65XwQIb863qF6msmhdQtxGXFL28Ob2NsCz/drEj28BJd/YPpLRBg==",
+      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -179,23 +179,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gustavo ZC\\.nuget\\packages\\": {},
+    "C:\\Users\\dev2\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj",
+      "projectUniqueName": "e:\\GitHub\\MexpressAcuerdos\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj",
       "projectName": "Sevensoft.Mexpress.Backend.Common",
-      "projectPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj",
-      "packagesPath": "C:\\Users\\Gustavo ZC\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub\\MEXPRESSACUERDOS\\Sevensoft.Mexpress.Backend.Common\\obj\\",
+      "projectPath": "e:\\GitHub\\MexpressAcuerdos\\Sevensoft.Mexpress.Backend.Common\\Sevensoft.Mexpress.Backend.Common.csproj",
+      "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+      "outputPath": "e:\\GitHub\\MexpressAcuerdos\\Sevensoft.Mexpress.Backend.Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Gustavo ZC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -227,16 +227,10 @@
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }
