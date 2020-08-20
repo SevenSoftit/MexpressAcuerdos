@@ -1,0 +1,14 @@
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\bin\Debug\netcoreapp2.2\AcuerdosWebClient.deps.json
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\bin\Debug\netcoreapp2.2\AcuerdosWebClient.runtimeconfig.json
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\bin\Debug\netcoreapp2.2\AcuerdosWebClient.runtimeconfig.dev.json
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\bin\Debug\netcoreapp2.2\AcuerdosWebClient.dll
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\bin\Debug\netcoreapp2.2\AcuerdosWebClient.pdb
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.csprojAssemblyReference.cache
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.csproj.CoreCompileInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.RazorAssemblyInfo.cache
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.RazorAssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.AssemblyInfoInputs.cache
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.AssemblyInfo.cs
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.RazorTargetAssemblyInfo.cache
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.dll
+C:\GitHub\MEXPRESSACUERDOS\AcuerdosWebClient\obj\Debug\netcoreapp2.2\AcuerdosWebClient.pdb

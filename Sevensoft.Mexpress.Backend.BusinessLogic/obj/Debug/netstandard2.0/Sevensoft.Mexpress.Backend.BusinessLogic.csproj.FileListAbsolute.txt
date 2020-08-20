@@ -1,0 +1,16 @@
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.deps.json
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.DataAccess.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.csprojAssemblyReference.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.csproj.CoreCompileInputs.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.AssemblyInfoInputs.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.AssemblyInfo.cs
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.csproj.CopyComplete
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Backend.BusinessLogic\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.BusinessLogic.pdb

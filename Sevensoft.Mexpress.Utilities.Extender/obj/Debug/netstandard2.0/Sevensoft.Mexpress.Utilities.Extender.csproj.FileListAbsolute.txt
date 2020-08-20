@@ -1,0 +1,12 @@
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.deps.json
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\bin\Debug\netstandard2.0\Sevensoft.Mexpress.Backend.Common.pdb
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.csprojAssemblyReference.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.csproj.CoreCompileInputs.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.AssemblyInfoInputs.cache
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.AssemblyInfo.cs
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.csproj.CopyComplete
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.dll
+E:\GitHub\MexpressAcuerdos\Sevensoft.Mexpress.Utilities.Extender\obj\Debug\netstandard2.0\Sevensoft.Mexpress.Utilities.Extender.pdb
