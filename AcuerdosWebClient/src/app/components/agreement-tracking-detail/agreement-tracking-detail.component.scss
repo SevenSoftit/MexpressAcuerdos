@@ -8,6 +8,9 @@
 
 .trade-agreements-description {
     font-family: $opensans-semibold;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .agreement-top-header {
@@ -38,6 +41,9 @@
 // .new-agreement-form-top {
 //     margin-top: 3vh;
 // }
+.new-agreement-form-top {
+    padding: 0.8rem 0;
+}
 // .agreement-top {
 //     margin-top: 2vh;
 // }
@@ -233,7 +239,9 @@
 
 .goals-info {
     font-family: $opensans-bold;
-    font-size: 2.4rem;
+    // font-size: 2.4rem;
+    font-size: 2rem;
+    padding: 0.5rem;
     color: #bdbdbd;
     text-align: center;
 }
@@ -254,6 +262,8 @@
 
 .back-arrow {
     cursor: pointer;
+    color: $light-blue;
+    margin: 0.2rem;
 }
 
 .cursor_view {
@@ -294,4 +304,33 @@
     color: $light-blue;
     vertical-align: text-bottom !important;
     margin-top: 1rem !important;
+}
+
+.back-arrow {
+    color: $light-blue;
+    display: flex;
+    align-items: center;
+    border: 0.5px solid $light-blue;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    width: 36px;
+    height: 36px;
+}
+
+.back-arrow:hover {
+    color: #fff;
+    background: $light-blue;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+}
+
+.activator-container {
+    border-style: dotted;
+    border-radius: 0.437rem;
+    padding: 0.4rem;
+    background: #DADADA;
 }

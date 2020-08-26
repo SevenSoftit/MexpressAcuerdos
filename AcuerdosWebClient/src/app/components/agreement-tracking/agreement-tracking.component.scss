@@ -38,6 +38,7 @@
 // Tabla 
 .new-agreement-table-top {
     margin-top: 4vh;
+    background: #00adef26;
 }
 
 .e-pager .e-currentitem,
@@ -116,18 +117,23 @@
     height: 18px;
     border: 1px solid #DADADA;
     border-radius: 100%;
-    background: #DADADA;
+    // background: #DADADA;
+    background: #fff;
 }
 
 [type="radio"]:checked+label:after,
 [type="radio"]:not(:checked)+label:after {
     content: '';
-    width: 14px;
-    height: 14px;
+    // width: 14px;
+    // height: 14px;
+    width: 10px;
+    height: 10px;
     background: $light-blue;
     position: absolute;
-    top: 2px;
-    left: 2px;
+    // top: 2px;
+    // left: 2px;
+    top: 4px;
+    left: 4px;
     border-radius: 100%;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
@@ -189,6 +195,7 @@
 
 .trade-agreements-edit-icon {
     cursor: pointer;
+    color: #212529;
 }
 
 //#region tableStyles

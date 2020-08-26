@@ -1,38 +1,39 @@
 @import "../../../styles.scss";
+
 .tittle-agreement {
-    font-size: $font-size-medium;
-    text-align: left;
-    font-family: $opensans-bold;
-    color: $light-blue;
+  font-size: $font-size-medium;
+  text-align: left;
+  font-family: $opensans-bold;
+  color: $light-blue;
 }
 
 .trade-agreements-description {
-    font-family: $opensans-semibold;
+  font-family: $opensans-semibold;
 }
 
 .agreement-top-header {
-    margin-top: 2vh;
+  margin-top: 2vh;
 }
 
 .agr-activator {
-    background: #E0E0E0;
-    padding: 0.5rem;
-    border-radius: 0.8rem;
+  background: #E0E0E0;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
 }
 
 // .agr-activator-lbl {
 //     display: block;
 // }
 .agreement-scroll {
-    height: 85vh!important;
+  height: 85vh !important;
 }
 
 .create-agreement-sector {
-    background: #eeeeee;
-    border-radius: 0rem;
-    padding: 1.3rem;
-    margin-left: 0;
-    margin-right: 0;
+  background: #eeeeee;
+  border-radius: 0rem;
+  padding: 1.3rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 // .new-agreement-form-top {
@@ -41,281 +42,299 @@
 // .agreement-top {
 //     margin-top: 2vh;
 // }
+.new-agreement-form-top {
+  padding: 0.8rem 0;
+}
+
 .new-agreement-label-input {
-    font-family: $opensans-semibold;
-    font-size: $font-size-small;
-    color: #000;
+  font-family: $opensans-semibold;
+  font-size: $font-size-small;
+  color: #000;
 }
 
 .new-agreement-form-input {
-    background: $backgroud-input;
-    border-radius: 0.25rem;
-    color: $dark-gray !important;
+  background: $backgroud-input;
+  border-radius: 0.25rem;
+  color: $dark-gray !important;
 }
 
 .new-agreement-select {
-    display: block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: $backgroud-input;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: $backgroud-input;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .new-agreement-table-top {
-    margin-top: 2vh;
+  margin-top: 2vh;
 }
 
 .new-agreement-doc-errors {
-    font-family: $opensans-semibold;
-    font-size: $font-size-small;
-    color: $red;
-    margin-left: 4rem;
-    margin-top: 1.2rem;
+  font-family: $opensans-semibold;
+  font-size: $font-size-small;
+  color: $red;
+  margin-left: 4rem;
+  margin-top: 1.2rem;
 }
 
 .new-agreement-buttons-top {
-    margin-top: 1vh;
+  margin-top: 1vh;
 }
 
 .excel-button {
-    font-family: "Open Sans SemiBold";
-    font-size: 0.8rem;
-    color: #F9F9F9;
-    background-color: $light-blue;
-    border-color: $light-blue;
-    border-radius: 0.437rem;
-    min-width: 7rem;
+  font-family: "Open Sans SemiBold";
+  font-size: 0.8rem;
+  color: #F9F9F9;
+  background-color: $light-blue;
+  border-color: $light-blue;
+  border-radius: 0.437rem;
+  min-width: 7rem;
+  outline: none;
+  box-shadow: none;
 }
 
 .new-trade-agreement-modal-date-input {
-    font-family: $opensans-semibold;
-    display: inline-block;
-    width: 98%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: $black;
-    background-color: $light-gray-softer;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    text-align: center;
+  font-family: $opensans-semibold;
+  display: inline-block;
+  width: 98%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $black;
+  background-color: $light-gray-softer;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  text-align: center;
 }
 
 .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
-    background: $light-blue !important;
+  background: $light-blue !important;
 }
 
 .new-agreement-slide-toggle {
-    width: fit-content;
-    display: block;
-    margin: 0.35rem auto auto;
+  width: fit-content;
+  display: block;
+  margin: 0.35rem auto auto;
 }
 
 ::ng-deep .e-pager .e-currentitem {
-    background: $light-blue;
+  background: $light-blue;
 }
 
 ::ng-deep .e-pager .e-currentitem:hover {
-    background: $light-blue;
+  background: $light-blue;
 }
 
 ::ng-deep .e-grid .e-content {
-    overflow-x: hidden !important;
+  overflow-x: hidden !important;
 }
 
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
-    font-family: $opensans-semibold !important;
-    font-size: $font-size-small!important;
-    color: $white!important;
-    background-color: $light-blue!important;
-    border-color: $light-blue!important;
-    border-radius: 0.437rem!important;
-    min-width: 7rem!important;
+  font-family: $opensans-semibold !important;
+  font-size: $font-size-small !important;
+  color: $white !important;
+  background-color: $light-blue !important;
+  border-color: $light-blue !important;
+  border-radius: 0.437rem !important;
+  min-width: 7rem !important;
 }
 
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
-    color: $white!important;
+  color: $white !important;
 }
 
 .new-trade-agreement-lbl-input {
-    display: block;
+  display: block;
 }
 
 ::ng-deep .date-picker-custom .mat-datepicker-toggle,
 .mat-datepicker-content .mat-calendar-next-button,
 .mat-datepicker-content .mat-calendar-previous-button {
-    margin-left: -2.35rem!important;
+  margin-left: -2.35rem !important;
 }
 
 .new-trade-agr-toogle-lbl {
-    justify-content: center;
+  justify-content: center;
 }
 
 .disabled_button {
-    background-color: $light-gray !important;
-    border-color: $light-gray !important;
+  background-color: $light-gray !important;
+  border-color: $light-gray !important;
 }
 
 .custom-padding-top {
-    padding-top: 0.3rem !important;
+  padding-top: 0.3rem !important;
 }
 
 .begin-agreement-creation {
-    font-family: $opensans-bold;
-    color: #bdbdbd;
-    width: 100%;
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 10vh;
+  font-family: $opensans-bold;
+  color: #bdbdbd;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10vh;
 }
 
 //#region tableStyles
 ::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
-    color: $light-blue !important;
+  color: $light-blue !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
-    background-color: #eee !important;
+  background-color: #eee !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
-    font-family: $opensans-bold !important;
-    font-size: $font-size-small!important;
-    white-space: normal !important;
+  font-family: $opensans-bold !important;
+  font-size: $font-size-small !important;
+  white-space: normal !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
-    background-color: $light-blue !important
+  background-color: $light-blue !important
 }
 
 //#endregion tableStyles
 .new-trade-agreement-show-goals-icon {
-    color: $light-blue-dark;
+  color: $light-blue-dark;
 }
 
 .new-trade-show-goals-content {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .new-trade-agreement-detail-goals-lbl {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .new-trade-agreement-detail-goals-lbl:hover {
-    color: $light-blue;
+  color: $light-blue;
 }
 
 .icon-align {
-    float: right;
+  float: right;
 }
 
 .new-trade-agreement-detail-button {
-    display: inline-block;
-    justify-content: center;
+  display: inline-block;
+  justify-content: center;
 }
 
 .goals-info {
-    font-family: $opensans-bold;
-    font-size: 2.4rem;
-    color: #bdbdbd;
-    text-align: center;
+  font-family: $opensans-bold;
+  font-size: 2.4rem;
+  color: #bdbdbd;
+  text-align: center;
 }
 
 .goals-info-content {
-    border: 1px solid #1F88B0;
-    margin: 4vh 2rem 0 2rem;
-    /* padding: 0vh; */
-    border-radius: 0.8rem;
-    background: rgba(240, 240, 240, 0.5);
+  border: 1px solid #1F88B0;
+  margin: 4vh 2rem 0 2rem;
+  /* padding: 0vh; */
+  border-radius: 0.8rem;
+  background: rgba(240, 240, 240, 0.5);
 }
 
 .buttons-content {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .agreement-top {
-    margin-top: 5vh;
+  margin-top: 5vh;
 }
 
 .border-section {
-    border: 1px solid #EEEEEE;
+  border: 1px solid #EEEEEE;
 }
 
 .border-section-header {
-    border: 1px solid $light-blue;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-    margin-left: 5rem;
-    margin-right: 5rem;
+  border: 1px solid $light-blue;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .label-resume-conciliation {
-    font-family: $opensans-bold;
-    font-size: 1.2rem;
-    color: $light-blue;
+  font-family: $opensans-bold;
+  font-size: 1.2rem;
+  color: $light-blue;
 }
 
 .label-conciliation-statistics {
-    font-family: $opensans-bold;
-    font-size: 1.1rem;
-    color: $black;
+  font-family: $opensans-bold;
+  font-size: 1.1rem;
+  color: $black;
 }
 
 .label-conciliation-detail {
-    font-family: $opensans-regular;
-    font-size: 1rem;
-    color: $black;
-    margin-top: 0.5rem;
+  font-family: $opensans-regular;
+  font-size: 1rem;
+  color: $black;
+  margin-top: 0.5rem;
 }
 
 .format-column {
-    text-align: center;
-    display: inline-grid;
-    margin-top: 1rem;
+  text-align: center;
+  display: inline-grid;
+  margin-top: 1rem;
 }
 
 .provider-margin {
-    margin-left: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 .label-status-inactive {
-    font-family: $opensans-semibold;
-    font-size: $font-size-small;
-    color: $black;
-    line-height: 0.8rem;
-    display: inline-block;
-    margin-right: 1rem;
+  font-family: $opensans-semibold;
+  font-size: $font-size-small;
+  color: $black;
+  line-height: 0.8rem;
+  display: inline-block;
+  margin-right: 1rem;
 }
 
 .label-status-active {
-    font-family: $opensans-semibold;
-    font-size: $font-size-small;
-    color: $black;
-    line-height: 0.8rem;
-    margin-left: 1rem;
+  font-family: $opensans-semibold;
+  font-size: $font-size-small;
+  color: $black;
+  line-height: 0.8rem;
+  margin-left: 1rem;
 }
 
 .new-agreement-slide-toggle-special {
-    width: fit-content;
-    // display: block;
-    margin: 0.35rem auto auto;
+  width: fit-content;
+  // display: block;
+  margin: 0.35rem auto auto;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+}
+
+.activator-container {
+    border-style: dotted;
+    border-radius: 0.437rem;
+    padding: 0.4rem;
+    background: #DADADA;
 }

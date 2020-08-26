@@ -1,215 +1,223 @@
 @import "../../../styles.scss";
+
 .tittle-agreement {
-    font-size: $font-size-medium;
-    text-align: left;
-    font-family: $opensans-bold;
-    color: $light-blue;
+  font-size: $font-size-medium;
+  text-align: left;
+  font-family: $opensans-bold;
+  color: $light-blue;
 }
 
 .trade-agreements-description {
-    font-family: $opensans-semibold;
+  font-family: $opensans-semibold;
 }
 
 .agreement-top-header {
-    margin-top: 2vh;
+  margin-top: 2vh;
 }
 
 .trade-agreements-filters {
-    background: #EEE;
-    margin-left: 0.9rem;
-    margin-right: 0.9rem;
-    padding: 0.35rem;
-    justify-content: space-between;
-    align-items: baseline;
+  background: #EEE;
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
+  padding: 0.35rem;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .agreement-scroll {
-    height: 85vh!important;
+  height: 85vh !important;
 }
 
 .trade-agreements-header {
-    background: #eeeeee;
-    border-radius: 0rem;
-    padding: 1.3rem;
-    margin-left: 0;
-    margin-right: 0;
+  background: #eeeeee;
+  border-radius: 0rem;
+  padding: 1.3rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 // Tabla 
 .new-agreement-table-top {
-    margin-top: 4vh;
+  margin-top: 4vh;
+  background: #00adef26;
 }
 
 .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
-    background: $light-blue !important;
+  background: $light-blue !important;
 }
 
 ::ng-deep .e-pager .e-currentitem {
-    background: $light-blue;
+  background: $light-blue;
 }
 
 ::ng-deep .e-pager .e-currentitem:hover {
-    background: $light-blue;
+  background: $light-blue;
 }
 
 ::ng-deep .e-grid .e-content {
-    overflow-x: hidden !important;
+  overflow-x: hidden !important;
 }
 
 .radioButton-agreement {
-    font-family: $opensans-bold;
-    font-style: normal;
-    font-size: 0.8rem;
-    line-height: 1rem;
+  font-family: $opensans-bold;
+  font-style: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 
 // Toolbar
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
-    font-family: $opensans-semibold !important;
-    font-size: $font-size-small!important;
-    color: $white!important;
-    background-color: $light-blue!important;
-    border-color: $light-blue!important;
-    border-radius: 0.437rem!important;
-    min-width: 7rem!important;
+  font-family: $opensans-semibold !important;
+  font-size: $font-size-small !important;
+  color: $white !important;
+  background-color: $light-blue !important;
+  border-color: $light-blue !important;
+  border-radius: 0.437rem !important;
+  min-width: 7rem !important;
 }
 
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text:hover {
-    color: $white!important;
+  color: $white !important;
 }
 
 //End toolbar
 
 // RadioButtons
 .agreements-radio-buttons {
-    font-family: $opensans-regular;
-    font-style: normal;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    color: $black;
+  font-family: $opensans-regular;
+  font-style: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: $black;
 }
 
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
 
 [type="radio"]:checked+label,
 [type="radio"]:not(:checked)+label {
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #666;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
 }
 
 [type="radio"]:checked+label:before,
 [type="radio"]:not(:checked)+label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #DADADA;
-    border-radius: 100%;
-    background: #DADADA;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #DADADA;
+  border-radius: 100%;
+  // background: #DADADA;
+  background: #fff;
 }
 
 [type="radio"]:checked+label:after,
 [type="radio"]:not(:checked)+label:after {
-    content: '';
-    width: 14px;
-    height: 14px;
-    background: $light-blue;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+  content: '';
+  // width: 14px;
+  // height: 14px;
+  width: 10px;
+  height: 10px;
+  background: $light-blue;
+  position: absolute;
+  // top: 2px;
+  // left: 2px;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 [type="radio"]:not(:checked)+label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
 }
 
 [type="radio"]:checked+label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 
 //COMBOBOX
 .agreement-status-select {
-    display: block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: $backgroud-input;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: $backgroud-input;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .trade-agreements-radio-b {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .trade-agreement-select {
-    width: 60%;
+  width: 60%;
 }
 
 .span-active {
-    margin-right: 1rem !important;
-    font-family: $opensans-bold;
-    font-style: normal;
-    font-size: 0.8rem;
-    line-height: 1rem;
+  margin-right: 1rem !important;
+  font-family: $opensans-bold;
+  font-style: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 
 .span-inactive {
-    margin-right: 1rem !important;
-    font-family: $opensans-bold;
-    font-style: normal;
-    font-size: 0.8rem;
-    line-height: 1rem;
+  margin-right: 1rem !important;
+  font-family: $opensans-bold;
+  font-style: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 
 .trade-agreements-edit-icon {
-    cursor: pointer;
+  cursor: pointer;
+  color: #212529;
 }
 
 //#region tableStyles
 ::ng-deep .newtrade-agreements-grid .e-grid .e-columnheader {
-    color: $light-blue !important;
+  color: $light-blue !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
-    background-color: #eee !important;
+  background-color: #eee !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-grid .e-headercelldiv {
-    font-family: $opensans-bold !important;
-    font-size: $font-size-small!important;
-    white-space: normal !important;
+  font-family: $opensans-bold !important;
+  font-size: $font-size-small !important;
+  white-space: normal !important;
 }
 
 ::ng-deep.newtrade-agreements-grid .e-pager .e-currentitem,
 .e-pager .e-currentitem:hover {
-    background-color: $light-blue !important
+  background-color: $light-blue !important
 }
 
 //#endregion tableStyles

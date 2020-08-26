@@ -1,20 +1,20 @@
 <div class="container-fluid p-0">
     <div class="create-agreement-sector">
         <div class="row  ml-0 mr-0 ">
-            <h5 class="tittle-agreement">Nuevo acuerdo comercial</h5>
+            <h5 class="tittle-agreement pl-3">Nuevo acuerdo comercial</h5>
         </div>
-        <div class="row m-0 pl-3">
-            <div class="col-md-5">
+        <div class="row m-0 pl-1 pr-4">
+            <div class="col-md-5 center-content">
                 <label class="trade-agreements-description">En esta sección se puede guardar y/o editar el acuerdo
                     seleccionado.</label>
             </div>
-            <div class="col-md-5 buttons-content">
+            <div class="col-md-5 buttons-content center-content">
                 <button *ngIf="enableExcel" class="excel-button float-right mr-3" (click)="openDialogImportProduct()" mat-raised-button [disabled]="showGoals"> 
-                    <mat-icon class="mr-0">import_export</mat-icon>Subir excel
+                    Subir excel<mat-icon class="mr-0 ml-2">import_export</mat-icon>
                 </button>
 
                 <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
-                    <mat-icon class="mr-0">attachment</mat-icon>Subir adjuntos
+                    Subir adjuntos<mat-icon class="mr-0 ml-2">attachment</mat-icon>
                 </button>
 
                 <button *ngIf="enableUpdateAgreement && !showWorkTable" class="excel-button float-right mr-3" (click)="saveAgreementHeader()" mat-raised-button>Actualizar acuerdo
@@ -22,7 +22,7 @@
                 </button>
             </div>
             <!--Activador de acuerdos-->
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 text-center activator-container">
                 <label for="agreement_activator" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del acuerdo</label>
                 <span class="label-status-inactive">Inactivo</span>
                 <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle-special" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
