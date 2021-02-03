@@ -6,7 +6,7 @@ let headers = new Headers({ 'Content-Type': 'application/json' });
 export const environment = {
     /************** INFO SISTEMA *******************/
 
-    apiURL: 'http://192.168.20.114/SevenSoft.Security.BackEnd.Web.Api.MExp/', //Desarrollo: http://74.208.217.164/SevenSoft.Security.BackEnd.Web.Api/
+    apiURL: 'http://74.208.217.164/SevenSoft.Security.BackEnd.Web.Api/', //Desarrollo: http://74.208.217.164/SevenSoft.Security.BackEnd.Web.Api/
     production: false,                                                        // Producción: http://192.168.20.114/SevenSoft.Security.BackEnd.Web.Api.MExp/ 
     //options: options,                                                       // Producción Desarrollo: http://74.208.253.79/SevenSoft.Security.BackEnd.Web.Api/
     clientId: 'MEXPRESS_AC',
