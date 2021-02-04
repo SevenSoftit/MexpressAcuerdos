@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID} from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +12,6 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 // import the GridModule for the Grid component
 import { GridModule, ToolbarService, EditService, PageService, FilterService, SortService} from '@syncfusion/ej2-angular-grids';
 
@@ -51,6 +49,9 @@ import { AgreementConciliationDetailModule } from './components/agreement-concil
 import { AgreementReportModule } from './components/agreement-report/agreement-report.module';
 import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -72,12 +73,13 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent
   ],
   imports: [
+    ScrollingModule,
+    NgxMaskModule.forRoot(options),
     CommonModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production}),
@@ -88,7 +90,6 @@ export function createTranslateLoader(http: HttpClient) {
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    ScrollDispatchModule,
     LayoutModule,
     LoadingModule,
     TradeAgreementsModule,

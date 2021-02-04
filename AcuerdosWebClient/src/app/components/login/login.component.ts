@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginModel).subscribe(
         data => {
           this.loginModel = data;
-          debugger
           if(environment.uat == true){
             this.loginModel.apiServiceBaseUri = environment.apiURLTemp;
           }

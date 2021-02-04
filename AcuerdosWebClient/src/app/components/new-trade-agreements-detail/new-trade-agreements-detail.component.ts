@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener, EventEmitter } from '@angul
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, IEditCell } from '@syncfusion/ej2-grids';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, GridLine } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
@@ -43,12 +43,13 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   providerN: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
-  public dataTable: any;
+  public dataTable: any[] = [];
   public workDataTable: any;
   public initialSort: Object;
   public pageSettings: Object;
   screenHeight: any;
   screenWidth: any;
+  public lines: GridLine;
   public editSettings: Object;
   public editSettingsWork: Object;
   public toolbar: ToolbarItems[] | Object;
@@ -111,7 +112,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   percentage:string='25%';
   //#endregion InfiniteScrollVariables
   maxAmountToggle = false;
-  maxAmount: number = 0;
+  maxAmount: string = '0';
   showAmountInput = false;
   emailNotification: string = '';
   submitted = false;
@@ -175,9 +176,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
-
+    this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
-    this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
+    this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top', mode: 'Normal', allowEditOnDblClick: true};
     this.editSettingsWork = { allowEditing: true, allowDeleting: true };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
@@ -238,7 +239,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-      this.maxAmount= this.agreementDetail.info.max_Amount;
+      debugger
+      this.maxAmount= String(this.agreementDetail.info.max_Amount);
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -350,7 +352,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
-      this.newAgreementDetailHeaderModel.Max_Amount = (this.maxAmount!== null)?this.maxAmount:0;
+      debugger
+      this.newAgreementDetailHeaderModel.Max_Amount = Number(this.maxAmount!== null && this.maxAmount !== '0.00') ? Number(this.maxAmount) : 0;
       this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
@@ -572,11 +575,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.docHasErrors = true;
     }
     this.headerFile = args.data.pk_Ac_Trade_Agreement;
-    this.grid.gridLines = 'Both';
-  }
-
-  dataBound() {
-    this.grid.gridLines = 'Both';
   }
 
 
@@ -811,9 +809,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.enableExcel = true;
           this.enableEvidence = true;
         }
+        this.dataTable = [];
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
-        this.grid.refresh();
+        // this.grid.refresh();
       },
       error => {
         this._common._setLoading(false);
