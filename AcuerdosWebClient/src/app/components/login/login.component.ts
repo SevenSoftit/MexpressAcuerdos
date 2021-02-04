@@ -8,6 +8,7 @@ import { LoginService } from 'src/app/shared/services/login/login.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { LoginModel } from 'src/app/models/login.Model';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -84,6 +85,10 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginModel).subscribe(
         data => {
           this.loginModel = data;
+          debugger
+          if(environment.uat == true){
+            this.loginModel.apiServiceBaseUri = environment.apiURLTemp;
+          }
           utiles.createCacheUser(this.loginModel);
           utiles.createInfoMenu(JSON.parse(this.loginModel.roleList));
   
