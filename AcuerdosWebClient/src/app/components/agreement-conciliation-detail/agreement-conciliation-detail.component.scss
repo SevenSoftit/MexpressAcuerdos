@@ -1,5 +1,42 @@
 @import "../../../styles.scss";
 
+.facturation-search{
+  border-style: dashed;
+  border-radius: 4px;
+  padding: 0.4rem;
+  background: #EEEEEE;
+  display: grid;
+}
+
+.title-facturation-search{
+  font-family: $opensans-bold;
+font-size: $font-size-medium;
+align-items: center;
+text-align: center;
+color: $light-blue;
+}
+
+.blue-icon {
+  color: $light-blue;
+  font-size: 2rem;
+  position: absolute;
+  margin-top: 0.7rem;
+  right: 6rem;
+  cursor: pointer;
+}
+.tickets-search-input {
+  background: $light-gray-softer;
+  font-family: $opensans-regular;
+  color: $black;
+  border-radius: 30px;
+  margin-top: 0.5rem;
+}
+
+.example-viewport-principal {
+  height: 45vh;
+  width: 100%;
+}
+
 .tittle-agreement {
   font-size: $font-size-medium;
   text-align: left;

@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarService, EditService, PageService, FilterService, SortService, FreezeService, ResizeService, GridModule, ExcelExportService, PdfExportService } from "@syncfusion/ej2-angular-grids";
 import { MatSelectModule } from '@angular/material/select';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
-import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MaterialModule } from 'src/app/material-module';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -60,7 +59,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule,
     GridModule,
-    DropDownListAllModule,
     MatDatepickerModule,
     MaterialModule,
     MatTooltipModule,

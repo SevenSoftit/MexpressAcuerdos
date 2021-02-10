@@ -67,7 +67,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
   percentage:string='25%';
   //#endregion InfiniteScrollVariables
   maxAmountToggle = false;
-  maxAmount: number = 0;
+  maxAmount: string = '0';
   showAmountInput = false;
   emailNotification: string = '';
   recovery_amount: number = 0;
@@ -165,7 +165,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-      this.maxAmount= this.agreementDetail.info.max_Amount;
+      this.maxAmount= String(this.agreementDetail.info.max_Amount);
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
@@ -351,7 +351,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
     this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
     this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
     this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
-    this.newAgreementDetailHeaderModel.Max_Amount = this.maxAmount;
+    this.newAgreementDetailHeaderModel.Max_Amount = Number(this.maxAmount);
     this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
     this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(

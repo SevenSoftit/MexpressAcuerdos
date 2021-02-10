@@ -1,5 +1,4 @@
 import { Component, OnInit, ɵConsole, Inject } from '@angular/core';
-import { UploaderComponent } from '@syncfusion/ej2-angular-inputs';
 import { utiles } from 'src/environments/utiles';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
@@ -13,7 +12,6 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
   styleUrls: ['./import-product.component.scss']
 })
 export class ImportProductComponent implements OnInit {
-  public uploadObj: UploaderComponent;
   infoUser = utiles.getInfoUser();
   public userName: string = this.infoUser.username;
   public PK_GLB_MTR_ORGANIZATION: string = '1';

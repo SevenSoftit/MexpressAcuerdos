@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">
+    <form [formGroup]="newAgreementForm" novalidate class="new-agreement-form-top">  
         <div class="row mr-0 ml-0">
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
@@ -101,7 +101,7 @@
             <!--Muestra el input de monto maximo-->
             <div class="col-md-2" *ngIf="showAmountInput">
                 <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
-                <input readonly type="number" min="0" class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
+                <input readonly type="text" mask="separator.2" thousandSeparator="," class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
             </div>
             <!--Activa todos los productos-->
             <div class="col-md-2">
@@ -115,57 +115,72 @@
                 <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
             </div>
         </div>
+    </form>
         <hr class="border-section">
-
+        <cdk-virtual-scroll-viewport [itemSize]="200" class="example-viewport-principal">
         <div class="row ml-0 mr-0 agreement-top">
-            <div class="col-md-4 text-center">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center">
                 <label for="general" class="label-resume-conciliation">General</label>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center">
                 <label for="status" class="label-resume-conciliation">Estado</label>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center">
                 <label for="date" class="label-resume-conciliation">Fecha</label>
             </div>
         </div>
         <hr class="border-section-header">
         <div class="row ml-0 mr-0">
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="agreementType" class="label-conciliation-statistics">Tipo de acuerdo</label>
                 <label for="agreementTypeDetail" class="label-conciliation-detail">{{status_type}}</label>
             </div>
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="recoveryAmmount" class="label-conciliation-statistics">Monto recuperado</label>
-                <label for="recoveryAmmountDetail" class="label-conciliation-detail">{{recovery_amount}} {{currencyName}}</label>
+                <label for="recoveryAmmountDetail" class="label-conciliation-detail">{{recovery_amount  | number: "1.2-2"}} {{currencyName}}</label>
             </div>
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="startDate" class="label-conciliation-statistics">Fecha inicial del acuerdo</label>
                 <label for="startDateDetail" class="label-conciliation-detail">{{initial_Date}}</label>
             </div>
         </div>
         <hr class="border-section-header">
         <div class="row ml-0 mr-0">
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="agreementName" class="label-conciliation-statistics">Nombre del acuerdo</label>
                 <label for="agreementNameDetail" class="label-conciliation-detail">{{nameAgree}}</label>
             </div>
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="agreementStatus" class="label-conciliation-statistics">Estado del acuerdo</label>
                 <label for="agreementStatusDetail" class="label-conciliation-detail">{{status_agree}}</label>
             </div>
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="finishDate" class="label-conciliation-statistics">Fecha final del acuerdo</label>
                 <label for="finishDateDetail" class="label-conciliation-detail">{{end_Date}}</label>
             </div>
         </div>
         <hr class="border-section-header">
         <div class="row ml-0 mr-0">
-            <div class="col-md-4 format-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 format-column">
                 <label for="providerName" class="label-conciliation-statistics">Proveedor</label>
                 <label for="providerNameDetail" class="label-conciliation-detail provider-margin">{{provid_Name}}</label>
             </div>
         </div>
-    </form>
+        <div class="row format-column w-100">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="facturation-search ml-4">
+                    <label for="" class="title-facturation-search">Buscar notas de crédito</label>
+                    <label for="">Digite el nombre del <span class="trade-agreements-description">"Proveedor"</span> o <span class="trade-agreements-description">"Monto de Recuperación"</span>para utilizar el buscador.</label>
+                    <div class="d-flex ml-5 mr-5">
+                        <mat-icon class="blue-icon">search</mat-icon>
+                        <input type="text" class="form-control tickets-search-input" [(ngModel)]="searchText">
+                      </div>
+                </div>              
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    
+
 
     <!-- <div *ngIf="showGoals" class="goals-info-content">
         <h2 class="goals-info">El acuerdo comercial esta siendo trabajado con metas.</h2>

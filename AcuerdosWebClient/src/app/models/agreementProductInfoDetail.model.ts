@@ -15,7 +15,9 @@ export class AgreementProductInfoDetailModel {
     Product_Name: string;
     Product_Serie: string;
     Product_Cost: number;
+    String_Product_Cost: string;
     Product_Price: number;
+    String_Product_Price: string;
     Date_Invoice: Date;
     Detail_Days_Warranty: number;
     Return_Invoice: boolean;
@@ -26,7 +28,6 @@ export class AgreementProductInfoDetailModel {
     Client_Identification: string;
     Client_Name: string;
     Date_Process: Date;
-
     Id_Currency: string;
     Active: Boolean;
     Name_Currency: string;
@@ -55,7 +56,9 @@ export class AgreementProductInfoDetailModel {
         this.Product_Name = '';
         this.Product_Serie = '';
         this.Product_Cost = 0;
+        this.String_Product_Cost = '0';
         this.Product_Price = 0;
+        this.String_Product_Price = '0';
         this.Date_Invoice = new Date();
         this.Detail_Days_Warranty = 0;
         this.Return_Invoice = false;

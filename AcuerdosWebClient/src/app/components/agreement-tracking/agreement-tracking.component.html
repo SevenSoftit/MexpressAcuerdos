@@ -33,24 +33,21 @@
       <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [allowExcelExport]='true' [toolbar]='toolbar'
         [dataSource]='secondDataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions'
         [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true'
-        [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound()" [allowResizing]='true'
-        (queryCellInfo)='tooltip($event)'>
+        [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound()" [allowResizing]='true'>
         <e-columns>
           <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='190' textAlign='Center'>
           </e-column>
           <e-column field='type_Agreement_Name' headerText='Tipo de acuerdo' width='162' textAlign='Center'></e-column>
           <e-column field='agreement_Status_Name' headerText='Estado' width='124' textAlign='Center'>
             <ng-template #filterTemplate let-data>
-              <ejs-dropdownlist id='dropdown' (change)=onChange($event) [dataSource]='dropdata' [fields]='fields'
-                [popupHeight]='height'>
+              <ejs-dropdownlist id='dropdown' [(ngModel)]="data.Name" (change)=onChange($event) [dataSource]='dropdata'>
               </ejs-dropdownlist>
             </ng-template>
           </e-column>
-          <e-column field='provider_Name' foreignKeyValue='provider_Name' headerText='Proveedor' width='210'
+          <e-column field='provider_Name' headerText='Proveedor' width='210'
             textAlign='Center'>
             <ng-template #filterTemplate let-data>
-              <ejs-dropdownlist id='ddltooltip' (change)=onChangeProvider($event) [dataSource]='dropdataProvider'
-                [fields]='fields' [popupHeight]='height'>
+              <ejs-dropdownlist id='dropdownProvider' [(ngModel)]="data.Name" (change)=onChangeProvider($event) [dataSource]='dropdataProvider'>
               </ejs-dropdownlist>
             </ng-template>
           </e-column>

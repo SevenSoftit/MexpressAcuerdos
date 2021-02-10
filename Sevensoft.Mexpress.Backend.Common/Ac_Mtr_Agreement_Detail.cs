@@ -20,6 +20,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Modification_User = "";          
             Active = false;
             Name_Currency = "";
+
         }
         public Int64 Pk_Cat_Agreement_Details { get; set; }
         public Int32 Pk_Ac_Trade_Agreement { get; set; }

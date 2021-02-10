@@ -879,7 +879,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
   openGoals() {
     let value = {
-      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement,
+      pk_Ac_Trade_Agreement: this.headerFile,
       is_in_follow_up: false
     }
 

@@ -23,7 +23,9 @@ namespace Sevensoft.Mexpress.Backend.Common
             Product_Name = "";
             Product_Serie = "";
             Product_Cost = 0;
+            String_Product_Cost = "0";
             Product_Price = 0;
+            String_Product_Price = "0";
             Date_Invoice = Convert.ToDateTime("1900-01-01");
             Detail_Days_Warranty = 0;
             Return_Invoice = false;
@@ -62,7 +64,9 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Product_Name { get; set; }
         public String Product_Serie { get; set; }
         public Decimal Product_Cost { get; set; }
+        public String String_Product_Cost { get; set; }
         public Decimal Product_Price { get; set; }
+        public String String_Product_Price { get; set; }
         public DateTime Date_Invoice { get; set; }
         public Int32 Detail_Days_Warranty { get; set; }
         public Boolean Return_Invoice { get; set; }
