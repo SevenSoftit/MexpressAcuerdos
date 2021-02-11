@@ -173,7 +173,7 @@
                     <label for="">Digite el nombre del <span class="trade-agreements-description">"Proveedor"</span> o <span class="trade-agreements-description">"Monto de Recuperación"</span>para utilizar el buscador.</label>
                     <div class="d-flex ml-5 mr-5">
                         <mat-icon class="blue-icon">search</mat-icon>
-                        <input type="text" class="form-control tickets-search-input" [(ngModel)]="searchText">
+                        <input type="text" (keyup)='updateSearch($event)' class="form-control tickets-search-input" [(ngModel)]="searchText">
                       </div>
                 </div>              
             </div>

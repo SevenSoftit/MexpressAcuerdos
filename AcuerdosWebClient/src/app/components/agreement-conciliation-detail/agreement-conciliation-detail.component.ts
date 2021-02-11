@@ -31,58 +31,59 @@ import { utiles } from 'src/environments/utiles';
   styleUrls: ['./agreement-conciliation-detail.component.scss']
 })
 export class AgreementConciliationDetailComponent implements OnInit {
-  newAgreementForm: FormGroup;
-  type_of_agreement: any;
-  providerN: any;
-  screenHeight: any;
-  screenWidth: any;
+  public newAgreementForm: FormGroup;
+  public type_of_agreement: any;
+  public providerN: any;
+  public screenHeight: any;
+  public screenWidth: any;
   public moneyTypeParams: IEditCell;
-  typeOfAgreementList: any;
-  providerList: any = [];
-  headerFile: number = 0;
-  nameAgree: string = '';
+  public typeOfAgreementList: any;
+  public providerList: any = [];
+  public headerFile: number = 0;
+  public nameAgree: string = '';
   public title: string = '';
   public moneyModel: MoneyModel = new MoneyModel();
   public typeOfAgreementModel: TypeOfAgreementModel = new TypeOfAgreementModel();
   public providerModel: ProviderModel = new ProviderModel();
-  agreement_activator: boolean = false;
-  showGoals = false;
-  allproducts_activator = false;
-  dateProcess: Date = new Date();
-  dateReprocess: Date = new Date();
-  listHeader: any = [];
-  catalogModel: CatalogModel = new CatalogModel();
-  agreementDetail: any;
-  fk_Glb_Mtr_Organization: number = 1;
-  option = true;
-  SearchInfo: any = [];
+  public agreement_activator: boolean = false;
+  public showGoals = false;
+  public allproducts_activator = false;
+  public dateProcess: Date = new Date();
+  public dateReprocess: Date = new Date();
+  public listHeader: any = [];
+  public catalogModel: CatalogModel = new CatalogModel();
+  public agreementDetail: any;
+  public fk_Glb_Mtr_Organization: number = 1;
+  public option = true;
+  public SearchInfo: any = [];
   //#region InfiniteScrollVariables
-  total = 0;
-  limit = 7;
-  offset = 0;
-  options = new BehaviorSubject<string[]>([]);
-  options$: Observable<string[]>;
-  pageNumber = 1;
-  completeLoad = false;
-  percentage:string='25%';
+  public total = 0;
+  public limit = 7;
+  public offset = 0;
+  public options = new BehaviorSubject<string[]>([]);
+  public options$: Observable<string[]>;
+  public pageNumber = 1;
+  public completeLoad = false;
+  public percentage:string='25%';
   //#endregion InfiniteScrollVariables
-  maxAmountToggle = false;
-  maxAmount: string = '0';
-  showAmountInput = false;
-  emailNotification: string = '';
-  recovery_amount: number = 0;
-  fk_Status_Agreement: number = 0;
-  search_key: string = 'agreement_status_conciled';
-  newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
-  infoUser = utiles.getInfoUser();
-  provid_Name: string = '';
-  status_agree: string = '';
-  status_type: string = ''
-  initial_Date: string = '';
-  end_Date: string = '';
-  disabledButtonConciliation: boolean = false;
-  statusValidation: boolean = false;
-  currencyName: string = '';
+  public maxAmountToggle = false;
+  public maxAmount: string = '0';
+  public showAmountInput = false;
+  public emailNotification: string = '';
+  public recovery_amount: number = 0;
+  public fk_Status_Agreement: number = 0;
+  public search_key: string = 'agreement_status_conciled';
+  public newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
+  public infoUser = utiles.getInfoUser();
+  public provid_Name: string = '';
+  public status_agree: string = '';
+  public status_type: string = ''
+  public initial_Date: string = '';
+  public end_Date: string = '';
+  public disabledButtonConciliation: boolean = false;
+  public statusValidation: boolean = false;
+  public currencyName: string = '';
+  public searchText: string = '';
 
   constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private typeOfAgreementService: TypeOfAgreementService,
@@ -363,9 +364,28 @@ export class AgreementConciliationDetailComponent implements OnInit {
 
       });
   }
+  updateSearch(event) {
+    if (event.key == "Enter") {
+      if (this.searchText.trim().length == 0) {
+      } else {
+        this.searchFacturationInfo();
+      }
+    }
+  }
+
+  searchFacturationInfo(){
+    var agreeDetail: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel(); 
+    this.tradeAgreementDetailService.listFacturationInfo(agreeDetail).subscribe(
+      data => {
+        this._common._setLoading(false);
+        
+      },
+      () => {
+
+      });
+  }
 
   public lastConciliationModal() {
-
     const dataSuccess = {
       icon: 'warning',
       labelTitile: '¡Atención!',
@@ -395,7 +415,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
 
   openGoals() {
     let value = {
-      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement,
+      pk_Ac_Trade_Agreement: this.headerFile,
       is_in_follow_up: true 
     }
 

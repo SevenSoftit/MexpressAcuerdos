@@ -358,6 +358,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   listAgreementDResume() { 
+    debugger
     var agreementProductInfoModel = new AgreementProductInfoModel();
     agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoModel.Behavior = this.behaviorTA;
@@ -571,7 +572,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
   openGoals() {
     let value = {
-      pk_Ac_Trade_Agreement: this.agreementDetail.info.pk_Ac_Trade_Agreement,
+      pk_Ac_Trade_Agreement: this.headerFile,
       is_in_follow_up: true
     }
 

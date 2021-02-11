@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener, EventEmitter } from '@angul
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, IEditCell } from '@syncfusion/ej2-grids';
-import { GridComponent, GridLine } from '@syncfusion/ej2-angular-grids';
+import { Column, GridComponent, GridLine } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportProductComponent } from '../import-product/import-product.component';
@@ -25,6 +25,7 @@ import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feed
 import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
 import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-loader.component';
 import { DatePipe } from '@angular/common';
+import { Query } from '@syncfusion/ej2-data';
 
 
 
@@ -195,24 +196,24 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         return this.typeContacElem;
       },
       read: () => {
-        // if(this.typeContactObj.value == 'COLONES'){
-        //   this.symbol = '₡'
-        // }else{
-        //   this.symbol = '$'
-        // }
+
         return this.typeContactObj.value;
       },
       destroy: () => {
         this.typeContactObj.destroy();
       },
-      write: () => {
+      write: (args: { rowData: any; column: Column }) => {
         this.typeContactObj = new DropDownList({
           dataSource: this.listsMoney,
 
           fields: { value: "name_Currency", text: "name_Currency" },
           enabled: true,
           placeholder: "Seleccione la moneda",
-          floatLabelType: "Never"
+          floatLabelType: "Never",
+          allowFiltering: true,
+          query: new Query(),
+          actionComplete: () => false,
+          value: args.rowData.name_Currency
         });
         this.typeContactObj.appendTo(this.typeContacElem);
         this.typeContactObj.dataBind();

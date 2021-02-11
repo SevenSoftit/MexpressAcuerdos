@@ -182,7 +182,8 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 return Ok(Url_Attachment);
             }
             catch (Exception ex)
-            {
+            {   
+                var exception = ex;
                 var error = "Debe cerrar el pdf anterior antes de poder generar el siguiente";
                 return BadRequest(error);
             }
