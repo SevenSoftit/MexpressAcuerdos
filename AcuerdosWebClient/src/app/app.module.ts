@@ -50,8 +50,6 @@ import { AgreementReportModule } from './components/agreement-report/agreement-r
 import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
-export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -74,7 +72,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     ScrollingModule,
-    NgxMaskModule.forRoot(options),
     CommonModule,
     MaterialModule,
     BrowserModule,

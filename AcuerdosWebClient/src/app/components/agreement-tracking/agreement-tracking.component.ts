@@ -11,7 +11,6 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
 
 
-
 @Component({
   selector: 'app-agreement-tracking',
   templateUrl: './agreement-tracking.component.html',
@@ -25,8 +24,7 @@ export class AgreementTrackingComponent implements OnInit {
   screenWidth: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
-  public firstDataTable: any = [];
-  public secondDataTable: any = [];
+  public dataTable: any = [];
   public activeAgreements: boolean = true;
   public inactiveAgreements: boolean = false;
   statusList: any;
@@ -68,12 +66,11 @@ export class AgreementTrackingComponent implements OnInit {
   constructor(private activated_route: ActivatedRoute, private router: Router, private _common: CommonService, private tradeAgreementDetailService: TradeAgreementDetailService, ) {
     this.activated_route.queryParams.subscribe(params => {
       var parameters = params["active_Agreements"];
-
       if (parameters != undefined) {
         this.agreementOption = JSON.parse(parameters);
         if (this.agreementOption.info !== null && this.agreementOption.info !== undefined) {
           this.status = this.agreementOption.info;
-          this.firstListHeaderAgreement(this.status);
+          this.listHeaderAgreement(this.status);
           this.activeAgreements = false;
           this.inactiveAgreements = true;
         }
@@ -103,7 +100,7 @@ export class AgreementTrackingComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
     }
-    this.firstListHeaderAgreement(this.status);
+    this.listHeaderAgreement(this.status);
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -118,7 +115,6 @@ export class AgreementTrackingComponent implements OnInit {
 
   }
 
-
     /*******************************************************
 * Author: Gustavo ZC
 * Creation date:  19/07/2019
@@ -132,14 +128,29 @@ export class AgreementTrackingComponent implements OnInit {
 * Author:
 * Description:
 *******************************************************/
-firstListHeaderAgreement(status: boolean) {
+listHeaderAgreement(status: boolean) {
   var data = new NewAgreementDetailHeaderModel();
   data.Active = status;
   this.isActiveAgreement = data.Active;
   this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
     dataQ => {
-      this.firstDataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
-         this.calculateAmounts(status); 
+      this.dropdata = [];
+      this.dropdataProvider = [];
+
+      this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+
+    let hash = {};
+    this.dataTable = this.dataTable.filter(function(current) {
+      let exists = (!hash[current.pk_Ac_Trade_Agreement] || false);
+      hash[current.pk_Ac_Trade_Agreement] = true;
+      return exists;
+    });
+
+      this.dataFilter = dataQ;
+      this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
+      this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    
+      this._common._setLoading(false);
+      
     },
     error => {
       this._common._setLoading(false);
@@ -147,13 +158,14 @@ firstListHeaderAgreement(status: boolean) {
     });
 }
 
+
 calculateAmounts(status: boolean){
 //Insertar logica para el calculo posterior de montos, esta logica va a eliminar e insertar la nueva data en la tabla details resume
-        this.arrayPost = this.firstDataTable;     
+        this.arrayPost = this.dataTable;     
         this.agreementProductInfoModel.Agreement_Product_Info_List = this.arrayPost;
         this.tradeAgreementDetailService.calculateAmounts(this.agreementProductInfoModel).subscribe(
           dataI => {
-            this.secondListHeaderAgreement(status);
+            this.listHeaderAgreement(status);
           },
           error => {
             this._common._setLoading(false);
@@ -161,50 +173,6 @@ calculateAmounts(status: boolean){
           }
         )
 }
-
-  /*******************************************************
-* Author: Gustavo ZC
-* Creation date:  19/07/2019
-* Description: method that list the products of the agreement 
-****************************************************
-* Modifications
-****************************************************
-* Number:
-* Date:
-* Ticket:
-* Author:
-* Description:
-*******************************************************/
-  secondListHeaderAgreement(status: boolean) {
-    var data = new NewAgreementDetailHeaderModel();
-    data.Active = status;
-    this.isActiveAgreement = data.Active;
-    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
-      dataQ => {
-        this.dropdata = [];
-        this.dropdataProvider = [];
-
-        this.secondDataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
-
-      let hash = {};
-      this.secondDataTable = this.secondDataTable.filter(function(current) {
-        let exists = (!hash[current.pk_Ac_Trade_Agreement] || false);
-        hash[current.pk_Ac_Trade_Agreement] = true;
-        return exists;
-      });
-
-        this.dataFilter = dataQ;
-        this.dropdata = DataUtil.distinct(this.dataFilter, 'agreement_Status_Name') as string[];
-        this.dropdataProvider = DataUtil.distinct(this.dataFilter, 'provider_Name') as string[];    
-        this._common._setLoading(false);
-        
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
-
 
   /*******************************************************
 * Author: Gustavo ZC
@@ -242,10 +210,10 @@ calculateAmounts(status: boolean){
         this.dropdata = [];
         this.dropdataProvider = [];
 
-        this.secondDataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+        this.dataTable = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
         
         let hash = {};
-        this.secondDataTable = this.secondDataTable.filter(function(current) {
+        this.dataTable = this.dataTable.filter(function(current) {
           let exists = (!hash[current.pk_Ac_Trade_Agreement] || false);
           hash[current.pk_Ac_Trade_Agreement] = true;
           return exists;

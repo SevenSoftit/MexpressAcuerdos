@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, ExcelExportService, ToolbarService} from "@syncfusion/ej2-angular-grids";
-import { MaterialModule } from 'src/app/material-module';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { AgreementConciliationComponent } from './agreement-conciliation.component';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
@@ -43,7 +42,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     GridModule,
-    MaterialModule,
     ButtonModule,
     DropDownListModule
   ],

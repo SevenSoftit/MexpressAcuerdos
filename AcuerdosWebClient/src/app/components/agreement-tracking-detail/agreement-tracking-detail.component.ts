@@ -108,7 +108,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado' || this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
 
-
           if (this.agreementDetail.info.max_Amount !== 0) {
             this.maxAmountToggle = true;
             this.showAmountInput = true;
@@ -145,6 +144,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
   }
+
+
   fillFormAgreementDetail() {
     if (this.agreementDetail != undefined) {
       this.newAgreementForm.patchValue({
@@ -177,6 +178,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.listAgreementDResume();
   }
 
+  
   saveAgreementHeader() {
     this._common._setLoading(true);
     // var filterProviderName: any = this.providerList.filter(obj => obj.pk_Ac_Cat_Provider == this.providerN);
