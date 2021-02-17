@@ -9,7 +9,6 @@ export class NewAgreementDetailHeaderModel {
     Id_Currency: string;
     Product_Amount: number;
     Recovery_Amount: number;
-
     Pk_Ac_Trade_Agreement: number;
     Pk_Cat_Type_Agreement: number;
     Pk_Ac_Cat_Provider: number;
@@ -28,6 +27,9 @@ export class NewAgreementDetailHeaderModel {
     Fk_Status_Agreement: number;
     Agreement_Status_Name: string;
     Active: Boolean;
+    Total_Recovery: number;
+    String_Total_Recovery: string;
+    String_Total_Recovery_Dollars: string;
 
     Error: Boolean;
     Message_Error: string;
@@ -50,6 +52,10 @@ export class NewAgreementDetailHeaderModel {
     Expired_Indicator: Boolean;
     Type_Agreement_Name: String;
     String_Recovery_Amount: String;
+    Conciliation_User: string
+    Conciliation_Date: Date;
+    Accounting_Account: string;
+
 
 
     constructor() {
@@ -79,6 +85,9 @@ export class NewAgreementDetailHeaderModel {
             this.Fk_Status_Agreement = 0;
             this.Agreement_Status_Name = '';
             this.Active = true;
+            this.Total_Recovery = 0;
+            this.String_Total_Recovery = '0';
+            this.String_Total_Recovery_Dollars = '0';
 
             this.Error = false;
             this.Message_Error = '';
@@ -102,5 +111,8 @@ export class NewAgreementDetailHeaderModel {
             this.Email = '';
             this.Type_Agreement_Name = '';
             this.String_Recovery_Amount = '';
+            this.Conciliation_User = '';
+            this.Conciliation_Date = new Date();
+            this.Accounting_Account = '';
     }
 }

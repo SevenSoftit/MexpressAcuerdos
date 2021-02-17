@@ -4,17 +4,20 @@
             <h5 class="tittle-agreement pl-3">Detalle de la conciliación del acuerdo</h5>
         </div>
         <div class="row m-0 pl-1">
-            <div class="col-md-5 center-content">
+            <div class="col-md-4 center-content">
                 <label class="trade-agreements-description">En esta sección se puede ver el detalle de la conciliación del acuerdo seleccionado.</label>
             </div>
-            <div class="col-md-5 buttons-content center-content">
-
+            <div class="col-md-6 buttons-content center-content">
                 <button class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
-                    <mat-icon class="mr-2">attachment</mat-icon>Ver adjuntos
+                    <!-- <mat-icon class="mr-2">attachment</mat-icon> -->
+                    Ver adjuntos
                 </button>
-
-                <button [disabled]='disabledButtonConciliation' class="excel-button float-right mr-3" (click)="conciliateAgreement()" mat-raised-button>
-                    <mat-icon class="mr-2">people</mat-icon>Conciliar acuerdo
+                <button class="excel-button mr-3" mat-raised-button (click)="exportToPdf()">
+                    Generar PDF
+                  </button>
+                <button [disabled]='disabledButtonConciliation' class="excel-button float-right" (click)="conciliateAgreement()" mat-raised-button>
+                    <!-- <mat-icon class="mr-2">people</mat-icon> -->
+                    Conciliar acuerdo
                 </button>
             </div>
             <!--Activador de acuerdos-->
@@ -166,7 +169,7 @@
                 <label for="providerNameDetail" class="label-conciliation-detail provider-margin">{{provid_Name}}</label>
             </div>
         </div>
-        <div class="row format-column w-100">
+        <!-- <div class="row format-column w-100">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="facturation-search ml-4">
                     <label for="" class="title-facturation-search">Buscar notas de crédito</label>
@@ -177,7 +180,7 @@
                       </div>
                 </div>              
             </div>
-        </div>
+        </div> -->
     </cdk-virtual-scroll-viewport>
     
 

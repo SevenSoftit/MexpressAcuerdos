@@ -67,8 +67,8 @@
 <!-- Listado de acuerdos -->
 <div class="row ml-0 mr-0 trade-agreements-grid">
     <div class="col-lg-12 col-md-12">
-        <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [allowExcelExport]='true' [toolbar]='toolbar' [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort'
-            allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)='dataBound()' [allowResizing]='true' >
+        <ejs-grid #grid [gridLines]='lines' (toolbarClick)="toolbarClick($event)" allowScrolling='true' [allowExcelExport]='true' [toolbar]='toolbar' [dataSource]='dataTable' id='Normalgrid' [allowFiltering]='true' [filterSettings]='filterOptions' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort'
+            allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' [allowResizing]='true' >
             <e-columns>
                 <e-column field='name_Agreement' headerText='Nombre del acuerdo' width='142' textAlign='Center'>
                 </e-column>

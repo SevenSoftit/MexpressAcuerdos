@@ -9,23 +9,29 @@
                     seleccionado.</label>
             </div>
             <div class="col-md-5 buttons-content center-content">
-                <button *ngIf="enableExcel" class="excel-button float-right mr-3" (click)="openDialogImportProduct()" mat-raised-button [disabled]="showGoals"> 
+                <button *ngIf="enableExcel" class="excel-button float-right mr-3" (click)="openDialogImportProduct()"
+                    mat-raised-button [disabled]="showGoals">
                     Subir excel<mat-icon class="mr-0 ml-2">import_export</mat-icon>
                 </button>
 
-                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
+                <button *ngIf="enableEvidence" class="excel-button float-right mr-3" (click)="openListEvidenceModal()"
+                    mat-raised-button>
                     Subir adjuntos<mat-icon class="mr-0 ml-2">attachment</mat-icon>
                 </button>
 
-                <button *ngIf="enableUpdateAgreement && !showWorkTable" class="excel-button float-right mr-3" (click)="saveAgreementHeader()" mat-raised-button>Actualizar acuerdo
+                <button *ngIf="enableUpdateAgreement && !showWorkTable" class="excel-button float-right mr-3"
+                    (click)="saveAgreementHeader()" mat-raised-button>Actualizar acuerdo
                     <mat-icon class="ml-2">autorenew</mat-icon>
                 </button>
             </div>
             <!--Activador de acuerdos-->
             <div class="col-md-2 text-center activator-container">
-                <label for="agreement_activator" class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del acuerdo</label>
+                <label for="agreement_activator"
+                    class="new-agreement-label-input w-100 text-center agr-activator-lbl">Cambiar estado del
+                    acuerdo</label>
                 <span class="label-status-inactive">Inactivo</span>
-                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle-special" [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
+                <mat-slide-toggle id="agreement_activator" class="new-agreement-slide-toggle-special"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="agreement_activator">
                 </mat-slide-toggle>
                 <span class="label-status-active">Activo</span>
             </div>
@@ -37,9 +43,12 @@
             <!-- Tipo de acuerdo -->
             <div class="col-md-2">
                 <label for="type_of_agreement" class="new-agreement-label-input">Tipo de acuerdo</label>
-                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement" [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}" class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)"
+                <mat-select id="type_of_agreement" [ngModelOptions]="{standalone: true}" [(ngModel)]="type_of_agreement"
+                    [ngClass]="{'form-control-error': showErrors && errorTypeOfAgreement}"
+                    class="new-agreement-select text-center" (selectionChange)="behaviorTypeOfAgreement($event)"
                     placeholder="Tipo de acuerdo">
-                    <mat-option *ngFor="let typeAgreement of typeOfAgreementList" [value]="typeAgreement.pk_Cat_Type_Agreement">
+                    <mat-option *ngFor="let typeAgreement of typeOfAgreementList"
+                        [value]="typeAgreement.pk_Cat_Type_Agreement">
                         {{typeAgreement.name_Agreement}}
                     </mat-option>
                 </mat-select>
@@ -51,23 +60,32 @@
             <!-- Nombre del acuerdo-->
             <div class="col-md-3">
                 <label for="agreement_name" class="new-agreement-label-input">Nombre</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}" formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name" placeholder="Nombre del acuerdo">
-                <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors" class="alert-error-required mt-2">
+                <input type="text" class="form-control new-agreement-form-input"
+                    [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('agreement_name').errors}"
+                    formControlName="agreement_name" id="agreement_name" aria-describedby="agreement_name"
+                    placeholder="Nombre del acuerdo">
+                <div *ngIf="newAgreementForm.get('agreement_name').errors && newAgreementForm.get('agreement_name').errors['required'] && showErrors"
+                    class="alert-error-required mt-2">
                     Debe escribir un nombre
                 </div>
             </div>
             <!-- Proveedor // (selectionChange)="behaviorProvider($event)"-->
             <div class="col-md-3">
                 <label for="provider" class="new-agreement-label-input">Proveedor</label>
-                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN" [ngClass]="{'form-control-error': showErrors && errorProvider}" class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll (infiniteScroll)="getNextBatch()"
-                    [threshold]="percentage" [complete]="offset === total" (selectionChange)="behaviorProvider($event)">
+                <mat-select id="provider" [ngModelOptions]="{standalone: true}" [(ngModel)]="providerN"
+                    [ngClass]="{'form-control-error': showErrors && errorProvider}"
+                    class="new-agreement-select text-center" placeholder="Proveedor" msInfiniteScroll
+                    (infiniteScroll)="getNextBatch()" [threshold]="percentage" [complete]="offset === total"
+                    (selectionChange)="behaviorProvider($event)">
                     <mat-option disabled>
                         <mat-form-field class="example-full-width" floatLabel="never">
                             <mat-icon class="icon-align">search</mat-icon>
-                            <input matInput placeholder="Buscar" type="text" #myInput autofocus (keyup)="providerSearch($event)">
+                            <input matInput placeholder="Buscar" type="text" #myInput autofocus
+                                (keyup)="providerSearch($event)">
                         </mat-form-field>
                     </mat-option>
-                    <mat-option *ngFor="let provider of options$ | async" [value]="provider.pk_Ac_Cat_Provider" matTooltip="{{provider.name_Provider}}" class="provider-opt">
+                    <mat-option *ngFor="let provider of options$ | async" [value]="provider.pk_Ac_Cat_Provider"
+                        matTooltip="{{provider.name_Provider}}" class="provider-opt">
                         {{provider.name_Provider}}
                     </mat-option>
                 </mat-select>
@@ -80,7 +98,9 @@
                 <div class="form-group text date-picker-custom">
                     <label for="startDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Inicio</label>
-                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker" id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorStartDate}" readonly>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDatePicker"
+                        id="startDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
+                        [ngClass]="{'form-control-error': errorStartDate}" readonly>
                     <mat-datepicker-toggle matSuffix [for]="startDatePicker" [disabled]="disableStartDate">
                     </mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
@@ -94,7 +114,9 @@
                 <div class="form-group text date-picker-custom">
                     <label for="endDatePicker" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Fin</label>
-                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker" placeholder="02/01/2019" class="new-trade-agreement-modal-date-input" [ngClass]="{'form-control-error': errorEndDate}" readonly>
+                    <input matInput [matDatepicker]="endDatePicker" formControlName="endDatePicker" id="endDatePicker"
+                        placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
+                        [ngClass]="{'form-control-error': errorEndDate}" readonly>
                     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                     <div *ngIf="errorEndDate" class="alert-error-required mt-2">
@@ -107,49 +129,95 @@
             <!--Descripción-->
             <div class="col-md-3">
                 <label for="description" class="new-agreement-label-input">Descripción</label>
-                <input type="text" class="form-control new-agreement-form-input" [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}" formControlName="description" id="description" aria-describedby="description" placeholder="Descripción del acuerdo">
+                <input type="text" class="form-control new-agreement-form-input"
+                    [ngClass]="{'form-control-error': showErrors && newAgreementForm.get('description').errors}"
+                    formControlName="description" id="description" aria-describedby="description"
+                    placeholder="Descripción del acuerdo">
             </div>
             <!--Muestra el input de email-->
             <div class="col-md-2">
                 <label for="notification_email" class="new-agreement-label-input">Email Notificación</label>
-                <input type="email" [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}" class="form-control new-agreement-form-input" id="notification_email" aria-describedby="Email de Notificación" formControlName="emailNotification"
-                    placeholder="Correo">
-                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['required']" class="alert-error-required">
+                <input type="email"
+                    [ngClass]="{'form-control-error': submitted && newAgreementForm.get('emailNotification').errors}"
+                    class="form-control new-agreement-form-input" id="notification_email"
+                    aria-describedby="Email de Notificación" formControlName="emailNotification" placeholder="Correo">
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['required']"
+                    class="alert-error-required">
                     El correo electrónico es requerido
                 </div>
-                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['email']" class="alert-error-required">
+                <div *ngIf="submitted && newAgreementForm.get('emailNotification').errors && newAgreementForm.get('emailNotification').errors['email']"
+                    class="alert-error-required">
                     El formato de correo es incorrecto
                 </div>
             </div>
             <!--Activa input de monto maximo-->
             <div class="col-md-1">
                 <label for="max_amount" class="new-agreement-label-input w-100 text-center">Monto Máx</label>
-                <mat-slide-toggle id="max_amount" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
+                <mat-slide-toggle id="max_amount" class="new-agreement-slide-toggle"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmountToggle" (change)="hasMaxAmount()">
                 </mat-slide-toggle>
             </div>
             <!--Muestra el input de monto maximo-->
             <div class="col-md-2" *ngIf="showAmountInput">
-                <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
-                <input type="text" mask="separator.2" thousandSeparator="," class="form-control new-agreement-form-input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
+                <label for="max_amount_input" class="new-agreement-label-input">Monto Máx</label>
+                <input type="text" mask="separator.2" thousandSeparator=","
+                    class="form-control new-agreement-form-input" aria-describedby="Monto Máximo"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
             </div>
             <div class="col-md-2 mt-4 new-trade-agreement-detail-button" *ngIf="!disableHeader">
-                <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button" mat-raised-button (click)="saveAgreementHeader()">
+                <button [ngClass]="{'disabled_button': disableHeader}" [disabled]="disableHeader" class="save-button"
+                    mat-raised-button (click)="saveAgreementHeader()">
                     <mat-icon class="mr-2">save</mat-icon>Guardar acuerdo
                 </button>
             </div>
+            <div class="col-md-2">
+                <label for="string_Total_Recovery" class="new-agreement-label-input">T. recuperado colones</label>
+                <input readonly type="text" mask="separator.2" thousandSeparator=","
+                    class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery"
+                    placeholder="T. recuperado colones">
+            </div>
+            <div class="col-md-2">
+                <label for="string_Total_Recovery_Dollars" class="new-agreement-label-input">T. recuperado
+                    dólares</label>
+                <input readonly type="text" mask="separator.2" thousandSeparator=","
+                    class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery_Dollars"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery_Dollars"
+                    placeholder="T. recuperado dólares">
+            </div>
+        </div>
+
+        <div class="row ml-0 mr-0 mt-3">
             <!--Activa todos los productos-->
-            <div class="col-md-2" *ngIf="disableHeader">
-                <label for="all_products" class="new-agreement-label-input w-100 text-center">Todos los articulos</label>
-                <mat-slide-toggle id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator" (change)="allProductsChange()">
-                </mat-slide-toggle>
+            <div class="col-md-3">
+                <label for="description" class="new-agreement-label-input">Cuenta contable</label>
+                <input type="text" class="form-control new-agreement-form-input"
+                    formControlName="accountingAccount" id="accountingAccount" aria-describedby="accountingAccount"
+                    placeholder="Cuenta contable">
+            </div>
+            <div class="col-md-3" *ngIf="disableHeader">
+                <div class="d-flex">
+                    <div>
+                        <label for="all_products" class="new-agreement-label-input w-100 text-left">Todos los
+                            articulos</label>
+                            <div class="margin-toogle">
+                                <mat-slide-toggle id="all_products"
+                                [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator"
+                                (change)="allProductsChange()">
+                            </mat-slide-toggle>
+                            </div>
+                    </div>
+                        <div class="d-flex ml-4" *ngIf="showGoals">
+                            <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
+                            <label class="new-agreement-label-input w-100 new-trade-agreement-detail-goals-lbl"
+                                (click)="openGoals()">Metas</label>
+                        </div>
+                </div>
             </div>
             <!--Muestra las metas-->
-            <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
-                <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
-                <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
+            <!-- <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
 
-            </div>
-
+            </div> -->
         </div>
     </form>
 
@@ -158,23 +226,35 @@
     </div>
 
 
-    <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="!showWorkTable && dataTable != undefined && !showGoals">
+    <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid"
+        *ngIf="!showWorkTable && dataTable != undefined && !showGoals">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [height]="heightGridLW" [dataSource]='dataTable' [allowExcelExport]='true' id='Normalgrid' allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings'
-            [gridLines]='lines' [editSettings]='editSettings' [toolbar]='toolbar' (actionBegin)='actionBegin($event)' [allowResizing]='true'>
+            <ejs-grid #grid (toolbarClick)="toolbarClick($event)" [height]="heightGridLW" [dataSource]='dataTable'
+                allowScrolling='true' [allowExcelExport]='true' id='Normalgrid' allowSorting='true'
+                [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings' [gridLines]='lines'
+                [editSettings]='editSettings' [toolbar]='toolbar' (actionBegin)='actionBegin($event)'
+                [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
-                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='name_Currency' headerText='Moneda(COLONES, DOLARES)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='recovery_Amount' type="number" defaultValue="0" MinValue="0" editType='numericedit' headerText='Monto' width='150' textAlign='Center'>
+                    <e-column field='product_Id_Alias' [allowEditing]='isEditable' headerText='Código' width='150'
+                        textAlign='Center' [validationRules]='codeRules'></e-column>
+                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center'
+                        [validationRules]='productNameRules'></e-column>
+                    <e-column field='name_Currency' headerText='Moneda(COLONES, DOLARES)' [validationRules]='moneyRules'
+                        width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='recovery_Amount' type="number" defaultValue="0" MinValue="0" editType='numericedit'
+                        headerText='Monto' width='150' textAlign='Center'>
                         <ng-template #template let-data>
                             {{ data.recovery_Amount | number: "1.2-2"}}
-                          </ng-template>
+                        </ng-template>
                     </e-column>
-                    <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false" headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5' textAlign='Center'></e-column>
-                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
+                    <e-column field='pk_Cat_Agreement_Details' [isPrimaryKey]="true" [visible]="false"
+                        headerText='Pk_Cat_Agreement_Details' width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement'
+                        width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Glb_Products' [visible]="false" headerText='pk_Glb_Products' width='5'
+                        textAlign='Center'></e-column>
+                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170'
+                        textAlign='Center'></e-column>
                     <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
                     </e-column>
                 </e-columns>
@@ -183,34 +263,51 @@
     </div>
 
     <div class="row ml-0 mr-0 mt-4" *ngIf="!showWorkTable && dataTable == undefined && !showGoals">
-        <h5 class="begin-agreement-creation">Guarda la primera sección del acuerdo para poder cargar el excel de productos.
+        <h5 class="begin-agreement-creation">Guarda la primera sección del acuerdo para poder cargar el excel de
+            productos.
         </h5>
     </div>
 
     <div class="row new-agreement-table-top mr-0 ml-0 newtrade-agreements-grid" *ngIf="showWorkTable">
         <div class="col-lg-12 col-md-12">
-            <ejs-grid #grid [height]="heightGridLW" [dataSource]='workDataTable' id='NormalgridWork' allowSorting='true' [sortSettings]='initialSort' allowScrolling='true' scrollSettings='initialScroll' allowPaging='true' [pageSettings]='pageSettings'
-            [gridLines]='lines' [editSettings]='editSettingsWork' [toolbar]='toolbarWork' (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBoundWork($event)" [allowResizing]='true'>
+            <ejs-grid #grid [height]="heightGridLW" [dataSource]='workDataTable' id='NormalgridWork' allowSorting='true'
+                [sortSettings]='initialSort' allowScrolling='true' allowPaging='true' [pageSettings]='pageSettings'
+                [gridLines]='lines' [editSettings]='editSettingsWork' [toolbar]='toolbarWork'
+                (actionBegin)='actionBeginWork($event)' (rowDataBound)="rowDataBoundWork($event)"
+                [allowResizing]='true'>
                 <e-columns>
-                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center' [validationRules]='codeRules'></e-column>
-                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center' [validationRules]='productNameRules'></e-column>
-                    <e-column field='id_Currency' headerText='Moneda(COLONES, DOLARES)' [validationRules]='moneyRules' width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
-                    <e-column field='product_Amount' type="number" defaultValue="0" MinValue="0" editType='numericedit' [validationRules]='amountRules' headerText='Monto' width='150' textAlign='Center'>
+                    <e-column field='product_Id_Alias' headerText='Código' width='150' textAlign='Center'
+                        [validationRules]='codeRules'></e-column>
+                    <e-column field='product_Name' headerText='Nombre' width='170' textAlign='Center'
+                        [validationRules]='productNameRules'></e-column>
+                    <e-column field='id_Currency' headerText='Moneda(COLONES, DOLARES)' [validationRules]='moneyRules'
+                        width='220' editType='dropdownedit' [edit]='moneyTypeParams' textAlign='Center'></e-column>
+                    <e-column field='product_Amount' type="number" defaultValue="0" MinValue="0" editType='numericedit'
+                        [validationRules]='amountRules' headerText='Monto' width='150' textAlign='Center'>
                         <ng-template #template let-data>
                             {{ data.product_Amount | number: "1.2-2" }}
-                          </ng-template>
+                        </ng-template>
                     </e-column>
-                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170' textAlign='Center'></e-column>
-                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
-                    <e-column field='pk_Gbl_Wrk_Agreement' [isPrimaryKey]="true" [visible]="false" headerText='pk_Gbl_Wrk_Agreement' width='5' textAlign='Center'></e-column>
+                    <e-column field='creation_User' [visible]="false" headerText='creation_User' width='170'
+                        textAlign='Center'></e-column>
+                    <e-column field='pk_Ac_Trade_Agreement' [visible]="false" headerText='pk_Ac_Trade_Agreement'
+                        width='5' textAlign='Center'></e-column>
+                    <e-column field='pk_Gbl_Wrk_Agreement' [isPrimaryKey]="true" [visible]="false"
+                        headerText='pk_Gbl_Wrk_Agreement' width='5' textAlign='Center'></e-column>
                     <e-column field='error' [visible]="false" headerText='error' width='5' textAlign='Center'>
                     </e-column>
-                    <e-column field='message_Error' [visible]="false" headerText='message_Error' width='5' textAlign='Center'></e-column>
-                    <e-column field='it_Processed' [visible]="false" headerText='it_Processed' width='5' textAlign='Center'></e-column>
-                    <e-column field='invalid_Amount' [visible]="false" headerText='invalid_Amount' width='5' textAlign='Center'></e-column>
-                    <e-column field='not_Exist_Product' [visible]="false" headerText='not_Exist_Product' width='5' textAlign='Center'></e-column>
-                    <e-column field='duplicate_Product_Alias' [visible]="false" headerText='duplicate_Product_Alias' width='5' textAlign='Center'></e-column>
-                    <e-column field='not_Exist_Id_Currency' [visible]="false" headerText='not_Exist_Id_Currency' width='5' textAlign='Center'></e-column>
+                    <e-column field='message_Error' [visible]="false" headerText='message_Error' width='5'
+                        textAlign='Center'></e-column>
+                    <e-column field='it_Processed' [visible]="false" headerText='it_Processed' width='5'
+                        textAlign='Center'></e-column>
+                    <e-column field='invalid_Amount' [visible]="false" headerText='invalid_Amount' width='5'
+                        textAlign='Center'></e-column>
+                    <e-column field='not_Exist_Product' [visible]="false" headerText='not_Exist_Product' width='5'
+                        textAlign='Center'></e-column>
+                    <e-column field='duplicate_Product_Alias' [visible]="false" headerText='duplicate_Product_Alias'
+                        width='5' textAlign='Center'></e-column>
+                    <e-column field='not_Exist_Id_Currency' [visible]="false" headerText='not_Exist_Id_Currency'
+                        width='5' textAlign='Center'></e-column>
                     <e-column field='active' [visible]="false" headerText='active' width='5' textAlign='Center'>
                     </e-column>
 
@@ -223,7 +320,8 @@
         </div>
         <div class=" mx-auto new-agreement-buttons-top">
 
-            <button (click)="processProductWork(false)" class="excel-button float-left mr-4" mat-raised-button>Sobreescribir acuerdo
+            <button (click)="processProductWork(false)" class="excel-button float-left mr-4"
+                mat-raised-button>Sobreescribir acuerdo
                 <mat-icon class="ml-2">play_for_work</mat-icon>
             </button>
             <button (click)="processProductWork(true)" class="excel-button mr-4" mat-raised-button>Actualizar acuerdo

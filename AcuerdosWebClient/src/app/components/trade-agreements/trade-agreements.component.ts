@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel, ExcelExportProperties } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, QueryCellInfoEventArgs, FilterSettingsModel, ExcelExportProperties, GridLine } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { Tooltip } from '@syncfusion/ej2-popups';
 import { DataUtil } from '@syncfusion/ej2-data';
@@ -16,6 +16,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations';
   styleUrls: ['./trade-agreements.component.scss']
 })
 export class TradeAgreementsComponent implements OnInit {
+  public lines: GridLine;
   public initialSort: Object;
   public pageSettings: Object;
   public editSettings: Object;
@@ -64,6 +65,7 @@ export class TradeAgreementsComponent implements OnInit {
     this._common._setLoading(true);
 
     this.getScreenSize();
+    this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
   
@@ -79,9 +81,9 @@ export class TradeAgreementsComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
-      this.pageSettings = { pageSize: 11, pageCount: 5 };
+      this.pageSettings = { pageSize: 10, pageCount: 5 };
     } else {
-      this.pageSettings = { pageSize: 7, pageCount: 5 };
+      this.pageSettings = { pageSize: 6, pageCount: 5 };
     }
     this.listHeaderAgreement();
   }
@@ -92,11 +94,10 @@ export class TradeAgreementsComponent implements OnInit {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
-  dataBound() {
-    this.grid.gridLines = 'Both';
-    Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
+  // dataBound() {
+  //   Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
 
-  }
+  // }
 
   redirectPageCreateNewAgreement() {
     this.router.navigate(["newTradeAgreements"]);

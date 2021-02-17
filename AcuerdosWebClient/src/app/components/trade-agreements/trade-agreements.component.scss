@@ -30,7 +30,7 @@
 .trade-agreements-header {
     background: #eeeeee;
     border-radius: 0rem;
-    padding: 1.3rem;
+    padding: 1rem 1rem 0rem 1rem;
     margin-left: 0;
     margin-right: 0;
 }
@@ -54,9 +54,9 @@
     background: $light-blue;
 }
 
-::ng-deep .e-grid .e-content {
-    overflow-x: hidden !important;
-}
+// ::ng-deep .e-grid .e-content {
+//     overflow-x: hidden !important;
+// }
 
 // Toolbar
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
