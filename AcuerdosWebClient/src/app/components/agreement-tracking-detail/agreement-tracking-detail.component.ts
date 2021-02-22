@@ -153,7 +153,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.lines = 'Both';
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
   }
 
   listAllEvidences() {
@@ -181,9 +181,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
       name_Agree: this.nameAgree
     }
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
-      data: { confirmInfo: object },
+      data: { confirmInfo: object }, disableClose: true,
       minWidth: "900px",
-      maxWidth: "950px"
+      maxWidth: "950px",
     });
     const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
       if (data !== false) {
@@ -307,10 +307,23 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
 
   // Opcion para Excel
-  toolbarClick(args: ClickEventArgs): void {
+  toolbarClickProduct(args: ClickEventArgs): void {
     if (args.item.id == "export") {
       var date = new Date().toISOString().slice(0, 10);
-      var archiveName = 'Reporte_De_Productos_' + date + '.xlsx'
+      var archiveName = 'Reporte_General_Por_Articulo_Acuerdo_' + this.agreementDetail.info.name_Agreement + '_' + date + '.xlsx'
+
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: archiveName
+      };
+
+      this.grid.excelExport(excelExportProperties);
+    }
+  }
+
+  toolbarClickGeneral(args: ClickEventArgs): void {
+    if (args.item.id == "export") {
+      var date = new Date().toISOString().slice(0, 10);
+      var archiveName = 'Reporte_Detallado_Acuerdo_' + this.agreementDetail.info.name_Agreement +'_'+ date + '.xlsx' 
 
       const excelExportProperties: ExcelExportProperties = {
         fileName: archiveName
@@ -464,6 +477,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         this.enableEntireAgreement = false;
         this.enableArrow = true;
         this.dataTableDetail = dataS;
+        debugger
         this.showAgreementResumeTable = false;
         this.showAgreementResultTable = true;
         this._common._setLoading(false);
@@ -549,11 +563,21 @@ export class AgreementTrackingDetailComponent implements OnInit {
     var generatePDF = new AgreementProductInfoDetailModel();
     if (this.dataTableDetail.length != 0) {
       generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
+      // Encabezado:
       generatePDF.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
       generatePDF.Name_Agree = this.nameAgree;
       generatePDF.Provider_Name = this.dataTableDetail[0].provider_Name;
       generatePDF.Date_Start = this.dataTableDetail[0].date_Start;
       generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
+
+      generatePDF.Email = this.dataTableDetail[0].email;
+      generatePDF.String_Max_Amount = this.dataTableDetail[0].string_Max_Amount;
+      generatePDF.String_Total_Recovery = this.dataTableDetail[0].string_Total_Recovery;
+      generatePDF.String_Total_Recovery_Dollars = this.dataTableDetail[0].string_Total_Recovery_Dollars;
+      generatePDF.Accounting_Account = this.dataTableDetail[0].accounting_Account;
+      // generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
+
+
     } else {
       generatePDF.AgreementProductInfoDetailList = [];
       generatePDF.Agreement_Type_Name = '';
@@ -561,6 +585,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
       generatePDF.Provider_Name = '';
       generatePDF.Date_Start = new Date();
       generatePDF.Date_Finish = new Date();
+
+      generatePDF.Email = '';
+      generatePDF.String_Max_Amount = '0';
+      generatePDF.String_Total_Recovery = '0';
+      generatePDF.String_Total_Recovery_Dollars = '0';
+      generatePDF.Accounting_Account = '';
     }
     this.reportService.saveReport(generatePDF).subscribe(
       dataS => {
@@ -571,6 +601,34 @@ export class AgreementTrackingDetailComponent implements OnInit {
       }
     )
   }
+
+  exportToExcel(){
+    var generateExcel = new AgreementProductInfoDetailModel();
+    if (this.dataTableDetail.length != 0) {
+      generateExcel.AgreementProductInfoDetailList = this.dataTableDetail;
+      generateExcel.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
+      generateExcel.Name_Agree = this.nameAgree;
+      generateExcel.Provider_Name = this.dataTableDetail[0].provider_Name;
+      generateExcel.Date_Start = this.dataTableDetail[0].date_Start;
+      generateExcel.Date_Finish = this.dataTableDetail[0].date_Finish;
+    } else {
+      generateExcel.AgreementProductInfoDetailList = [];
+      generateExcel.Agreement_Type_Name = '';
+      generateExcel.Name_Agree = this.nameAgree;
+      generateExcel.Provider_Name = '';
+      generateExcel.Date_Start = new Date();
+      generateExcel.Date_Finish = new Date();
+    }
+    this.reportService.saveExcel(generateExcel).subscribe(
+      dataS => {
+        var url = dataS;
+        this.downloadFile(url, "Informe_General_Acuerdo" + "_" + this.nameAgree + ".pdf");
+      },
+      error => {
+      }
+    )
+  }
+
   downloadFile(url, archive) {
     try {
       var FileSaver = require('file-saver');

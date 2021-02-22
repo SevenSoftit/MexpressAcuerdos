@@ -11,6 +11,7 @@
         public enum Operation
         {
             Save,
+            SaveCopy,
             List,
             Get,
             Delete,

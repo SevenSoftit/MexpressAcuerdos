@@ -100,11 +100,11 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_STATUS_OPTION = model.Status_Option
                     },
                     commandType: CommandType.StoredProcedure).FirstOrDefault();
-                    return await Task.FromResult<Common.Import_Product>(result);
+                return await Task.FromResult<Common.Import_Product>(result);
             }
         }
 
-    public async Task<IEnumerable<Import_Product>> ListSpecialAgreementStatus(Common.Import_Product model)
+        public async Task<IEnumerable<Import_Product>> ListSpecialAgreementStatus(Common.Import_Product model)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -205,6 +205,25 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_CONCILIATION_DATE = model.Conciliation_Date,
                         P_ACCOUNTING_ACCOUNT = model.Accounting_Account
 
+                    },
+                //     commandType: CommandType.StoredProcedure).FirstOrDefault();
+                // return await Task.FromResult<Common.Import_Product>(result);
+                commandType: CommandType.StoredProcedure);
+                return await Task.FromResult<IEnumerable<Import_Product>>(result.ToList());
+
+            }
+        }
+        public async Task<IEnumerable<Common.Import_Product>> SaveCopy(Common.Import_Product model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<
+                    Sevensoft.Mexpress.Backend.Common.Import_Product>
+                    ("PA_MAN_AC_MTR_AGREEMENT_HEADER_COPY",
+                    param: new
+                    {
+                        P_PK_AC_TRADE_AGREEMENT_COPY = model.Pk_Ac_Trade_Agreement_Copy,
+                        P_CREATION_USER = model.Creation_User
                     },
                 //     commandType: CommandType.StoredProcedure).FirstOrDefault();
                 // return await Task.FromResult<Common.Import_Product>(result);

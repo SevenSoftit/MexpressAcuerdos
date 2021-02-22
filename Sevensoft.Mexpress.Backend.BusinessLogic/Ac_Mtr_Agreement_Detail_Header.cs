@@ -30,6 +30,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                         return await Get(message);
                     case Operation.Save:
                         return await Save(message);
+                    case Operation.SaveCopy:
+                        return await SaveCopy(message);
                     case Operation.Delete:
                         return await Delete(message);
                     default:
@@ -105,8 +107,34 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
                 using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
                 {
-                    
+
                     var returObject = await repository.SaveScalar(model);
+                    resultMessage.Status = Status.Success;
+                    resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+                    resultMessage.MessageInfo = returObject.SerializeObject();
+                    return resultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                var resultMessage = new Message();
+                resultMessage.Status = Status.Failed;
+                resultMessage.Result = string.Format("{0}", ex.Message);
+                resultMessage.MessageInfo = string.Empty;
+                return resultMessage;
+            }
+        }
+
+        public async virtual Task<Message> SaveCopy(Message message)
+        {
+            try
+            {
+                var resultMessage = new Message();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Import_Product>();
+                using (var repository = new Do_Mtr_Agreement_Header_Repository(message.Connection))
+                {
+
+                    var returObject = await repository.SaveCopy(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";
                     resultMessage.MessageInfo = returObject.SerializeObject();

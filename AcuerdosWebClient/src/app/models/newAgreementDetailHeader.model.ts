@@ -55,6 +55,7 @@ export class NewAgreementDetailHeaderModel {
     Conciliation_User: string
     Conciliation_Date: Date;
     Accounting_Account: string;
+    Pk_Ac_Trade_Agreement_Copy: number;
 
 
 
@@ -114,5 +115,6 @@ export class NewAgreementDetailHeaderModel {
             this.Conciliation_User = '';
             this.Conciliation_Date = new Date();
             this.Accounting_Account = '';
+            this.Pk_Ac_Trade_Agreement_Copy = 0;
     }
 }

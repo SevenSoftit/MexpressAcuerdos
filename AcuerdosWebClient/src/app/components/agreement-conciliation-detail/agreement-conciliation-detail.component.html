@@ -103,21 +103,58 @@
             </div>
             <!--Muestra el input de monto maximo-->
             <div class="col-md-2" *ngIf="showAmountInput">
-                <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
+                <label for="max_amount_input" class="new-agreement-label-input">Monto Máx</label>
                 <input readonly type="text" mask="separator.2" thousandSeparator="," class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
             </div>
-            <!--Activa todos los productos-->
             <div class="col-md-2">
-                <label for="all_products" class="new-agreement-label-input w-100 text-center">Todos los articulos</label>
-                <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle" [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator">
-                </mat-slide-toggle>
+                <label for="string_Total_Recovery" class="new-agreement-label-input">T. recuperado colones</label>
+                <input readonly type="text" mask="separator.2" thousandSeparator=","
+                    class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery"
+                    placeholder="T. recuperado colones">
             </div>
-            <!--Muestra las metas-->
-            <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
-                <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
-                <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()"> Carga de metas</label>
+            <div class="col-md-2">
+                <label for="string_Total_Recovery_Dollars" class="new-agreement-label-input">T. recuperado
+                    dólares</label>
+                <input readonly type="text" mask="separator.2" thousandSeparator=","
+                    class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery_Dollars"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery_Dollars"
+                    placeholder="T. recuperado dólares">
             </div>
         </div>
+        <div class="row ml-0 mr-0 mt-3">
+            <!--Activa todos los productos-->
+            <div class="col-md-3">
+                <label for="description" class="new-agreement-label-input">Cuenta contable</label>
+                <input type="text" class="form-control new-agreement-form-input"
+                    formControlName="accountingAccount" id="accountingAccount" aria-describedby="accountingAccount"
+                    placeholder="Cuenta contable">
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex">
+                    <div>
+                        <label for="all_products" class="new-agreement-label-input w-100 text-left">Todos los
+                            articulos</label>
+                            <div class="margin-toogle">
+                                <mat-slide-toggle disabled id="all_products"
+                                [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator"
+                                >
+                            </mat-slide-toggle>
+                            </div>
+                    </div>
+                        <div class="d-flex ml-4" *ngIf="showGoals">
+                            <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
+                            <label class="new-agreement-label-input w-100 new-trade-agreement-detail-goals-lbl"
+                                (click)="openGoals()">Metas</label>
+                        </div>
+                </div>
+            </div>
+            <!--Muestra las metas-->
+            <!-- <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
+        
+            </div> -->
+        </div>
+        
     </form>
         <hr class="border-section">
         <cdk-virtual-scroll-viewport [itemSize]="200" class="example-viewport-principal">
