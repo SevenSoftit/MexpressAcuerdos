@@ -88,8 +88,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
   public searchText: string = '';
   public behaviorTA: string = '';
   public dataTableDetail: any[] = [];
-  public string_Total_Recovery: string = '0';
-  public string_Total_Recovery_Dollars: string = '0';
 
   constructor(private reportService: AgreementReportService, private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private typeOfAgreementService: TypeOfAgreementService,
@@ -231,8 +229,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount= String(this.agreementDetail.info.max_Amount);
-      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
-      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',

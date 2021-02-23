@@ -108,11 +108,6 @@
                         <mat-icon (click)="viewAgreementDetails($event)" class="trade-agreements-edit-icon">border_color</mat-icon>
                     </ng-template>
                 </e-column>
-                <e-column field='duplicate' textAlign='center' headerText= 'Crear copia' width=120 [allowFiltering]='false'>
-                    <ng-template #template let-dataAgreements>
-                        <mat-icon (click)="copyTradeAgreement($event)" class="trade-agreements-edit-icon">content_copy</mat-icon>
-                    </ng-template>
-                </e-column>
             </e-columns>
         </ejs-grid>
     </div>

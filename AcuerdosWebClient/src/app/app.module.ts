@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { environment } from 'src/environments/environment';
-// import { MaterialModule } from './material-module';
+import { MaterialModule } from './material-module';
 import { ApplicationPipesModule } from './shared/helper/application-pipes.module';
 import { LoginService } from './shared/services/login/login.service';
 import { CommonService } from './shared/services/common/common.service';
@@ -50,7 +50,6 @@ import { AgreementReportModule } from './components/agreement-report/agreement-r
 import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -72,10 +71,9 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent
   ],
   imports: [
-    MatExpansionModule,
     ScrollingModule,
     CommonModule,
-    // MaterialModule,
+    MaterialModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

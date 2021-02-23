@@ -9,7 +9,6 @@ import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feed
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
-import { utiles } from 'src/environments/utiles';
 
 @Component({
   selector: 'app-trade-agreements',
@@ -328,31 +327,6 @@ export class TradeAgreementsComponent implements OnInit {
     }
   }
 
-  copyTradeAgreement(args: any): void {
-    this._common._setLoading(true);
-    let data: any = this.grid.getRowInfo(args.target).rowData;
-    debugger
-    if (data.agreement_Status_Name != 'Finalizado' && data.agreement_Status_Name != 'Conciliado') {
-      var newAgreementDetailHeaderModel: NewAgreementDetailHeaderModel = new NewAgreementDetailHeaderModel();
-      newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement_Copy = data.pk_Ac_Trade_Agreement;
-      newAgreementDetailHeaderModel.Creation_User = utiles.getInfoUser().username;
-      this.tradeAgreementDetailService.copyAgreement(newAgreementDetailHeaderModel).subscribe(
-        dataG => {
-          debugger
-          this._common._setLoading(false);
-          this.listHeaderAgreement();
-          this.agreementDuplicateSuccessModal();
-        
-        },
-        () => {
-
-        });
-    }else{
-      this._common._setLoading(false);
-      this.agreementDuplicateAlertModal();
-    }
-  }
-
   public agreementFinalizedAlertModal() {
     const dataSuccess = {
       icon: 'warning',
@@ -374,35 +348,6 @@ export class TradeAgreementsComponent implements OnInit {
       labelTitile: '¡Atención!',
       textDescription: 'No se pueden editar los acuerdos en estado conciliado. Favor, pasar a la sección de SEGUIMIENTO para ver los detalles del acuerdo',
       status: 'warning'
-    };
-
-    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-      data: { contactInfo: dataSuccess },
-      minWidth: '27vw', maxWidth: '35vw', maxHeight: '40vh', minHeight: '23vh'
-    });
-    setTimeout(() => dialogRef.close(), 5300);
-  }
-
-  public agreementDuplicateAlertModal() {
-    const dataSuccess = {
-      icon: 'warning',
-      labelTitile: '¡Atención!',
-      textDescription: 'No se puede hacer una réplica de un acuerdo en estado Conciliado ó Finalizado',
-      status: 'warning'
-    };
-
-    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-      data: { contactInfo: dataSuccess },
-      minWidth: '27vw', maxWidth: '35vw', maxHeight: '40vh', minHeight: '23vh'
-    });
-    setTimeout(() => dialogRef.close(), 5300);
-  }
-  public agreementDuplicateSuccessModal() {
-    const dataSuccess = {
-      icon: 'check_circle_outline',
-      labelTitile: '¡Listo!',
-      textDescription: 'Réplica del acuerdo creada',
-      status: 'success'
     };
 
     const dialogRef = this.matDialog.open(FeedbackModalComponent, {

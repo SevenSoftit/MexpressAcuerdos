@@ -50,14 +50,6 @@ export class AgreementReportService {
       );
   }
 
-  saveExcel (contactInfoData: any) {
-    const url = this.apiUrl + 'api/Excel/GenerateExcel';
-    return this.http.post<any>(url, contactInfoData, httpOptions).pipe(
-      tap((product: any) => console.log('')),
-      catchError(this.handleError<any>(''))
-      );
-  }
-
 
 
   /*******************************************************

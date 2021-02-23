@@ -19,7 +19,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         }
         #region Region [Methods]
         /// Nombre: CreatePdf
-        /// Descripcion: Metodo utilizado para crear un archivo PDF a partir de celdas creadas
+        /// Descripcion: Metodo utilizado para crear un archivo PDF a partir de un HTML
         /// Fecha de creacion: 28/08/2019
         /// Autor: Gustavo ZC
         [Route("CreatePdf")]
@@ -28,7 +28,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
         {
 
             try
-            {
+            {   
                 String output = "";
                 output = string.Format("{0}{1}", configuration.GetValue<string>("Files:RutaDestinoReporteAcuerdos"), "Informe_General_Acuerdo" + "_" + list.Name_Agree + ".pdf");
                 FileStream fs = new FileStream(output, FileMode.Create);
@@ -42,7 +42,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 Font fontTextColumnHeader = new Font(bf, 14, 1, BaseColor.WHITE);
                 Font fontTextTable = new Font(bf, 12, 0, BaseColor.BLACK);
 
-
+                
                 //Tabla para insertar espacios en blanco
                 PdfPTable pdfTableBlack = new PdfPTable(1);
                 pdfTableBlack.DefaultCell.Border = 0;
@@ -51,18 +51,17 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
 
                 // Insertar imagen en el documento:
                 string imageURL = @"C:\inetpub\wwwroot\Archivos\Acuerdos\Reportes\Recursos\Header_Mexpress.png";
-                iTextSharp.text.Image png = iTextSharp.text.Image.GetInstance(imageURL);
+                iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
                 // Reescalar imagen:
-                // png.ScaleToFit(1587f, 200f);  //1587f, 270f
+                jpg.ScaleToFit(1587f, 270f);  //140f, 120f
                 // Agregar espacio antes de la imagen:
-                png.SpacingBefore = 0f;//10f;
+                jpg.SpacingBefore = 0f;//10f;
                 // Agregar espacio despues de la imagen:
-                png.SpacingAfter = 0f;
+                jpg.SpacingAfter = 2f;
                 //Alineacion de la imagen:
-                png.Alignment = Element.ALIGN_CENTER;
+                jpg.Alignment = Element.ALIGN_CENTER;
                 document.Open();
-                document.Add(png);
-                document.Add(pdfTableBlack);
+                document.Add(jpg);
 
                 //Tabla para insertar informacion varia del reporte:
                 PdfPTable pdfTableVariedInformation = new PdfPTable(1);
@@ -94,32 +93,6 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 cellInfo5.Border = 0;
                 cellInfo5.ExtraParagraphSpace = 10;
                 pdfTableVariedInformation.AddCell(cellInfo5);
-
-                PdfPCell cellInfo6 = new PdfPCell(new Paragraph("Correo: " + list.Email, fontVariedInformation));
-                cellInfo6.Border = 0;
-                cellInfo6.ExtraParagraphSpace = 10;
-                pdfTableVariedInformation.AddCell(cellInfo6);
-
-                PdfPCell cellInfo7 = new PdfPCell(new Paragraph("Monto máximo: " + list.String_Max_Amount, fontVariedInformation));
-                cellInfo7.Border = 0;
-                cellInfo7.ExtraParagraphSpace = 10;
-                pdfTableVariedInformation.AddCell(cellInfo7);
-
-                PdfPCell cellInfo8 = new PdfPCell(new Paragraph("Recuperado colones: " + list.String_Total_Recovery, fontVariedInformation));
-                cellInfo8.Border = 0;
-                cellInfo8.ExtraParagraphSpace = 10;
-                pdfTableVariedInformation.AddCell(cellInfo8);
-
-                PdfPCell cellInfo9 = new PdfPCell(new Paragraph("Recuperado dólares: " + list.String_Total_Recovery_Dollars, fontVariedInformation));
-                cellInfo9.Border = 0;
-                cellInfo9.ExtraParagraphSpace = 10;
-                pdfTableVariedInformation.AddCell(cellInfo9);
-
-                PdfPCell cellInfo10 = new PdfPCell(new Paragraph("Cuenta contable: " + list.Accounting_Account, fontVariedInformation));
-                cellInfo10.Border = 0;
-                cellInfo10.ExtraParagraphSpace = 10;
-                pdfTableVariedInformation.AddCell(cellInfo10);
-
 
                 document.Add(pdfTableVariedInformation);
                 document.Add(pdfTableBlack);
@@ -209,7 +182,7 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 return Ok(Url_Attachment);
             }
             catch (Exception ex)
-            {
+            {   
                 var exception = ex;
                 var error = "Debe cerrar el pdf anterior antes de poder generar el siguiente";
                 return BadRequest(error);

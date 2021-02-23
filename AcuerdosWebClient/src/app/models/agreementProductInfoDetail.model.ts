@@ -9,7 +9,7 @@ export class AgreementProductInfoDetailModel {
     Suc_Id: number;
     Name_Store: string;
     Case_Id: number;
-    Bill_Id: string;
+    Bill_Id: number;
     Product_Quantity: number;
     Product_Id: string;
     Product_Name: string;
@@ -38,15 +38,6 @@ export class AgreementProductInfoDetailModel {
     Provider_Name: string;
     Date_Start: Date;
     Date_Finish: Date;
-    
-    Email: string;
-    Max_Amount: number;
-    String_Max_Amount: string;
-    Total_Recovery: number;
-    String_Total_Recovery: string;
-    Total_Recovery_Dollars: number;
-    String_Total_Recovery_Dollars: string;
-    Accounting_Account: string;
 
     constructor() {
         this.Pk_Ac_Trade_Agreement = 0;
@@ -59,7 +50,7 @@ export class AgreementProductInfoDetailModel {
         this.Suc_Id = 0;
         this.Name_Store = '';
         this.Case_Id = 0;
-        this.Bill_Id = '';
+        this.Bill_Id = 0;
         this.Product_Quantity = 0;
         this.Product_Id = '';
         this.Product_Name = '';
@@ -77,7 +68,8 @@ export class AgreementProductInfoDetailModel {
         this.Client_Id = 0;
         this.Client_Identification = '';
         this.Client_Name = '';
-        this.Date_Process = new Date(); 
+        this.Date_Process = new Date();
+     
         this.Id_Currency = '';  
         this.Active = false;
         this.Name_Currency = '';
@@ -88,15 +80,5 @@ export class AgreementProductInfoDetailModel {
         this.Provider_Name = '';
         this.Date_Start = new Date();
         this.Date_Finish = new Date();
-        
-        this.Email = '';
-        this.Max_Amount = 0;
-        this.String_Max_Amount = '0';
-        this.Total_Recovery = 0;
-        this.String_Total_Recovery = '0';
-        this.Total_Recovery_Dollars = 0;
-        this.String_Total_Recovery_Dollars = '0';
-        this.Accounting_Account = '';
-
     }
 }

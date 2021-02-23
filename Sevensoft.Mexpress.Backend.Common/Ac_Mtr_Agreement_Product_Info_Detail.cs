@@ -8,8 +8,8 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Ac_Mtr_Agreement_Product_Info_Detail()
         {
             Pk_Ac_Trade_Agreement = 0;
-            Pk_Cat_Agreement_Details_Result = 0;
-            Pk_Cat_Agreement_Details_Resume = 0;
+            Pk_Cat_Agreement_Details_Result = 0; 
+            Pk_Cat_Agreement_Details_Resume = 0; 
             Emp_Id = 0;
             Name_Company = "";
             Type_Doc_Id = 0;
@@ -17,7 +17,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Suc_Id = 0;
             Name_Store = "";
             Case_Id = 0;
-            Bill_Id = "";
+            Bill_Id = 0;
             Product_Quantity = 0;
             Product_Id = "";
             Product_Name = "";
@@ -36,7 +36,8 @@ namespace Sevensoft.Mexpress.Backend.Common
             Client_Identification = "";
             Client_Name = "";
             Date_Process = Convert.ToDateTime("1900-01-01");
-            Id_Currency = "";
+           
+            Id_Currency = "";                 
             Active = false;
             Name_Currency = "";
             Behavior = "";
@@ -46,16 +47,6 @@ namespace Sevensoft.Mexpress.Backend.Common
             Provider_Name = "";
             Date_Start = Convert.ToDateTime("1900-01-01");
             Date_Finish = Convert.ToDateTime("1900-01-01");
-
-            Email = "";
-            Max_Amount = 0;
-            String_Max_Amount = "0";
-            Total_Recovery = 0;
-            String_Total_Recovery = "0";
-            Total_Recovery_Dollars = 0;
-            String_Total_Recovery_Dollars = "0";
-            Accounting_Account = "";
-
         }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
         public Int64 Pk_Cat_Agreement_Details_Result { get; set; }
@@ -67,7 +58,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Int32 Suc_Id { get; set; }
         public String Name_Store { get; set; }
         public Int32 Case_Id { get; set; }
-        public String Bill_Id { get; set; }
+        public Int32 Bill_Id { get; set; }
         public Int32 Product_Quantity { get; set; }
         public String Product_Id { get; set; }
         public String Product_Name { get; set; }
@@ -86,25 +77,16 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Client_Identification { get; set; }
         public String Client_Name { get; set; }
         public DateTime Date_Process { get; set; }
-        public String Id_Currency { get; set; }
-        public Boolean Active { get; set; }
-        public String Name_Currency { get; set; }
-        public String Behavior { get; set; }
-        public List<Ac_Mtr_Agreement_Product_Info_Detail> AgreementProductInfoDetailList { get; set; }
-        public String Name_Agree { get; set; }
-        public String Agreement_Type_Name { get; set; }
-        public String Provider_Name { get; set; }
-        public DateTime Date_Start { get; set; }
-        public DateTime Date_Finish { get; set; }
-        
-        public String Email { get; set; }
-        public Decimal Max_Amount { get; set; }
-        public String String_Max_Amount { get; set; }
-        public Decimal Total_Recovery { get; set; }
-        public String String_Total_Recovery { get; set; }
-        public Decimal Total_Recovery_Dollars { get; set; }
-        public String String_Total_Recovery_Dollars { get; set; }
-        public String Accounting_Account { get; set; }
 
+        public String Id_Currency { get; set; }
+        public Boolean Active { get; set; }  
+        public String Name_Currency { get; set; }    
+         public String Behavior { get; set; } 
+         public List<Ac_Mtr_Agreement_Product_Info_Detail> AgreementProductInfoDetailList { get; set; }
+         public String Name_Agree { get; set; } 
+         public String Agreement_Type_Name { get; set; }
+         public String Provider_Name { get; set; }
+         public DateTime Date_Start { get; set; }
+         public DateTime Date_Finish { get; set; }
     }
 }
