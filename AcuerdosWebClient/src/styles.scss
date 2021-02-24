@@ -158,9 +158,8 @@ $soft-gray: #5a5a5a;
 }
 
 *::-webkit-scrollbar {
-    width: 12px !important;
-    height: 12px !important;
-    background-color: #F5F5F5 !important;
+    width: 12px;
+    background-color: #F5F5F5;
 }
 
 *::-webkit-scrollbar-thumb {

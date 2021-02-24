@@ -200,11 +200,7 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_FK_STATUS_AGREEMENT = model.Fk_Status_Agreement,
                         P_FK_GLB_MTR_ORGANIZATION = model.Fk_Glb_Mtr_Organization,
                         P_MAX_AMOUNT = model.Max_Amount,
-                        P_EMAIL = model.Email,
-                        P_CONCILIATION_USER = model.Conciliation_User,
-                        P_CONCILIATION_DATE = model.Conciliation_Date,
-                        P_ACCOUNTING_ACCOUNT = model.Accounting_Account
-
+                        P_EMAIL = model.Email
                     },
                 //     commandType: CommandType.StoredProcedure).FirstOrDefault();
                 // return await Task.FromResult<Common.Import_Product>(result);

@@ -1,8 +1,4 @@
 @import "../../../styles.scss";
-
-.margin-toogle{
-    margin-left: 2rem;
-}
 .tittle-agreement {
     font-size: $font-size-medium;
     text-align: left;
@@ -34,7 +30,7 @@
 .create-agreement-sector {
     background: #eeeeee;
     border-radius: 0rem;
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 1.3rem;
     margin-left: 0;
     margin-right: 0;
 }
@@ -43,7 +39,7 @@
 //     margin-top: 3vh;
 // }
 .new-agreement-form-top {
-    padding: 0.8rem 0 0 0;
+    padding: 0.8rem 0;
 }
 // .agreement-top {
 //     margin-top: 2vh;
@@ -147,9 +143,9 @@
     background: $light-blue;
 }
 
-// ::ng-deep .e-grid .e-content {
-//     overflow-x: hidden !important;
-// }
+::ng-deep .e-grid .e-content {
+    overflow-x: hidden !important;
+}
 
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
     font-family: $opensans-semibold !important;
@@ -224,7 +220,8 @@
 }
 
 .new-trade-show-goals-content {
-    text-align: right;
+    display: flex;
+    align-items: center;
 }
 
 .new-trade-agreement-detail-goals-lbl {
@@ -254,7 +251,7 @@
 
 .goals-info-content {
     border: 1px solid $light-blue-dark;
-    margin: 4vh 2rem 0 2rem;
+    margin: 19vh 2rem 0 2rem;
     padding: 8vh;
     border-radius: 0.8rem;
     background: rgba(240, 240, 240, 0.5);

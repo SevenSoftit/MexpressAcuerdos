@@ -21,9 +21,7 @@ import { FeedbackDescriptionModalComponent } from 'src/app/shared/modal/feedback
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { FeedbackModalComponent } from 'src/app/shared/modal/feedback-modal/feedback-modal.component';
 import { utiles } from 'src/environments/utiles';
-import { AgreementProductInfoDetailModel } from 'src/app/models/agreementProductInfoDetail.model';
-import { AgreementReportService } from 'src/app/shared/services/agreementReport/agreementReport.service';
-declare var require: any
+
 
 
 
@@ -86,10 +84,8 @@ export class AgreementConciliationDetailComponent implements OnInit {
   public statusValidation: boolean = false;
   public currencyName: string = '';
   public searchText: string = '';
-  public behaviorTA: string = '';
-  public dataTableDetail: any[] = [];
 
-  constructor(private reportService: AgreementReportService, private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
+  constructor(private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
@@ -108,7 +104,6 @@ export class AgreementConciliationDetailComponent implements OnInit {
           this.disabledButtonConciliation = (this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
           this.statusValidation = (this.agreementDetail.info.agreement_Status_Name == 'Conciliado' || this.agreementDetail.info.agreement_Status_Name == 'Finalizado') ? true : false;
           // Resumen table
-          this.behaviorTA = this.agreementDetail.info.behavior;
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.status_agree = this.agreementDetail.info.agreement_Status_Name;
           this.status_type = this.agreementDetail.info.type_Agreement_Name;
@@ -131,8 +126,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
   ngOnInit() {
     this._common._setLoading(true);
     this.getScreenSize();
-    this.seeDetailOfTheEntireAgreement();
-  
+
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
         if(this.providerModel.Name_Provider === ''){
@@ -149,65 +143,10 @@ export class AgreementConciliationDetailComponent implements OnInit {
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
       description: new FormControl(''),
-      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      accountingAccount: new FormControl('')
+      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
   }
-  @HostListener('window:resize', ['$event'])
-  getScreenSize() {
-    this.screenHeight = window.innerHeight;
-    this.screenWidth = window.innerWidth;
 
-    if (this.screenWidth < 1536) {
-    } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
-    } 
-    else if (this.screenWidth > 1900) {
-    }
-    else if (this.screenWidth == 1680) {
-    }
-
-    if (this.screenWidth >= 1900) {
-    } else {
-    }
-  }
-
-  public newRowPosition: { [key: string]: Object }[] = [
-    { id: 'Top', newRowPosition: 'Top' },
-    { id: 'Bottom', newRowPosition: 'Bottom' }
-  ];
-  public localFields: Object = { text: 'newRowPosition', value: 'id' };
-
-  seeDetailOfTheEntireAgreement(): void {
-    this._common._setLoading(true);
-    var agreementProductInfoDetailModel = new AgreementProductInfoDetailModel();
-    agreementProductInfoDetailModel.Pk_Ac_Trade_Agreement = this.headerFile;
-    agreementProductInfoDetailModel.Behavior = this.behaviorTA;
-    agreementProductInfoDetailModel.Product_Id = '';
-
-    this.tradeAgreementDetailService.viewAgreementProductDetails(agreementProductInfoDetailModel).subscribe(
-      dataS => {
-        this.dataTableDetail = dataS;
-        this.listTypeOfAgreement();
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
-  }
-  listTypeOfAgreement() { 
-    this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
-      dataS => {
-        this.typeOfAgreementList = dataS;
-        this.fillFormAgreementDetail();
-        
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
-  }
   fillFormAgreementDetail() {
     if (this.agreementDetail != undefined) {
       this.newAgreementForm.patchValue({
@@ -215,8 +154,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
-        emailNotification: this.agreementDetail.info.email,
-        accountingAccount: this.agreementDetail.info.accounting_Account
+        emailNotification: this.agreementDetail.info.email
 
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -235,109 +173,97 @@ export class AgreementConciliationDetailComponent implements OnInit {
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
-        emailNotification: '',
-        accountingAccount: ''
+        emailNotification: ''
       });
 
     }
     this.getKeyStatus();
   }
-  getKeyStatus() {
-    this.catalogModel.Search_Key = this.search_key;
-    this._common.listCatalog(this.catalogModel).subscribe(
-      dataF => {
-        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
-        this.listProvider(this.option);
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+
+    if (this.screenWidth < 1536) {
+    } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
+    } 
+    else if (this.screenWidth > 1900) {
+    }
+    else if (this.screenWidth == 1680) {
+    }
+
+    if (this.screenWidth >= 1900) {
+    } else {
+    }
+    this.listTypeOfAgreement();
+  }
+
+  public newRowPosition: { [key: string]: Object }[] = [
+    { id: 'Top', newRowPosition: 'Top' },
+    { id: 'Bottom', newRowPosition: 'Bottom' }
+  ];
+  public localFields: Object = { text: 'newRowPosition', value: 'id' };
+
+  listTypeOfAgreement() { 
+    this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
+      dataS => {
+        this.typeOfAgreementList = dataS;
+        this.fillFormAgreementDetail();
+        
       },
       error => {
         this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
+        console.error(error);
+      }
+    )
   }
-  /*******************************************************
+/*******************************************************
 * Author: Gustavo ZC
 * Creation date:  08/07/2019
 * Description: method that list all providers
 ****************************************************/
-listProvider(option) {
-  this.providerModel.Page_Number = this.pageNumber;
-  this.providerModel.Rows_Page = this.limit;
-  this.providerService.listProvider(this.providerModel).subscribe(
-    dataG => {
-      this._common._setLoading(false);
-      if (this.pageNumber == 1) {
-        this.pageNumber = 1;
-        this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
-      }
-      this.providerList = dataG;
+  listProvider(option) {
+    this.providerModel.Page_Number = this.pageNumber;
+    this.providerModel.Rows_Page = this.limit;
+    this.providerService.listProvider(this.providerModel).subscribe(
+      dataG => {
+       
+        if (this.pageNumber == 1) {
+          this.pageNumber = 1;
+          this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
+        }
+        this.providerList = dataG;
 
-    if(option == true && this.providerModel.Name_Provider !== ""){
-      this.providerList.forEach(element => {
-        this.SearchInfo.push(element)
-       });
-      this.options.next(this.SearchInfo);
-      this._common._setLoading(false);
-     } 
-     
-     else if (option == false){
-      this.providerList.forEach(element => {
-        this.SearchInfo.push(element)
-       });
-      this.options.next(this.SearchInfo);
-      this._common._setLoading(false);
-     } 
-     
-     else if(option == true && this.providerModel.Name_Provider === ""){
-      this.options.next(this.providerList);
-      this._common._setLoading(false);
-     } 
+      if(option == true && this.providerModel.Name_Provider !== ""){
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+         });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+       } 
+       
+       else if (option == false){
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+         });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+       } 
+       
+       else if(option == true && this.providerModel.Name_Provider === ""){
+        this.options.next(this.providerList);
+        this._common._setLoading(false);
+       } 
 
-    },
-    error => {
-      this._common._setLoading(false);
-      console.error(error);
-    }
-  )
-}
-
-  exportToPdf(): void {
-    var generatePDF = new AgreementProductInfoDetailModel();
-    if (this.dataTableDetail.length != 0) {
-      generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
-      generatePDF.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
-      generatePDF.Name_Agree = this.nameAgree;
-      generatePDF.Provider_Name = this.dataTableDetail[0].provider_Name;
-      generatePDF.Date_Start = this.dataTableDetail[0].date_Start;
-      generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
-    } else {  
-      generatePDF.AgreementProductInfoDetailList = [];
-      generatePDF.Agreement_Type_Name = '';
-      generatePDF.Name_Agree = this.nameAgree;
-      generatePDF.Provider_Name = '';
-      generatePDF.Date_Start = new Date();
-      generatePDF.Date_Finish = new Date();
-    }
-    this.reportService.saveReport(generatePDF).subscribe(
-      dataS => {
-        var url = dataS;
-        this.downloadFile(url, "Informe_General_Acuerdo" + "_" + this.nameAgree + ".pdf");
       },
       error => {
+        this._common._setLoading(false);
+        console.error(error);
       }
     )
   }
-  downloadFile(url, archive) {
-    try {
-      var FileSaver = require('file-saver');
-      FileSaver.saveAs(url, archive);
 
-      this._common._setLoading(false);
-    }
-    catch
-    {
-      this._common._setLoading(false);
-    }
-  }
 
   /*******************************************************
   * Author: esalas
@@ -427,10 +353,7 @@ listProvider(option) {
     this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
     this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
     this.newAgreementDetailHeaderModel.Max_Amount = Number(this.maxAmount);
-    this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification; 
-    this.newAgreementDetailHeaderModel.Conciliation_User = utiles.getInfoUser().username;
-    this.newAgreementDetailHeaderModel.Conciliation_Date = new Date();
-    this.newAgreementDetailHeaderModel.Accounting_Account = this.newAgreementForm.value.accountingAccount;
+    this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
 
     this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
       data => {
@@ -475,6 +398,19 @@ listProvider(option) {
       minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
     });
     setTimeout(() => dialogRef.close(), 3000);
+  }
+
+  getKeyStatus() {
+    this.catalogModel.Search_Key = this.search_key;
+    this._common.listCatalog(this.catalogModel).subscribe(
+      dataF => {
+        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
+        this.listProvider(this.option);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
   }
 
   openGoals() {

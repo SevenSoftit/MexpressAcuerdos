@@ -112,10 +112,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   completeLoad = false;
   percentage:string='25%';
   //#endregion InfiniteScrollVariables
-  public maxAmountToggle = false;
-  public maxAmount: string = '0';
-  public string_Total_Recovery: string = '0';
-  public string_Total_Recovery_Dollars: string = '0';
+  maxAmountToggle = false;
+  maxAmount: string = '0';
   showAmountInput = false;
   emailNotification: string = '';
   submitted = false;
@@ -177,8 +175,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       startDatePicker: new FormControl(new Date()), //new Date(this.doo.getTime() - this.doo.getTimezoneOffset() * -60000)
       endDatePicker: new FormControl(new Date()),
       description: new FormControl(''),
-      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      accountingAccount: new FormControl('')
+      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
     this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
@@ -231,8 +228,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: this.agreementDetail.info.date_Start,
         endDatePicker: this.agreementDetail.info.date_Finish,
-        emailNotification: this.agreementDetail.info.email,
-        accountingAccount: this.agreementDetail.info.accounting_Account
+        emailNotification: this.agreementDetail.info.email
 
       });
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -244,17 +240,15 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+      debugger
       this.maxAmount= String(this.agreementDetail.info.max_Amount);
-      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
-      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
     } else {
       this.newAgreementForm.setValue({
         agreement_name: '',
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
-        emailNotification: '',
-        accountingAccount: ''
+        emailNotification: ''
       });
     }
     this.getKeyStatus(); 
@@ -268,7 +262,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     if (this.screenWidth < 1536) {
       this.heightGridLW = 220;
     } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
-      this.heightGridLW = 170;
+      this.heightGridLW = 213;
     } 
     else if (this.screenWidth > 1900) {
       this.heightGridLW = 420;
@@ -359,11 +353,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.newAgreementDetailHeaderModel.Fk_Status_Agreement = this.fk_Status_Agreement;
       this.newAgreementDetailHeaderModel.Active = this.agreement_activator;
       this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
+      debugger
       this.newAgreementDetailHeaderModel.Max_Amount = Number(this.maxAmount!== null && this.maxAmount !== '0.00') ? Number(this.maxAmount) : 0;
       this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
-      this.newAgreementDetailHeaderModel.Conciliation_User = '';
-      this.newAgreementDetailHeaderModel.Conciliation_Date = new Date();
-      this.newAgreementDetailHeaderModel.Accounting_Account = this.newAgreementForm.value.accountingAccount;
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {

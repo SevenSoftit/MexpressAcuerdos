@@ -17,12 +17,12 @@ declare var require: any
   styleUrls: ['./list-evidences-modal.component.scss']
 })
 export class ListEvidencesModalComponent implements OnInit {
-  public evidenceList: any[] = [];
-  public evidenceListCount: any = 0;
-  public notRepeatEvidence: any;
-  public onAdd = new EventEmitter();
-  public step = 0;
-  public disableButton: boolean = false;
+  evidenceList: any;
+  evidenceListCount: any = 0;
+  notRepeatEvidence: any;
+  onAdd = new EventEmitter();
+  step = 0;
+  disableButton: boolean = false;
 
 
 
@@ -165,7 +165,7 @@ deleteEvidence(evidence) {
    * Description:
    *******************************************************/
   openAddEvidenceModal(){
-    // this.onAdd.emit(true);
+    this.onAdd.emit(true);
     const dialogRef = this.dialog.open(AddAgreementEvidenceModalComponent, {
       data: {confirmInfo: this.dataModal.confirmInfo},
       minWidth: "900px",
@@ -179,10 +179,6 @@ deleteEvidence(evidence) {
         this.listAllEvidences();
       }
     });
-  }
-
-  closeModal(){
-    this.onAdd.emit(this.evidenceList); 
   }
 
   setStep(index: number) {

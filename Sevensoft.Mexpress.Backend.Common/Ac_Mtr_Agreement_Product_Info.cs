@@ -22,8 +22,6 @@ namespace Sevensoft.Mexpress.Backend.Common
             Product_Quantity_Sold = 0;
             Product_Amount_Recovery = 0;
             String_Product_Amount_Recovery = "0";
-            Calculate_Recovery_Amount = 0;
-            String_Calculate_Recovery_Amount = "0";
             Id_Currency = "";
             Active = false;
             Name_Currency = "";
@@ -32,7 +30,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         }
         public Int64 Pk_Cat_Agreement_Details_Resume { get; set; }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
-        public Int32 Pk_Glb_Products { get; set; }  
+        public Int32 Pk_Glb_Products { get; set; }
         public DateTime Creation_Date { get; set; }
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
@@ -43,9 +41,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String String_Product_Amount { get; set; }
         public Int32 Product_Quantity_Sold { get; set; }
         public Decimal Product_Amount_Recovery { get; set; }
-        public String String_Product_Amount_Recovery { get; set; }   
-        public Decimal Calculate_Recovery_Amount { get; set; }   
-        public String  String_Calculate_Recovery_Amount{ get; set; }
+        public String String_Product_Amount_Recovery { get; set; }
         public String Id_Currency { get; set; }
         public Boolean Active { get; set; }
         public String Name_Currency { get; set; }

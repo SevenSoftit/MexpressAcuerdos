@@ -1,7 +1,4 @@
 @import "../../../styles.scss";
-.margin-toogle{
-    margin-left: 2rem;
-}
 .tittle-agreement {
     font-size: $font-size-medium;
     text-align: left;
@@ -36,7 +33,7 @@
 .create-agreement-sector {
     background: #eeeeee;
     border-radius: 0rem;
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 1.3rem;
     margin-left: 0;
     margin-right: 0;
 }
@@ -141,9 +138,9 @@
     background: $light-blue;
 }
 
-// ::ng-deep .e-grid .e-content {
-//     overflow-x: hidden !important;
-// }
+::ng-deep .e-grid .e-content {
+    overflow-x: hidden !important;
+}
 
 ::ng-deep .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn:hover {
     font-family: $opensans-semibold !important;

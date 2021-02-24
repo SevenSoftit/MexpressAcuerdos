@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { GridComponent, ToolbarItems, ExcelExportProperties, GridLine } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ToolbarItems, ExcelExportProperties } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
@@ -17,8 +17,6 @@ import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.m
   styleUrls: ['./agreement-tracking.component.scss'],
 })
 export class AgreementTrackingComponent implements OnInit {
-  public heightGridLW: any;
-  public lines: GridLine;
   public initialSort: Object;
   public pageSettings: Object;
   public editSettings: Object;
@@ -83,14 +81,12 @@ export class AgreementTrackingComponent implements OnInit {
   ngOnInit() {
     this._common._setLoading(true);
     this.getScreenSize();
-    this.listHeaderAgreement(this.status);
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
     this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
-    this.lines = 'Both';
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
@@ -101,12 +97,10 @@ export class AgreementTrackingComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= 1900) {
       this.pageSettings = { pageSize: 12, pageCount: 5 };
-      this.heightGridLW = 290;
     } else {
       this.pageSettings = { pageSize: 7, pageCount: 5 };
-      this.heightGridLW = 290;
     }
-    
+    this.listHeaderAgreement(this.status);
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -116,8 +110,8 @@ export class AgreementTrackingComponent implements OnInit {
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
   dataBound() {
-    // this.grid.gridLines = 'Both';
-    // Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
+    this.grid.gridLines = 'Both';
+    Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
 
   }
 
@@ -284,5 +278,13 @@ calculateAmounts(status: boolean){
     
           this.grid.excelExport(excelExportProperties);
         }
+      }
+
+      public currencyFormatterRecovery = (field: string, data1: object, column: object) => {
+        if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+          return '₡' + data1['string_Recovery_Amount'];    
+        }else{
+          return '$' + data1['string_Recovery_Amount'];
+        } 
       }
 }

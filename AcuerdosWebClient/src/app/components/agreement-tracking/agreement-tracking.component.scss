@@ -23,11 +23,14 @@
     align-items: baseline;
 }
 
+.agreement-scroll {
+    height: 85vh!important;
+}
 
 .trade-agreements-header {
     background: #eeeeee;
     border-radius: 0rem;
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 1.3rem;
     margin-left: 0;
     margin-right: 0;
 }
@@ -51,9 +54,9 @@
     background: $light-blue;
 }
 
-// ::ng-deep .e-grid .e-content {
-//     overflow-x: hidden !important;
-// }
+::ng-deep .e-grid .e-content {
+    overflow-x: hidden !important;
+}
 
 .radioButton-agreement {
     font-family: $opensans-bold;

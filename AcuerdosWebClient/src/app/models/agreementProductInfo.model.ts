@@ -16,8 +16,6 @@ export class AgreementProductInfoModel {
     Product_Quantity_Sold: number;
     Product_Amount_Recovery: number;
     String_Product_Amount_Recovery: string;
-    Calculate_Recovery_Amount: number;
-    String_Calculate_Recovery_Amount: string;
     Id_Currency: string;
     Active: Boolean;
     Name_Currency: string;
@@ -39,8 +37,6 @@ export class AgreementProductInfoModel {
         this.Product_Quantity_Sold = 0;
         this.Product_Amount_Recovery = 0;
         this.String_Product_Amount_Recovery = '0';
-        this.Calculate_Recovery_Amount = 0;
-        this.String_Calculate_Recovery_Amount = '0';
         this.Id_Currency = '';  
         this.Active = false;
         this.Name_Currency = '';

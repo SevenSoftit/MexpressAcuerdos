@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { GridComponent, ForeignKeyService, FilterService, ExcelExportProperties, ToolbarItems, GridLine } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, ForeignKeyService, FilterService, ExcelExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { NewAgreementDetailHeaderModel } from 'src/app/models/newAgreementDetailHeader.model';
 import { QueryCellInfoEventArgs, FilterSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
@@ -16,7 +16,6 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations';
   styleUrls: ['./agreement-conciliation.component.scss'],
 })
 export class AgreementConciliationComponent implements OnInit {
-  public lines: GridLine;
   public initialSort: Object;
   public pageSettings: Object;
   public editSettings: Object;
@@ -64,7 +63,6 @@ public onChangeProvider(args: any): void {
   ngOnInit() {
     this._common._setLoading(true);
     this.getScreenSize();
-    this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.filterOptions = {
@@ -92,9 +90,11 @@ public onChangeProvider(args: any): void {
   ];
   public localFields: Object = { text: 'newRowPosition', value: 'id' };
 
-  // dataBound() {
-  //   Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
-  // }
+  dataBound() {
+    this.grid.gridLines = 'Both';
+    Object.assign((this.grid.filterModule as any).filterOperators, { startsWith: 'contains' });
+
+  }
 
 
   /*******************************************************
