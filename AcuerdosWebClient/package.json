@@ -37,7 +37,7 @@
     "latest": "^0.2.0",
     "moment": "^2.24.0",
     "ng-mat-select-infinite-scroll": "^1.1.0",
-    "ngx-dropzone-wrapper": "^8.0.0",
+    "ngx-dropzone-wrapper": "^10.0.1",
     "ngx-loading": "^3.0.1",
     "ngx-mask": "^8.2.0",
     "rxjs": "~6.4.0",

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, HostListener, EventEmitter } from '@angul
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 import { ExcelExportProperties, ToolbarItems, QueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
-import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, GridLine } from '@syncfusion/ej2-angular-grids';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderModel } from 'src/app/models/provider.model';
@@ -24,6 +24,9 @@ import { ProviderService } from 'src/app/shared/services/TaProvider/provider.ser
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { TypeOfAgreementService } from 'src/app/shared/services/typeOfAgreement/typeOfAgreement.service';
 import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreementDetail/tradeAgreementDetail.service';
+import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
+import { AgreementDocumentModel } from 'src/app/models/agreementDocument.model';
+import { EvidenceService } from 'src/app/shared/services/evidence/evidence.service';
 declare var require: any
 
 @Component({
@@ -38,7 +41,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any;
-  public dataTableDetail: any;
+  public dataTableDetail: any[] = [];
   public initialSort: Object;
   public pageSettings: Object;
   screenHeight: any;
@@ -91,8 +94,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
   listValidation: any = [];
   onAdd = new EventEmitter();
   disabledButtonFinalization: boolean = false;
+  public lines: GridLine;
+  public arrayEvidences: any[] = [];
+  public string_Total_Recovery: string = '0';
+  public string_Total_Recovery_Dollars: string = '0';
 
-  constructor(private reportService: AgreementReportService, public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService, private typeOfAgreementService: TypeOfAgreementService,
+  constructor(private evidenceService: EvidenceService, private reportService: AgreementReportService, public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService, private typeOfAgreementService: TypeOfAgreementService,
     private tradeAgreementDetailService: TradeAgreementDetailService, private router: Router) {
     this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
@@ -120,7 +127,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
   ngOnInit() {
     this._common._setLoading(true);
     this.getScreenSize();
-
+    
+    this.listAllEvidences();
+    
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
         if (this.providerModel.Name_Provider === '') {
@@ -137,12 +146,50 @@ export class AgreementTrackingDetailComponent implements OnInit {
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
       description: new FormControl(''),
-      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email]))
+      emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      accountingAccount: new FormControl('')
     });
 
     // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
+    this.lines = 'Both';
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+  }
+
+  listAllEvidences() {
+    var evidenceKey = new AgreementDocumentModel();
+    evidenceKey.Pk_Ac_Trade_Agreement = this.headerFile;
+    this.evidenceService.listEvidence(evidenceKey).subscribe(
+      dataQ => {
+        this.arrayEvidences = dataQ;
+
+        this.listTypeOfAgreement();
+
+      },
+      error => {
+        this._common._setLoading(false);
+      }
+    );
+  }
+
+  openListEvidenceModal() {
+    if(!this.showGoals){
+      this.grid.endEdit();
+    }
+    const object = {
+      header_File: this.headerFile,
+      name_Agree: this.nameAgree
+    }
+    const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
+      data: { confirmInfo: object }, disableClose: true,
+      minWidth: "900px",
+      maxWidth: "950px",
+    });
+    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
+      if (data !== false) {
+        this.arrayEvidences = data;
+      } 
+    });
   }
 
 
@@ -153,7 +200,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
-        emailNotification: this.agreementDetail.info.email
+        emailNotification: this.agreementDetail.info.email,
+        accountingAccount: this.agreementDetail.info.accounting_Account
       });  
     
       this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
@@ -166,13 +214,16 @@ export class AgreementTrackingDetailComponent implements OnInit {
       this.agreement_activator = this.agreementDetail.info.active;
       this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
       this.maxAmount = String(this.agreementDetail.info.max_Amount);
+      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
+      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
     } else {  
       this.newAgreementForm.setValue({
         agreement_name: '',  
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
-        emailNotification: ''
+        emailNotification: '',
+        accountingAccount: ''
       });
     }
     this.listAgreementDResume();
@@ -201,6 +252,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.newAgreementDetailHeaderModel.Fk_Glb_Mtr_Organization = this.fk_Glb_Mtr_Organization;
     this.newAgreementDetailHeaderModel.Max_Amount = Number(this.maxAmount);
     this.newAgreementDetailHeaderModel.Email = this.newAgreementForm.value.emailNotification;
+    this.newAgreementDetailHeaderModel.Conciliation_User = '';
+    this.newAgreementDetailHeaderModel.Conciliation_Date = new Date();
+    this.newAgreementDetailHeaderModel.Accounting_Account = this.newAgreementForm.value.accountingAccount;
 
     this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
       data => {
@@ -220,7 +274,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     if (this.screenWidth < 1536) {
       this.heightGridLW = 220;
     } else if (this.screenWidth >= 1536 && this.screenWidth < 1900 && this.screenWidth != 1680) {
-      this.heightGridLW = 213;
+      this.heightGridLW = 190;
     }
     else if (this.screenWidth > 1900) {
       this.heightGridLW = 420;
@@ -234,7 +288,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 5, pageCount: 5 };
     }
-    this.listTypeOfAgreement();
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -245,21 +298,32 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
 
 
-  dataBound() {
-    this.grid.gridLines = 'Both';
-
-    // if (this.grid.columns.length > 9) {
-    //   this.grid.autoFitColumns();
-    // }
-  }
+  // dataBound() {
+  //   if (this.grid.columns.length > 9) {
+  //     this.grid.autoFitColumns();
+  //   }
+  // }
 
 
 
   // Opcion para Excel
-  toolbarClick(args: ClickEventArgs): void {
+  toolbarClickProduct(args: ClickEventArgs): void {
     if (args.item.id == "export") {
       var date = new Date().toISOString().slice(0, 10);
-      var archiveName = 'Reporte_De_Productos_' + date + '.xlsx'
+      var archiveName = 'Reporte_General_Por_Articulo_Acuerdo_' + this.agreementDetail.info.name_Agreement + '_' + date + '.xlsx'
+
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: archiveName
+      };
+
+      this.grid.excelExport(excelExportProperties);
+    }
+  }
+
+  toolbarClickGeneral(args: ClickEventArgs): void {
+    if (args.item.id == "export") {
+      var date = new Date().toISOString().slice(0, 10);
+      var archiveName = 'Reporte_Detallado_Acuerdo_' + this.agreementDetail.info.name_Agreement +'_'+ date + '.xlsx' 
 
       const excelExportProperties: ExcelExportProperties = {
         fileName: archiveName
@@ -359,8 +423,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.listProvider(this.option);
   }
 
-  listAgreementDResume() { 
-    debugger
+  listAgreementDResume() {   
     var agreementProductInfoModel = new AgreementProductInfoModel();
     agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoModel.Behavior = this.behaviorTA;
@@ -368,7 +431,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
       dataI => {
         this.dataTable = dataI;
         this.grid.refresh();
-        this.getKeyStatus();
+        this.getKeyStatus();  
       },
       error => {
         this._common._setLoading(false);
@@ -426,26 +489,18 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   finishAgreement(): void {
-    this.listHeaderAgreement();
-  }
+    if(this.arrayEvidences.length !== 0){
+      if (this.agreementDetail.info.expired_Indicator == true) {
+        this.expiryIndicationModal();
+      } else {
+        this.disabledButtonFinalization = true;
+        this.saveAgreementHeader();
+      }
 
-  listHeaderAgreement() {
-    var data = new NewAgreementDetailHeaderModel();
-    data.Active = this.agreement_activator;
-    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
-      dataQ => {
-        this.listValidation = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All' && dataOpt.pk_Ac_Trade_Agreement == this.headerFile);
-        if (this.listValidation[0].expired_Indicator == true) {
-          this.expiryIndicationModal();
-        } else {
-          this.disabledButtonFinalization = true;
-          this.saveAgreementHeader();
-        }
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
+    }else{
+        this.noElectronicBillModal();
+    }
+
   }
 
   public expiryIndicationModal() {
@@ -474,7 +529,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   public directFinalizationModal() {
-
     const dataSuccess = {
       icon: 'warning',
       labelTitile: '¡Atención!',
@@ -489,19 +543,40 @@ export class AgreementTrackingDetailComponent implements OnInit {
     setTimeout(() => dialogRef.close(), 3000);
   }
 
+  public noElectronicBillModal() {
+    const dataSuccess = {
+      icon: 'warning',
+      labelTitile: '¡Atención!',
+      textDescription: 'Debe adjuntar la factura electrónica antes de poder finalizar el acuerdo',
+      status: 'warning'
+    };
+
+    const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+      data: { contactInfo: dataSuccess },
+      minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+    });
+    setTimeout(() => dialogRef.close(), 3000);
+  }
 
   exportToPdf(): void {
-    this.getPdf();
-  }
-  getPdf(): void {
     var generatePDF = new AgreementProductInfoDetailModel();
     if (this.dataTableDetail.length != 0) {
       generatePDF.AgreementProductInfoDetailList = this.dataTableDetail;
+      // Encabezado:
       generatePDF.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
       generatePDF.Name_Agree = this.nameAgree;
       generatePDF.Provider_Name = this.dataTableDetail[0].provider_Name;
       generatePDF.Date_Start = this.dataTableDetail[0].date_Start;
       generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
+
+      generatePDF.Email = this.dataTableDetail[0].email;
+      generatePDF.String_Max_Amount = this.dataTableDetail[0].string_Max_Amount;
+      generatePDF.String_Total_Recovery = this.dataTableDetail[0].string_Total_Recovery;
+      generatePDF.String_Total_Recovery_Dollars = this.dataTableDetail[0].string_Total_Recovery_Dollars;
+      generatePDF.Accounting_Account = this.dataTableDetail[0].accounting_Account;
+      // generatePDF.Date_Finish = this.dataTableDetail[0].date_Finish;
+
+
     } else {
       generatePDF.AgreementProductInfoDetailList = [];
       generatePDF.Agreement_Type_Name = '';
@@ -509,6 +584,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
       generatePDF.Provider_Name = '';
       generatePDF.Date_Start = new Date();
       generatePDF.Date_Finish = new Date();
+
+      generatePDF.Email = '';
+      generatePDF.String_Max_Amount = '0';
+      generatePDF.String_Total_Recovery = '0';
+      generatePDF.String_Total_Recovery_Dollars = '0';
+      generatePDF.Accounting_Account = '';
     }
     this.reportService.saveReport(generatePDF).subscribe(
       dataS => {
@@ -519,6 +600,34 @@ export class AgreementTrackingDetailComponent implements OnInit {
       }
     )
   }
+
+  exportToExcel(){
+    var generateExcel = new AgreementProductInfoDetailModel();
+    if (this.dataTableDetail.length != 0) {
+      generateExcel.AgreementProductInfoDetailList = this.dataTableDetail;
+      generateExcel.Agreement_Type_Name = this.dataTableDetail[0].agreement_Type_Name;
+      generateExcel.Name_Agree = this.nameAgree;
+      generateExcel.Provider_Name = this.dataTableDetail[0].provider_Name;
+      generateExcel.Date_Start = this.dataTableDetail[0].date_Start;
+      generateExcel.Date_Finish = this.dataTableDetail[0].date_Finish;
+    } else {
+      generateExcel.AgreementProductInfoDetailList = [];
+      generateExcel.Agreement_Type_Name = '';
+      generateExcel.Name_Agree = this.nameAgree;
+      generateExcel.Provider_Name = '';
+      generateExcel.Date_Start = new Date();
+      generateExcel.Date_Finish = new Date();
+    }
+    this.reportService.saveExcel(generateExcel).subscribe(
+      dataS => {
+        var url = dataS;
+        this.downloadFile(url, "Informe_General_Acuerdo" + "_" + this.nameAgree + ".pdf");
+      },
+      error => {
+      }
+    )
+  }
+
   downloadFile(url, archive) {
     try {
       var FileSaver = require('file-saver');
@@ -623,11 +732,12 @@ export class AgreementTrackingDetailComponent implements OnInit {
     } 
   }
 
-  public currencyFormatterRecovery = (field: string, data1: object, column: object) => {
+
+  public currencyFormatterCalculate = (field: string, data1: object, column: object) => {
     if(data1['id_Currency'].toUpperCase() == 'COLONES'){
-      return '₡' + data1['string_Product_Amount_Recovery'];    
+      return '₡' + data1['string_Calculate_Recovery_Amount'];    
     }else{
-      return '$' + data1['string_Product_Amount_Recovery'];
+      return '$' + data1['string_Calculate_Recovery_Amount'];
     } 
   }
 

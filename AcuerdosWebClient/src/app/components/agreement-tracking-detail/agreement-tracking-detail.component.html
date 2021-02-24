@@ -4,7 +4,7 @@
       <h5 class="tittle-agreement pl-3">Detalle del seguimiento</h5>
     </div>
     <div class="row m-0 pl-0">
-      <div class="col-md-5 p-0 center-content">
+      <div class="col-md-4 p-0 center-content">
         <span class="icon-container ml-3" *ngIf="enableArrow">
           <mat-icon *ngIf="enableArrow" (click)="goListProductsResume()" class="back-arrow">keyboard_backspace
           </mat-icon>
@@ -13,20 +13,27 @@
           acuerdo.</label>
       </div>
 
-      
-      <div class=" col-md-5 buttons-content center-content">
-        <button class="save-button ml-4" mat-raised-button (click)="seeDetailOfTheEntireAgreement()"
+
+      <div class=" col-md-6 buttons-content center-content">
+        <button class="save-button" mat-raised-button (click)="seeDetailOfTheEntireAgreement()"
           *ngIf="enableEntireAgreement">
           Ver detalle de todo el acuerdo<mat-icon class="ml-2">star</mat-icon>
         </button>
 
-        <button class="save-button ml-4" mat-raised-button (click)="exportToPdf()" *ngIf="enablePdfExport">
-          <mat-icon class="mr-2">description</mat-icon>Generar acuerdo en Pdf
+        <button class="save-button mr-3" mat-raised-button (click)="openListEvidenceModal()" *ngIf="enablePdfExport">
+          Adjuntar factura
         </button>
 
-        <button [disabled]='disabledButtonFinalization' class="save-button ml-4" mat-raised-button
+        <button class="save-button mr-3" mat-raised-button (click)="exportToPdf()" *ngIf="enablePdfExport">
+          Generar PDF
+        </button>
+        <!-- <button class="save-button mr-3" mat-raised-button (click)="exportToExcel()" *ngIf="enablePdfExport">
+          Generar Excel
+        </button> -->
+
+        <button [disabled]='disabledButtonFinalization' class="save-button" mat-raised-button
           (click)="finishAgreement()" *ngIf="enablePdfExport">
-          <mat-icon class="mr-2">done_all</mat-icon>Finalizar acuerdo
+          Finalizar acuerdo
         </button>
       </div>
       <!--Activador de acuerdos-->
@@ -125,25 +132,56 @@
       </div>
       <!--Muestra el input de monto maximo-->
       <div class="col-md-2" *ngIf="showAmountInput">
-        <label for="max_amount_input" class="new-agreement-label-input">Monto</label>
-        <input readonly type="text" mask="separator.2" thousandSeparator="," class="form-control new-agreement-form-input" id="max_amount_input"
-          aria-describedby="Monto Máximo" [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount"
-          placeholder="Monto">
+        <label for="max_amount_input" class="new-agreement-label-input">Monto Máx</label>
+        <input readonly type="text" mask="separator.2" thousandSeparator=","
+          class="form-control new-agreement-form-input" id="max_amount_input" aria-describedby="Monto Máximo"
+          [ngModelOptions]="{standalone: true}" [(ngModel)]="maxAmount" placeholder="Monto">
       </div>
-
-      <!--Activa todos los productos-->
       <div class="col-md-2">
-        <label for="all_products" class="new-agreement-label-input w-100 text-center">Todos los articulos</label>
-        <mat-slide-toggle disabled id="all_products" class="new-agreement-slide-toggle"
-          [ngModelOptions]="{standalone: true}" [(ngModel)]="allproducts_activator">
-        </mat-slide-toggle>
+        <label for="string_Total_Recovery" class="new-agreement-label-input">T. recuperado colones</label>
+        <input readonly type="text" mask="separator.2" thousandSeparator=","
+          class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery"
+          [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery" placeholder="T. recuperado colones">
+      </div>
+      <div class="col-md-2">
+        <label for="string_Total_Recovery_Dollars" class="new-agreement-label-input">T. recuperado
+          dólares</label>
+        <input readonly type="text" mask="separator.2" thousandSeparator=","
+          class="form-control new-agreement-form-input" aria-describedby="string_Total_Recovery_Dollars"
+          [ngModelOptions]="{standalone: true}" [(ngModel)]="string_Total_Recovery_Dollars"
+          placeholder="T. recuperado dólares">
+      </div>
+    </div>
+
+    <div class="row ml-0 mr-0 mt-3">
+      <!--Activa todos los productos-->
+      <div class="col-md-3">
+        <label for="description" class="new-agreement-label-input">Cuenta contable</label>
+        <input type="text" class="form-control new-agreement-form-input" formControlName="accountingAccount"
+          id="accountingAccount" aria-describedby="accountingAccount" placeholder="Cuenta contable">
+      </div>
+      <div class="col-md-3">
+        <div class="d-flex">
+          <div>
+            <label for="all_products" class="new-agreement-label-input w-100 text-left">Todos los
+              articulos</label>
+            <div class="margin-toogle">
+              <mat-slide-toggle disabled id="all_products" [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="allproducts_activator">
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="d-flex ml-4" *ngIf="showGoals">
+            <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
+            <label class="new-agreement-label-input w-100 new-trade-agreement-detail-goals-lbl"
+              (click)="openGoals()">Metas</label>
+          </div>
+        </div>
       </div>
       <!--Muestra las metas-->
-      <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
-        <mat-icon class="new-trade-agreement-show-goals-icon">view_comfy</mat-icon>
-        <label class="new-agreement-label-input w-100 ml-3 new-trade-agreement-detail-goals-lbl" (click)="openGoals()">
-          Carga de metas</label>
-      </div>
+      <!-- <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
+
+    </div> -->
     </div>
   </form>
 
@@ -154,18 +192,22 @@
   <!-- Listado de productos del acuerdo-->
   <div *ngIf="showAgreementResumeTable" class="row new-agreement-table-top ml-0 mr-0">
     <div class="col-lg-12 col-md-12">
-      <ejs-grid #grid [dataSource]='dataTable' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0"
-        allowSorting='true' [sortSettings]='initialSort' allowPaging='true' [pageSettings]='pageSettings'
-        [editSettings]='editSettings' (dataBound)="dataBound($event)" [allowResizing]='true'>
+      <ejs-grid #grid [toolbar]='toolbar' [gridLines]='lines' [dataSource]='dataTable' [height]="heightGridLW"
+        id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true'
+        [pageSettings]='pageSettings' allowScrolling='true' (toolbarClick)="toolbarClickProduct($event)"
+        [allowExcelExport]='true' [editSettings]='editSettings' [allowResizing]='true'>
         <e-columns>
           <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
           <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
-          <e-column field='string_Product_Amount' [valueAccessor]='currencyFormatter' type="text"  headerText='Monto del acuerdo' 
-          width='170' textAlign='Center'></e-column>
-          <e-column field='product_Quantity_Sold' headerText='Cantidad de artículos vendidos' width='180'
+          <e-column field='string_Product_Amount' [valueAccessor]='currencyFormatter' type="text"
+            headerText='Monto acuerdo' width='170' textAlign='Center'></e-column>
+          <e-column field='product_Quantity_Sold' headerText='Artículos vendidos' width='180' textAlign='Center'>
+          </e-column>
+          <e-column field='string_Product_Amount_Recovery' type="text" headerText='Total ventas' width='150'
             textAlign='Center'></e-column>
-          <e-column field='string_Product_Amount_Recovery' [valueAccessor]='currencyFormatterRecovery' type="text"
-             headerText='Monto recuperado' width='150' textAlign='Center'></e-column>
+
+          <e-column field='string_Calculate_Recovery_Amount' [valueAccessor]='currencyFormatterCalculate' type="text"
+            headerText='Total recuperado' width='170' textAlign='Center'></e-column>
 
           <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false"
             headerText='pk_Ac_Trade_Agreement' width='5' textAlign='Center'></e-column>
@@ -189,10 +231,10 @@
   <!-- Tabla para listar el detalle de cada producto -->
   <div *ngIf="showAgreementResultTable" class="row new-agreement-table-top ml-0 mr-0">
     <div class="col-lg-12 col-md-12">
-      <ejs-grid #grid [frozenColumns]="2" allowScrolling='true' [dataSource]='dataTableDetail' [height]="heightGridLW"
-        id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true'
-        [pageSettings]='pageSettings' [editSettings]='editSettings' (dataBound)="dataBound($event)"
-        [allowResizing]='true' (queryCellInfo)='tooltip($event)'>
+      <ejs-grid #grid [toolbar]='toolbar' [gridLines]='lines' [frozenColumns]="2" allowScrolling='true'
+        [dataSource]='dataTableDetail' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0"
+        allowSorting='true' [sortSettings]='initialSort' allowPaging='true' (toolbarClick)="toolbarClickGeneral($event)"
+        [allowExcelExport]='true' [pageSettings]='pageSettings' [editSettings]='editSettings' [allowResizing]='true'>
         <e-columns>
           <e-column field='product_Id' headerText='Código' textAlign='Center' width='120'></e-column>
           <e-column field='product_Name' headerText='Nombre artículo' textAlign='Center' width='180'></e-column>
@@ -203,12 +245,29 @@
           <e-column field='bill_Id' headerText='Nº Factura' textAlign='Center' width='180'></e-column>
           <e-column field='product_Serie' headerText='Serie' textAlign='Center' width='180'></e-column>
           <e-column field='product_Quantity' headerText='Cantidad' textAlign='Center' width='150'></e-column>
-          <e-column field='string_Product_Cost' type="string" headerText='Costo' textAlign='Center'
-            width='150'></e-column>
-          <e-column field='string_Product_Price' type="string" headerText='Precio' textAlign='Center'
-            width='150'></e-column>
+          <e-column field='string_Product_Cost' type="string" headerText='Costo' textAlign='Center' width='150'>
+          </e-column>
+          <e-column field='string_Product_Price' type="string" headerText='Precio' textAlign='Center' width='150'>
+          </e-column>
           <e-column field='date_Invoice' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"
             headerText='Fecha de venta' textAlign='Center' width='180'></e-column>
+            
+            <e-column field='agreement_Type_Name' headerText='Tipo acuerdo' textAlign='Center' width='180'></e-column>
+            <e-column field='name_Agree' headerText='Nombre acuerdo' textAlign='Center' width='180'></e-column>
+            <e-column field='provider_Name' headerText='Nombre proveedor' textAlign='Center' width='180'></e-column>
+            <e-column field='date_Start' headerText='Fecha inicio' textAlign='Center'
+              [format]="{type:'date', format:'dd/MM/yyyy'}" type='date' [allowFiltering]='false' width='180'>
+            </e-column>
+            <e-column field='date_Finish' headerText='Fecha fin' textAlign='Center'
+              [format]="{type:'date', format:'dd/MM/yyyy'}" type='date' [allowFiltering]='false' width='180'>
+            </e-column>
+            <e-column field='email' headerText='Correo' textAlign='Center' width='180'></e-column>
+            <e-column field='string_Max_Amount' headerText='Monto máximo' textAlign='Center' width='180'></e-column>
+            <e-column field='string_Total_Recovery' headerText='Recuperado colones' textAlign='Center' width='180'>
+            </e-column>
+            <e-column field='string_Total_Recovery_Dollars' headerText='Recuperado dólares' textAlign='Center'
+              width='180'></e-column>
+            <e-column field='accounting_Account' headerText='Cuenta contable' textAlign='Center' width='180'></e-column>
 
           <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false"
             headerText='pk_Ac_Trade_Agreement' textAlign='Center' width='5'></e-column>

@@ -14,7 +14,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Id_Currency = "";
             Product_Amount = 0;
             Recovery_Amount = 0;
-            
+
             Pk_Ac_Trade_Agreement = 0;
             Pk_Cat_Type_Agreement = 0;
             Pk_Ac_Cat_Provider = 0;
@@ -48,16 +48,23 @@ namespace Sevensoft.Mexpress.Backend.Common
             Update_Rows = false;
             Name_Currency = "";
             Pk_Cat_Agreement_Details = 0;
-            list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();  
-            Behavior = "";  
-            String_Date_Start = "";  
+            list_Agreement_Document = new List<Ac_Mtr_Agreement_Document>();
+            Behavior = "";
+            String_Date_Start = "";
             String_Date_Finish = "";
-            Max_Amount = 0; 
+            Max_Amount = 0;
             Email = "";
             Status_Option = false;
             Expired_Indicator = false;
             Type_Agreement_Name = "";
             String_Recovery_Amount = "";
+            Total_Recovery = 0;
+            String_Total_Recovery = "0";
+            String_Total_Recovery_Dollars = "0";
+            Conciliation_User = "";
+            Conciliation_Date = Convert.ToDateTime("1900-01-01"); ;
+            Accounting_Account = "";
+            Pk_Ac_Trade_Agreement_Copy = 0;
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -97,23 +104,31 @@ namespace Sevensoft.Mexpress.Backend.Common
         public Agreement_Option Option { get; set; }
         public bool Update_Rows { get; set; }
         public String Name_Currency { get; set; }
-
         public Int64 Pk_Cat_Agreement_Details { get; set; }
-
         public List<Ac_Mtr_Agreement_Document> list_Agreement_Document { get; set; }
         public String Behavior { get; set; }
         public String String_Date_Start { get; set; }
         public String String_Date_Finish { get; set; }
         public Decimal Max_Amount { get; set; }
         public String Email { get; set; }
-         public bool Status_Option { get; set; }
-         public bool Expired_Indicator { get; set; }
-         public String Type_Agreement_Name { get; set; }
-         public String String_Recovery_Amount { get; set; }
-        
+        public bool Status_Option { get; set; }
+        public bool Expired_Indicator { get; set; }
+        public String Type_Agreement_Name { get; set; }
+        public String String_Recovery_Amount { get; set; }
+        public Decimal Total_Recovery { get; set; }
+        public String String_Total_Recovery { get; set; }
+        public String String_Total_Recovery_Dollars { get; set; }
+        public String Conciliation_User { get; set; }
+        public DateTime Conciliation_Date { get; set; }
+        public String Accounting_Account { get; set; }
+        public Int32 Pk_Ac_Trade_Agreement_Copy { get; set; }
+
         public static implicit operator long(Import_Product v)
         {
             throw new NotImplementedException();
         }
     }
 }
+
+
+

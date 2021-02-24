@@ -41,7 +41,6 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                     param: new
                     {
                         P_PK_AC_TRADE_AGREEMENT = model.Pk_Ac_Trade_Agreement,
-                        // P_PK_GLB_PRODUCTS = model.Pk_Glb_Products
                         P_BEHAVIOR = model.Behavior
             },
                     commandType: CommandType.StoredProcedure);

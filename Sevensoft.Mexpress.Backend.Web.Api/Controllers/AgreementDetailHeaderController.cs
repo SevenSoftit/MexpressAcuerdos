@@ -146,6 +146,44 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
             }
         }
 
+                /// <summary>
+        /// Nombre: Guardar Import_Product
+        /// Descripcion: Metodo utilizado para guardar un objeto de tipo Import_Product.
+        /// Fecha de creacion: 17/02/2021
+        /// Autor: Gustavo ZC
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [Route("SaveCopy")]
+        [HttpPost]
+        public async Task<IActionResult> SaveCopy([FromBody] Common.Import_Product model)
+        {
+            try
+            {
+
+                var message = new Message();
+                message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Ac_Mtr_Agreement_Detail_Header");
+                message.Operation = Operation.SaveCopy;
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:MEXPRESS_AC");
+                message.MessageInfo = model.SerializeObject();
+                using (var businessLgic = new ServiceManager())
+                {
+                    var result = await businessLgic.DoWork(message);
+                    if (result.Status == Status.Failed)
+                    {
+                        return BadRequest(result.Result);
+                    }
+                    var list = result.DeSerializeObject<IEnumerable<Common.Import_Product>>();
+
+                    return Ok(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         /// <summary>
         /// Nombre: Eliminar Import_Product
         /// Descripcion: Metodo utilizado para eliminar un objeto de tipo Import_Product.
