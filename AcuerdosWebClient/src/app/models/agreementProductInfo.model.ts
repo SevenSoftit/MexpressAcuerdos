@@ -23,6 +23,9 @@ export class AgreementProductInfoModel {
     Name_Currency: string;
     Behavior: string;
     Agreement_Product_Info_List : Array<NewAgreementDetailHeaderModel>;
+    Inventory_Quantity: number;
+    Inventory_Date: Date;
+    Average_Cost: number
 
     constructor() {
         this.Pk_Cat_Agreement_Details_Resume = 0;
@@ -46,5 +49,8 @@ export class AgreementProductInfoModel {
         this.Name_Currency = '';
         this.Behavior = '';
         this.Agreement_Product_Info_List = [];
+        this.Inventory_Quantity = 0;
+        this.Inventory_Date = new Date();
+        this.Average_Cost = 0;
     }
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <h5 class="list-evidences-title">Evidencia del acuerdo</h5>
+        <h5 class="list-evidences-title">Adjuntos del acuerdo</h5>
     </div>
     <!-- <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scroll list-evidence-scroll">
         <mat-card class="mb-3" *ngFor="let evidence of evidenceList">
@@ -71,7 +71,7 @@
         </mat-accordion>
 
         <div class="row ml-0 mr-0 mt-4" *ngIf="evidenceListCount == 0">
-            <h5 class="w-100 text-left without-evidences">No se registran evidencias para este acuerdo</h5>
+            <h5 class="w-100 text-left without-evidences">No se registran adjuntos para este acuerdo</h5>
         </div>
 
     </div>
@@ -79,7 +79,7 @@
 
     <div class="row list-evidence-buttons-top">
         <div class="col-md-6">
-            <button mat-button [ngClass]="{'button-disabled': disableButton}" [disabled]="disableButton" class="save-button " (click)="openAddEvidenceModal()">Añadir evidencia 
+            <button mat-button [ngClass]="{'button-disabled': disableButton}" [disabled]="disableButton" class="save-button " (click)="openAddEvidenceModal()">Añadir adjunto 
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
         </div>

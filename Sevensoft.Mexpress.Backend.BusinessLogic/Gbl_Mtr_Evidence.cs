@@ -131,7 +131,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                                 Archive_New_Name = item.Archive_New_Name,
                                 File_Description = item.File_Description,
                                 Name_Agreement = item.Name_Agreement, 
-                                Active = item.Active
+                                Active = item.Active,
+                                Is_Invoice = item.Is_Invoice
                         };
 
                         await repository.Save(document);

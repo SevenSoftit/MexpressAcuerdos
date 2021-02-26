@@ -13,6 +13,7 @@
             Save,
             SaveCopy,
             List,
+            ListInventory,
             Get,
             Delete,
             Login,

@@ -27,6 +27,7 @@ import { TradeAgreementDetailService } from 'src/app/shared/services/tradeAgreem
 import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences-modal/list-evidences-modal.component';
 import { AgreementDocumentModel } from 'src/app/models/agreementDocument.model';
 import { EvidenceService } from 'src/app/shared/services/evidence/evidence.service';
+import { NewAgreementModel } from 'src/app/models/newAgreement.model';
 declare var require: any
 
 @Component({
@@ -98,6 +99,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   public arrayEvidences: any[] = [];
   public string_Total_Recovery: string = '0';
   public string_Total_Recovery_Dollars: string = '0';
+  public inventory_Date: Date;
 
   constructor(private evidenceService: EvidenceService, private reportService: AgreementReportService, public matDialog: MatDialog, private activated_route: ActivatedRoute, private providerService: ProviderService, private _common: CommonService, private typeOfAgreementService: TypeOfAgreementService,
     private tradeAgreementDetailService: TradeAgreementDetailService, private router: Router) {
@@ -145,6 +147,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
+      inventory_Date: new FormControl(new Date()),
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       accountingAccount: new FormControl('')
@@ -162,7 +165,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.evidenceService.listEvidence(evidenceKey).subscribe(
       dataQ => {
         this.arrayEvidences = dataQ;
-
+ 
         this.listTypeOfAgreement();
 
       },
@@ -178,7 +181,29 @@ export class AgreementTrackingDetailComponent implements OnInit {
     }
     const object = {
       header_File: this.headerFile,
-      name_Agree: this.nameAgree
+      name_Agree: this.nameAgree,
+      is_Invoice: false
+    }
+    const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
+      data: { confirmInfo: object }, disableClose: true,
+      minWidth: "900px",
+      maxWidth: "950px",
+    });
+    const sub = dialogRef.componentInstance.onAdd.subscribe((data) => {
+      if (data !== false) {
+        this.arrayEvidences = data;
+      } 
+    });
+  }
+
+  openListElectronicInvoiceModal() {
+    if(!this.showGoals){
+      this.grid.endEdit();
+    }
+    const object = {
+      header_File: this.headerFile,
+      name_Agree: this.nameAgree,
+      is_Invoice: true
     }
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object }, disableClose: true,
@@ -200,6 +225,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
+        inventory_Date: this.agreementDetail.info.inventory_Date,
         emailNotification: this.agreementDetail.info.email,
         accountingAccount: this.agreementDetail.info.accounting_Account
       });  
@@ -222,12 +248,104 @@ export class AgreementTrackingDetailComponent implements OnInit {
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
+        inventory_Date: new Date(),
         emailNotification: '',
         accountingAccount: ''
       });
     }
-    this.listAgreementDResume();
+    this.updateInventory();
   }
+
+  updateInventory(){
+    var newAgreementM: NewAgreementModel = new NewAgreementModel();
+    // this.dataTable.forEach(element => {
+    //   var entity: TableEntityGenericModel = new TableEntityGenericModel();
+    //   entity.CODE = (element.product_Id_Alias).toString();
+    //   newAgreementM.Product_Codes_List.push(entity);
+    // });
+    newAgreementM.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+    this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
+      dataQ => {
+        this.listAgreementDResume();    
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+  listAgreementDResume() {   
+    var agreementProductInfoModel = new AgreementProductInfoModel();
+    agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    agreementProductInfoModel.Behavior = this.behaviorTA;
+    this.tradeAgreementDetailService.listAgreementDetailsResume(agreementProductInfoModel).subscribe(
+      dataI => {
+        this.dataTable = dataI;
+        this.grid.refresh();
+        this.getKeyStatus();  
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
+  }
+  getKeyStatus() {
+    this.catalogModel.Search_Key = this.search_key;
+    this._common.listCatalog(this.catalogModel).subscribe(
+      dataF => {
+        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
+        this.listProvider(this.option);
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+    /*******************************************************
+* Author: Gustavo ZC
+* Creation date:  08/07/2019
+* Description: method that list all providers
+****************************************************/
+listProvider(option) {
+  this.providerModel.Page_Number = this.pageNumber;
+  this.providerModel.Rows_Page = this.limit;
+  this.providerService.listProvider(this.providerModel).subscribe(
+    dataG => {
+      if (this.pageNumber == 1) {
+        this.pageNumber = 1;
+        this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
+      }
+
+      this.providerList = dataG;
+
+      if (option == true && this.providerModel.Name_Provider !== "") {
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+        });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+      }
+
+      else if (option == false) {
+        this.providerList.forEach(element => {
+          this.SearchInfo.push(element)
+        });
+        this.options.next(this.SearchInfo);
+        this._common._setLoading(false);
+      }
+
+      else if (option == true && this.providerModel.Name_Provider === "") {
+        this.options.next(this.providerList);
+        this._common._setLoading(false);
+      }
+
+    },
+    error => {
+      this._common._setLoading(false);
+      console.error(error);
+    }
+  )
+}
 
   
   saveAgreementHeader() {
@@ -348,52 +466,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
 
 
   /*******************************************************
-* Author: Gustavo ZC
-* Creation date:  08/07/2019
-* Description: method that list all providers
-****************************************************/
-  listProvider(option) {
-    this.providerModel.Page_Number = this.pageNumber;
-    this.providerModel.Rows_Page = this.limit;
-    this.providerService.listProvider(this.providerModel).subscribe(
-      dataG => {
-        if (this.pageNumber == 1) {
-          this.pageNumber = 1;
-          this.total = dataG.length == 0 ? 0 : dataG[0].total_Row;
-        }
-
-        this.providerList = dataG;
-
-        if (option == true && this.providerModel.Name_Provider !== "") {
-          this.providerList.forEach(element => {
-            this.SearchInfo.push(element)
-          });
-          this.options.next(this.SearchInfo);
-          this._common._setLoading(false);
-        }
-
-        else if (option == false) {
-          this.providerList.forEach(element => {
-            this.SearchInfo.push(element)
-          });
-          this.options.next(this.SearchInfo);
-          this._common._setLoading(false);
-        }
-
-        else if (option == true && this.providerModel.Name_Provider === "") {
-          this.options.next(this.providerList);
-          this._common._setLoading(false);
-        }
-
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
-  }
-
-  /*******************************************************
   * Author: Gustavo ZC
   * Creation date:  22/08/2019
   * Description: method that helps infinite scroll to show more info
@@ -421,23 +493,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.pageNumber = 1;
     this.option = false;
     this.listProvider(this.option);
-  }
-
-  listAgreementDResume() {   
-    var agreementProductInfoModel = new AgreementProductInfoModel();
-    agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
-    agreementProductInfoModel.Behavior = this.behaviorTA;
-    this.tradeAgreementDetailService.listAgreementDetailsResume(agreementProductInfoModel).subscribe(
-      dataI => {
-        this.dataTable = dataI;
-        this.grid.refresh();
-        this.getKeyStatus();  
-      },
-      error => {
-        this._common._setLoading(false);
-        console.error(error);
-      }
-    )
   }
 
   viewAgreementProductD(args: any): void {
@@ -489,7 +544,9 @@ export class AgreementTrackingDetailComponent implements OnInit {
   }
 
   finishAgreement(): void {
-    if(this.arrayEvidences.length !== 0){
+    var isInvoiceArray = this.arrayEvidences.filter(x => x.is_Invoice == true);
+
+    if(isInvoiceArray.length !== 0){
       if (this.agreementDetail.info.expired_Indicator == true) {
         this.expiryIndicationModal();
       } else {
@@ -711,18 +768,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     })
 
   }
-  getKeyStatus() {
-    this.catalogModel.Search_Key = this.search_key;
-    this._common.listCatalog(this.catalogModel).subscribe(
-      dataF => {
-        this.fk_Status_Agreement = dataF[0].pk_Glb_Cat_Catalog;
-        this.listProvider(this.option);
-      },
-      error => {
-        this._common._setLoading(false);
-        console.log('no se envio' + ' ' + error);
-      });
-  }
+
 
   public currencyFormatter = (field: string, data1: object, column: object) => {
     if(data1['id_Currency'].toUpperCase() == 'COLONES'){

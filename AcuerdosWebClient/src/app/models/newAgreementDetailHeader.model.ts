@@ -56,6 +56,7 @@ export class NewAgreementDetailHeaderModel {
     Conciliation_Date: Date;
     Accounting_Account: string;
     Pk_Ac_Trade_Agreement_Copy: number;
+    Inventory_Date: Date;
 
 
 
@@ -116,5 +117,6 @@ export class NewAgreementDetailHeaderModel {
             this.Conciliation_Date = new Date();
             this.Accounting_Account = '';
             this.Pk_Ac_Trade_Agreement_Copy = 0;
+            this.Inventory_Date = new Date();
     }
 }

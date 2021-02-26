@@ -65,6 +65,13 @@ export class TradeAgreementDetailService {
     );
   }
 
+  updateInventory(tradeAgreementDetail: any) {
+    const url = this.apiUrl + 'api/agreementDetail/ListInventory';
+    return this.http.post<any[]>(url, tradeAgreementDetail, httpOptions).pipe(
+      tap(() => console.log(''))
+    );
+  }
+
   processWorkProductDetailTable(employeeData: any) {
     const url = this.apiUrl + 'api/agreementDetail/ProcessWorkProductDetailTable';
     return this.http.post<any[]>(url, employeeData, httpOptions).pipe(

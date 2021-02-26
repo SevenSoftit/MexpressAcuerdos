@@ -46,6 +46,22 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
         }
     }
 
+            public async Task<IEnumerable<Ac_Mtr_Agreement_Detail>> ListInventory(Ac_Mtr_Agreement_Detail model)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<
+                    Common.Ac_Mtr_Agreement_Detail>
+                    ("PA_PRO_AGREEMENT_SYNC_INVENTORY",
+                    param: new
+                    {
+                        @P_AGREEMENT_ID = model.Pk_Ac_Trade_Agreement
+            },
+                    commandType: CommandType.StoredProcedure);
+            return await Task.FromResult<IEnumerable<Ac_Mtr_Agreement_Detail>>(result.ToList());
+        }
+    }
+
     public async Task<Common.Ac_Mtr_Agreement_Detail> Get(Common.Ac_Mtr_Agreement_Detail model)
     {
         using (var connection = new SqlConnection(ConnectionString))

@@ -20,8 +20,12 @@
           Ver detalle de todo el acuerdo<mat-icon class="ml-2">star</mat-icon>
         </button>
 
-        <button class="save-button mr-3" mat-raised-button (click)="openListEvidenceModal()" *ngIf="enablePdfExport">
+        <button class="save-button mr-3" mat-raised-button (click)="openListElectronicInvoiceModal()" *ngIf="enablePdfExport">
           Adjuntar factura
+        </button>
+
+        <button class="save-button mr-3" mat-raised-button (click)="openListEvidenceModal()" *ngIf="enablePdfExport">
+          Adjuntar evidencia
         </button>
 
         <button class="save-button mr-3" mat-raised-button (click)="exportToPdf()" *ngIf="enablePdfExport">
@@ -156,9 +160,9 @@
     <div class="row ml-0 mr-0 mt-3">
       <!--Activa todos los productos-->
       <div class="col-md-3">
-        <label for="description" class="new-agreement-label-input">Cuenta contable</label>
+        <label for="description" class="new-agreement-label-input">Descripción contable</label>
         <input type="text" class="form-control new-agreement-form-input" formControlName="accountingAccount"
-          id="accountingAccount" aria-describedby="accountingAccount" placeholder="Cuenta contable">
+          id="accountingAccount" aria-describedby="accountingAccount" placeholder="Descripción contable">
       </div>
       <div class="col-md-3">
         <div class="d-flex">
@@ -178,10 +182,18 @@
           </div>
         </div>
       </div>
-      <!--Muestra las metas-->
-      <!-- <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
+      <div class="col-md-2">
+        <div class="form-group text date-picker-custom">
+            <label for="inventory_Date" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                Inventario</label>
+            <input matInput [matDatepicker]="inventory_Date" formControlName="inventory_Date" id="inventory_Date"
+                placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
+                 readonly>
+            <mat-datepicker-toggle matSuffix [for]="inventory_Date" [disabled] = 'true'></mat-datepicker-toggle>
+            <mat-datepicker #inventory_Date></mat-datepicker>
+        </div>
+    </div>
 
-    </div> -->
     </div>
   </form>
 
@@ -199,6 +211,16 @@
         <e-columns>
           <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
           <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
+          
+          <e-column field='inventory_Quantity' headerText='Inventario' width='150' textAlign='Center'
+          [allowEditing]='false'></e-column>
+          <e-column field='average_Cost' [allowEditing]='false' type="number" defaultValue="0" MinValue="0" editType='numericedit'
+              headerText='Cost. promedio' width='150' textAlign='Center'>
+              <ng-template #template let-data>
+                  {{ data.average_Cost | number: "1.2-2"}}
+              </ng-template>
+          </e-column>
+          
           <e-column field='string_Product_Amount' [valueAccessor]='currencyFormatter' type="text"
             headerText='Monto acuerdo' width='170' textAlign='Center'></e-column>
           <e-column field='product_Quantity_Sold' headerText='Artículos vendidos' width='180' textAlign='Center'>
@@ -267,7 +289,7 @@
             </e-column>
             <e-column field='string_Total_Recovery_Dollars' headerText='Recuperado dólares' textAlign='Center'
               width='180'></e-column>
-            <e-column field='accounting_Account' headerText='Cuenta contable' textAlign='Center' width='180'></e-column>
+            <e-column field='accounting_Account' headerText='Descripción contable' textAlign='Center' width='180'></e-column>
 
           <e-column field='pk_Ac_Trade_Agreement' [isPrimaryKey]="true" [visible]="false"
             headerText='pk_Ac_Trade_Agreement' textAlign='Center' width='5'></e-column>

@@ -26,6 +26,7 @@ import { ListEvidencesModalComponent } from 'src/app/shared/modal/list-evidences
 import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-loader.component';
 import { DatePipe } from '@angular/common';
 import { Query } from '@syncfusion/ej2-data';
+import { TableEntityGenericModel } from 'src/app/models/tableEntityGeneric.model';
 
 
 
@@ -116,6 +117,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public maxAmount: string = '0';
   public string_Total_Recovery: string = '0';
   public string_Total_Recovery_Dollars: string = '0';
+  public inventory_Date: Date;
   showAmountInput = false;
   emailNotification: string = '';
   submitted = false;
@@ -145,7 +147,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
               this.maxAmountToggle = true;
               this.showAmountInput = true;
           }
-          this.listAgreement(agreement);
+          this.updateInventory();
         }
       }
     });
@@ -171,11 +173,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       }, [])
     );
-
     this.newAgreementForm = new FormGroup({
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()), //new Date(this.doo.getTime() - this.doo.getTimezoneOffset() * -60000)
       endDatePicker: new FormControl(new Date()),
+      inventory_Date: new FormControl(new Date()),
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       accountingAccount: new FormControl('')
@@ -223,43 +225,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       }
     };
   }
-
-  fillFormAgreementDetail() {
-    if (this.agreementDetail != undefined) {
-      this.newAgreementForm.patchValue({
-        agreement_name: this.agreementDetail.info.name_Agreement,
-        description: this.agreementDetail.info.description_Agreement,
-        startDatePicker: this.agreementDetail.info.date_Start,
-        endDatePicker: this.agreementDetail.info.date_Finish,
-        emailNotification: this.agreementDetail.info.email,
-        accountingAccount: this.agreementDetail.info.accounting_Account
-
-      });
-      this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-      this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
-      this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
-      this.dateProcess = this.agreementDetail.info.date_Process;
-      this.dateReprocess = this.agreementDetail.info.date_Reprocess;
-      this.allproducts_activator = this.agreementDetail.info.all_Products;
-      this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
-      this.agreement_activator = this.agreementDetail.info.active;
-      this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-      this.maxAmount= String(this.agreementDetail.info.max_Amount);
-      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
-      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
-    } else {
-      this.newAgreementForm.setValue({
-        agreement_name: '',
-        description: '',
-        startDatePicker: new Date(),
-        endDatePicker: new Date(),
-        emailNotification: '',
-        accountingAccount: ''
-      });
-    }
-    this.getKeyStatus(); 
-  }
-
   @HostListener('window:resize', ['$event'])
   getScreenSize() {
     this.screenHeight = window.innerHeight;
@@ -284,6 +249,63 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
     this.listMoney();
   }
+
+  fillFormAgreementDetail() {
+    if (this.agreementDetail != undefined) {
+      this.newAgreementForm.patchValue({
+        agreement_name: this.agreementDetail.info.name_Agreement,
+        description: this.agreementDetail.info.description_Agreement,
+        startDatePicker: this.agreementDetail.info.date_Start,
+        endDatePicker: this.agreementDetail.info.date_Finish,
+        inventory_Date: this.agreementDetail.info.inventory_Date,
+        emailNotification: this.agreementDetail.info.email,
+        accountingAccount: this.agreementDetail.info.accounting_Account
+
+      });
+      this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+      this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
+      this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
+      this.dateProcess = this.agreementDetail.info.date_Process;
+      this.dateReprocess = this.agreementDetail.info.date_Reprocess;
+      this.allproducts_activator = this.agreementDetail.info.all_Products;
+      this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
+      this.agreement_activator = this.agreementDetail.info.active;
+      this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
+      this.maxAmount= String(this.agreementDetail.info.max_Amount);
+      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
+      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
+    } else {
+      this.newAgreementForm.setValue({
+        agreement_name: '',
+        description: '',
+        startDatePicker: new Date(),
+        endDatePicker: new Date(),
+        inventory_Date: new Date(),
+        emailNotification: '',
+        accountingAccount: ''
+      });
+    }
+    this.getKeyStatus(); 
+  }
+
+  updateInventory(){
+    var newAgreementM: NewAgreementModel = new NewAgreementModel();
+    // this.dataTable.forEach(element => {
+    //   var entity: TableEntityGenericModel = new TableEntityGenericModel();
+    //   entity.CODE = (element.product_Id_Alias).toString();
+    //   newAgreementM.Product_Codes_List.push(entity);
+    // });
+    newAgreementM.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+    this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
+      dataQ => {
+        this.listAgreement(newAgreementM);     
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+
 
   public newRowPosition: { [key: string]: Object }[] = [
     { id: 'Top', newRowPosition: 'Top' },
@@ -844,7 +866,8 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     }
     const object = {
       header_File: this.headerFile,
-      name_Agree: this.nameAgree
+      name_Agree: this.nameAgree,
+      is_Invoice: false
     }
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
       data: { confirmInfo: object },

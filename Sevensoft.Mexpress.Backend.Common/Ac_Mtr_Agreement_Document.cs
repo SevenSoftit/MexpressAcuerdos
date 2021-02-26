@@ -19,6 +19,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Agreement = "";
             Active = false;
             Extension_Type = "";
+            Is_Invoice = false;
             
         }
         public Int32 Pk_Cat_Document_Agreement { get; set; }
@@ -34,6 +35,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Name_Agreement { get; set; }
         public Boolean Active { get; set; }
         public String Extension_Type { get; set; }
+        public Boolean Is_Invoice { get; set; }
         
     }
 }

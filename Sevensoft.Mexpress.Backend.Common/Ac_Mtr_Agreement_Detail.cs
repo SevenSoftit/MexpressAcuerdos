@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Sevensoft.Mexpress.Backend.Common
 {
@@ -20,6 +21,12 @@ namespace Sevensoft.Mexpress.Backend.Common
             Modification_User = "";          
             Active = false;
             Name_Currency = "";
+            Inventory_Quantity = 0;
+            Inventory_Date = Convert.ToDateTime("1900-01-01");
+            Average_Cost = 0;
+            Product_Codes_List = new List<GblTableEntityGeneric>();
+            Product_Detail_List = new List<Ac_Mtr_Agreement_Detail>();
+
 
         }
         public Int64 Pk_Cat_Agreement_Details { get; set; }
@@ -34,6 +41,11 @@ namespace Sevensoft.Mexpress.Backend.Common
         public DateTime Modification_Date { get; set; }
         public String Modification_User { get; set; }
         public Boolean Active { get; set; }  
-        public String Name_Currency { get; set; }     
+        public String Name_Currency { get; set; }  
+        public Int32 Inventory_Quantity { get; set; }  
+        public DateTime Inventory_Date { get; set; } 
+        public Decimal Average_Cost { get; set; }
+        public List<GblTableEntityGeneric> Product_Codes_List { get; set; }
+        public List<Ac_Mtr_Agreement_Detail> Product_Detail_List { get; set; }
     }
 }

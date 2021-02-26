@@ -65,6 +65,50 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                 return BadRequest(ex);
             }
         }
+
+                /// <summary>
+        /// Nombre: Listar Ac_Mtr_Agreement_Detail
+        /// Descripcion: Metodo utilizado para obtener una lista de productos y retornar un objeto datatable
+        /// Fecha de creacion: 24/02/2021
+        /// Autor: Gustavo ZC
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns> 
+        [Route("ListInventory")]
+        [HttpPost]
+        public async Task<IActionResult> ListInventory([FromBody] Common.Ac_Mtr_Agreement_Detail model)
+        {
+            try
+            {
+                var message = new Message();
+                message.BusinessLogic = configuration.GetValue<string>("AppSettings:BusinessLogic:Ac_Mtr_Agreement_Detail");
+                message.Operation = Operation.ListInventory;
+                message.Connection = configuration.GetValue<string>("ConnectionStrings:INTERFACES");
+                message.MessageInfo = model.SerializeObject();
+                using (var businessLgic = new ServiceManager())
+                {
+                    var result = await businessLgic.DoWork(message);
+                    if (result.Status == Status.Failed)
+                    {
+                        return BadRequest(result.Result);
+                    }
+                    var list = result.DeSerializeObject<IEnumerable<Common.Ac_Mtr_Agreement_Detail>>();
+                    // var dataSuccess = new
+                    // {
+                    //     Data = list,
+                    //     MessageResult = Backend.Common.Enum.Status.Success,
+                    //     Message = string.Empty,
+                    //     RegisterType = string.Empty
+                    // };
+                    return Ok(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         /// <summary>
         /// Nombre: Obtener Ac_Mtr_Agreement_Detail
         /// Descripcion: Metodo utilizado para obtener una lista de productos y retornar un objeto datatable

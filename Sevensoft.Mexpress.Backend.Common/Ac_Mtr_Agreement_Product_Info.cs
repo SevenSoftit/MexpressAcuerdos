@@ -29,10 +29,13 @@ namespace Sevensoft.Mexpress.Backend.Common
             Name_Currency = "";
             Behavior = "";
             Agreement_Product_Info_List = new List<Import_Product>();
+            Inventory_Quantity = 0;
+            Inventory_Date = Convert.ToDateTime("1900-01-01");
+            Average_Cost = 0;
         }
         public Int64 Pk_Cat_Agreement_Details_Resume { get; set; }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
-        public Int32 Pk_Glb_Products { get; set; }  
+        public Int32 Pk_Glb_Products { get; set; }
         public DateTime Creation_Date { get; set; }
         public String Creation_User { get; set; }
         public DateTime Modification_Date { get; set; }
@@ -43,13 +46,16 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String String_Product_Amount { get; set; }
         public Int32 Product_Quantity_Sold { get; set; }
         public Decimal Product_Amount_Recovery { get; set; }
-        public String String_Product_Amount_Recovery { get; set; }   
-        public Decimal Calculate_Recovery_Amount { get; set; }   
-        public String  String_Calculate_Recovery_Amount{ get; set; }
+        public String String_Product_Amount_Recovery { get; set; }
+        public Decimal Calculate_Recovery_Amount { get; set; }
+        public String String_Calculate_Recovery_Amount { get; set; }
         public String Id_Currency { get; set; }
         public Boolean Active { get; set; }
         public String Name_Currency { get; set; }
         public String Behavior { get; set; }
         public List<Import_Product> Agreement_Product_Info_List { get; set; }
+        public Int32 Inventory_Quantity { get; set; }
+        public Decimal Average_Cost { get; set; }
+        public DateTime Inventory_Date { get; set; }
     }
 }

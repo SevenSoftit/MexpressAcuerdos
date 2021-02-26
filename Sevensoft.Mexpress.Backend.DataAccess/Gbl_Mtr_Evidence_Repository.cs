@@ -97,7 +97,8 @@ namespace Sevensoft.Mexpress.Backend.DataAccess
                         P_ARCHIVE_NEW_NAME = model.Archive_New_Name,
                         P_FILE_DESCRIPTION = model.File_Description,
                         P_NAME_AGREEMENT = model.Name_Agreement,
-                        P_ACTIVE = model.Active
+                        P_ACTIVE = model.Active,
+                        P_IS_INVOICE = model.Is_Invoice
                     },
                     commandType: CommandType.StoredProcedure);
             }

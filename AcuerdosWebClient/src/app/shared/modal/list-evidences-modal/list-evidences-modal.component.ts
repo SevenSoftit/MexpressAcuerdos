@@ -54,11 +54,13 @@ export class ListEvidencesModalComponent implements OnInit {
     evidenceKey.Pk_Ac_Trade_Agreement = this.dataModal.confirmInfo.header_File;
     this.evidenceService.listEvidence(evidenceKey).subscribe(
       dataQ => {
-        this.evidenceList = dataQ;
-
+        if(this.dataModal.confirmInfo.is_Invoice == true){
+          this.evidenceList = dataQ.filter(x => x.is_Invoice == true);
+        }else{
+          this.evidenceList = dataQ.filter(x => x.is_Invoice !== true);
+        }
+      
         this.evidenceListCount = this.evidenceList.length;
-
-
         this._common._setLoading(false);
       },
       error => {

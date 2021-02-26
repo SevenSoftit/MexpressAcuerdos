@@ -369,6 +369,9 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
 
                     else if (dictionary.Key == "Active")
                         obj.Active = Convert.ToBoolean(dictionary.Value[x]);
+
+                    else if (dictionary.Key == "Is_Invoice")
+                        obj.Is_Invoice = Convert.ToBoolean(dictionary.Value[x]);
                 }
 
                 list.Add(obj);

@@ -152,6 +152,7 @@ export class AddAgreementEvidenceModalComponent implements OnInit {
       file[2].append("File_Description", selectedFile[0].file_Description);   
       file[2].append("Name_Agreement", this.dataModal.confirmInfo.name_Agree);
       file[2].append("Active", true);
+      file[2].append("Is_Invoice", this.dataModal.confirmInfo.is_Invoice);
     }
   }
 

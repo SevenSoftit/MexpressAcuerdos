@@ -27,6 +27,7 @@ export class AgreementDocumentModel {
   File_Description: string;
   Active: boolean;
   Extension_Type: string;
+  Is_Invoice: boolean;
  
     constructor() {
       this.Pk_Cat_Document_Agreement = 0;
@@ -42,6 +43,7 @@ export class AgreementDocumentModel {
       this.File_Description = '';
       this.Active = false;
       this.Extension_Type = '';
+      this.Is_Invoice = false;
       
     }
   }

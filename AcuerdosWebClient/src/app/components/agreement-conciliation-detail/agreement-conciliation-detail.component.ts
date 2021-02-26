@@ -90,6 +90,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
   public dataTableDetail: any[] = [];
   public string_Total_Recovery: string = '0';
   public string_Total_Recovery_Dollars: string = '0';
+  public inventory_Date: Date;
 
   constructor(private reportService: AgreementReportService, private router: Router, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService, 
     private typeOfAgreementService: TypeOfAgreementService,
@@ -150,6 +151,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
       agreement_name: new FormControl('', [Validators.required]),
       startDatePicker: new FormControl(new Date()),
       endDatePicker: new FormControl(new Date()),
+      inventory_Date: new FormControl(new Date()),
       description: new FormControl(''),
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       accountingAccount: new FormControl('')
@@ -217,6 +219,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
         description: this.agreementDetail.info.description_Agreement,
         startDatePicker: new Date(this.agreementDetail.info.date_Start),
         endDatePicker: new Date(this.agreementDetail.info.date_Finish),
+        inventory_Date: this.agreementDetail.info.inventory_Date,
         emailNotification: this.agreementDetail.info.email,
         accountingAccount: this.agreementDetail.info.accounting_Account
 
@@ -239,6 +242,7 @@ export class AgreementConciliationDetailComponent implements OnInit {
         description: '',
         startDatePicker: new Date(),
         endDatePicker: new Date(),
+        inventory_Date: new Date(),
         emailNotification: '',
         accountingAccount: ''
       });

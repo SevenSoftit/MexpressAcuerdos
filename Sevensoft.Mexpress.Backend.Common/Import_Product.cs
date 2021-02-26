@@ -62,9 +62,10 @@ namespace Sevensoft.Mexpress.Backend.Common
             String_Total_Recovery = "0";
             String_Total_Recovery_Dollars = "0";
             Conciliation_User = "";
-            Conciliation_Date = Convert.ToDateTime("1900-01-01"); ;
+            Conciliation_Date = Convert.ToDateTime("1900-01-01"); 
             Accounting_Account = "";
             Pk_Ac_Trade_Agreement_Copy = 0;
+            Inventory_Date = Convert.ToDateTime("1900-01-01");
         }
         public Int64 Pk_Gbl_Wrk_Agreement { get; set; }
         public String Product_Id_Alias { get; set; }
@@ -122,6 +123,7 @@ namespace Sevensoft.Mexpress.Backend.Common
         public DateTime Conciliation_Date { get; set; }
         public String Accounting_Account { get; set; }
         public Int32 Pk_Ac_Trade_Agreement_Copy { get; set; }
+        public DateTime Inventory_Date { get; set; }
 
         public static implicit operator long(Import_Product v)
         {

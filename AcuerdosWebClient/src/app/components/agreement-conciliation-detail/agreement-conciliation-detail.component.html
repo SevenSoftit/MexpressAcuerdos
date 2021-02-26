@@ -125,10 +125,10 @@
         <div class="row ml-0 mr-0 mt-3">
             <!--Activa todos los productos-->
             <div class="col-md-3">
-                <label for="description" class="new-agreement-label-input">Cuenta contable</label>
+                <label for="description" class="new-agreement-label-input">Descripción contable</label>
                 <input type="text" class="form-control new-agreement-form-input"
                     formControlName="accountingAccount" id="accountingAccount" aria-describedby="accountingAccount"
-                    placeholder="Cuenta contable">
+                    placeholder="Descripción contable">
             </div>
             <div class="col-md-3">
                 <div class="d-flex">
@@ -149,10 +149,18 @@
                         </div>
                 </div>
             </div>
-            <!--Muestra las metas-->
-            <!-- <div class="col-md-2 new-trade-show-goals-content" *ngIf="showGoals">
-        
-            </div> -->
+            <div class="col-md-2">
+                <div class="form-group text date-picker-custom">
+                    <label for="inventory_Date" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Inventario</label>
+                    <input matInput [matDatepicker]="inventory_Date" formControlName="inventory_Date" id="inventory_Date"
+                        placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
+                         readonly>
+                    <mat-datepicker-toggle matSuffix [for]="inventory_Date" [disabled] = 'true'></mat-datepicker-toggle>
+                    <mat-datepicker #inventory_Date></mat-datepicker>
+                </div>
+            </div>
+
         </div>
         
     </form>

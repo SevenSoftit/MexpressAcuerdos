@@ -26,6 +26,8 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 {
                     case Operation.List:
                         return await List(message);
+                    case Operation.ListInventory:
+                        return await ListInventory(message);
                     case Operation.Get:
                         return await Get(message);
                     case Operation.Save:
@@ -73,6 +75,31 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 return resultMessage;
             }
         }
+
+        public async virtual Task<Message> ListInventory(Message message)
+        {
+            try
+            {
+                var resultMessage = new Message();
+                var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
+                using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
+                {
+                    var returnObject = await repository.ListInventory(model);
+                    resultMessage.Status = Status.Success;
+                    resultMessage.Result = "Proceso efectuado satisfactoriamente...";
+                    resultMessage.MessageInfo = returnObject.SerializeObject();
+                    return resultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                var resultMessage = new Message();
+                resultMessage.Status = Status.Failed;
+                resultMessage.Result = string.Format("{0}", ex.Message);
+                resultMessage.MessageInfo = string.Empty;
+                return resultMessage;
+            }
+        }
         public async virtual Task<Message> Get(Message message)
         {
             try
@@ -105,7 +132,7 @@ namespace Sevensoft.Mexpress.Backend.BusinessLogic
                 var model = message.DeSerializeObject<Sevensoft.Mexpress.Backend.Common.Ac_Mtr_Agreement_Detail>();
                 using (var repository = new Do_Mtr_Agreement_Repository(message.Connection))
                 {
-                    
+
                     var returObject = await repository.SaveScalar(model);
                     resultMessage.Status = Status.Success;
                     resultMessage.Result = "Proceso efectuado satisfactoriamente...";

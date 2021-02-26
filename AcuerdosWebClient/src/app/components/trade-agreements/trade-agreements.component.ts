@@ -39,10 +39,15 @@ export class TradeAgreementsComponent implements OnInit {
   public data: object[];
   public height = '220px';
   public dropdata: string[];
+
   public onChange(args: any): void {
-    if (args.value !== 'All') {
+    if (args.value !== 'All' && args.value !== undefined) {
       this.grid.filterByColumn('agreement_Status_Name', 'equal', args.value);
-    } else {
+    }
+    else if(args == 'En proceso'){
+      this.grid.filterByColumn('agreement_Status_Name', 'equal', args);
+    }
+    else {
       this.grid.removeFilteredColsByField('agreement_Status_Name');
     }
   }
@@ -66,6 +71,7 @@ export class TradeAgreementsComponent implements OnInit {
     this._common._setLoading(true);
 
     this.getScreenSize();
+    this.listHeaderAgreement();
     this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'provider_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
@@ -86,7 +92,6 @@ export class TradeAgreementsComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 6, pageCount: 5 };
     }
-    this.listHeaderAgreement();
   }
 
   public newRowPosition: { [key: string]: Object }[] = [
@@ -141,6 +146,7 @@ export class TradeAgreementsComponent implements OnInit {
         dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
+        this.onChange('En proceso');
         this._common._setLoading(false);
       },
       error => {

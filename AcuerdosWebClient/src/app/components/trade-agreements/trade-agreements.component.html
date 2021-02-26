@@ -77,7 +77,6 @@
                 <e-column field='agreement_Status_Name' headerText='Estado' width='110' textAlign='Center'>
                     <ng-template #filterTemplate let-data>
                         <ejs-dropdownlist id='dropdown' [(ngModel)]="data.Name" (change)=onChange($event) [dataSource]='dropdata'>
-
                         </ejs-dropdownlist>
                     </ng-template>
                 </e-column>
