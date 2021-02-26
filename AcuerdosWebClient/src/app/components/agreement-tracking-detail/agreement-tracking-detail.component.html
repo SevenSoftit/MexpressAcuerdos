@@ -207,15 +207,15 @@
       <ejs-grid #grid [toolbar]='toolbar' [gridLines]='lines' [dataSource]='dataTable' [height]="heightGridLW"
         id='Normalgrid' [selectedRowIndex]="0" allowSorting='true' [sortSettings]='initialSort' allowPaging='true'
         [pageSettings]='pageSettings' allowScrolling='true' (toolbarClick)="toolbarClickProduct($event)"
-        [allowExcelExport]='true' [editSettings]='editSettings' [allowResizing]='true'>
+        [allowExcelExport]='true' [editSettings]='editSettings' [allowResizing]='true' [allowFiltering]='true'> 
         <e-columns>
           <e-column field='product_Id' headerText='Código' width='150' textAlign='Center'></e-column>
-          <e-column field='product_Name' headerText='Nombre artículo' width='120' textAlign='Center'></e-column>
+          <e-column field='product_Name' headerText='Nombre artículo' width='300' textAlign='Center'></e-column>
           
           <e-column field='inventory_Quantity' headerText='Inventario' width='150' textAlign='Center'
           [allowEditing]='false'></e-column>
           <e-column field='average_Cost' [allowEditing]='false' type="number" defaultValue="0" MinValue="0" editType='numericedit'
-              headerText='Cost. promedio' width='150' textAlign='Center'>
+              headerText='Cost. promedio' width='200' textAlign='Center'>
               <ng-template #template let-data>
                   {{ data.average_Cost | number: "1.2-2"}}
               </ng-template>
@@ -240,7 +240,7 @@
           <e-column field='id_Currency' [visible]="false" headerText='Moneda(COLONES, DOLARES)' textAlign='Center'>
           </e-column>
 
-          <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120>
+          <e-column field='edit' textAlign='center' headerText='Ver detalle' width=120 [allowFiltering]='false'>
             <ng-template #template let-dataAgreements>
               <mat-icon (click)="viewAgreementProductD($event)" class="cursor_view">remove_red_eye</mat-icon>
             </ng-template>
@@ -256,7 +256,7 @@
       <ejs-grid #grid [toolbar]='toolbar' [gridLines]='lines' [frozenColumns]="2" allowScrolling='true'
         [dataSource]='dataTableDetail' [height]="heightGridLW" id='Normalgrid' [selectedRowIndex]="0"
         allowSorting='true' [sortSettings]='initialSort' allowPaging='true' (toolbarClick)="toolbarClickGeneral($event)"
-        [allowExcelExport]='true' [pageSettings]='pageSettings' [editSettings]='editSettings' [allowResizing]='true'>
+        [allowExcelExport]='true' [pageSettings]='pageSettings' [editSettings]='editSettings' [allowResizing]='true' [allowFiltering]='true'>
         <e-columns>
           <e-column field='product_Id' headerText='Código' textAlign='Center' width='120'></e-column>
           <e-column field='product_Name' headerText='Nombre artículo' textAlign='Center' width='180'></e-column>
@@ -272,7 +272,7 @@
           <e-column field='string_Product_Price' type="string" headerText='Precio' textAlign='Center' width='150'>
           </e-column>
           <e-column field='date_Invoice' type="date" [format]="{type: 'date', format:'dd/MM/yyyy'}"
-            headerText='Fecha de venta' textAlign='Center' width='180'></e-column>
+            headerText='Fecha de venta' textAlign='Center' width='180' [allowFiltering]='false'></e-column>
             
             <e-column field='agreement_Type_Name' headerText='Tipo acuerdo' textAlign='Center' width='180'></e-column>
             <e-column field='name_Agree' headerText='Nombre acuerdo' textAlign='Center' width='180'></e-column>

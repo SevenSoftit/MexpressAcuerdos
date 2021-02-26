@@ -27,6 +27,7 @@ import { GoalsLoaderComponent } from 'src/app/shared/modal/goals-loader/goals-lo
 import { DatePipe } from '@angular/common';
 import { Query } from '@syncfusion/ej2-data';
 import { TableEntityGenericModel } from 'src/app/models/tableEntityGeneric.model';
+import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
 
 
 
@@ -46,6 +47,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
   public dataTable: any[] = [];
+  public dataTableGoals: any[] = [];
   public workDataTable: any;
   public initialSort: Object;
   public pageSettings: Object;
@@ -54,8 +56,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public lines: GridLine;
   public editSettings: Object;
   public editSettingsWork: Object;
-  public toolbar: ToolbarItems[] | Object;
+  public editSettingsGoals: Object;  
+  public toolbar: ToolbarItems[] | Object;  
   public toolbarWork: ToolbarItems[] | Object;
+  public toolbarGoals: ToolbarItems[] | Object;  
   public codeRules: Object;
   public productNameRules: Object;
   public moneyRules: Object;
@@ -123,6 +127,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   submitted = false;
   yearStart: number = 0;
   yearEnd: number = 0;
+  public behaviorTA: string = '';
 
   constructor(private datePipe: DatePipe, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -142,6 +147,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.nameAgree = this.agreementDetail.info.name_Agreement;
           this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
           this.showGoals = this.agreementDetail.info.all_Products;
+          this.behaviorTA = this.agreementDetail.info.behavior;
           
           if(this.agreementDetail.info.max_Amount !== 0){
               this.maxAmountToggle = true;
@@ -186,8 +192,11 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top', mode: 'Normal', allowEditOnDblClick: true};
     this.editSettingsWork = { allowEditing: true, allowDeleting: true };
+    this.editSettingsGoals = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top', mode: 'Normal', allowEditOnDblClick: false};
+
     this.toolbar = ['Add', 'Edit', 'Delete', 'Cancel', 'Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.toolbarWork = ['Edit', 'Delete', 'Cancel', 'Search'];
+    this.toolbarGoals = ['Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
 
     this.codeRules = { required: [true, 'Código requerido'] };
     this.productNameRules = { required: [true, 'Nombre requerido'] };
@@ -298,12 +307,38 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     newAgreementM.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
     this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
       dataQ => {
-        this.listAgreement(newAgreementM);     
+        if(this.showGoals == true){
+          this.listAgreementDResume();
+        }else{
+          this.listAgreement(newAgreementM); 
+        }
+            
       },
       error => {
         this._common._setLoading(false);
         console.log('no se envio' + ' ' + error);
       });
+  }
+  
+  listAgreementDResume() {   
+    var agreementProductInfoModel = new AgreementProductInfoModel();
+    agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
+    agreementProductInfoModel.Behavior = this.behaviorTA;
+    this.tradeAgreementDetailService.listAgreementDetailsResume(agreementProductInfoModel).subscribe(
+      dataJ => {
+        this.dataTableGoals = [];        
+        this.dataTableGoals = dataJ;
+        if ((dataJ.length == 0 || dataJ.length != 0) && dataJ != undefined) {
+          this.enableExcel = true;
+          this.enableEvidence = true;
+        }
+        this.enableUpdateAgreement = true;
+      },
+      error => {
+        this._common._setLoading(false);
+        console.error(error);
+      }
+    )
   }
 
 
@@ -819,6 +854,18 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       this.grid.excelExport(excelExportProperties);
     }
   }
+  toolbarClickGoals(args: ClickEventArgs): void {
+    if (args.item.id == "export") {
+      var date = new Date().toISOString().slice(0, 10);
+      var archiveName = 'Reporte_De_Productos_' + date + '.xlsx'
+
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: archiveName
+      };
+
+      this.grid.excelExport(excelExportProperties);
+    }
+  }
 
   /*******************************************************
 * Author: Gustavo ZC
@@ -945,8 +992,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     this.showAmountInput = (this.maxAmountToggle?true:false);
   }
 
-
-
 public currencyFormatter = (field: string, data1: object, column: object) => {
   if(data1['name_Currency'] == 'COLONES'){
     return '₡' + data1['recovery_Amount'];
@@ -955,12 +1000,25 @@ public currencyFormatter = (field: string, data1: object, column: object) => {
 
   } 
 }
-
 public currencyFormatterWork = (field: string, data1: object, column: object) => {
   if(data1['id_Currency'].toUpperCase() == 'COLONES'){
     return '₡' + data1['product_Amount'];
   }else{
     return '$' + data1['product_Amount'];
+  } 
+}
+public currencyFormatterGoals = (field: string, data1: object, column: object) => {
+  if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+    return '₡' + data1['string_Product_Amount'];    
+  }else{
+    return '$' + data1['string_Product_Amount'];
+  } 
+}
+public currencyFormatterCalculateGoals = (field: string, data1: object, column: object) => {
+  if(data1['id_Currency'].toUpperCase() == 'COLONES'){
+    return '₡' + data1['string_Calculate_Recovery_Amount'];    
+  }else{
+    return '$' + data1['string_Calculate_Recovery_Amount'];
   } 
 }
 
