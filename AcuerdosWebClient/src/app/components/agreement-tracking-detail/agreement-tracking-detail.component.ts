@@ -156,7 +156,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     // this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.lines = 'Both';
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
-    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbar = ['Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
   }
 
   listAllEvidences() {

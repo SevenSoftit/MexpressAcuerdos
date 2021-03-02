@@ -89,7 +89,7 @@ export class AgreementTrackingComponent implements OnInit {
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
-    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbar = ['Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     this.lines = 'Both';
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }

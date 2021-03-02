@@ -30,8 +30,10 @@ namespace Sevensoft.Mexpress.Backend.Common
             Behavior = "";
             Agreement_Product_Info_List = new List<Import_Product>();
             Inventory_Quantity = 0;
+            String_Inventory_Quantity = "0";
             Inventory_Date = Convert.ToDateTime("1900-01-01");
             Average_Cost = 0;
+            String_Average_Cost = "0";
         }
         public Int64 Pk_Cat_Agreement_Details_Resume { get; set; }
         public Int64 Pk_Ac_Trade_Agreement { get; set; }
@@ -55,7 +57,9 @@ namespace Sevensoft.Mexpress.Backend.Common
         public String Behavior { get; set; }
         public List<Import_Product> Agreement_Product_Info_List { get; set; }
         public Int32 Inventory_Quantity { get; set; }
+        public String String_Inventory_Quantity { get; set; }
         public Decimal Average_Cost { get; set; }
+        public String String_Average_Cost { get; set; }
         public DateTime Inventory_Date { get; set; }
     }
 }

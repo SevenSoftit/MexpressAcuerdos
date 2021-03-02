@@ -24,8 +24,10 @@ export class AgreementProductInfoModel {
     Behavior: string;
     Agreement_Product_Info_List : Array<NewAgreementDetailHeaderModel>;
     Inventory_Quantity: number;
+    String_Inventory_Quantity: string;
     Inventory_Date: Date;
-    Average_Cost: number
+    Average_Cost: number;
+    String_Average_Cost: string;
 
     constructor() {
         this.Pk_Cat_Agreement_Details_Resume = 0;
@@ -52,5 +54,7 @@ export class AgreementProductInfoModel {
         this.Inventory_Quantity = 0;
         this.Inventory_Date = new Date();
         this.Average_Cost = 0;
+        this.String_Inventory_Quantity = '0';
+        this.String_Average_Cost = '0';
     }
 }

@@ -214,12 +214,14 @@
           
           <e-column field='inventory_Quantity' headerText='Inventario' width='150' textAlign='Center'
           [allowEditing]='false'></e-column>
-          <e-column field='average_Cost' [allowEditing]='false' type="number" defaultValue="0" MinValue="0" editType='numericedit'
+          <!-- <e-column field='average_Cost' [allowEditing]='false' type="number" defaultValue="0" MinValue="0" editType='numericedit'
               headerText='Cost. promedio' width='200' textAlign='Center'>
               <ng-template #template let-data>
                   {{ data.average_Cost | number: "1.2-2"}}
               </ng-template>
-          </e-column>
+          </e-column> -->
+          <e-column field='string_Average_Cost' type="text"
+            headerText='Cost. promedio' width='170' textAlign='Center'></e-column>
           
           <e-column field='string_Product_Amount' [valueAccessor]='currencyFormatter' type="text"
             headerText='Monto acuerdo' width='170' textAlign='Center'></e-column>

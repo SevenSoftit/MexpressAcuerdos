@@ -79,7 +79,7 @@ export class TradeAgreementsComponent implements OnInit {
     this.filterOptions = {
       type: 'FilterBar', mode: 'OnEnter', ignoreAccent: true
     };
-    this.toolbar = [{ text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+    this.toolbar = ['Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
     // this.searchOptions = {operator: 'contains', key: '', ignoreCase: true };
   }
 
@@ -219,6 +219,7 @@ export class TradeAgreementsComponent implements OnInit {
         dataFilter = dataQ;
         this.dropdata = DataUtil.distinct(dataFilter, 'agreement_Status_Name') as string[];
         this.dropdataProvider = DataUtil.distinct(dataFilter, 'provider_Name') as string[];
+        this.onChange('');
         this._common._setLoading(false);
       },
       error => {

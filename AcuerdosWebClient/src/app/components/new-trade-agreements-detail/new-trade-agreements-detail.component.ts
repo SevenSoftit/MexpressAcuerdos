@@ -91,8 +91,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   onAdd = new EventEmitter();
   enableExcel: boolean = false;
   disableHeader: boolean = false;
-  errorProvider: boolean = false;
-  errorTypeOfAgreement: boolean = false;
+  errorProvider: boolean = false;  
+  errorTypeOfAgreement: boolean = false; 
+  public errorActiveAgreement: boolean = false; 
   enableEvidence: boolean = false;
   listHeader: any = [];
   catalogModel: CatalogModel = new CatalogModel();
@@ -126,8 +127,10 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   emailNotification: string = '';
   submitted = false;
   yearStart: number = 0;
-  yearEnd: number = 0;
+  yearEnd: number = 0;   
   public behaviorTA: string = '';
+  public actualDate: Date = new Date();
+  public tempDate:Date = new Date();
 
   constructor(private datePipe: DatePipe, private tradeAgreementDetailService: TradeAgreementDetailService, public matDialog: MatDialog, private _common: CommonService,
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
@@ -188,6 +191,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
       emailNotification: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       accountingAccount: new FormControl('')
     });
+    
     this.lines = 'Both';
     this.initialSort = { columns: [{ field: 'product_Name', direction: 'Ascending' }] };
     this.editSettings = { allowAdding: true, allowEditing: true, allowDeleting: true, newRowPosition: 'Top', mode: 'Normal', allowEditOnDblClick: true};
@@ -395,9 +399,17 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     if (this.type_of_agreement == undefined) {
       this.errorTypeOfAgreement = true;    
     } 
+   this.tempDate = new Date(this.datePipe.transform(this.newAgreementForm.value.endDatePicker, 'yyyy/MM/dd'))
+   this.actualDate = new Date(this.datePipe.transform(this.actualDate, 'yyyy/MM/dd'));
+    if (this.agreement_activator == true && this.tempDate < this.actualDate) {
+      this.errorActiveAgreement = true;
+      this.agreement_activator = false;    
+    }else{
+      this.errorActiveAgreement = false;
+    } 
 
 
-    if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement) {
+    if (this.newAgreementForm.status != 'INVALID' && !this.errorDate && !this.errorProvider && !this.errorTypeOfAgreement && !this.errorActiveAgreement ) {
       var fechaInicial = new Date(this.datePipe.transform(this.newAgreementForm.value.startDatePicker, 'yyyy/MM/dd'));
       var fechaFinal = new Date(this.datePipe.transform(this.newAgreementForm.value.endDatePicker, 'yyyy/MM/dd'));
       this.newAgreementDetailHeaderModel.Pk_Ac_Trade_Agreement = this.headerFile;
@@ -472,9 +484,26 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         });
 
     }
-    else
+    else{
       this.showErrors = true;
-    this._common._setLoading(false);
+
+      if(this.errorActiveAgreement == true){
+        this.agreement_activator = false;
+        const dataSuccess = {
+          labelTitile: '¡Atención!',
+          icon: 'warning',
+          textDescription: 'La fecha final del acuerdo debe ser mayor o igual a la fecha actual',
+          status: 'warning'
+        };
+
+        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+          data: { contactInfo: dataSuccess },
+          minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+        });
+        setTimeout(() => dialogRef.close(), 3000);
+      }
+      this._common._setLoading(false);
+    }
   }
   dateChange() {
     // startDate.setHours(0);
