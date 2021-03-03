@@ -311,7 +311,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     newAgreementM.Pk_Ac_Trade_Agreement = this.headerFile;
     this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
       dataQ => {
-        if(this.showGoals == true){
+        if(this.showGoals == true){  
           this.listAgreementDResume();
         }else{
           this.listAgreement(newAgreementM); 
