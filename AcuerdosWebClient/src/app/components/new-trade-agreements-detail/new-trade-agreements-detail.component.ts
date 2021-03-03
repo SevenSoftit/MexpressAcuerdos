@@ -122,7 +122,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   public maxAmount: string = '0';
   public string_Total_Recovery: string = '0';
   public string_Total_Recovery_Dollars: string = '0';
-  public inventory_Date: Date;
+  public inventory_Date: Date = new Date();
   showAmountInput = false;
   emailNotification: string = '';
   submitted = false;
@@ -308,15 +308,27 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     //   entity.CODE = (element.product_Id_Alias).toString();
     //   newAgreementM.Product_Codes_List.push(entity);
     // });
-    newAgreementM.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+    newAgreementM.Pk_Ac_Trade_Agreement = this.headerFile;
     this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
       dataQ => {
         if(this.showGoals == true){
           this.listAgreementDResume();
         }else{
           this.listAgreement(newAgreementM); 
-        }
-            
+        }           
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+  }
+
+  updateInventoryWork(){
+    var newAgreementM: NewAgreementModel = new NewAgreementModel();
+    newAgreementM.Pk_Ac_Trade_Agreement = this.headerFile;
+    this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
+      dataQ => {
+          this.saveAgreementHeader();
       },
       error => {
         this._common._setLoading(false);
@@ -436,16 +448,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
 
       this.tradeAgreementDetailService.saveAgreementHeader(this.newAgreementDetailHeaderModel).subscribe(
         data => {
-          var agreementRefresh = new NewAgreementModel();
-          agreementRefresh.Pk_Ac_Trade_Agreement = this.headerFile;
-          this.listAgreement(agreementRefresh);
-          const datafailed = {
-            labelTitile: '¡Atención!',
-            icon: 'new_releases',
-            textDescription: 'La información se guardó correctamente.',
-            status: 'success'
-          };
-
           this._common._setLoading(false);
           if (!this.enableUpdateAgreement) {
             this.enableExcel = true;
@@ -469,8 +471,17 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
             this.showErrors = false;
             this.showWorkTable = false;
             this.onAdd.emit(true);
-
           }
+          
+          var agreementRefresh = new NewAgreementModel();
+          agreementRefresh.Pk_Ac_Trade_Agreement = this.headerFile;
+          this.listAgreement(agreementRefresh);
+          const datafailed = {
+            labelTitile: '¡Atención!',
+            icon: 'new_releases',
+            textDescription: 'La información se guardó correctamente.',
+            status: 'success'
+          };
 
           const dialogRef = this.matDialog.open(FeedbackModalComponent, {
             data: { contactInfo: datafailed },
@@ -722,28 +733,28 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     };
     this.tradeAgreementDetailService.processWorkProductDetailTable(object).subscribe(
       dataW => {
+        debugger
         var agreement = new NewAgreementModel();
         if (dataW.length !== 0) {
           agreement.Pk_Ac_Trade_Agreement = dataW[0].pk_Ac_Trade_Agreement;
         } else {
           agreement.Pk_Ac_Trade_Agreement = 0;
         }
-        this.saveAgreementHeader();
-        this.listAgreement(agreement);
+        this.updateInventoryWork();
         this.showWorkTable = false;
         this.title = 'Todos los productos';
-        const dataSuccess = {
-          labelTitile: '¡Listo!',
-          icon: 'check_box',
-          textDescription: 'Se procesaron los registros de manera correcta.',
-          status: 'success'
-        };
+        // const dataSuccess = {
+        //   labelTitile: '¡Listo!',
+        //   icon: 'check_box',
+        //   textDescription: 'Se procesaron los registros de manera correcta.',
+        //   status: 'success'
+        // };
 
-        const dialogRef = this.matDialog.open(FeedbackModalComponent, {
-          data: { contactInfo: dataSuccess },
-          minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
-        });
-        setTimeout(() => dialogRef.close(), 3000);
+        // const dialogRef = this.matDialog.open(FeedbackModalComponent, {
+        //   data: { contactInfo: dataSuccess },
+        //   minWidth: '27vw', maxWidth: '35vw', maxHeight: '35vh', minHeight: '23vh'
+        // });
+        // setTimeout(() => dialogRef.close(), 3000);
       }, () => {
         this._common._setLoading(false);
       });

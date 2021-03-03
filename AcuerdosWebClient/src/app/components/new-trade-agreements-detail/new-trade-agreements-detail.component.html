@@ -217,7 +217,7 @@
                         </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" *ngIf = '!showWorkTable && (dataTable.length !== 0 || dataTableGoals.length !== 0)'>
                 <div class="form-group text date-picker-custom">
                     <label for="inventory_Date" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
                         Inventario</label>
