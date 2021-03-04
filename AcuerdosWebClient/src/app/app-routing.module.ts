@@ -14,38 +14,45 @@ import { ChangePasswordModalComponent } from './components/change-password-modal
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
-  
+
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path:'feedbackDescription', component: FeedbackDescriptionModalComponent},
-  { path:'feedbackModal', component: FeedbackModalComponent},
-  { path:'importProduct', component: ImportProductComponent},
-  { path:'addAgreementEvidence', component: AddAgreementEvidenceModalComponent},
-  { path:'listEvidence', component: ListEvidencesModalComponent},
-  { path:'confirmModal', component: ConfirmModalComponent},
-  { path:'goalsLoaderModal', component: GoalsLoaderComponent},
-  {path: 'changePass', component: ChangePasswordModalComponent},
-  {path: 'forgotPassword', component: ForgotPasswordComponent},
+  // { path:'feedbackDescription', component: FeedbackDescriptionModalComponent},
+  // { path:'feedbackModal', component: FeedbackModalComponent},
+  // { path:'importProduct', component: ImportProductComponent},
+  // { path:'addAgreementEvidence', component: AddAgreementEvidenceModalComponent},
+  // { path:'listEvidence', component: ListEvidencesModalComponent},
+  // { path:'confirmModal', component: ConfirmModalComponent},
+  // { path:'goalsLoaderModal', component: GoalsLoaderComponent},
+  { path: 'changePass', component: ChangePasswordModalComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
   {
     path: '',
-    component: LayoutComponent,  
+    component: LayoutComponent,
     children: [
-      {path: 'home', redirectTo: 'home', pathMatch: 'full' },
-      {path: 'home', loadChildren: './components/home/home.module#HomeModule' },
-      {path: 'tradeAgreements', loadChildren: './components/trade-agreements/trade-agreements.module#TradeAgreementsModule'},
-      {path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements-detail/new-trade-agreements-detail.module#NewTradeAgreementsDetailModule'},
-      {path: 'agreementTracking', loadChildren: './components/agreement-tracking/agreement-tracking.module#AgreementTrackingModule'},
-      {path: 'agreementTrackingDetail', loadChildren: './components/agreement-tracking-detail/agreement-tracking-detail.module#AgreementTrackingDetailModule'},
-      {path: 'agreementReport', loadChildren: './components/agreement-report/agreement-report.module#AgreementReportModule'},
-      {path: 'agreementConciliation', loadChildren: './components/agreement-conciliation/agreement-conciliation.module#AgreementConciliationModule'},
-      {path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule'},
+      { path: 'home', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', loadChildren: './components/home/home.module#HomeModule' },
+      { path: 'tradeAgreements', loadChildren: './components/trade-agreements/trade-agreements.module#TradeAgreementsModule' },
+      { path: 'newTradeAgreements', loadChildren: './components/new-trade-agreements-detail/new-trade-agreements-detail.module#NewTradeAgreementsDetailModule' },
+      { path: 'agreementTracking', loadChildren: './components/agreement-tracking/agreement-tracking.module#AgreementTrackingModule' },
+      { path: 'agreementTrackingDetail', loadChildren: './components/agreement-tracking-detail/agreement-tracking-detail.module#AgreementTrackingDetailModule' },
+      { path: 'agreementReport', loadChildren: './components/agreement-report/agreement-report.module#AgreementReportModule' },
+      { path: 'agreementConciliation', loadChildren: './components/agreement-conciliation/agreement-conciliation.module#AgreementConciliationModule' },
+      { path: 'agreementConciliationDetail', loadChildren: './components/agreement-conciliation-detail/agreement-conciliation-detail.module#AgreementConciliationDetailModule' },
+      { path: 'feedbackDescription', component: FeedbackDescriptionModalComponent },
+      { path: 'feedbackModal', component: FeedbackModalComponent },
+      { path: 'importProduct', component: ImportProductComponent },
+      { path: 'addAgreementEvidence', component: AddAgreementEvidenceModalComponent },
+      { path: 'listEvidence', component: ListEvidencesModalComponent },
+      { path: 'confirmModal', component: ConfirmModalComponent },
+      { path: 'goalsLoaderModal', component: GoalsLoaderComponent },
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
-  providers:[AuthGuard]
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
