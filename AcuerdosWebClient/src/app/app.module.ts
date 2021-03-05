@@ -4,25 +4,20 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { registerLocaleData, CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es');
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 // import the GridModule for the Grid component
-import { GridModule, ToolbarService, EditService, PageService, FilterService, SortService} from '@syncfusion/ej2-angular-grids';
+import { ToolbarService, EditService, PageService, FilterService, SortService} from '@syncfusion/ej2-angular-grids';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
 
 // servicios
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { environment } from 'src/environments/environment';
-import { MaterialModule } from './material-module';
 import { ApplicationPipesModule } from './shared/helper/application-pipes.module';
 import { LoginService } from './shared/services/login/login.service';
 import { CommonService } from './shared/services/common/common.service';
@@ -49,7 +44,7 @@ import { AgreementConciliationDetailModule } from './components/agreement-concil
 import { AgreementReportModule } from './components/agreement-report/agreement-report.module';
 import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { SharedModule } from './shared-module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -71,22 +66,14 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent
   ],
   imports: [
-    ScrollingModule,
-    CommonModule,
-    MaterialModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production}),
     BrowserAnimationsModule,
     DropzoneModule,
     ApplicationPipesModule,  
-    GridModule,
-    MatDatepickerModule,
-    MatIconModule,
-    MatButtonModule,
     LayoutModule,
     LoadingModule,
     TradeAgreementsModule,

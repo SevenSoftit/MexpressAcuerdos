@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AgreementReportComponent } from './agreement-report.component';
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { Routes, RouterModule } from '@angular/router';
-import { GridModule, ToolbarService, EditService, PageService, FilterService, SortService, FreezeService, ResizeService } from '@syncfusion/ej2-angular-grids';
+import { ToolbarService, EditService, PageService, FilterService, SortService, FreezeService, ResizeService } from '@syncfusion/ej2-angular-grids';
+import { SharedModule } from 'src/app/shared-module';
 
 setCulture('es-ES');
 
@@ -32,9 +32,8 @@ const routes: Routes = [
   ],
   entryComponents: [AgreementReportComponent],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
-    GridModule
+    SharedModule
   ],
   providers: [
     ToolbarService,

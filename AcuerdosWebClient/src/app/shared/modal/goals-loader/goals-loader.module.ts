@@ -1,23 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import { MaterialModule } from 'src/app/material-module';
+import { SharedModule } from 'src/app/shared-module';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    ScrollingModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MaterialModule
+    SharedModule
   ]
 })
 export class GoalsLoaderModule { }

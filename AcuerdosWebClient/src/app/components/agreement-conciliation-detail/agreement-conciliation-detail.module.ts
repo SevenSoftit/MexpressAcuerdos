@@ -1,22 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AgreementConciliationDetailComponent } from './agreement-conciliation-detail.component';
 import { Routes, RouterModule } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ToolbarService,EditService,PageService,FilterService,SortService,FreezeService,ResizeService,GridModule, ExcelExportService, PdfExportService} from "@syncfusion/ej2-angular-grids";
-import { MatSelectModule } from '@angular/material/select';
+import {ToolbarService,EditService,PageService,FilterService,SortService,FreezeService,ResizeService,ExcelExportService, PdfExportService} from "@syncfusion/ej2-angular-grids";
 import { L10n, setCulture } from '@syncfusion/ej2-base';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MaterialModule } from 'src/app/material-module';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
-export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
-// Infinite scroll
-import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+import { SharedModule } from 'src/app/shared-module';
 
 setCulture('es-ES');
 
@@ -47,21 +34,8 @@ const routes: Routes = [
   ],
   entryComponents: [AgreementConciliationDetailComponent],
   imports: [
-    NgxMaskModule,
-    CommonModule,
     RouterModule.forChild(routes),
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    GridModule,
-    MatDatepickerModule,
-    MaterialModule,
-    MatTooltipModule,
-    MatSelectInfiniteScrollModule,
-    ScrollingModule
+    SharedModule
   ],
   providers: [
     ToolbarService,

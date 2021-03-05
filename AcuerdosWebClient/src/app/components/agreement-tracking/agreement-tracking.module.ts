@@ -1,15 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EditService,PageService,FilterService,SortService,ResizeService,GridModule, ExcelExportService, ToolbarService} from "@syncfusion/ej2-angular-grids";
+import {EditService,PageService,FilterService,SortService,ResizeService,ExcelExportService, ToolbarService} from "@syncfusion/ej2-angular-grids";
 import { setCulture, L10n } from '@syncfusion/ej2-base';
 import { AgreementTrackingComponent } from './agreement-tracking.component';
-import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { SharedModule } from 'src/app/shared-module';
 
 setCulture('es-ES');
 
@@ -35,15 +29,7 @@ const routes: Routes = [
   entryComponents: [AgreementTrackingComponent],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    GridModule,
-    ButtonModule,
-    DropDownListModule
+    SharedModule
   ],
   providers: [
     EditService,

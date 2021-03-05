@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ConfirmModalComponent } from './confirm-modal.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { SharedModule } from 'src/app/shared-module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule
+    SharedModule
   ]
 })
 export class ConfirmModalModule { }
