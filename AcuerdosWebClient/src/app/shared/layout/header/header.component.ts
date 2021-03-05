@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { utiles } from 'src/environments/utiles';
 import { CommonService } from '../../services/common/common.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { ChangePasswordModalComponent } from 'src/app/components/change-password-modal/change-password-modal.component';
+import { ChangePasswordModalComponent } from '../../modal/change-password-modal/change-password-modal.component';
 
 @Component({
   selector: 'app-header',

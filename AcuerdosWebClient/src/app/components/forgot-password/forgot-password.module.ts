@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared-module';
+import { ForgotPasswordComponent } from './forgot-password.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ForgotPasswordComponent],
   imports: [
     SharedModule
   ]

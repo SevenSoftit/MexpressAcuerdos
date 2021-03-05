@@ -5,7 +5,6 @@ import { ExcelExportProperties, ToolbarItems, IEditCell } from '@syncfusion/ej2-
 import { Column, GridComponent, GridLine } from '@syncfusion/ej2-angular-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { MatDialog } from '@angular/material/dialog';
-import { ImportProductComponent } from '../import-product/import-product.component';
 import { MoneyModel } from 'src/app/models/money.model';
 import { TypeOfAgreementModel } from 'src/app/models/typeOfAgreement.model';
 import { ProviderModel } from 'src/app/models/provider.model';
@@ -28,6 +27,7 @@ import { DatePipe } from '@angular/common';
 import { Query } from '@syncfusion/ej2-data';
 import { TableEntityGenericModel } from 'src/app/models/tableEntityGeneric.model';
 import { AgreementProductInfoModel } from 'src/app/models/agreementProductInfo.model';
+import { ImportProductComponent } from 'src/app/shared/modal/import-product/import-product.component';
 
 
 

@@ -26,13 +26,10 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { HttpinterceptorService } from './shared/services/interceptor/httpinterceptor.service';
 import { LoginComponent } from './components/login/login.component';
-import { ImportProductComponent } from './components/import-product/import-product.component';
 import { AddAgreementEvidenceModalComponent } from './shared/modal/add-agreement-evidence-modal/add-agreement-evidence-modal.component';
 import { ListEvidencesModalComponent } from './shared/modal/list-evidences-modal/list-evidences-modal.component';
 import { ConfirmModalComponent } from './shared/modal/confirm-modal/confirm-modal.component';
 import { GoalsLoaderComponent } from './shared/modal/goals-loader/goals-loader.component';
-import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LayoutModule } from './shared/layout/layout.module';
 import { LoadingModule } from './shared/loading/loading.module';
 import { TradeAgreementsModule } from './components/trade-agreements/trade-agreements.module';
@@ -45,6 +42,9 @@ import { AgreementReportModule } from './components/agreement-report/agreement-r
 import { FeedbackDescriptionModalComponent } from './shared/modal/feedback-description-modal/feedback-description-modal.component';
 import { FeedbackModalComponent } from './shared/modal/feedback-modal/feedback-modal.component';
 import { SharedModule } from './shared-module';
+import { ForgotPasswordModule } from './components/forgot-password/forgot-password.module';
+import { ChangePasswordModalComponent } from './shared/modal/change-password-modal/change-password-modal.component';
+import { ImportProductComponent } from './shared/modal/import-product/import-product.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -54,7 +54,6 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     FeedbackModalComponent,
     FeedbackDescriptionModalComponent,
     ImportProductComponent,
@@ -62,8 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
     ListEvidencesModalComponent,
     ConfirmModalComponent,
     GoalsLoaderComponent,
-    ChangePasswordModalComponent,
-    ForgotPasswordComponent
+    ChangePasswordModalComponent
   ],
   imports: [
     SharedModule,
@@ -83,6 +81,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgreementConciliationModule,
     AgreementConciliationDetailModule,
     AgreementReportModule,
+    ForgotPasswordModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -92,7 +91,14 @@ export function createTranslateLoader(http: HttpClient) {
     })
   ],
   entryComponents: [
-    
+    FeedbackModalComponent,
+    FeedbackDescriptionModalComponent,
+    ImportProductComponent,
+    AddAgreementEvidenceModalComponent,
+    ListEvidencesModalComponent,
+    ConfirmModalComponent,
+    GoalsLoaderComponent,
+    ChangePasswordModalComponent
   ],
 
   providers: [
