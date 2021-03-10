@@ -130,7 +130,18 @@
                     formControlName="accountingAccount" id="accountingAccount" aria-describedby="accountingAccount"
                     placeholder="Descripción contable">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="form-group text date-picker-custom">
+                    <label for="inventory_Date" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
+                        Inventario</label>
+                    <input matInput [matDatepicker]="inventory_Date" formControlName="inventory_Date" id="inventory_Date"
+                        placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
+                         readonly>
+                    <mat-datepicker-toggle matSuffix [for]="inventory_Date" [disabled] = 'true'></mat-datepicker-toggle>
+                    <mat-datepicker #inventory_Date></mat-datepicker>
+                </div>
+            </div>
+            <div class="col-md-3 pl-0">
                 <div class="d-flex">
                     <div>
                         <label for="all_products" class="new-agreement-label-input w-100 text-left">Todos los
@@ -149,20 +160,7 @@
                         </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group text date-picker-custom">
-                    <label for="inventory_Date" class="new-agreement-label-input new-trade-agreement-lbl-input">Fecha
-                        Inventario</label>
-                    <input matInput [matDatepicker]="inventory_Date" formControlName="inventory_Date" id="inventory_Date"
-                        placeholder="02/01/2019" class="new-trade-agreement-modal-date-input"
-                         readonly>
-                    <mat-datepicker-toggle matSuffix [for]="inventory_Date" [disabled] = 'true'></mat-datepicker-toggle>
-                    <mat-datepicker #inventory_Date></mat-datepicker>
-                </div>
-            </div>
-
-        </div>
-        
+        </div>     
     </form>
         <hr class="border-section">
         <cdk-virtual-scroll-viewport [itemSize]="200" class="example-viewport-principal">

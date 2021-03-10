@@ -7,6 +7,7 @@ import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.compone
 import { TradeAgreementDetailService } from '../../services/tradeAgreementDetail/tradeAgreementDetail.service';
 import { AllMoneyService } from '../../services/allMoney/allMoney.service';
 import { CommonService } from '../../services/common/common.service';
+import { GoalModel } from "src/app/models/goal.model";
 
 @Component({
   selector: "app-goals-loader",
@@ -14,13 +15,14 @@ import { CommonService } from '../../services/common/common.service';
   styleUrls: ["./goals-loader.component.scss"]
 })
 export class GoalsLoaderComponent implements OnInit {
-  goalLine = [];
-  goalLineDelete = [];
-  goalLineCounter = 0;
-  pk_Ac_Trade_Agreement: number;
-  moneyList: any = [];
-  minDate = new Date();
-  followUp: boolean = false;
+  public goalLine: GoalModel[] = [];
+  public goalLineDelete: GoalModel[] = [];
+  public goalLineCounter: number = 0;
+  public pk_Ac_Trade_Agreement: number = 0;
+  public moneyList: any[] = [];
+  public minDate = new Date();
+  public followUp: boolean = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public params,
     public tradeAgreementDetailService: TradeAgreementDetailService,
@@ -37,19 +39,23 @@ export class GoalsLoaderComponent implements OnInit {
 
   ngOnInit() {}
   addNewGoal() {
-    var objGoalLine = {
+    var objGoalLine: GoalModel = {
       pk_Cat_Agreement_Goals: Math.floor(Math.random() * -100) + -1,
       pk_Ac_Trade_Agreement: this.pk_Ac_Trade_Agreement,
       date_Start: new Date(),
       date_Finish: new Date(),
-      goal_Amount: "",
+      goal_Amount: 0,
       type_Goal: false,
       pk_Cat_Currency: 1,
       name_Currency: "COLONES",
       bonus: 0,
       id: this.goalLineCounter,
-      Creation_User: utiles.getInfoUser().username,
-      Modification_User: utiles.getInfoUser().username,
+      creation_Date: new Date(),
+      creation_User: utiles.getInfoUser().username,
+      modification_Date: new Date(),
+      modification_User: utiles.getInfoUser().username,
+      active: true,
+      agreement_Amount: 0,
       errorGoal: false,
       errorBonus: false,
       errorFinishDate: false
@@ -59,15 +65,16 @@ export class GoalsLoaderComponent implements OnInit {
   }
 
   getGoalByAgreement() {
-    var agreementGoal = { Pk_Ac_Trade_Agreement: this.pk_Ac_Trade_Agreement };
+    var agreementGoal = { Pk_Ac_Trade_Agreement: this.pk_Ac_Trade_Agreement }; 
     this.tradeAgreementDetailService
       .ListAgreementGoals(agreementGoal)
       .subscribe(
         data => {
-          this.goalLine = data.data;
+          debugger
+          this.goalLine = data;
 
           this.goalLine.forEach(element => {
-            element.Modification_User = utiles.getInfoUser().username;
+            element.modification_User = utiles.getInfoUser().username;
           });
         },
         error => {}
@@ -99,12 +106,14 @@ export class GoalsLoaderComponent implements OnInit {
       minHeight: "300px"
     });
     const sub = dialogRef.componentInstance.onAdd.subscribe(data => {
+      debugger
       goal.active = false;
       this.goalLineDelete.push(goal);
 
       this.goalLine = this.goalLine.filter(
         g => g.pk_Cat_Agreement_Goals != goal.pk_Cat_Agreement_Goals
       );
+      debugger
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -117,12 +126,12 @@ export class GoalsLoaderComponent implements OnInit {
     this.goalLine.forEach(element => {
       var startDate = new Date(element.date_Start);
       var endDate= new Date(element.date_Finish);
-      if (element.goal_Amount == "" || element.goal_Amount == null) {
+      if (element.goal_Amount == 0 || element.goal_Amount == null) {
         element.errorGoal = true;
         error = true;
       }
 
-      if (element.bonus == "" || element.bonus == null) {
+      if (element.bonus == 0 || element.bonus == null) {
         element.errorBonus = true;
         error = true;
       }
@@ -145,7 +154,7 @@ export class GoalsLoaderComponent implements OnInit {
           m => m.name_Currency == element.name_Currency
         )[0].id_Currency;
       });
-
+      debugger
       this.tradeAgreementDetailService
         .saveAgreementGoals(this.goalLine)
         .subscribe(data => {}, error => {});

@@ -5,6 +5,7 @@ import { utiles } from 'src/environments/utiles';
 import { tap, catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { GoalModel } from 'src/app/models/goal.model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -216,7 +217,7 @@ export class TradeAgreementDetailService {
 
   ListAgreementGoals(agreement: any) {
     const url = this.apiUrl + 'api/agreementGoals/List';
-    return this.http.post<any>(url, agreement, httpOptions).pipe(
+    return this.http.post<GoalModel[]>(url, agreement, httpOptions).pipe(
       tap(() => console.log(''))
     );
   }

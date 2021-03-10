@@ -49,14 +49,14 @@ namespace Sevensoft.Mexpress.Backend.Web.Api.Controllers
                         return BadRequest(result.Result);
                     }
                     var list = result.DeSerializeObject<IEnumerable<Common.Ac_Cat_Agreement_Goals>>();
-                    var dataSuccess = new
-                    {
-                        Data = list,
-                        MessageResult = Backend.Common.Enum.Status.Success,
-                        Message = string.Empty,
-                        RegisterType = string.Empty
-                    };
-                    return Ok(dataSuccess);
+                    // var dataSuccess = new
+                    // {
+                    //     Data = list,
+                    //     MessageResult = Backend.Common.Enum.Status.Success,
+                    //     Message = string.Empty,
+                    //     RegisterType = string.Empty
+                    // };
+                    return Ok(list);
                 }
             }
             catch (Exception ex)
