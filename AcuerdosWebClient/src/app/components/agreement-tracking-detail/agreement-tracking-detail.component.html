@@ -300,7 +300,7 @@
       </ejs-grid>
     </div>
   </div>
-  <div class="row ml-0 mr-0">
+  <div *ngIf = 'dataTable.length !== 0' class="row ml-0 mr-0">
     <div class="offset-md-8 offset-lg-8 col-lg-4 col-md-4 text-right">
       <mat-icon class="mr-2 icon-process">date_range</mat-icon><label for="labelDateProcess"
         class="label-date-process">Fecha de la última actualización: {{dateProcess | date:'dd/MM/yyyy'}}</label>

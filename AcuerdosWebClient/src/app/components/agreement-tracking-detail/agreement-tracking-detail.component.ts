@@ -41,7 +41,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
   providerN: any;
   @ViewChild("grid", { static: false })
   public grid: GridComponent;
-  public dataTable: any;
+  public dataTable: any[] = [];
   public dataTableDetail: any[] = [];
   public initialSort: Object;
   public pageSettings: Object;
@@ -49,7 +49,8 @@ export class AgreementTrackingDetailComponent implements OnInit {
   screenWidth: any;
   public editSettings: Object;
   public toolbar: ToolbarItems[] | Object;
-  headerFile: number = 0;
+  public headerFile: number = 0;
+  public active: boolean = false;
   title = 'Todos los acuerdos comerciales';
   agreement_activator: boolean = false;
   showGoals = false;
@@ -111,26 +112,18 @@ export class AgreementTrackingDetailComponent implements OnInit {
         this.agreementDetail = JSON.parse(parameters);
         if (this.agreementDetail.info.pk_Ac_Trade_Agreement !== null && this.agreementDetail.info.pk_Ac_Trade_Agreement !== undefined) {
           this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-          this.behaviorTA = this.agreementDetail.info.behavior;
-          this.providerModel.Name_Provider = this.agreementDetail.info.provider_Name;
-          this.showGoals = this.agreementDetail.info.all_Products;
-          this.nameAgree = this.agreementDetail.info.name_Agreement;
-          this.disabledButtonFinalization = (this.agreementDetail.info.agreement_Status_Name == 'Finalizado' || this.agreementDetail.info.agreement_Status_Name == 'Conciliado') ? true : false;
+          this.active = this.agreementDetail.info.active;
+          this.getAgreementInfo();
 
-          if (this.agreementDetail.info.max_Amount !== 0) {
-            this.maxAmountToggle = true;
-            this.showAmountInput = true;
-          }
         }
       }
     });
   }
 
   ngOnInit() {
-    this._common._setLoading(true);
     this.getScreenSize();
     
-    this.listAllEvidences();
+    // this.listAllEvidences();
     
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
@@ -157,6 +150,70 @@ export class AgreementTrackingDetailComponent implements OnInit {
     this.lines = 'Both';
     this.editSettings = { allowAdding: false, allowEditing: false, allowDeleting: false, newRowPosition: 'Top' };
     this.toolbar = ['Search', { text: 'Exportar a Excel', prefixIcon: 'e-excelexport', id: 'export' }];
+  }
+
+  getAgreementInfo(){
+    this._common._setLoading(true);
+    var data = new NewAgreementDetailHeaderModel();
+    data.Active = this.active;
+    data.Pk_Ac_Trade_Agreement = this.headerFile
+    this.tradeAgreementDetailService.ListHeaderAgreementDetail(data).subscribe(
+      dataQ => {
+          if (dataQ != undefined && dataQ.length !== 0) {
+            dataQ = dataQ.filter(dataOpt => dataOpt.agreement_Status_Name !== 'All' && dataOpt.provider_Name !== 'All');
+            this.behaviorTA = dataQ[0].behavior;
+            this.providerModel.Name_Provider = dataQ[0].provider_Name;
+            this.showGoals = dataQ[0].all_Products;
+            this.nameAgree = dataQ[0].name_Agreement;
+            this.disabledButtonFinalization = (dataQ[0].agreement_Status_Name == 'Finalizado' || dataQ[0].agreement_Status_Name == 'Conciliado') ? true : false;
+  
+            if (dataQ[0].max_Amount !== 0) {
+              this.maxAmountToggle = true;
+              this.showAmountInput = true;
+            }
+
+
+            this.newAgreementForm.patchValue({
+              agreement_name:dataQ[0].name_Agreement,
+              description: dataQ[0].description_Agreement,
+              startDatePicker: new Date(dataQ[0].date_Start),
+              endDatePicker: new Date(dataQ[0].date_Finish),
+              inventory_Date: dataQ[0].inventory_Date,
+              emailNotification: dataQ[0].email,
+              accountingAccount: dataQ[0].accounting_Account
+            });  
+            this.headerFile = dataQ[0].pk_Ac_Trade_Agreement;
+            this.type_of_agreement = dataQ[0].pk_Cat_Type_Agreement;
+            this.providerN = dataQ[0].pk_Ac_Cat_Provider;
+            this.dateProcess = dataQ[0].date_Process;
+            this.dateReprocess = dataQ[0].date_Reprocess;
+            this.allproducts_activator = dataQ[0].all_Products;
+            this.fk_Status_Agreement = dataQ[0].fk_Status_Agreement;
+            this.agreement_activator = dataQ[0].active;
+            this.fk_Glb_Mtr_Organization = dataQ[0].fk_Glb_Mtr_Organization;
+            this.maxAmount = String(dataQ[0].max_Amount);
+            this.string_Total_Recovery = String(dataQ[0].string_Total_Recovery);
+            this.string_Total_Recovery_Dollars = String(dataQ[0].string_Total_Recovery_Dollars);
+          } else {  
+            this.newAgreementForm.setValue({
+              agreement_name: '',  
+              description: '',
+              startDatePicker: new Date(),
+              endDatePicker: new Date(),
+              inventory_Date: new Date(),
+              emailNotification: '',
+              accountingAccount: ''
+            });
+          }
+          // this.updateInventory();
+          this.listAllEvidences();
+        
+      },
+      error => {
+        this._common._setLoading(false);
+        console.log('no se envio' + ' ' + error);
+      });
+
   }
 
   listAllEvidences() {
@@ -217,45 +274,6 @@ export class AgreementTrackingDetailComponent implements OnInit {
     });
   }
 
-
-  fillFormAgreementDetail() {
-    if (this.agreementDetail != undefined) {
-      this.newAgreementForm.patchValue({
-        agreement_name: this.agreementDetail.info.name_Agreement,
-        description: this.agreementDetail.info.description_Agreement,
-        startDatePicker: new Date(this.agreementDetail.info.date_Start),
-        endDatePicker: new Date(this.agreementDetail.info.date_Finish),
-        inventory_Date: this.agreementDetail.info.inventory_Date,
-        emailNotification: this.agreementDetail.info.email,
-        accountingAccount: this.agreementDetail.info.accounting_Account
-      });  
-    
-      this.headerFile = this.agreementDetail.info.pk_Ac_Trade_Agreement;
-      this.type_of_agreement = this.agreementDetail.info.pk_Cat_Type_Agreement;
-      this.providerN = this.agreementDetail.info.pk_Ac_Cat_Provider;
-      this.dateProcess = this.agreementDetail.info.date_Process;
-      this.dateReprocess = this.agreementDetail.info.date_Reprocess;
-      this.allproducts_activator = this.agreementDetail.info.all_Products;
-      this.fk_Status_Agreement = this.agreementDetail.info.fk_Status_Agreement;
-      this.agreement_activator = this.agreementDetail.info.active;
-      this.fk_Glb_Mtr_Organization = this.agreementDetail.info.fk_Glb_Mtr_Organization;
-      this.maxAmount = String(this.agreementDetail.info.max_Amount);
-      this.string_Total_Recovery = String(this.agreementDetail.info.string_Total_Recovery);
-      this.string_Total_Recovery_Dollars = String(this.agreementDetail.info.string_Total_Recovery_Dollars);
-    } else {  
-      this.newAgreementForm.setValue({
-        agreement_name: '',  
-        description: '',
-        startDatePicker: new Date(),
-        endDatePicker: new Date(),
-        inventory_Date: new Date(),
-        emailNotification: '',
-        accountingAccount: ''
-      });
-    }
-    this.updateInventory();
-  }
-
   updateInventory(){
     var newAgreementM: NewAgreementModel = new NewAgreementModel();
     // this.dataTable.forEach(element => {
@@ -263,7 +281,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
     //   entity.CODE = (element.product_Id_Alias).toString();
     //   newAgreementM.Product_Codes_List.push(entity);
     // });
-    newAgreementM.Pk_Ac_Trade_Agreement = this.agreementDetail.info.pk_Ac_Trade_Agreement;
+    newAgreementM.Pk_Ac_Trade_Agreement = this.headerFile;
     this.tradeAgreementDetailService.updateInventory(newAgreementM).subscribe(
       dataQ => {
         this.listAgreementDResume();    
@@ -273,7 +291,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
         console.log('no se envio' + ' ' + error);
       });
   }
-  listAgreementDResume() {   
+  listAgreementDResume() {
     var agreementProductInfoModel = new AgreementProductInfoModel();
     agreementProductInfoModel.Pk_Ac_Trade_Agreement = this.headerFile;
     agreementProductInfoModel.Behavior = this.behaviorTA;
@@ -455,7 +473,8 @@ listProvider(option) {
     this.typeOfAgreementService.listTypeOfAgreement(this.typeOfAgreementModel).subscribe(
       dataS => {
         this.typeOfAgreementList = dataS;
-        this.fillFormAgreementDetail();
+        // this.fillFormAgreementDetail();
+        this.updateInventory();
       },
       error => {
         this._common._setLoading(false);
