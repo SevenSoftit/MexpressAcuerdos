@@ -136,7 +136,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     private allMoneyService: AllMoneyService, private typeOfAgreementService: TypeOfAgreementService,
     private providerService: ProviderService, private activated_route: ActivatedRoute) {
 
-    this._common._setLoading(true);
     this.activated_route.queryParams.subscribe(params => {
       var parameters = params["agreementDet"];
 
@@ -169,8 +168,9 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._common._setLoading(true);
     this.getScreenSize();
+    this.listMoney();
+    
 
     this.options$ = this.options.asObservable().pipe(
       scan((acc, curr) => {
@@ -260,7 +260,6 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
     } else {
       this.pageSettings = { pageSize: 5, pageCount: 8 };
     }
-    this.listMoney();
   }
 
   fillFormAgreementDetail() {
@@ -302,6 +301,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
   }
 
   updateInventory(){
+    this._common._setLoading(true);
     var newAgreementM: NewAgreementModel = new NewAgreementModel();
     // this.dataTable.forEach(element => {
     //   var entity: TableEntityGenericModel = new TableEntityGenericModel();
@@ -349,6 +349,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
           this.enableEvidence = true;
         }
         this.enableUpdateAgreement = true;
+        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
@@ -931,6 +932,7 @@ export class NewTradeAgreementsDetailComponent implements OnInit {
         this.dataTable = dataQ;
         this.enableUpdateAgreement = true
         // this.grid.refresh();
+        this._common._setLoading(false);
       },
       error => {
         this._common._setLoading(false);
