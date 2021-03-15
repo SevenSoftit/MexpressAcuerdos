@@ -380,12 +380,27 @@ listProvider(option) {
     const object = {
       header_File: this.headerFile,
       name_Agree: this.nameAgree,
-      status_validation: this.statusValidation
+      status_validation: this.statusValidation,
+      is_Invoice: false
     }
     const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
-      data: { confirmInfo: object },
+      data: { confirmInfo: object }, disableClose: true,
       minWidth: "900px",
       maxWidth: "950px"
+    });
+  }
+  openListElectronicInvoiceModal() {
+
+    const object = {
+      header_File: this.headerFile,
+      name_Agree: this.nameAgree,
+      status_validation: this.statusValidation,
+      is_Invoice: true
+    }
+    const dialogRef = this.matDialog.open(ListEvidencesModalComponent, {
+      data: { confirmInfo: object }, disableClose: true,
+      minWidth: "900px",
+      maxWidth: "950px",
     });
   }
 

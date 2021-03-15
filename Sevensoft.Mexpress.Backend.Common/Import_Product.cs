@@ -25,7 +25,7 @@ namespace Sevensoft.Mexpress.Backend.Common
             Description_Agreement = "";
             Date_Start = Convert.ToDateTime("1900-01-01");
             Date_Finish = Convert.ToDateTime("1900-01-01");
-            Date_Process = Convert.ToDateTime("1900-01-01");
+            Date_Process = Convert.ToDateTime("01/01/1900");
             Date_Reprocess = Convert.ToDateTime("1900-01-01");
             All_Products = false;
             Provider_Name = "";

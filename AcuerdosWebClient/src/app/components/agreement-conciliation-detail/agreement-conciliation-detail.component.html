@@ -8,9 +8,13 @@
                 <label class="trade-agreements-description">En esta sección se puede ver el detalle de la conciliación del acuerdo seleccionado.</label>
             </div>
             <div class="col-md-6 buttons-content center-content">
+                <button class="save-button mr-3" mat-raised-button (click)="openListElectronicInvoiceModal()">
+                    Ver factura
+                  </button>
+
                 <button class="excel-button float-right mr-3" (click)="openListEvidenceModal()" mat-raised-button>
                     <!-- <mat-icon class="mr-2">attachment</mat-icon> -->
-                    Ver adjuntos
+                    Ver evidencia
                 </button>
                 <button class="excel-button mr-3" mat-raised-button (click)="exportToPdf()">
                     Generar PDF

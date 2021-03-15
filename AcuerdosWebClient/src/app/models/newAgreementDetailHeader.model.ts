@@ -80,7 +80,7 @@ export class NewAgreementDetailHeaderModel {
             this.Description_Agreement = '';
             this.Date_Start = new Date();
             this.Date_Finish = new Date();
-            this.Date_Process = new Date();
+            this.Date_Process = new Date('01/01/1900');
             this.Date_Reprocess = new Date();
             this.All_Products = false;
             this.Provider_Name = '';

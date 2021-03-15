@@ -185,6 +185,7 @@ export class AgreementTrackingDetailComponent implements OnInit {
             this.headerFile = dataQ[0].pk_Ac_Trade_Agreement;
             this.type_of_agreement = dataQ[0].pk_Cat_Type_Agreement;
             this.providerN = dataQ[0].pk_Ac_Cat_Provider;
+            debugger
             this.dateProcess = dataQ[0].date_Process;
             this.dateReprocess = dataQ[0].date_Reprocess;
             this.allproducts_activator = dataQ[0].all_Products;
